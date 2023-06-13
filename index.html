@@ -1,38 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
- <!--   <script src="./controller.js"></script> -->
+
+    <!--   <script src="./controller.js"></script> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/c6b75d90fa.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
+
 <body>
     <header>
-        <h1 id="siteName"><img src="./assets/Images/Logo/Les petits plats (1).png" alt="Logo du site les petits plats" id="logo"><div id="ellipseOut"><div id="ellipseIn"></div></div> </h1>
+        <h1 id="siteName"><img src="./assets/Images/Logo/Les petits plats (1).png" alt="Logo du site les petits plats"
+                id="logo">
+            <div id="ellipseOut">
+                <div id="ellipseIn"></div>
+            </div>
+        </h1>
     </header>
-    
+
     <main>
         <section id="hero">
-            <p id="welcome">CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES</p>    
+            <h2 id="welcome">CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES</h2>
             <div id="labelSearch">
-                    <input type="text" name="searchInput" id="searchInput" aria-labelledby="searchInputButton" placeholder="rechercher un ingrédients, une recettes, etc...">
-                    <span id="searchInputButton"><i class="fa-solid fa-magnifying-glass"></i></span>
-                    
-                </div> 
+                <input type="text" name="searchInput" id="searchInput" aria-labelledby="searchInputButton"
+                    placeholder="rechercher un ingrédients, une recettes, etc...">
+                <span id="searchInputButton">&#128269;</span>
+
+            </div>
         </section>
 
-        <section id="Filters">
+        <section id="labels&Filters">
+
+        </section>
+        <section id="RecipesCardsContainer">
+
+
+            <article class="recipesCard">
+                <div class="recipesPictureContainer">
+                    <img class="recipesPicture" src="/assets/Images/Recipes/Recette01.jpg" alt="">
+                </div>
+                <span class="CookingTime">10mn</span>
+                <div class="recipesContent">
+                    <h2 class="recipesName">Limonade de coco</h2>
+                    <h3 class="recipesTitle">Recettes</h3>
+                    <p>Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2
+                        citrons et le sucre. Mixer jusqu'à avoir la consistence désirée.</p>
+                    <h3 class="IngredientsTitle">INGREDIENTS</h3>
+                    <div class="RecipesIngredients">
+                        <div class=" oneIngredientContainer">
+                            <h4 class='ingredientsName'>Lait de coco</h4>
+                            <p class="quantity">400ml</p>
+                        </div>
+                        <div class=" oneIngredientContainer">
+                            <h4 class='ingredientsName'>jus de citron</h4>
+                            <p class="quantity">2</p>
+                        </div>
+                        <div class=" oneIngredientContainer">
+                            <h4 class='ingredientsName'>Crème de coco</h4>
+                            <p class="quantity">4 cuilléres</p>
+                        </div>
+                        <div class=" oneIngredientContainer">
+                            <h4 class='ingredientsName'>Sucre</h4>
+                            <p class="quantity">20g</p>
+                        </div>
+                        <div class=" oneIngredientContainer">
+                            <h4 class='ingredientsName'>Glaçons</h4>
+                            <p class="quantity">2</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="recipesCard">
+                <div class="recipesPictureContainer">
+                    <img class="recipesPicture" src="/assets/Images/Recipes/Recette01.jpg" alt="">
+                </div>
+                <span class="CookingTime">10mn</span>
+                <div class="recipesContent">
+                    <h2 class="recipesName">Limonade de coco</h2>
+                    <h3 class="recipesTitle">Recettes</h3>
+                    <p>Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2
+                        citrons et le sucre. Mixer jusqu'à avoir la consistence désirée.</p>
+                    <h3 class="IngredientsTitle">INGREDIENTS</h3>
+                    <div class="RecipesIngredients">
+                        <div class=" oneIngredientContainer">
+                            <h4 class='ingredientsName'>Lait de coco</h4>
+                            <p class="quantity">400ml</p>
+                        </div>
+                        <div class=" oneIngredientContainer">
+                            <h4 class='ingredientsName'>jus de citron</h4>
+                            <p class="quantity">2</p>
+                        </div>
+                        <div class=" oneIngredientContainer">
+                            <h4 class='ingredientsName'>Crème de coco</h4>
+                            <p class="quantity">4 cuilléres</p>
+                        </div>
+                        <div class=" oneIngredientContainer">
+                            <h4 class='ingredientsName'>Sucre</h4>
+                            <p class="quantity">20g</p>
+                        </div>
+                        <div class=" oneIngredientContainer">
+                            <h4 class='ingredientsName'>Glaçons</h4>
+                            <p class="quantity">2</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="recipesCard">
+                <div class="recipesPictureContainer">
+                    <img class="recipesPicture" src="/assets/Images/Recipes/Recette01.jpg" alt="">
+                </div>
+                <span class="CookingTime">10mn</span>
+                <div class="recipesContent">
+                    <h2 class="recipesName">Limonade de coco</h2>
+                    <h3 class="recipesTitle">Recettes</h3>
+                    <p>Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2
+                        citrons et le sucre. Mixer jusqu'à avoir la consistence désirée.</p>
+                    <h3 class="IngredientsTitle">INGREDIENTS</h3>
+                    <div class="RecipesIngredients">
+                        <div class=" oneIngredientContainer">
+                            <h4 class='ingredientsName'>Lait de coco</h4>
+                            <p class="quantity">400ml</p>
+                        </div>
+                        <div class=" oneIngredientContainer">
+                            <h4 class='ingredientsName'>jus de citron</h4>
+                            <p class="quantity">2</p>
+                        </div>
+                        <div class=" oneIngredientContainer">
+                            <h4 class='ingredientsName'>Crème de coco</h4>
+                            <p class="quantity">4 cuilléres</p>
+                        </div>
+                        <div class=" oneIngredientContainer">
+                            <h4 class='ingredientsName'>Sucre</h4>
+                            <p class="quantity">20g</p>
+                        </div>
+                        <div class=" oneIngredientContainer">
+                            <h4 class='ingredientsName'>Glaçons</h4>
+                            <p class="quantity">2</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
 
         </section>
     </main>
-    
+
     <footer>
 
     </footer>
 </body>
+
 </html>
