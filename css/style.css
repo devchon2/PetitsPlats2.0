@@ -6,14 +6,16 @@
     margin:0;
     padding:0;
     box-sizing: border-box;
-    font-family: 'Manrope';
-    font-weight:400;
+    
+   
     color:#1b1b1b
 }
 
 body{
     max-width: 1440px;
     margin: 0 auto;
+    background-color: #f0eeee;
+    font-family: 'Manrope';
 }
 
 header{
@@ -60,7 +62,7 @@ header{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-image: url("./assets/Images/Hero/lampos-aritonang-24gR_9lCdes-unsplash\ 1\ \(1\).png");
+    background-image: url('../assets/Images/Hero/lampos-aritonang-24gR_9lCdes-unsplash\ 1\ \(1\).png');
     background-repeat: no-repeat;
     background-position: center;
     height:600px;
@@ -97,19 +99,109 @@ header{
 }
 
 #searchInputButton{
-    display:flex;
-    justify-content: center;
+    padding:5px;
+    border:1px solid black;
     align-items: center;
     width:2.5rem;
     height: 2.5rem;
     border-radius: 5px;
-    color:white;
+    
     background-color:#1b1b1b;
 }
 
 #searchInputButton i{
     color:white;
 }
+
+/*           Labels et filtres */
+
+#labelsAndFiltersContainer{
+    display: flex;
+    flex-direction: column;
+    padding:20px;
+}
+
+#filtersContainer,
+#labelsContainer{
+    display: flex;
+    justify-content: space-between;
+    margin:0 40px;
+}
+
+#filters{
+    display: flex;
+    justify-content: space-between;
+}
+
+#totalRecipes{
+    position: relative;
+    right:10px;
+    padding-top: 30px;
+    font-family: 'Anton';
+    font-size: 21px;
+    
+}
+
+
+#IngredientsList, 
+#applianceList,
+#UstensilesList,
+.labels{
+    display: flex;
+    justify-content: flex-start;
+    width:150px;
+    margin:20px;
+    padding:15px ;
+  /*  border: 2px solid black;*/
+    background-color: white;
+    border-radius: 15px;
+    position:relative;
+}
+
+.labels{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #FFD15B;
+    padding: 15px ;
+    width : 150px;
+}
+.labels i::before{
+    font-family: "Font Awesome 6 Free";
+    font-weight: 550;
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    scale: 1.5;
+}
+
+#IngredientsList #text, 
+#applianceList #text,
+#UstensilesList #text,
+.labels #text{
+    font-family:"Manrope";
+    font-weight:500;
+    font-size:16px;
+}
+
+#IngredientsList i::before, 
+#applianceList i::before,
+#UstensilesList i::before{
+    font-family:"Font Awesome 6 Free";
+    font-weight:900;
+    position:absolute;
+    top:18px;
+    right:10px;
+    ;
+}
+
+
+
+
+
+
+
+/*           Container de recettes */
 
 #RecipesCardsContainer{
     justify-content: center;
@@ -124,7 +216,8 @@ header{
     min-width:350px;
     width:28%;
     overflow: hidden;
-    border:3px solid black;
+    background-color: white;
+    /*border:3px solid black;*/
     border-radius: 20px;
 }
 
@@ -197,3 +290,7 @@ header{
     font-size: 1rem;
     padding: 0 10px;
 }
+
+
+
+

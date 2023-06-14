@@ -4,13 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <!--   <script src="./controller.js"></script> -->
+    <script src="./scripts/controller.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/c6b75d90fa.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/style.css">
 
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Les petits plats</title>
 </head>
 
 <body>
@@ -29,20 +28,36 @@
             <div id="labelSearch">
                 <input type="text" name="searchInput" id="searchInput" aria-labelledby="searchInputButton"
                     placeholder="rechercher un ingrédients, une recettes, etc...">
-                <span id="searchInputButton">&#128269;</span>
+                <svg id="searchInputButton" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 
+                        376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 
+                        0 1 0 0-288 144 144 0 1 0 0 288z" fill="white" />
+                </svg>
 
             </div>
         </section>
 
-        <section id="labels&Filters">
-
+        <section id="labelsAndFiltersContainer">
+            <div id="filtersContainer">
+                <div id="filters">
+                    <div id="IngredientsList">Ingredients <i class="fa-solid fa-chevron-down"></i></div>
+                    <div id="applianceList">Appareils <i class="fa-solid fa-chevron-down"></i></div>
+                    <div id="UstensilesList">Ustensile <i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div id="totalRecipes">
+                    <span id="summer">25</span> Recettes
+                </div>
+            </div>
+                <div id="labelsContainer">
+                    <div class="labels">coucou <i class="fa-solid fa-xmark"></i></div>
+                </div>
         </section>
         <section id="RecipesCardsContainer">
 
 
             <article class="recipesCard">
                 <div class="recipesPictureContainer">
-                    <img class="recipesPicture" src="/assets/Images/Recipes/Recette01.jpg" alt="">
+                    <img class="recipesPicture" src="./assets/Images/Recipes/Recette01.jpg" alt="">
                 </div>
                 <span class="CookingTime">10mn</span>
                 <div class="recipesContent">
