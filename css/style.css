@@ -73,13 +73,15 @@ header{
 #welcome{
     display: flex;
     text-align: center;
-    width:55%;
+    width:45%;
     padding:10px 20px;
     background: transparent;
     height: fit-content;
     color:#FFD15B;
     font-family: 'anton';
-    font-size: 2rem;
+    font-size: 2.2rem;
+    font-weight:400;
+    margin-bottom:20px;
 }
 
 #labelSearch{
