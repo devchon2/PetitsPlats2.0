@@ -1,8 +1,5 @@
 /* eslint-disable no-console */
 /* eslint-disable import/extensions */
+import { } from '../controllers/RecipesController.js';
 
-import { getDatas } from '../controllers/datasController.js';
-
-const recipesDatas = await getDatas();
-
-console.log('test reci
+console.log('index.js loaded');
