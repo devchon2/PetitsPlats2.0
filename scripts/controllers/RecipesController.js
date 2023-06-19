@@ -123,7 +123,7 @@ class Recipe {
 
         recipeContent.appendChild(ingredientsList);
 
-        const ingredientQuantity = this.ingredients[i].quantity;
+        const ingredientQuantity = this.ingredients[i].quantity ? this.ingredients[i].quantity : "";
         const ingredientUnit = this.ingredients[i].unit
         ? this.ingredients[i].unit
         : "";

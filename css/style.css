@@ -254,14 +254,14 @@ header{
 .recipeName{
     margin:15px 0 20px 0;
     font-family: 'anton';
-    font-size: 18px;
+    font-size: 1rem;
     font-weight:400px;
 }
 
 .cardTitle,
 .cardSubTitle,
 .IngredientsTitle{
-    margin:10px 0;
+    margin:15px 0 10px 0;
     font-family:'Manrope';
     font-weight:700;
     font-size:12px;
@@ -270,6 +270,7 @@ header{
 }
 
 .recipeDescription{
+    font-size: 0.85rem;
     height: 90px;
     text-align: left;
     white-space: wrap; /* Empêche le texte de se retourner à la ligne */
