@@ -5,8 +5,7 @@
 const docdatas = './datas/recipes.json';
 async function getDatas() {
   try {
-    /* if(!response.status.toString(200)) throw new Error(`${data.message}
-    tesssssstttt ${response.status}`); */
+    
     const response = await fetch(docdatas);
 
     if (!response.ok) {
@@ -23,4 +22,6 @@ async function getDatas() {
 }
 
 const recipesArray = await getDatas();
+
+console.log(recipesArray);
 export { recipesArray };
