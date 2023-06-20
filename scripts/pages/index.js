@@ -2,10 +2,10 @@
 /* eslint-disable import/extensions */
 import {  Recipe } from '../controllers/RecipesController.js';
 import { recipesArray } from '../controllers/datasController.js';
-import { utils } from '../utils/utils.js';
+import { CreateAllFilters, CreateFilter } from '../utils/utils.js';
+
 
 console.log('index.js loaded');
-
 const recipeContainer = document.getElementById('RecipesCardsContainer');
 
 
@@ -27,7 +27,6 @@ function init() {
         
     
         const recipeCard =  recipe.getCard();
-        console.log("recipeCard",recipeCard);
         recipeContainer.appendChild(recipeCard);
         
         

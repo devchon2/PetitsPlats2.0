@@ -145,9 +145,9 @@ header{
 }
 
 
-#IngredientsList, 
-#applianceList,
-#UstensilesList,
+#ingredientsList, 
+#appliancesList,
+#ustensilesList,
 .labels{
     display: flex;
     justify-content: flex-start;
@@ -177,9 +177,9 @@ header{
     scale: 1.5;
 }
 
-#IngredientsList #text, 
+#ingredientsList #text, 
 #applianceList #text,
-#UstensilesList #text,
+#ustensilesList #text,
 .labels #text{
     font-family:"Manrope";
     font-weight:500;
