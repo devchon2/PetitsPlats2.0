@@ -1,13 +1,17 @@
-/* eslint-disable no-unreachable-loop */
-/* eslint-disable import/prefer-default-export */
+console.log('datasController.js chargé');
 
 const JSONDatas = './datas/recipes.json';
+
+/**
+ * Récupère les données du fichier JSON.
+ * @returns {Promise<Object>} Les données JSON.
+ */
 async function getDatas() {
   try {
     const response = await fetch(JSONDatas);
 
     if (!response.ok) {
-      if (response.status === 404) throw new Error('aucun fichier trouvé');
+      if (response.status === 404) throw new Error('Aucun fichier trouvé');
     }
   } catch (e) {
     console.log(e);
@@ -19,6 +23,10 @@ async function getDatas() {
   return datas;
 }
 
+/**
+ * Obtient tous les ingrédients disponibles.
+ * @returns {Object} L'objet contenant tous les ingrédients.
+ */
 function GetFullIngredients() {
   const IngredientsArray = [];
   recipesArray.forEach((recipeObject) => {
@@ -30,11 +38,16 @@ function GetFullIngredients() {
       }
     });
   });
-
-  return IngredientsArray;
+  
+  const FinalIngredientsObject = { 'Ingredients': IngredientsArray };
+  return FinalIngredientsObject;
 }
 
- function GetFullAppliance() {
+/**
+ * Obtient tout le matériel (appareils) disponible.
+ * @returns {Object} L'objet contenant tout le matériel.
+ */
+function GetFullAppliance() {
   const AppliancesArray = [];
   recipesArray.forEach((recipeObject) => {
     const { appliance } = recipeObject;
@@ -44,31 +57,34 @@ function GetFullIngredients() {
     }
   });
 
-  return AppliancesArray;
+  const FinalApplianceObject = { 'Matériel': AppliancesArray };
+  return FinalApplianceObject;
 }
 
- function GetFullUstensils() {
+/**
+ * Obtient tous les ustensiles disponibles.
+ * @returns {Object} L'objet contenant tous les ustensiles.
+ */
+function GetFullUstensils() {
   const UstensilsArray = [];
   recipesArray.forEach((recipeObject) => {
-    const { Ustensils } = recipeObject;
-    Ustensils.forEach((Ustensil) => {
-      if (!UstensilsArray.includes(Ustensil)) {
-        UstensilsArray.push(Ustensil);
+    const { ustensils } = recipeObject;
+    ustensils.forEach((ustensil) => {
+      if (!UstensilsArray.includes(ustensil)) {
+        UstensilsArray.push(ustensil);
       }
     });
   });
 
-  return UstensilsArray;
+  const FinalUstensilsObject = { 'Ustensiles': UstensilsArray };
+  return FinalUstensilsObject;
 }
 
+// Récupération des données, des ingrédients, du matériel et des ustensiles
 const recipesArray = await getDatas();
-const IngredientsArray =  GetFullIngredients();
-const AppliancesArray =  GetFullAppliance();
-// const UstensilsArray =  GetFullUstensils();
-console.log('recette', recipesArray);
-console.log('Ingredients', IngredientsArray);
-console.log('appliance', AppliancesArray);
-// console.log('Ustensils', UstensilsArray);
+const IngredientsObject = GetFullIngredients();
+const AppliancesObject = GetFullAppliance();
+const UstensilesObject = GetFullUstensils();
 
-// eslint-disable-next-line no-unused-vars
-export { recipesArray };
+
+export { recipesArray, IngredientsObject, AppliancesObject, UstensilesObject };

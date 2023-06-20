@@ -12,6 +12,7 @@
 </head>
 
 <body>
+    <!-- En-tête -->
     <header>
         <h1 id="siteName"><img src="./assets/Images/Logo/Les petits plats (1).png" alt="Logo du site les petits plats"
                 id="logo">
@@ -22,6 +23,7 @@
     </header>
 
     <main>
+        <!-- Section héro -->
         <section id="hero">
             <h2 id="welcome">CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES</h2>
             <div id="labelSearch">
@@ -36,26 +38,34 @@
             </div>
         </section>
 
+        <!-- Section filtres et labels -->
         <section id="labelsAndFiltersContainer">
+            <!-- Conteneur des filtres -->
             <div id="filtersContainer">
                 <div id="filters">
-                    <select id="ingredientsList"></select>
-                    <select id="appliancesList"></select>
-                    <select id="ustensilesList"></select>
+                    <select id="ingredientsList" data-label='Ingrédients'>
+                       
+                            <input type="search" name="IngredientsInput" id="IngredientsInput"
+                                placeholder="Rechercher un ingrédient">
+                            
+                            
+                    </select>
+                    <select id="appliancesList" data-label="Matériel"></select>
+                    <select id="ustensilesList" data-label="Ustensiles"></select>
                 </div>
+                <!-- Nombre total de recettes -->
                 <div id="totalRecipes">
                     <span id="summer">25</span> Recettes
                 </div>
             </div>
+            <!-- Conteneur des labels -->
             <div id="labelsContainer">
                 <div class="labels"><span>coucou <i class="fa-solid fa-xmark"></i></span></div>
             </div>
         </section>
+        
+        <!-- Conteneur des cartes de recettes -->
         <section id="RecipesCardsContainer">
-
-
-
-
 
         </section>
     </main>
@@ -64,6 +74,7 @@
 
     </footer>
 </body>
+<!-- Scripts -->
 <script src="/scripts/pages/index.js" type="module"></script>
 <script src="https://kit.fontawesome.com/c6b75d90fa.js" crossorigin="anonymous"></script>
 

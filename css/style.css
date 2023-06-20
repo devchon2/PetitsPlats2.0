@@ -1,62 +1,67 @@
+/* Importation des polices Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
 
-
-*,::before,::after{
-    margin:0;
-    padding:0;
+/* Réinitialisation des marges, des paddings et de la boîte */
+*, ::before, ::after {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    
-   
-    color:#1b1b1b
+    color: #1b1b1b;
 }
 
-body{
+/* Styles généraux du corps de la page */
+body {
     max-width: 1440px;
     margin: 0 auto;
     background-color: #f0eeee;
     font-family: 'Manrope';
 }
 
-header{
-    
+/* Styles de l'en-tête */
+header {
     position: absolute;
     background-color: transparent;
-    width:100%;  
-    z-index: 1
+    width: 100%;
+    z-index: 1;
 }
 
-
-#siteName{
-    padding:20px 0 20px 20px;
+/* Styles du nom du site */
+#siteName {
+    padding: 20px 0 20px 20px;
     display: flex;
     flex-direction: row;
     justify-content: start;
     align-items: end;
 }
 
-#logo{
-    width:200px;
+/* Styles du logo */
+#logo {
+    width: 200px;
 }
-#ellipseOut{
+
+/* Styles des ellipses */
+#ellipseOut {
     display: flex;
     justify-content: center;
     align-items: center;
-    border:1px solid black;
-    width:1.25rem;
-    height:1.25rem;
+    border: 1px solid black;
+    width: 1.25rem;
+    height: 1.25rem;
     border-radius: 50%;
-    margin-left:10px;
+    margin-left: 10px;
     background-color: aliceblue;
 }
-#ellipseIn{
-    border:1px solid black;
-    width:75%;
-    height:75%;
+
+#ellipseIn {
+    border: 1px solid black;
+    width: 75%;
+    height: 75%;
     border-radius: 50%;
 }
 
-#hero{
+/* Styles du héros */
+#hero {
     position: relative;
     display: flex;
     justify-content: center;
@@ -65,110 +70,116 @@ header{
     background-image: url('../assets/Images/Hero/lampos-aritonang-24gR_9lCdes-unsplash\ 1\ \(1\).png');
     background-repeat: no-repeat;
     background-position: center;
-    height:600px;
-    width:100%;
-    
+    height: 600px;
+    width: 100%;
 }
 
-#welcome{
+/* Styles du message de bienvenue */
+#welcome {
     display: flex;
     text-align: center;
-    width:45%;
-    padding:10px 20px;
+    width: 45%;
+    padding: 10px 20px;
     background: transparent;
     height: fit-content;
-    color:#FFD15B;
+    color: #FFD15B;
     font-family: 'anton';
     font-size: 2.2rem;
-    font-weight:400;
-    margin-bottom:20px;
+    font-weight: 400;
+    margin-bottom: 20px;
 }
 
-#labelSearch{
+/* Styles du label de recherche */
+#labelSearch {
     display: flex;
-    width:60%;
+    width: 60%;
     border-radius: 5px;
-    padding:5px ;
+    padding: 5px;
     background-color: aliceblue;
-    
 }
 
-#searchInput{
+/* Styles de la zone de recherche */
+#searchInput {
     display: flex;
-    height:100%;
-    width:calc(100% - 2rem);
-    border:none;
+    height: 100%;
+    width: calc(100% - 2rem);
+    border: none;
 }
 
-#searchInputButton{
-    padding:5px;
-    border:1px solid black;
+/* Styles du bouton de recherche */
+#searchInputButton {
+    padding: 5px;
+    border: 1px solid black;
     align-items: center;
-    width:2.5rem;
+    width: 2.5rem;
     height: 2.5rem;
     border-radius: 5px;
-    
-    background-color:#1b1b1b;
+    background-color: #1b1b1b;
 }
 
-#searchInputButton i{
-    color:white;
+#searchInputButton i {
+    color: white;
 }
 
-/*           Labels et filtres */
+/* Labels et filtres */
 
-#labelsAndFiltersContainer{
+/* Conteneur des labels et des filtres */
+#labelsAndFiltersContainer {
     display: flex;
     flex-direction: column;
-    padding:20px;
+    padding: 20px;
 }
 
+/* Conteneurs des filtres et des labels */
 #filtersContainer,
-#labelsContainer{
+#labelsContainer {
     display: flex;
     justify-content: space-between;
-    margin:0 40px;
+    margin: 0 40px;
 }
 
-#filters{
+/* Styles des filtres */
+#filters {
     display: flex;
     justify-content: space-between;
 }
 
-#totalRecipes{
+/* Styles du total des recettes */
+#totalRecipes {
     position: relative;
-    right:10px;
+    right: 10px;
     padding-top: 30px;
     font-family: 'Anton';
     font-size: 21px;
-    
 }
 
-
-#ingredientsList, 
+/* Styles des listes d'ingrédients, d'appareils et d'ustensiles, ainsi que des labels */
+#ingredientsList,
 #appliancesList,
 #ustensilesList,
-.labels{
+.labels {
     display: flex;
     justify-content: flex-start;
-    width:150px;
-    margin:20px;
-    padding:15px ;
-  /*  border: 2px solid black;*/
+    width: 150px;
+    margin: 20px;
+    padding: 15px;
     background-color: white;
     border-radius: 15px;
-    position:relative;
+    position: relative;
 }
 
-.labels{
+
+/* Styles des labels */
+.labels {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     background-color: #FFD15B;
-    padding: 15px ;
-    width : 150px;
+    padding: 15px;
+    width: 150px;
 }
-.labels i::before{
+
+.labels i::before {
     font-family: "Font Awesome 6 Free";
     font-weight: 550;
     position: absolute;
@@ -177,145 +188,142 @@ header{
     scale: 1.5;
 }
 
-#ingredientsList #text, 
+/* Styles des textes des listes d'ingrédients, d'appareils et d'ustensiles, ainsi que des labels */
+#ingredientsList #text,
 #applianceList #text,
 #ustensilesList #text,
-.labels #text{
-    font-family:"Manrope";
-    font-weight:500;
-    font-size:16px;
+.labels #text {
+    font-family: "Manrope";
+    font-weight: 500;
+    font-size: 16px;
 }
 
-#IngredientsList i::before, 
+/* Styles des icônes des listes d'ingrédients, d'appareils et d'ustensiles */
+#IngredientsList i::before,
 #applianceList i::before,
-#UstensilesList i::before{
-    font-family:"Font Awesome 6 Free";
-    font-weight:900;
-    position:absolute;
-    top:18px;
-    right:10px;
-    ;
+#UstensilesList i::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 18px;
+    right: 10px;
 }
 
+/* Container de recettes */
 
-
-
-
-
-
-/*           Container de recettes */
-
-#RecipesCardsContainer{
+/* Conteneur des cartes de recettes */
+#RecipesCardsContainer {
     justify-content: center;
-    align-items:center;
-    display:flex;
+    align-items: center;
+    display: flex;
     flex-wrap: wrap;
 }
 
-.recipeCard{
-    margin:20px;
-    position:relative;
-    min-width:350px;
-    width:28%;
-    height:750px;
+/* Styles des cartes de recettes */
+.recipeCard {
+    margin: 20px;
+    position: relative;
+    min-width: 350px;
+    width: 28%;
+    height: 750px;
     overflow: hidden;
     background-color: white;
-    /*border:3px solid black;*/
     border-radius: 20px;
 }
 
-.CookingTime{
+/* Styles du temps de cuisson */
+.CookingTime {
     position: absolute;
-    right:30px;
-    top:30px;
+    right: 30px;
+    top: 30px;
     background-color: #FFD15B;
-    padding:7.5px 15px;
+    padding: 7.5px 15px;
     border-radius: 15px;
 }
 
-.recipePictureContainer{
-    width:100%;
-    height:280px;
+/* Styles du conteneur de l'image de recette */
+.recipePictureContainer {
+    width: 100%;
+    height: 280px;
     overflow: hidden;
 }
 
-
-.recipePicture{
-    width:100%;
-    height:100%;
+/* Styles de l'image de recette */
+.recipePicture {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    
 }
 
-.recipeContent{
-    padding:10px 25px;;
+/* Styles du contenu de recette */
+.recipeContent {
+    padding: 10px 25px;
 }
 
-.recipeName{
-    margin:15px 0 20px 0;
+/* Styles du nom de la recette */
+.recipeName {
+    margin: 15px 0 20px 0;
     font-family: 'anton';
     font-size: 1rem;
-    font-weight:400px;
+    font-weight: 400px;
 }
 
+/* Styles des titres de carte, des sous-titres de carte et des titres d'ingrédients */
 .cardTitle,
 .cardSubTitle,
-.IngredientsTitle{
-    margin:15px 0 10px 0;
-    font-family:'Manrope';
-    font-weight:700;
-    font-size:12px;
-    color:#7A7A7A;
-    text-transform:uppercase;
+.IngredientsTitle {
+    margin: 15px 0 10px 0;
+    font-family: 'Manrope';
+    font-weight: 700;
+    font-size: 12px;
+    color: #7A7A7A;
+    text-transform: uppercase;
 }
 
-.recipeDescription{
+/* Styles de la description de la recette */
+.recipeDescription {
     font-size: 0.85rem;
     height: 90px;
     text-align: left;
     white-space: wrap; /* Empêche le texte de se retourner à la ligne */
-  overflow: hidden; /* Cache le texte qui dépasse */
-  text-overflow: ellipsis; /* Ajoute l'ellipse à la fin du texte caché */
-    
+    overflow: hidden; /* Cache le texte qui dépasse */
+    text-overflow: ellipsis; /* Ajoute l'ellipse à la fin du texte caché */
 }
 
-.RecipeIngredients{
-    
-    display:flex;
+/* Styles de la liste des ingrédients */
+.RecipeIngredients {
+    display: flex;
     flex-wrap: wrap;
-    justify-content:start;
+    justify-content: start;
     align-items: center;
-    font-size: 1rem;;
+    font-size: 1rem;
 }
 
-.oneIngredientContainer{
-    display:flex;
+/* Styles des conteneurs d'un ingrédient */
+.oneIngredientContainer {
+    display: flex;
     flex-direction: column;
-    width:50%;
-    margin:10px 0px;
+    width: 50%;
+    margin: 10px 0px;
 }
 
-.ingredientMesure{
-    font-weight:400;
-    font-family: 'Manrope','Sans-serif';
-    margin:2px 0;
+/* Styles des mesures d'ingrédients */
+.ingredientMesure {
+    font-weight: 400;
+    font-family: 'Manrope', 'Sans-serif';
+    margin: 2px 0;
     font-size: 0.8rem;
 }
 
-.ingredientName{
-    font-weight:900;
-    font-family: 'Manrope','Sans-serif';
-    margin:2px 0;
+/* Styles des noms d'ingrédients */
+.ingredientName {
+    font-weight: 900;
+    font-family: 'Manrope', 'Sans-serif';
+    margin: 2px 0;
     font-size: 0.9rem;
-
 }
 
-.quantity{
-    
+/* Styles des quantités */
+.quantity {
     font-size: 1rem;
-
 }
-
-
-
-
