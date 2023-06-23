@@ -1,14 +1,50 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-param-reassign */
 
-import { IngredientsObject, AppliancesObject, UstensilesObject } from '../controllers/datasController.js';
+import {
+  IngredientsObject,
+  AppliancesObject,
+  UstensilesObject,
+} from '../controllers/datasController.js';
 
-const selectIngredientsBtn = document.getElementById('ingredientsList');
-selectIngredientsBtn.innerHTML = '<p>Ingrédients <i class="fa-arrow fa-arrow-bottom"></i></p>';
+import {
+  Label
+} from './labels.js'
 
-const selectApplianceBtn = document.getElementById('appliancesList');
-selectApplianceBtn.innerHTML = '<p>Ingrédients <i class="fa-arrow fa-arrow-bottom"></i></p>';
+/**
+ * Variables des éléments
+ */
+const filterIngredientsList = document.getElementById('ingredientsList');
+const filterApplianceList = document.getElementById('appliancesList');
+const filterUstensilsList = document.getElementById('ustensilesList');
+const filtersBtn = document.querySelectorAll('.filterBtn');
+const filtersInputs = document.querySelectorAll('.filtersInput');
+const filterList = document.querySelectorAll('filterList')
 
-const selectUstensilsBtn = document.getElementById('ustensilesList');
-selectUstensilsBtn.innerHTML = '<p>Ingrédients <i class="fa-arrow fa-arrow-bottom"></i></p>';
+/**
+ * Écouteurs d'événements pour les entrées des filtres
+ */
+filtersInputs.forEach((input) => {
+  console.log(input)
+})
+
+
+
+/**
+ * Écouteur d'événement pour les bouton des filtres
+ */
+filtersBtn.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation()
+        const { target } = e
+        const { id } = target
+        const  btnID  = btn.id
+        const list = target.lastElementChild
+        console.log('bouton :', btn,
+        'id :', id,'target :', target,'list :', list,'btnID :', btnID)
+          clickFilter(id)
+      })})
+
 
 /**
  * Fonction qui crée tous les filtres.
@@ -24,33 +60,65 @@ function CreateAllFilters() {
 
 /**
  * Fonction qui crée un filtre pour un objet donné.
- * @param {Object} Obj - L'objet pour lequel on veut créer un filtre.ex: {Ingredients: IngredientsArray}
+ * @param {Object} Obj - L'objet pour lequel on veut créer un filtre. ex: {'Ingredients': $IngredientsArray}
  */
 function CreateFilter(Obj) {
   const Arrayname = Object.keys(Obj)[0];
   const Arrayfull = Object.values(Obj)[0].sort();
-  const label = document.createElement('span');
-  label.classList.add('label');
-  label.innerText = Arrayname;
 
   Arrayfull.forEach((element) => {
-    const optionElement = document.createElement('option');
-    optionElement.setAttribute('value', element);
-    optionElement.innerText = element;
+    const optionElement = document.createElement('div');
+    optionElement.id = element;
+    optionElement.innerHTML = `${element}`;
+    optionElement.classList.add('filter');
 
     if (Arrayname === 'Ingredients') {
-      selectIngredientsBtn.appendChild(optionElement);
-      
-
+      filterIngredientsList.appendChild(optionElement);
     } else if (Arrayname === 'Matériel') {
-      selectApplianceBtn.appendChild(optionElement);
-
+      filterApplianceList.appendChild(optionElement);
     } else if (Arrayname === 'Ustensiles') {
-      selectUstensilsBtn.appendChild(optionElement);
-      
+      filterUstensilsList.appendChild(optionElement);
     }
+
+    optionElement.addEventListener('click', (e) => {
+      e.stopPropagation()
+
+    })
   });
 }
 
-// On exporte les fonctions pour pouvoir les utiliser dans d'autres fichiers.
+function clickFilter(FilterID){
+  const list = document.getElementById(`${FilterID}List`)  
+  list.classList.toggle('hidden')
+  list.classList.toggle('active')
+  const filterElements = document.querySelectorAll('.filterList .filter')
+  const elements = Array.from(filterElements)
+  elements.shift()
+  elements.forEach((element) => {
+    element.addEventListener('click', (filter) =>{
+      filter.stopPropagation()
+      const { id } = element
+      console.log(id)
+      const label = new Label(id)
+      const labelDom = label.getDom()
+      console.log(labelDom)
+      const labelContainer = document.getElementById('labelsContainer')
+      labelContainer.appendChild(labelDom)
+    })
+  })
+}
+
+function UpdateFilter(filter){
+  const {label} = document.querySelectorAll('.labels')
+  const input = document.getElementById('searchInput')
+  if (!filter.id === label.id || !input.value.match(filter.id))  {
+    filter.classList.add('hidden')
+  }
+
+}
+    
+
+
+
+// Exporte les fonctions pour pouvoir les utiliser dans d'autres fichiers.
 export { CreateAllFilters, CreateFilter };

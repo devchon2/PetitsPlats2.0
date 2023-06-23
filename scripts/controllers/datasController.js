@@ -80,6 +80,8 @@ function GetFullUstensils() {
   return FinalUstensilsObject;
 }
 
+
+
 // Récupération des données, des ingrédients, du matériel et des ustensiles
 const recipesArray = await getDatas();
 const IngredientsObject = GetFullIngredients();

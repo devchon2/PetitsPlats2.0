@@ -34,8 +34,8 @@ function init() {
     const recipeCard = recipe.getCard();
     recipeContainer.appendChild(recipeCard);
   }
-  
   CreateAllFilters();
+  
 }
 
 // Appel de la fonction d'initialisation

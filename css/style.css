@@ -18,6 +18,13 @@ body {
     font-family: 'Manrope';
 }
 
+.hidden{
+    display:none;
+}
+
+.visible{
+    display:flex;
+}
 /* Styles de l'en-tête */
 header {
     position: absolute;
@@ -141,90 +148,129 @@ header {
 /* Styles des filtres */
 #filters {
     display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    max-width: 80%;
+}
+
+
+
+/* Styles des Btn d'ingrédients, d'appareils et d'ustensiles, ainsi que des labels */
+#ingredients,
+#appliances,
+#ustensiles,
+.labels {
+    display: flex;
     justify-content: space-between;
+    width: 200px;
+    margin: 20px;
+    padding: 15px 10px;
+    background-color: white;
+    border-radius: 15px;
+    position: relative;
+    font-family: "Manrope";
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.fa-magnifying-glass::before{
+    color:#afafaf;
+    padding:0;
+}
+
+#ingredientsList,
+#appliancesList,
+#ustensilesList{
+    position:absolute;
+    padding: 10px;
+    left:0px;
+    top:40px;
+    width:200px;;
+    background-color: white;
+    z-index: 1
+}
+
+.filter{
+    padding:10px 0;
+    cursor: pointer;
+    z-index:10
+    
+}
+.filter::first-letter{
+    text-transform:capitalize
+}
+
+.InputFilterBtn{
+    display:flex;
+    padding: 5px 0;
+    margin-bottom:10px;
+    border:2px solid #afafaf;
+    border-radius: 5px;
+}
+
+.InputFilterBtn input{
+    width: 100%;
+    border:none;
+    outline: none;
+    
+}
+
+.InputFilterBtn button{
+    
+    border:none;
+    background-color: white;
+}
+
+ button i{
+    color: #dfdfdf;
+    padding:0 5px;
 }
 
 /* Styles du total des recettes */
 #totalRecipes {
     position: relative;
     right: 10px;
-    padding-top: 30px;
+    padding: 30px 15px 0 0;
     font-family: 'Anton';
     font-size: 21px;
 }
 
-/* Styles des listes d'ingrédients, d'appareils et d'ustensiles, ainsi que des labels */
-#ingredientsList,
-#appliancesList,
-#ustensilesList,
-.labels {
-    display: flex;
-    justify-content: flex-start;
-    width: 150px;
-    margin: 20px;
-    padding: 15px;
-    background-color: white;
-    border-radius: 15px;
-    position: relative;
-}
-
-
 /* Styles des labels */
 .labels {
-    display: flex;
-    justify-content: flex-start;
     align-items: center;
     background-color: #FFD15B;
-    padding: 15px;
+}
+/* Styles des labels */
+.labels span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 150px;
 }
 
-.labels i::before {
-    font-family: "Font Awesome 6 Free";
-    font-weight: 550;
-    position: absolute;
-    top: 18px;
-    right: 15px;
-    scale: 1.5;
-}
 
-/* Styles des textes des listes d'ingrédients, d'appareils et d'ustensiles, ainsi que des labels */
-#ingredientsList #text,
-#applianceList #text,
-#ustensilesList #text,
-.labels #text {
-    font-family: "Manrope";
-    font-weight: 500;
-    font-size: 16px;
-}
 
-/* Styles des icônes des listes d'ingrédients, d'appareils et d'ustensiles */
-#IngredientsList i::before,
-#applianceList i::before,
-#UstensilesList i::before {
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    position: absolute;
-    top: 18px;
-    right: 10px;
-}
 
-/* Container de recettes */
+
+
+
+
 
 /* Conteneur des cartes de recettes */
 #RecipesCardsContainer {
-    justify-content: center;
-    align-items: center;
     display: flex;
+    justify-content:space-between;
+    align-items: center;
     flex-wrap: wrap;
+    padding:0 50px
 }
 
 /* Styles des cartes de recettes */
 .recipeCard {
-    margin: 20px;
+    margin-top:50px;
     position: relative;
-    min-width: 350px;
-    width: 28%;
+    min-width: 300px;
+    width: 30%;
     height: 750px;
     overflow: hidden;
     background-color: white;
@@ -290,7 +336,7 @@ header {
     text-overflow: ellipsis; /* Ajoute l'ellipse à la fin du texte caché */
 }
 
-/* Styles de la liste des ingrédients */
+/* Styles de la Btne des ingrédients */
 .RecipeIngredients {
     display: flex;
     flex-wrap: wrap;

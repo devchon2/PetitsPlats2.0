@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
-
+    <script src="https://kit.fontawesome.com/c6b75d90fa.js" crossorigin="anonymous"></script>
     <title>Les petits plats</title>
 </head>
 
@@ -43,16 +43,58 @@
             <!-- Conteneur des filtres -->
             <div id="filtersContainer">
                 <div id="filters">
-                    <select id="ingredientsList" data-label='Ingrédients'>
-                       
-                            <input type="search" name="IngredientsInput" id="IngredientsInput"
-                                placeholder="Rechercher un ingrédient">
-                            
-                            
-                    </select>
-                    <select id="appliancesList" data-label="Matériel"></select>
-                    <select id="ustensilesList" data-label="Ustensiles"></select>
+                    <div id="ingredientsFilter" class="filter">
+                        <div id="ingredients" class="filterBtn">
+                            <p>Ingrédients</p>
+                            <i class="fa-solid fa-chevron-down"></i>
+                            <div id="ingredientsList" class="filterList hidden">
+                                <div class="InputFilterBtn">
+                                    <input type="text" name="SearchInputIngredient" class="filterInput">
+                                    <button>
+                                        <i class="fa-solid fa-magnifying-glass FiltersIcon"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="appliancesFilter" class="filter">
+                        <div id="appliances" class="filterBtn">
+                            <p>Matériel</p>
+                            <i class="fa-solid fa-chevron-down"></i>
+
+                            <div id="appliancesList" class="filterList hidden">
+                                <div class="InputFilterBtn">
+                                    <input type="text" name="SearchInputAppliances" class="filterInput">
+                                    <button><i class="fa-solid fa-magnifying-glass FiltersIcon"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ustensilesFilter" class="filter">
+                        <div id="ustensiles" class="filterBtn">
+                            <p>Ustensiles</p>
+                            <i class="fa-solid fa-chevron-down"></i>
+
+                            <div id="ustensilesList" class="filterList hidden">
+                                <div class="InputFilterBtn">
+                                    <input type="text" name="SearchInputUstensiles" class="filterInput">
+                                    <button><i class="fa-solid fa-magnifying-glass FiltersIcon"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
+
+
+
+
+
+
+
+
+
                 <!-- Nombre total de recettes -->
                 <div id="totalRecipes">
                     <span id="summer">25</span> Recettes
@@ -63,7 +105,7 @@
                 <div class="labels"><span>coucou <i class="fa-solid fa-xmark"></i></span></div>
             </div>
         </section>
-        
+
         <!-- Conteneur des cartes de recettes -->
         <section id="RecipesCardsContainer">
 
