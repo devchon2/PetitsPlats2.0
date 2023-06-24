@@ -5,7 +5,7 @@ import {
   UstensilesObject,
 } from '../controllers/datasController.js';
 
-
+import { Label } from './labels.js';
 
 /**
  * Variables des éléments
@@ -15,14 +15,19 @@ const filterApplianceList = document.getElementById('appliancesList');
 const filterUstensilsList = document.getElementById('ustensilesList');
 const filtersBtn = document.querySelectorAll('.filterBtn');
 const FullArray = [IngredientsObject, AppliancesObject, UstensilesObject];
+const labelContainer = document.getElementById('labelsContainer');
+
+
+
+
 
 
 /**
  * Écouteur d'événement pour les bouton des filtres
  */
 filtersBtn.forEach((btn) => {
-  btn.addEventListener('click', () => {
-        
+  btn.addEventListener('click', (e) => {
+        e.preventDefault()
         btn.classList.toggle('active')
         const { id } = btn
         displayFilter(id)
@@ -48,19 +53,37 @@ function CreateFilter(Obj) {
   const Arrayname = Object.keys(Obj)[0];
   const Arrayfull = Object.values(Obj)[0].sort();
   Arrayfull.forEach((element) => {
-    const optionElement = document.createElement('div');
-    optionElement.id = element;
-    optionElement.innerHTML = `${element}`;
-    optionElement.classList.add('filter');
+    const filterElement = document.createElement('div');
+    filterElement.id = element;
+    filterElement.innerHTML = `${element}`;
+    filterElement.classList.add('filterOption');
 
-    if (Arrayname === 'Ingredients') {
-      filterIngredientsList.appendChild(optionElement);
-    } else if (Arrayname === 'Matériel') {
-      filterApplianceList.appendChild(optionElement);
-    } else if (Arrayname === 'Ustensiles') {
-      filterUstensilsList.appendChild(optionElement);
-    }
+    filterElement.addEventListener('click', (e) => {
+      const activeFilter = filterElement.classList.contains('active')
+
+      
+e.stopPropagation()
+      if (!activeFilter) {
+        filterElement.classList.toggle('active')
+        const label = new Label(e.target.id)
+        const labelDom = label.getDom()
+        labelContainer.appendChild(labelDom)
+      } 
+      else if (activeFilter) {
+          filterElement.classList.toggle('active')
+          const labelDom = document.getElementById(`label-${e.target.id}`)
+          labelDom.remove()
+      }
     })
+    if (Arrayname === 'Ingredients') {
+      filterIngredientsList.appendChild(filterElement);
+    } else if (Arrayname === 'Matériel') {
+      filterApplianceList.appendChild(filterElement);
+    } else if (Arrayname === 'Ustensiles') {
+      filterUstensilsList.appendChild(filterElement);
+    }
+  })
+    
 }
 
 function displayFilter(FilterID){

@@ -16,9 +16,7 @@
 }
 
 /* Styles des Btn d'ingrédients, d'appareils et d'ustensiles */
-#ingredients,
-#appliances,
-#ustensiles{
+.filterBtn{
 
     display: flex;
     justify-content: space-between;
@@ -32,9 +30,7 @@
     font-weight: 500;
     font-size: 16px;
 }
-#ingredients.active,
-#appliances.active,
-#ustensiles.active{
+.filterBtn.active{
 
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -54,7 +50,7 @@
     top:50px;
     width:200px;;
     background-color: white;
-    z-index: 1
+    z-index:1
 }
 
 .filter{
@@ -62,9 +58,10 @@
     justify-content: space-between;
     padding:10px 0;
     cursor: pointer;
-    z-index:10
     
 }
+
+
 .filter::first-letter{
 
     text-transform:capitalize
@@ -79,7 +76,7 @@
 
 
 
-.filter .hovered{
+.filterOption.hovered{
 
     background-color: #FFD15B;
 }
