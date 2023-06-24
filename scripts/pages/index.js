@@ -35,6 +35,10 @@ function init() {
     recipeContainer.appendChild(recipeCard);
   }
   CreateAllFilters();
+
+  const resume = document.getElementById('summer')
+  const lenght = recipesArray.length
+  resume.innerHTML = `${lenght} `
   
 }
 

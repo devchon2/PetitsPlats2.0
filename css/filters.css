@@ -32,6 +32,13 @@
     font-weight: 500;
     font-size: 16px;
 }
+#ingredients.active,
+#appliances.active,
+#ustensiles.active{
+
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
 
 .fa-magnifying-glass::before{
 
@@ -39,14 +46,12 @@
     padding:0;
 }
 
-#ingredientsList,
-#appliancesList,
-#ustensilesList{
+.filterList{
     
     position:absolute;
     padding: 10px;
     left:0px;
-    top:40px;
+    top:50px;
     width:200px;;
     background-color: white;
     z-index: 1
@@ -71,6 +76,8 @@
 
     background-color: #FFD15B;
 }
+
+
 
 .filter .hovered{
 
