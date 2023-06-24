@@ -1,0 +1,113 @@
+
+#filtersContainer{
+
+    display: flex;
+    justify-content: space-between;
+    margin: 0 40px;
+}
+
+/* Styles des filtres */
+#filters {
+
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    max-width: 80%;
+}
+
+/* Styles des Btn d'ingrédients, d'appareils et d'ustensiles */
+#ingredients,
+#appliances,
+#ustensiles{
+
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    margin: 20px;
+    padding: 15px 10px;
+    background-color: white;
+    border-radius: 15px;
+    position: relative;
+    font-family: "Manrope";
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.fa-magnifying-glass::before{
+
+    color:#afafaf;
+    padding:0;
+}
+
+#ingredientsList,
+#appliancesList,
+#ustensilesList{
+    
+    position:absolute;
+    padding: 10px;
+    left:0px;
+    top:40px;
+    width:200px;;
+    background-color: white;
+    z-index: 1
+}
+
+.filter{
+    display: flex;
+    justify-content: space-between;
+    padding:10px 0;
+    cursor: pointer;
+    z-index:10
+    
+}
+.filter::first-letter{
+
+    text-transform:capitalize
+}
+
+
+
+.filter.active{
+
+    background-color: #FFD15B;
+}
+
+.filter .hovered{
+
+    background-color: #FFD15B;
+}
+
+.filter.hovered i{
+
+    width:30px;
+    height:30px;
+}
+
+.InputFilterBtn{
+
+    display:flex;
+    padding: 5px 0;
+    margin-bottom:10px;
+    border:2px solid #afafaf;
+    border-radius: 5px;
+}
+
+.InputFilterBtn input{
+
+    width: 100%;
+    border:none;
+    outline: none;
+    
+}
+
+.InputFilterBtn button{
+    
+    border:none;
+    background-color: white;
+}
+
+button i{
+
+    color: #dfdfdf;
+    padding:0 5px;
+}

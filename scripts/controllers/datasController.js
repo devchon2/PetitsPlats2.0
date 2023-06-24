@@ -39,8 +39,8 @@ function GetFullIngredients() {
     });
   });
   
-  const FinalIngredientsObject = { 'Ingredients': IngredientsArray };
-  return FinalIngredientsObject;
+  const StartIngredientsArray = { 'Ingredients': IngredientsArray };
+  return StartIngredientsArray;
 }
 
 /**
@@ -87,6 +87,5 @@ const recipesArray = await getDatas();
 const IngredientsObject = GetFullIngredients();
 const AppliancesObject = GetFullAppliance();
 const UstensilesObject = GetFullUstensils();
-
 
 export { recipesArray, IngredientsObject, AppliancesObject, UstensilesObject };
