@@ -67,6 +67,8 @@ e.stopPropagation()
         filterElement.classList.toggle('active')
         const label = new Label(e.target.id)
         const labelDom = label.getDom()
+        labelDom.classList.add(`label-${Arrayname}`)
+        
         labelContainer.appendChild(labelDom)
       } 
       else if (activeFilter) {
