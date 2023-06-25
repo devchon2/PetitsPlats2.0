@@ -53,24 +53,32 @@
     z-index:1
 }
 
-.filter{
+.filter,
+.filterOption{
     display: flex;
     justify-content: space-between;
-    padding:10px 0;
     cursor: pointer;
+    padding:10px 15px;
     
 }
 
+.closeBtn{
+    cursor: pointer;
+}
 
-.filter::first-letter{
+
+.filterOption::first-letter{
 
     text-transform:capitalize
 }
 
 
 
-.filter.active{
-
+.filterOption.active{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
     background-color: #FFD15B;
 }
 

@@ -2,7 +2,7 @@
 #labelsContainer {
 
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     margin: 0 40px;
     justify-content: start;
 }
@@ -43,5 +43,11 @@
 }
 
 .label-icon{
-    margin:0px 20px 0px ;
+    margin:0px 5px 0px 20px;
+    cursor: pointer;
+}
+
+.filter-icon:hover,
+.label-icon:hover{
+    scale:1.5
 }

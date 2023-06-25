@@ -26,13 +26,25 @@ const labelContainer = document.getElementById('labelsContainer');
  * Écouteur d'événement pour les bouton des filtres
  */
 filtersBtn.forEach((btn) => {
-  btn.addEventListener('click', (e) => {
-        e.preventDefault()
+  btn.addEventListener('click', (event) => {
         btn.classList.toggle('active')
-        const { id } = btn
-        displayFilter(id)
-  })
-})
+        const list = document.getElementById(`${btn.id}List`)
+        const { target } = event
+        const clickOutsideList = (target !== list)
+        const clickOutsideBtn = (target !== btn)
+                  const btnID = btn.id
+
+
+        
+        if (!clickOutsideBtn && !clickOutsideList) {
+        displayFilter(btnID)
+        } else {
+              HideFilter(btnID)
+              btn.classList.remove('active')
+            }
+          })
+        })
+
 
 /**
  * Fonction qui crée tous les filtres.
@@ -68,15 +80,27 @@ e.stopPropagation()
         const label = new Label(e.target.id)
         const labelDom = label.getDom()
         labelDom.classList.add(`label-${Arrayname}`)
+        filterElement.innerHTML += '<i class="fa-solid fa-circle-xmark filter-icon"></i>'
         
         labelContainer.appendChild(labelDom)
       } 
       else if (activeFilter) {
           filterElement.classList.toggle('active')
+          filterElement.innerHTML = `${element}`
           const labelDom = document.getElementById(`label-${e.target.id}`)
+
           labelDom.remove()
       }
     })
+
+    filterElement.addEventListener('mouseover', () => {
+      filterElement.classList.add('hovered')
+    })
+
+    filterElement.addEventListener('mouseout', () => {
+      filterElement.classList.remove('hovered')
+    })
+
     if (Arrayname === 'Ingredients') {
       filterIngredientsList.appendChild(filterElement);
     } else if (Arrayname === 'Matériel') {
@@ -92,6 +116,12 @@ function displayFilter(FilterID){
   const list = document.getElementById(`${FilterID}List`)  
   list.classList.toggle('hidden')
   list.classList.toggle('active')
+}
+function HideFilter(FilterID){
+  const list = document.getElementById(`${FilterID}List`)  
+  list.classList.toggle('hidden')
+  list.classList.toggle('active')
+  console.log('hide')
 }
 
 export { CreateAllFilters, CreateFilter };
