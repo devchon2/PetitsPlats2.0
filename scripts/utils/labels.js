@@ -1,27 +1,32 @@
 /* eslint-disable import/prefer-default-export */
+
+/** Classe représentant un label.
+ * @class Label
+ * 
+ */
 class Label {
     constructor(id) {
         this.id = id
+        this.element.innerHTML = `<div class="labels" id="label-${this.id}">
+                                    <span>${this.id}</span>
+                                        <i class="hidden fa-solid fa-xmark label-icon">
+                                        </i>
+                                    </div>`
+
         
     }
 
+    /** Récupère l'ID du label.
+     * 
+     * @returns {HTMLElement} Retourne un élément HTML "label" et ajoute un événement "click" sur l'icone pour supprimer le label.
+     */
     getDom() {
-        
-        const element = document.createElement('div')
-        element.classList.add('labels')
-        element.id = `label-${this.id}`
-        const content = document.createElement('span')
-        const icon = '<i class="fa-solid fa-xmark label-icon"></i>'
-        content.innerHTML = this.id + icon
-        element.appendChild(content)
-        const icone = element.querySelector('i')
-        icone.addEventListener('click', () => {
-            element.remove()
+        const labelElement = this.element
+        labelElement.queryselector('.label-icon').addEventListener('click', () => {
+            labelElement.remove()
         })
-
-
-
-        return element
+    
+        return labelElement
     }
 
     

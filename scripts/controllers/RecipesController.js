@@ -3,8 +3,13 @@
 /* eslint-disable import/extensions */
 // eslint-disable-next-line import/no-unresolved
 
-console.log('RecipesController.js chargé');
+console.log('RecipesController.js loaded');
 
+/**
+ * Classe représentant une recette.
+ * @class Recipe
+ * 
+ */
 class Recipe {
   /**
    * Constructeur de la classe Recipe.
@@ -18,17 +23,7 @@ class Recipe {
    * @param {number} time - Le temps de préparation de la recette.
    * @param {Array} ustensils - Les ustensiles de la recette.
    */
-  constructor(
-    appliance,
-    description,
-    id,
-    image,
-    ingredients,
-    name,
-    servings,
-    time,
-    ustensils
-  ) {
+  constructor(appliance, description, id, image, ingredients, name, servings, time, ustensils) {
     this.appliance = appliance;
     this.description = description;
     this.id = id;
@@ -40,65 +35,65 @@ class Recipe {
     this.ustensils = ustensils;
   }
 
-  /**
-   * Récupère le nom de la recette.
+  /** Récupère le nom de la recette.
    * @returns {string} Le nom de la recette.
+   *
    */
   getName() {
     return this.name;
   }
 
-  /**
-   * Récupère les ingrédients de la recette.
+  /** Récupère les ingrédients de la recette.
    * @returns {Array} Les ingrédients de la recette.
+   *
    */
   getIngredients() {
     return this.ingredients;
   }
 
-  /**
-   * Récupère le temps de préparation de la recette.
+  /** Récupère le temps de préparation de la recette.
    * @returns {number} Le temps de préparation de la recette.
+   *
    */
   getTime() {
     return this.time;
   }
 
-  /**
-   * Récupère le nombre de portions de la recette.
+  /** Récupère le nombre de portions de la recette.
    * @returns {number} Le nombre de portions de la recette.
+   *
    */
   getServings() {
     return this.servings;
   }
 
-  /**
-   * Récupère l'appareil de la recette.
+  /** Récupère les appareils de la recette.
    * @returns {string} L'appareil de la recette.
+   *
    */
   getAppliance() {
     return this.appliance;
   }
 
-  /**
-   * Récupère les ustensiles de la recette.
+  /** Récupère les ustensiles de la recette.
    * @returns {Array} Les ustensiles de la recette.
+   *
    */
   getUstensils() {
     return this.ustensils;
   }
 
-  /**
-   * Récupère l'ID de la recette.
+  /** Récupère l'ID de la recette.
    * @returns {number} L'ID de la recette.
+   *
    */
   getId() {
     return this.id;
   }
 
-  /**
-   * Génère la carte de la recette.
+  /** Génère la carte de la recette.
    * @returns {HTMLElement} La carte de la recette.
+   *
    */
   getCard() {
     // Création de la carte

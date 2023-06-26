@@ -2,45 +2,26 @@
 /* eslint-disable no-console */
 /* eslint-disable import/extensions */
 import { Recipe } from '../controllers/RecipesController.js';
-import {
-  recipesArray,
-  IngredientsObject,
-  AppliancesObject,
-  UstensilesObject,
-} from '../controllers/datasController.js';
-import { CreateAllFilters, CreateFilter } from '../utils/Filters.js';
+import {  recipesArray } from '../controllers/datasController.js';
+import { CreateAllFilters } from '../utils/Filters.js';
 
 console.log('index.js chargé');
 
-const recipeContainer = document.getElementById('RecipesCardsContainer');
+const recipeContainer = document.getElementById('RecipesCardsContainer'); // Récupère l'élément HTML qui contiendra les cartes de recettes.
 
-/**
- * Initialise l'application.
- */
-function init() {
-  // Parcourt le tableau recipesArray et crée une carte de recette pour chaque élément.
-  for (let i = 0; i < recipesArray.length - 1; i += 1) {
-    const recipe = new Recipe(
-      recipesArray[i].appliance,
-      recipesArray[i].description,
-      recipesArray[i].id,
-      recipesArray[i].image,
-      recipesArray[i].ingredients,
-      recipesArray[i].name,
-      recipesArray[i].servings,
-      recipesArray[i].time,
-      recipesArray[i].ustensils
-    );
-    const recipeCard = recipe.getCard();
-    recipeContainer.appendChild(recipeCard);
+function init() {// Initialise l'application 
+
+  for (let i = 0; i < recipesArray.length - 1; i += 1) {// Parcourt le tableau recipesArray et crée une carte de recette pour chaque élément.
+    const { appliance, description, id, image, ingredients, name, servings, time, ustensils } = recipesArray[i];
+    const recipe = new Recipe( appliance, description, id, image, ingredients, name, servings, time, ustensils );
+    recipeContainer.appendChild(recipe.getCard());
   }
-  CreateAllFilters();
 
-  const resume = document.getElementById('summer')
-  const lenght = recipesArray.length
-  resume.innerHTML = `${lenght} `
-  
+  CreateAllFilters(); // Crée les filtres de recherche.
+  const resume = document.getElementById('summer'); // Affiche le nombre de recettes.
+  const lenght = recipesArray.length; // Récupère la longueur du tableau recipesArray.
+  resume.innerHTML = `${lenght} `; // Affiche la longueur du tableau recipesArray.
 }
 
-// Appel de la fonction d'initialisation
-init();
+init();// Appel de la fonction d'initialisation
+
