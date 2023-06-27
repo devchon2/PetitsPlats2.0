@@ -42,34 +42,36 @@ function CreateAllFilters() {
 function CreateFilter(Obj) {
   const Arrayname = Object.keys(Obj)[0];
   const Arrayfull = Object.values(Obj)[0].sort();
+  
   Arrayfull.forEach((element) => {// Parcourt chaque élément du tableau et crée un élément HTML pour chaque élément.
+    
     const filterElement = document.createElement('div');
     filterElement.id = element;
-    filterElement.innerHTML = `${element}`;
+    filterElement.innerHTML = `<p class='filterName'>${element}</p>`;
     filterElement.classList.add('filterOption');
 
     // Écouteur d'événement Click pour chaque élément de filtre.
     filterElement.addEventListener('click', (e) => {
-      const activeFilter = filterElement.classList.contains('active')
+      const activeFilter = filterElement.classList.contains('active') // Récupère  l'élément de filtre en état actif
       e.stopPropagation()
+
       if (!activeFilter) {
         filterElement.classList.toggle('active')
-        const label = new Label(e.target.id)
+        const label = new Label(filterElement.id)
         const labelDom = label.getDom()
         labelDom.classList.add(`label-${Arrayname}`)
-        filterElement.innerHTML = `${element} <i class="fa-solid fa-circle-xmark filter-icon"></i>`	
+        filterElement.innerHTML = `<p class='filterName'>${element}</p> <i class="fa-solid fa-circle-xmark filter-icon"></i>`	
         
         labelContainer.appendChild(labelDom)
-      } 
-      else {
+      } else if (activeFilter && e.target.classList.contains('filter-icon')){
           filterElement.classList.toggle('active')
           filterElement.innerHTML = `${element}`
-          console.log('target', e.target.id)
-          const labelDom = document.getElementById(`label-${e.target.id}`)
+          const labelDom = document.getElementById(`label-${filterElement.id}`)
           labelDom.remove()
-      }
-    })
-
+      } 
+     
+      });
+    
     // Écouteur d'événement Hover pour chaque élément de filtre.
     filterElement.addEventListener('mouseover', () => {
       filterElement.classList.add('hovered')
@@ -79,7 +81,16 @@ function CreateFilter(Obj) {
     filterElement.addEventListener('mouseout', () => {
       filterElement.classList.remove('hovered')
     })
-
+  
+    document.addEventListener('click', (e) => {
+      const activeList = document.querySelector('.filterList.active');
+      const activeBtn = document.querySelector('.filterBtn.active');
+      
+      if (activeList && !activeList.contains(e.target)) {
+        activeList.classList.remove('active');
+        activeBtn.classList.remove('active');
+      }
+    });
     // Ajoute l'élément de filtre à la bonne liste.
     if (Arrayname === 'Ingredients') {
       filterIngredientsList.appendChild(filterElement);
@@ -89,8 +100,9 @@ function CreateFilter(Obj) {
       filterUstensilsList.appendChild(filterElement);
     }
   })
-    
 }
+    
+
 
 /** Fonction qui affiche ou cache la liste de filtre.
  * @param { string } FilterID - Le nom du bouton de filtre. ex: 'ingredientsBtn'

@@ -62,14 +62,15 @@
     
 }
 
-.closeBtn{
+.label.icon,
+.filter-icon{
     cursor: pointer;
 }
 
 
-.filterOption::first-letter{
+.filterName::first-letter{
 
-    text-transform:capitalize
+    text-transform:uppercase
 }
 
 
@@ -78,7 +79,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    cursor: pointer;
+    cursor: default;
     background-color: #FFD15B;
 }
 
