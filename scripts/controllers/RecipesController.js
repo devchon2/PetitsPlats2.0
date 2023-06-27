@@ -27,7 +27,7 @@ class Recipe {
     this.appliance = appliance;
     this.description = description;
     this.id = id;
-    this.image = `/assets/Images/Recipes/${image}`;
+    this.image = `./assets/Images/Recipes/${image}`;
     this.ingredients = ingredients;
     this.name = name;
     this.servings = servings;
