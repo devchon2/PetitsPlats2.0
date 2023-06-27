@@ -47,7 +47,7 @@ function CreateFilter(Obj) {
   Arrayfull.forEach((element) => {// Parcourt chaque élément du tableau et crée un élément HTML pour chaque élément.
     
     const filterElement = document.createElement('div');
-    filterElement.id = `${element.toUpperCase().charAt(0)}${element.slice(1)}`
+    filterElement.id = `Filter-${element.toUpperCase().charAt(0)}${element.slice(1).replaceAll(' ', '-')}`
     filterElement.innerHTML = `${filterElement.id}`;
     filterElement.classList.add('filterOption');
 
@@ -76,27 +76,37 @@ function CreateFilter(Obj) {
     
     // Écouteur d'événement Hover pour chaque élément de filtre.
     filterElement.addEventListener('mouseover', () => {
-      filterElement.classList.toggle('hovered')
+      filterElement.classList.add('hovered')
     })
 
     // Écouteur d'événement HoverOut pour chaque élément de filtre.
     filterElement.addEventListener('mouseout', () => {
-      filterElement.classList.toggle('hovered')
+      filterElement.classList.remove('hovered')
     })
   
     window.addEventListener('click', (e) => {
       e.stopPropagation()
       const activeList = document.querySelector('.filterList.active');
       const activeBtn = document.querySelector('.filterBtn.active');
+      const inactiveBtn = document.querySelector('.filterBtn:not(.active)');
       
       if (activeList) {
+        if(!e.target(activeBtn)) {
         activeList.classList.remove('active');
         activeList.classList.add('hidden');
         activeBtn.classList.remove('active');
         activeBtn.querySelector('i').classList.remove('fa-chevron-up');
         activeBtn.querySelector('i').classList.add('fa-chevron-down');
+        } 
+        if (e.target.id === inactiveBtn.id) {
+          activeList.classList.remove('active');
+          activeList.classList.add('hidden');
+          activeBtn.classList.remove('active');
+          activeBtn.querySelector('i').classList.remove('fa-chevron-up');
+          activeBtn.querySelector('i').classList.add('fa-chevron-down');
         }
-      })
+      }
+    })
     
 
     // Ajoute l'élément de filtre à la bonne liste.
