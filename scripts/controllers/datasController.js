@@ -1,4 +1,4 @@
-console.log('datasController.js chargé');
+console.log('datasController.js loaded');
 
 const JSONDatas = './datas/recipes.json';
 

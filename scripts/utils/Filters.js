@@ -18,6 +18,10 @@ const labelContainer = document.getElementById('labelsContainer');
  */
 filtersBtn.forEach((btn) => {
   btn.addEventListener('mouseover', (e) => {
+     const input = e.target.querySelector('input')
+     if (input.focus()){
+      e.stopImmediatePropagation()
+     }
     e.stopPropagation()
     btn.parentElement.classList.add('active')
     btn.classList.toggle('active') // Ajoute ou supprime la classe active au bouton
@@ -35,6 +39,7 @@ filtersBtn.forEach((btn) => {
         btn.querySelector('i').classList.toggle('fa-chevron-up') // Change l'icône du bouton pour indiquer si la liste est ouverte ou fermée.
         ToggleList(btnID) 
   })
+  
   })
 
   
