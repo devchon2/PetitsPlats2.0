@@ -1,8 +1,8 @@
 /* Importation des polices Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
-@import url('/css/filters.css');
-@import url('/css/labels.css');
+@import url('./filters.css');
+@import url('./labels.css');
 
 /* Réinitialisation des marges, des paddings et de la boîte */
 *, ::before, ::after {
