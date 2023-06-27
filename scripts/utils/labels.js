@@ -27,8 +27,9 @@ class Label {
 
     addListener(){
         const LabelIcon = this.labelElement.querySelector('.label-icon')
-        LabelIcon.addEventListener('click', () => {
-            const filter = document.querySelector(`#${this.id}.filterOption.active`)
+        LabelIcon.addEventListener('click', (e) => {
+            e.stopPropagation()
+            const filter = document.querySelector('.filterOption.active')
             filter.classList.remove('active')
             filter.innerHTML = `${this.id}`
             this.labelElement.remove()
