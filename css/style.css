@@ -113,6 +113,8 @@ header {
     height: 100%;
     width: calc(100% - 2rem);
     border: none;
+    outline: none;
+    padding:5px 10px;
 }
 
 /* Styles du bouton de recherche */

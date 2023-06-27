@@ -18,14 +18,13 @@ const labelContainer = document.getElementById('labelsContainer');
  */
 filtersBtn.forEach((btn) => {
   btn.addEventListener('click', (e) => {
-    if (e.target == e.currentTarget) {
-        btn.classList.toggle('active') // Ajoute ou supprime la classe active au bouton
+    e.stopPropagation()
+    btn.classList.toggle('active') // Ajoute ou supprime la classe active au bouton
         const btnID = btn.id // Récupère l'ID du bouton
         btn.querySelector('i').classList.toggle('fa-chevron-down')//
         btn.querySelector('i').classList.toggle('fa-chevron-up') // Change l'icône du bouton pour indiquer si la liste est ouverte ou fermée.
         ToggleList(btnID) 
-    }}
-    )
+  })
 })
   
 /** Fonction qui crée tous les filtres.
@@ -88,11 +87,14 @@ function CreateFilter(Obj) {
       const activeList = document.querySelector('.filterList.active');
       const activeBtn = document.querySelector('.filterBtn.active');
       
-      if (activeList && !activeList.contains(e.target)) {
+      if (activeList) {
         activeList.classList.remove('active');
+        activeList.classList.add('hidden');
         activeBtn.classList.remove('active');
-      }
-    });
+        }
+      })
+    
+
     // Ajoute l'élément de filtre à la bonne liste.
     if (Arrayname === 'Ingredients') {
       filterIngredientsList.appendChild(filterElement);
