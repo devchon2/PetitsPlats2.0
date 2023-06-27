@@ -84,6 +84,7 @@ function CreateFilter(Obj) {
     })
   
     window.addEventListener('click', (e) => {
+      e.stopPropagation()
       const activeList = document.querySelector('.filterList.active');
       const activeBtn = document.querySelector('.filterBtn.active');
       
