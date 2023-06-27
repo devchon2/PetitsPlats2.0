@@ -17,15 +17,24 @@ const labelContainer = document.getElementById('labelsContainer');
  * 
  */
 filtersBtn.forEach((btn) => {
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation()
+  btn.addEventListener('mouseover', () => {
+    btn.parentElement.classList.add('active')
     btn.classList.toggle('active') // Ajoute ou supprime la classe active au bouton
         const btnID = btn.id // Récupère l'ID du bouton
         btn.querySelector('i').classList.toggle('fa-chevron-down')//
         btn.querySelector('i').classList.toggle('fa-chevron-up') // Change l'icône du bouton pour indiquer si la liste est ouverte ou fermée.
         ToggleList(btnID) 
   })
-})
+  btn.addEventListener('mouseout', () => {
+    btn.parentElement.classList.remove('active')
+    btn.classList.toggle('active') // Ajoute ou supprime la classe active au bouton
+        const btnID = btn.id // Récupère l'ID du bouton
+        btn.querySelector('i').classList.toggle('fa-chevron-down')//
+        btn.querySelector('i').classList.toggle('fa-chevron-up') // Change l'icône du bouton pour indiquer si la liste est ouverte ou fermée.
+        ToggleList(btnID) 
+  })
+  })
+
   
 /** Fonction qui crée tous les filtres.
  *
@@ -55,7 +64,7 @@ function CreateFilter(Obj) {
     // Écouteur d'événement Click pour chaque élément de filtre.
     filterElement.addEventListener('click', (e) => {
       const activeFilter = filterElement.classList.contains('active') // Récupère  l'élément de filtre en état actif
-      e.stopPropagation()
+      const activeBtn = document.querySelector('.filterOption.active')
 
       if (!activeFilter) {
         filterElement.classList.toggle('active')
@@ -71,10 +80,9 @@ function CreateFilter(Obj) {
           filterElement.innerHTML = `${filterName}  `
           const labelDom = document.getElementById(`label-${filterName}`)
           labelDom.remove()
-      } 
-      else if (activeFilter && !e.target.classList.contains('.filter-icon' && e.target.classList.contains('.filterBtn:not(.active'))) {
+      } else if (activeFilter && e.target.contains('.filter:not(.active)')) {
+        if(activeBtn){
           const activeList = document.querySelector('.filterList.active');
-          const activeBtn = document.querySelector('.filterBtn.active');
           activeList.classList.remove('active');
           activeList.classList.add('hidden');
           activeBtn.classList.remove('active');
@@ -84,7 +92,7 @@ function CreateFilter(Obj) {
           filterElement.innerHTML = `${filterName}  `
           const labelDom = document.getElementById(`label-${filterName}`)
           labelDom.remove()
-      }
+      }}
     })
     
     // Écouteur d'événement Hover pour chaque élément de filtre.
@@ -130,7 +138,6 @@ function CreateFilter(Obj) {
  */
 function ToggleList(FilterID){
   const list = document.getElementById(`${FilterID}List`)  
-  
   list.classList.toggle('active')
   list.classList.toggle('hidden')
 }
