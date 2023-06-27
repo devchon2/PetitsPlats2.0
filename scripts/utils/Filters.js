@@ -18,11 +18,12 @@ const labelContainer = document.getElementById('labelsContainer');
  */
 filtersBtn.forEach((btn) => {
   btn.addEventListener('mouseover', (e) => {
-     const input = e.target.querySelector('input')
-     if (input.focus()){
-      e.stopImmediatePropagation()
-     }
     e.stopPropagation()
+     const input = btn.querySelector('input')
+     
+    if (input.focus){
+      e.stopPropagation()
+    }
     btn.parentElement.classList.add('active')
     btn.classList.toggle('active') // Ajoute ou supprime la classe active au bouton
         const btnID = btn.id // Récupère l'ID du bouton
@@ -30,8 +31,8 @@ filtersBtn.forEach((btn) => {
         btn.querySelector('i').classList.toggle('fa-chevron-up') // Change l'icône du bouton pour indiquer si la liste est ouverte ou fermée.
         ToggleList(btnID) 
   })
-  btn.addEventListener('mouseout', (f) => {
-    f.stopPropagation()
+  btn.addEventListener('mouseout', (e) => {
+    e.stopPropagation()
     btn.parentElement.classList.remove('active')
     btn.classList.toggle('active') // Ajoute ou supprime la classe active au bouton
         const btnID = btn.id // Récupère l'ID du bouton
@@ -111,22 +112,7 @@ function CreateFilter(Obj) {
     // Écouteur d'événement HoverOut pour chaque élément de filtre.
     filterElement.addEventListener('mouseout', () => {
       filterElement.classList.remove('hovered')
-    })
-  
-    window.addEventListener('click', (e) => {
-      e.stopPropagation()
-      const activeList = document.querySelector('.filterList.active');
-      const activeBtn = document.querySelector('.filterBtn.active');
-      
-      if (activeList) {
-        activeList.classList.remove('active');
-        activeList.classList.add('hidden');
-        activeBtn.classList.remove('active');
-        activeBtn.querySelector('i').classList.remove('fa-chevron-up');
-        activeBtn.querySelector('i').classList.add('fa-chevron-down');
-        }
-      })
-      
+    })      
 
     // Ajoute l'élément de filtre à la bonne liste.
     if (Arrayname === 'Ingredients') {
