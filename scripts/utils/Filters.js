@@ -24,9 +24,11 @@ filtersBtn.forEach((btn) => {
   btn.addEventListener('click', (e) => {
   if (input.contains(e.target)){
     e.stopImmediatePropagation()
-  } else if (e.target.classList.contains(btn.classList))
+  } else{
+    e.stopPropagation()
     ToggleList(btnID) 
-  })
+  }
+})
 })
 
 /** Écouteur d'événement de clic en dehors de la zone active */
