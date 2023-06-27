@@ -59,17 +59,17 @@ function CreateFilter(Obj) {
 
       if (!activeFilter) {
         filterElement.classList.toggle('active')
-        const label = new Label(filterElement.id)
+        const label = new Label(filterName)
         const labelDom = label.getDom()
         label.addListener()
         labelDom.classList.add(`label-${Arrayname}`)
-        filterElement.innerHTML = `<p class='filterName'>${filterElement.id}</p> <i class="fa-solid fa-circle-xmark filter-icon"></i>`	
+        filterElement.innerHTML = `<p class='filterName'>${filterName}</p> <i class="fa-solid fa-circle-xmark filter-icon"></i>`	
         
         labelContainer.appendChild(labelDom)
       } else if (activeFilter && e.target.classList.contains('filter-icon')){
           filterElement.classList.toggle('active')
-          filterElement.innerHTML = `${filterElement.id}  `
-          const labelDom = document.getElementById(`label-${filterElement.id}`)
+          filterElement.innerHTML = `${filterName}  `
+          const labelDom = document.getElementById(`label-${filterName}`)
           labelDom.remove()
       } 
      

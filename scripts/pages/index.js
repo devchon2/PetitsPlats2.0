@@ -5,7 +5,7 @@ import { Recipe } from '../controllers/RecipesController.js';
 import {  recipesArray } from '../controllers/datasController.js';
 import { CreateAllFilters } from '../utils/Filters.js';
 
-console.log('index.js chargé');
+console.log('index.js loaded');
 
 const recipeContainer = document.getElementById('RecipesCardsContainer'); // Récupère l'élément HTML qui contiendra les cartes de recettes.
 
