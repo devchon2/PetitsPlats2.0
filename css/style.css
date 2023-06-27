@@ -139,6 +139,10 @@ header {
     padding: 20px;
 }
 
+#labelsContainer{
+    height:90px;
+}
+
 
 
 
@@ -172,7 +176,9 @@ header {
 
 /* Styles des cartes de recettes */
 .recipeCard {
-    margin-top:50px;
+    display:flex;
+    flex-direction: column;
+    margin:20px ;
     position: relative;
     min-width: 300px;
     width: 30%;

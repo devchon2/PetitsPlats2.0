@@ -36,6 +36,10 @@
     border-bottom-right-radius: 0;
 }
 
+.filterBtnName{
+    z-index:10;
+}
+
 .fa-magnifying-glass::before{
 
     color:#afafaf;
@@ -57,14 +61,19 @@
 .filterOption{
     display: flex;
     justify-content: space-between;
-    cursor: pointer;
+    cursor: pointer;    
+}
+
+.filterOption{
     padding:10px 15px;
-    
+
 }
 
 .label.icon,
 .filter-icon{
     cursor: pointer;
+    scale:1
+    
 }
 
 
@@ -90,11 +99,6 @@
     background-color: #FFD15B;
 }
 
-.filter.hovered i{
-
-    width:30px;
-    height:30px;
-}
 
 .InputFilterBtn{
 

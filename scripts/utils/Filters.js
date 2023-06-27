@@ -17,13 +17,15 @@ const labelContainer = document.getElementById('labelsContainer');
  * 
  */
 filtersBtn.forEach((btn) => {
-  btn.addEventListener('click', () => {
+  btn.addEventListener('click', (e) => {
+    if (e.target == e.currentTarget) {
         btn.classList.toggle('active') // Ajoute ou supprime la classe active au bouton
         const btnID = btn.id // Récupère l'ID du bouton
         btn.querySelector('i').classList.toggle('fa-chevron-down')//
         btn.querySelector('i').classList.toggle('fa-chevron-up') // Change l'icône du bouton pour indiquer si la liste est ouverte ou fermée.
         ToggleList(btnID) 
-    })
+    }}
+    )
 })
   
 /** Fonction qui crée tous les filtres.
@@ -47,7 +49,7 @@ function CreateFilter(Obj) {
     
     const filterElement = document.createElement('div');
     filterElement.id = element;
-    filterElement.innerHTML = `<p class='filterName'>${element}</p>`;
+    filterElement.innerHTML = `${element}`;
     filterElement.classList.add('filterOption');
 
     // Écouteur d'événement Click pour chaque élément de filtre.
@@ -82,7 +84,7 @@ function CreateFilter(Obj) {
       filterElement.classList.remove('hovered')
     })
   
-    document.addEventListener('click', (e) => {
+    window.addEventListener('click', (e) => {
       const activeList = document.querySelector('.filterList.active');
       const activeBtn = document.querySelector('.filterBtn.active');
       
@@ -109,8 +111,9 @@ function CreateFilter(Obj) {
  */
 function ToggleList(FilterID){
   const list = document.getElementById(`${FilterID}List`)  
-  list.classList.toggle('hidden')
+  
   list.classList.toggle('active')
+  list.classList.toggle('hidden')
 }
 
 

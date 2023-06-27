@@ -39,9 +39,11 @@
 .label-icon{
     margin:0px 5px 0px 20px;
     cursor: pointer;
+    scale:1;
 }
 
 .filter-icon:hover,
 .label-icon:hover{
-    scale:1.5
+   transition: ease-out 0.2s;
+    scale:1.3;
 }

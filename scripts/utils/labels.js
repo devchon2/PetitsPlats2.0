@@ -25,7 +25,11 @@ class Label {
         labelElement.innerHTML = `${this.html}`
         const LabelIcon = labelElement.querySelector('.label-icon')
         LabelIcon.addEventListener('click', () => {
+            const filter = document.querySelector(`#${this.id}.filterOption.active`)
+            filter.classList.toggle('active')
+            filter.innerHTML = `${this.id}`
             labelElement.remove()
+            
         })
     
         return labelElement
