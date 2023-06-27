@@ -92,6 +92,8 @@ function CreateFilter(Obj) {
         activeList.classList.remove('active');
         activeList.classList.add('hidden');
         activeBtn.classList.remove('active');
+        activeBtn.querySelector('i').classList.remove('fa-chevron-up');
+        activeBtn.querySelector('i').classList.add('fa-chevron-down');
         }
       })
     
