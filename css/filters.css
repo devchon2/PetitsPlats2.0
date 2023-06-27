@@ -77,7 +77,7 @@
 }
 
 
-.filterName::first-letter{
+.filterName #text::first-letter{
 
     text-transform:uppercase
 }

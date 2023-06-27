@@ -47,8 +47,8 @@ function CreateFilter(Obj) {
   Arrayfull.forEach((element) => {// Parcourt chaque élément du tableau et crée un élément HTML pour chaque élément.
     
     const filterElement = document.createElement('div');
-    filterElement.id = element;
-    filterElement.innerHTML = `${element}`;
+    filterElement.id = `${element.toUpperCase().charAt(0)}${element.slice(1)}`
+    filterElement.innerHTML = `${filterElement.id}`;
     filterElement.classList.add('filterOption');
 
     // Écouteur d'événement Click pour chaque élément de filtre.
@@ -60,13 +60,14 @@ function CreateFilter(Obj) {
         filterElement.classList.toggle('active')
         const label = new Label(filterElement.id)
         const labelDom = label.getDom()
+        label.addListener()
         labelDom.classList.add(`label-${Arrayname}`)
-        filterElement.innerHTML = `<p class='filterName'>${element}</p> <i class="fa-solid fa-circle-xmark filter-icon"></i>`	
+        filterElement.innerHTML = `<p class='filterName'>${filterElement.id}</p> <i class="fa-solid fa-circle-xmark filter-icon"></i>`	
         
         labelContainer.appendChild(labelDom)
       } else if (activeFilter && e.target.classList.contains('filter-icon')){
           filterElement.classList.toggle('active')
-          filterElement.innerHTML = `${element}`
+          filterElement.innerHTML = `${filterElement.id}  `
           const labelDom = document.getElementById(`label-${filterElement.id}`)
           labelDom.remove()
       } 
@@ -75,12 +76,12 @@ function CreateFilter(Obj) {
     
     // Écouteur d'événement Hover pour chaque élément de filtre.
     filterElement.addEventListener('mouseover', () => {
-      filterElement.classList.add('hovered')
+      filterElement.classList.toggle('hovered')
     })
 
     // Écouteur d'événement HoverOut pour chaque élément de filtre.
     filterElement.addEventListener('mouseout', () => {
-      filterElement.classList.remove('hovered')
+      filterElement.classList.toggle('hovered')
     })
   
     window.addEventListener('click', (e) => {

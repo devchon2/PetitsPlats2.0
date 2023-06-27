@@ -11,7 +11,7 @@ class Label {
                         <span>${this.id}</span>
                         <i class="hidden fa-solid fa-xmark label-icon"></i>
                     </div>`
-
+        this.labelElement = document.createElement('div') 
 
         
     }
@@ -21,19 +21,22 @@ class Label {
      * @returns {HTMLElement} Retourne un élément HTML "label" et ajoute un événement "click" sur l'icone pour supprimer le label.
      */
     getDom() {
-        const labelElement = document.createElement('div') 
-        labelElement.innerHTML = `${this.html}`
-        const LabelIcon = labelElement.querySelector('.label-icon')
+        this.labelElement.innerHTML = `${this.html}`
+        return this.labelElement
+    }
+
+    addListener(){
+        const LabelIcon = this.labelElement.querySelector('.label-icon')
         LabelIcon.addEventListener('click', () => {
             const filter = document.querySelector(`#${this.id}.filterOption.active`)
-            filter.classList.toggle('active')
+            filter.classList.remove('active')
             filter.innerHTML = `${this.id}`
-            labelElement.remove()
+            this.labelElement.remove()
             
         })
-    
-        return labelElement
     }
+    
+        
 
     
 }
