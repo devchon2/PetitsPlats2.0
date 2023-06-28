@@ -39,9 +39,11 @@ document.body.addEventListener('click', (e) => {
     const activeBtnID = activeFilter.id.replace('Filter', '');
     ToggleList(activeBtnID);
   }
-});
-
-
+  if (activeFilter && e.target === inactiveFilter){
+      const activeBtnID = activeFilter.id.replace('Filter', '');
+    ToggleList(activeBtnID);
+  }
+})
 /** Fonction qui crée tous les filtres.
  *
  */

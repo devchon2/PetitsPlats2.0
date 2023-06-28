@@ -119,8 +119,8 @@ header {
 
 /* Styles du bouton de recherche */
 #searchInputButton {
-    padding: 5px;
-    border: 1px solid black;
+    display:flex;
+    justify-content: center;
     align-items: center;
     width: 2.5rem;
     height: 2.5rem;
@@ -128,9 +128,28 @@ header {
     background-color: #1b1b1b;
 }
 
-#searchInputButton i {
-    color: white;
+#searchInputButton #MainSearchIcon::before{
+    color:grey;
+    font-weight: 550;
+    font-size: large;
 }
+
+#searchInputButton:hover{
+    background-color: #FFD15B;
+}
+
+#searchInputButton:hover #MainSearchIcon::before{
+    color:black;
+    font-weight: 800;
+    font-size: large;
+}
+
+#searchInputButton:active{
+    border:2px solid  #1b1b1b
+}
+
+
+
 
 /* Labels et filtres */
 
