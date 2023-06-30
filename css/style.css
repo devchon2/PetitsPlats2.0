@@ -20,13 +20,14 @@ body {
     font-family: 'Manrope';
 }
 
-.hidden{
-    display:none;
+.hidden {
+    display: none;
 }
 
-.visible{
-    display:flex;
+.visible {
+    display: flex;
 }
+
 /* Styles de l'en-tête */
 header {
     position: absolute;
@@ -108,48 +109,62 @@ header {
 }
 
 /* Styles de la zone de recherche */
-#searchInput {
+#mainSearchInput {
     display: flex;
     height: 100%;
     width: calc(100% - 2rem);
     border: none;
     outline: none;
-    padding:5px 10px;
+    padding: 5px 10px;
 }
 
 /* Styles du bouton de recherche */
-#searchInputButton {
-    display:flex;
+#mainSearchButton {
+    display: flex;
     justify-content: center;
     align-items: center;
     width: 2.5rem;
     height: 2.5rem;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: #1b1b1b;
 }
 
-#searchInputButton #MainSearchIcon::before{
-    color:grey;
+#mainSearchIcon {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+#mainSearchButton #mainSearchIcon::before {
+    color: grey;
     font-weight: 550;
     font-size: large;
 }
 
-#searchInputButton:hover{
+#mainSearchButton:hover {
     background-color: #FFD15B;
+    border-top: 1px solid #1b1b1b;
+    border-left: 1px solid #1b1b1b;
+    border-bottom: 3px solid #1b1b1b;
+    border-right: 3px solid #1b1b1b;
+    border-radius: 10px;
 }
 
-#searchInputButton:hover #MainSearchIcon::before{
-    color:black;
+#mainSearchButton:hover #mainSearchIcon::before {
+    color: black;
     font-weight: 800;
     font-size: large;
 }
 
-#searchInputButton:active{
-    border:2px solid  #1b1b1b
+#mainSearchButton:active {
+    border-top: 1px;
+    border-left: 1px;
+    border-bottom: 1px solid grey;
+    border-right: 1px solid grey;
 }
-
-
-
 
 /* Labels et filtres */
 
@@ -160,20 +175,9 @@ header {
     padding: 20px;
 }
 
-#labelsContainer{
-    height:90px;
+#labelsContainer {
+    height: 90px;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 /* Styles du total des recettes */
 #totalRecipes {
@@ -184,22 +188,20 @@ header {
     font-size: 21px;
 }
 
-
-
 /* Conteneur des cartes de recettes */
-#RecipesCardsContainer {
+#recipesCardsContainer {
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    padding:0 50px
+    padding: 0 50px;
 }
 
 /* Styles des cartes de recettes */
 .recipeCard {
-    display:flex;
+    display: flex;
     flex-direction: column;
-    margin:20px ;
+    margin: 20px;
     position: relative;
     min-width: 300px;
     width: 30%;
@@ -210,7 +212,7 @@ header {
 }
 
 /* Styles du temps de cuisson */
-.CookingTime {
+.cookingTime {
     position: absolute;
     right: 30px;
     top: 30px;
@@ -249,7 +251,7 @@ header {
 /* Styles des titres de carte, des sous-titres de carte et des titres d'ingrédients */
 .cardTitle,
 .cardSubTitle,
-.IngredientsTitle {
+.ingredientsTitle {
     margin: 15px 0 10px 0;
     font-family: 'Manrope';
     font-weight: 700;
@@ -269,7 +271,7 @@ header {
 }
 
 /* Styles de la Btne des ingrédients */
-.RecipeIngredients {
+.recipeIngredients {
     display: flex;
     flex-wrap: wrap;
     justify-content: start;

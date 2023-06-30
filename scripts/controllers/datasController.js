@@ -1,6 +1,6 @@
 console.log('datasController.js loaded');
 
-const JSONDatas = './datas/recipes.json';
+const jsonDatas = './datas/recipes.json';
 
 /**
  * Récupère les données du fichier JSON.
@@ -8,7 +8,7 @@ const JSONDatas = './datas/recipes.json';
  */
 async function getDatas() {
   try {
-    const response = await fetch(JSONDatas);
+    const response = await fetch(jsonDatas);
 
     if (!response.ok) {
       if (response.status === 404) throw new Error('Aucun fichier trouvé');
@@ -17,7 +17,7 @@ async function getDatas() {
     console.log(e);
   }
 
-  const response = await fetch(JSONDatas);
+  const response = await fetch(jsonDatas);
   const datas = await response.json();
 
   return datas;
@@ -27,56 +27,56 @@ async function getDatas() {
  * Obtient tous les ingrédients disponibles.
  * @returns {Object} L'objet contenant tous les ingrédients.
  */
-function GetFullIngredients() {
-  const IngredientsArray = [];
+function getFullIngredients() {
+  const ingredientsArray = [];
   recipesArray.forEach((recipeObject) => {
     const { ingredients } = recipeObject;
     ingredients.forEach((ingredientObject) => {
       const { ingredient } = ingredientObject;
-      if (!IngredientsArray.includes(ingredient)) {
-        IngredientsArray.push(ingredient);
+      if (!ingredientsArray.includes(ingredient)) {
+        ingredientsArray.push(ingredient);
       }
     });
   });
   
-  const StartIngredientsArray = { 'Ingredients': IngredientsArray };
-  return StartIngredientsArray;
+  const StartingredientsArray = { 'Ingredients': ingredientsArray };
+  return StartingredientsArray;
 }
 
 /**
  * Obtient tout le matériel (appareils) disponible.
  * @returns {Object} L'objet contenant tout le matériel.
  */
-function GetFullAppliance() {
-  const AppliancesArray = [];
+function getFullAppliance() {
+  const appliancesArray = [];
   recipesArray.forEach((recipeObject) => {
     const { appliance } = recipeObject;
 
-    if (!AppliancesArray.includes(appliance)) {
-      AppliancesArray.push(appliance);
+    if (!appliancesArray.includes(appliance)) {
+      appliancesArray.push(appliance);
     }
   });
 
-  const FinalApplianceObject = { 'Matériel': AppliancesArray };
-  return FinalApplianceObject;
+  const finalApplianceObject = { 'Matériel': appliancesArray };
+  return finalApplianceObject;
 }
 
 /**
  * Obtient tous les ustensiles disponibles.
  * @returns {Object} L'objet contenant tous les ustensiles.
  */
-function GetFullUstensils() {
-  const UstensilsArray = [];
+function getFullUstensils() {
+  const ustensilsArray = [];
   recipesArray.forEach((recipeObject) => {
     const { ustensils } = recipeObject;
     ustensils.forEach((ustensil) => {
-      if (!UstensilsArray.includes(ustensil)) {
-        UstensilsArray.push(ustensil);
+      if (!ustensilsArray.includes(ustensil)) {
+        ustensilsArray.push(ustensil);
       }
     });
   });
 
-  const FinalUstensilsObject = { 'Ustensiles': UstensilsArray };
+  const FinalUstensilsObject = { 'Ustensiles': ustensilsArray };
   return FinalUstensilsObject;
 }
 
@@ -84,8 +84,8 @@ function GetFullUstensils() {
 
 // Récupération des données, des ingrédients, du matériel et des ustensiles
 const recipesArray = await getDatas();
-const IngredientsObject = GetFullIngredients();
-const AppliancesObject = GetFullAppliance();
-const UstensilesObject = GetFullUstensils();
+const ingredientsObject = getFullIngredients();
+const appliancesObject = getFullAppliance();
+const ustensilesObject = getFullUstensils();
 
-export { recipesArray, IngredientsObject, AppliancesObject, UstensilesObject };
+export { recipesArray, ingredientsObject, appliancesObject, ustensilesObject };

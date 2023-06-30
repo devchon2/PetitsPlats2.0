@@ -1,5 +1,5 @@
 
-import { IngredientsObject, AppliancesObject, UstensilesObject } from '../controllers/datasController.js';
+import { ingredientsObject, appliancesObject, ustensilesObject } from '../controllers/datasController.js';
 import { Label } from './labels.js';
 
 /** Variables des éléments
@@ -7,9 +7,9 @@ import { Label } from './labels.js';
  */
 const filterIngredientsList = document.getElementById('ingredientsList');
 const filterApplianceList = document.getElementById('appliancesList');
-const filterUstensilsList = document.getElementById('ustensilesList');
+const filterUstensilsList = document.getElementById('ustensilsList');
 const filtersBtn = document.querySelectorAll('.filterBtn');
-const FullArray = [IngredientsObject, AppliancesObject, UstensilesObject];
+const fullArray = [ingredientsObject, appliancesObject, ustensilesObject];
 const labelContainer = document.getElementById('labelsContainer');
 
 
@@ -26,30 +26,32 @@ filtersBtn.forEach((btn) => {
     e.stopImmediatePropagation()
   } else{
     e.stopPropagation()
-    ToggleList(btnID) 
+    toggleList(btnID) 
   }
+
+  /** Écouteur d'événement de clic en dehors de la zone active */
+document.body.addEventListener('click', (e2) => {
+  const activeFilter = document.querySelector('.filter.active');
+  const activeBtnID = activeFilter?.id.replace('Filter', '');
+
+  if (activeFilter && e2.target.classList.contains('filter') && (!e2.target.classList.contains('active'))) {
+    toggleList(e2.target.id);
+    toggleList(activeBtnID);
+  } else if (activeFilter) {
+    toggleList(activeBtnID);   
+  }
+});
+
 })
 })
 
-/** Écouteur d'événement de clic en dehors de la zone active */
-document.body.addEventListener('click', (e) => {
-  const activeFilter = document.querySelector('.filter.active');
-  const inactiveFilter = !document.querySelector('.filter.active')
-  if (activeFilter && !activeFilter.contains(e.target)) {
-    const activeBtnID = activeFilter.id.replace('Filter', '');
-    ToggleList(activeBtnID);
-  }
-  if (activeFilter && e.target === inactiveFilter){
-      const activeBtnID = activeFilter.id.replace('Filter', '');
-    ToggleList(activeBtnID);
-  }
-})
-/** Fonction qui crée tous les filtres.
+
+    /** Fonction qui crée tous les filtres.
  *
  */
-function CreateAllFilters() {
-  FullArray.forEach((element) => {  // Parcourt chaque élément de FullArray et appelle CreateFilter pour chaque élément.
-    CreateFilter(element);
+function createAllFilters() {
+  fullArray.forEach((element) => {  // Parcourt chaque élément de fullArray et appelle CreateFilter pour chaque élément.
+    createFilter(element);
   });
 }
 
@@ -57,11 +59,11 @@ function CreateAllFilters() {
  * @param {Object} Obj - L'objet pour lequel on veut créer un filtre. ex: {'Ingredients': $IngredientsArray}
  *
  */
-function CreateFilter(Obj) {
-  const Arrayname = Object.keys(Obj)[0];
-  const Arrayfull = Object.values(Obj)[0].sort();
+function createFilter(Obj) {
+  const arrayName = Object.keys(Obj)[0];
+  const arrayFull = Object.values(Obj)[0].sort();
   
-  Arrayfull.forEach((element) => {// Parcourt chaque élément du tableau et crée un élément HTML pour chaque élément.
+  arrayFull.forEach((element) => {// Parcourt chaque élément du tableau et crée un élément HTML pour chaque élément.
     
     const filterElement = document.createElement('div');
     const filterName = element.toUpperCase().charAt(0) + element.slice(1);
@@ -80,7 +82,7 @@ function CreateFilter(Obj) {
         const label = new Label(filterName)
         const labelDom = label.getDom()
         label.addListener()
-        labelDom.classList.add(`label-${Arrayname}`)
+        labelDom.classList.add(`label-${arrayName}`)
         filterElement.innerHTML = `<p class='filterName'>${filterName}</p> <i class="fa-solid fa-circle-xmark filter-icon"></i>`	
         
         labelContainer.appendChild(labelDom)
@@ -91,29 +93,29 @@ function CreateFilter(Obj) {
           const labelDom = document.getElementById(`label-${filterName}`)
           labelDom.remove()
       } else {
-          ToggleList(activeBtn.id)
+          toggleList(activeBtn.id)
           filterElement.innerHTML = `${filterName}  `
           const labelDom = document.getElementById(`label-${filterName}`)
           labelDom.remove()
       }
     })
     // Écouteur d'événement Hover pour chaque élément de filtre.
-    filterElement.addEventListener('mouseover', (e) => {
+    filterElement.addEventListener('mouseover', () => {
       filterElement.classList.add('hovered')
     })
 
     // Écouteur d'événement HoverOut pour chaque élément de filtre.
-    filterElement.addEventListener('mouseout', (e) => {
+    filterElement.addEventListener('mouseout', () => {
       filterElement.classList.remove('hovered')
     })      
 
 
     // Ajoute l'élément de filtre à la bonne liste.
-    if (Arrayname === 'Ingredients') {
+    if (arrayName === 'Ingredients') {
       filterIngredientsList.appendChild(filterElement);
-    } else if (Arrayname === 'Matériel') {
+    } else if (arrayName === 'Matériel') {
       filterApplianceList.appendChild(filterElement);
-    } else if (Arrayname === 'Ustensiles') {
+    } else if (arrayName === 'Ustensiles') {
       filterUstensilsList.appendChild(filterElement);
     }
   })
@@ -123,7 +125,7 @@ function CreateFilter(Obj) {
 /** Fonction qui affiche ou cache la liste de filtre.
  * @param { string } FilterID - Le nom du bouton de filtre. ex: 'ingredientsBtn'
  */
-function ToggleList(FilterID){
+function toggleList(FilterID){
   const list = document.getElementById(`${FilterID}List`)  
   const btn = document.getElementById(`${FilterID}`)
   const zone = document.getElementById(`${FilterID}Filter`) 
@@ -137,4 +139,4 @@ function ToggleList(FilterID){
 }
 
 
-export { CreateAllFilters, CreateFilter };
+export { createAllFilters, createFilter };

@@ -101,7 +101,7 @@
 }
 
 
-.InputFilterBtn{
+.inputFilterBtn{
 
     display:flex;
     padding: 5px 0;
@@ -110,7 +110,7 @@
     border-radius: 5px;
 }
 
-.InputFilterBtn input{
+.inputFilterBtn input{
 
     width: 100%;
     border:none;
@@ -118,13 +118,13 @@
     
 }
 
-.InputFilterBtn button{
+.searchInputButton{
     
     border:none;
     background-color: white;
 }
 
-button i{
+.filtersIcon{
 
     color: #dfdfdf;
     padding:0 5px;

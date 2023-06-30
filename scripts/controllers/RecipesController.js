@@ -150,7 +150,7 @@ class Recipe {
 
     // Création de la liste des ingrédients
     const ingredientsList = document.createElement('div');
-    ingredientsList.classList.add('RecipeIngredients');
+    ingredientsList.classList.add('recipeIngredients');
 
     // Boucle pour afficher les ingrédients
     for (let i = 0; i < this.ingredients.length; i += 1) {

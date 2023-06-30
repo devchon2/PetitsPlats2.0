@@ -27,9 +27,10 @@
         <section id="hero">
             <h2 id="welcome">CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES</h2>
             <div id="labelSearch">
-                <input type="text" name="searchInput" id="searchInput" aria-labelledby="searchInputButton"
+                <input type="text" name="searchInput" id="mainSearchInput"
                     placeholder="rechercher un ingrédients, une recettes, etc...">
-                <button role="submit" id="searchInputButton"><i  id="MainSearchIcon"class="fa-solid fa-magnifying-glass "></i></button>
+                <button id="mainSearchButton" class="searchInputButton"><i id="mainSearchIcon"
+                        class="fa-solid fa-magnifying-glass "></i></button>
 
             </div>
         </section>
@@ -44,10 +45,10 @@
                             Ingrédients
                             <i class="fa-solid fa-chevron-down"></i>
                             <div id="ingredientsList" class="filterList hidden">
-                                <div class="InputFilterBtn">
-                                    <input type="text" name="SearchInputIngredient" class="filterInput">
-                                    <button>
-                                        <i class="fa-solid fa-magnifying-glass FiltersIcon"></i>
+                                <div class="inputFilterBtn">
+                                    <input type="text" id="ingredientsSearchInput" class="filterInput">
+                                    <button id="ingredientsSearchButton" class="searchInputButton">
+                                        <i class="fa-solid fa-magnifying-glass filtersIcon"></i>
                                     </button>
                                 </div>
                             </div>
@@ -59,22 +60,25 @@
                             <i class="fa-solid fa-chevron-down"></i>
 
                             <div id="appliancesList" class="filterList hidden">
-                                <div class="InputFilterBtn">
-                                    <input type="text" name="SearchInputAppliances" class="filterInput">
-                                    <button><i class="fa-solid fa-magnifying-glass FiltersIcon"></i></button>
+                                <div class="inputFilterBtn">
+                                    <input type="text" id="appliancesSearchInput" class="filterInput">
+                                    <button id="appliancesSearchButton" class="searchInputButton"><i
+                                            class="fa-solid fa-magnifying-glass filtersIcon"></i></button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="ustensilesFilter" class="filter">
-                        <div id="ustensiles" class="filterBtn">
+                    <div id="ustensilsFilter" class="filter">
+                        <div id="ustensils" class="filterBtn">
                             Ustensiles
                             <i class="fa-solid fa-chevron-down"></i>
 
-                            <div id="ustensilesList" class="filterList hidden">
-                                <div class="InputFilterBtn">
-                                    <input type="text" name="SearchInputUstensiles" class="filterInput">
-                                    <button><i class="fa-solid fa-magnifying-glass FiltersIcon"></i></button>
+                            <div id="ustensilsList" class="filterList hidden">
+                                <div class="inputFilterBtn">
+                                    <input type="text" id="ustensilsSearchInput" class="filterInput">
+                                    <button id="ustensilsSearchButton" class="searchInputButton">
+                                        <i class="fa-solid fa-magnifying-glass filtersIcon"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +96,7 @@
         </section>
 
         <!-- Conteneur des cartes de recettes -->
-        <section id="RecipesCardsContainer">
+        <section id="recipesCardsContainer">
 
         </section>
     </main>

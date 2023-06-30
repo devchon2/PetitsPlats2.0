@@ -1,46 +1,42 @@
 /* eslint-disable import/prefer-default-export */
 
-/** Classe représentant un label.
+/** Class representing a label.
  * @class Label
- * 
  */
 class Label {
     constructor(id) {
-        this.id = id
+        this.id = id;
         this.html = `<div class="labels" id="label-${this.id}">
                         <span>${this.id}</span>
                         <i class="hidden fa-solid fa-xmark label-icon"></i>
-                    </div>`
-        this.labelElement = document.createElement('div') 
+                    </div>`;
 
-        
+        this.labelElement = document.createElement('div');
+        this.labelElement.innerHTML = `${this.html}`;
+        this.addListener();
+
     }
 
-    /** Récupère l'ID du label.
-     * 
-     * @returns {HTMLElement} Retourne un élément HTML "label" et ajoute un événement "click" sur l'icone pour supprimer le label.
+    /** Get the label's ID.
+     *
+     * @returns {HTMLElement} Returns an HTML element "label" and adds a "click" event on the icon to remove the label.
      */
     getDom() {
-        this.labelElement.innerHTML = `${this.html}`
-        return this.labelElement
+        return this.labelElement;
     }
 
-    addListener(){
-        const LabelIcon = this.labelElement.querySelector('.label-icon')
-        LabelIcon.addEventListener('click', (e) => {
-            e.stopPropagation()
-            const filter = document.querySelector('.filterOption.active')
-            filter.classList.remove('active')
-            filter.innerHTML = `${this.id}`
-            this.labelElement.remove()
-            
-        })
+    addListener() {
+        const labelIcon = this.labelElement.querySelector('.label-icon');
+        labelIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const filter = document.querySelector(`#Filter-${this.id}`)  ;
+            if (filter){
+                filter.classList.remove('active');
+            filter.innerHTML = `${this.id}`;
+            }
+            this.labelElement.remove();
+        });
     }
-    
-        
-
-    
 }
 
-
-export { Label }
+export { Label };
