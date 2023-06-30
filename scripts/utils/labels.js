@@ -33,9 +33,11 @@ class Label {
             if (filter){
                 filter.classList.remove('active');
             filter.innerHTML = `${this.id}`;
-            }
             this.labelElement.remove();
-        });
+        } else {
+            this.labelElement.remove();
+        }
+    });
     }
 }
 
