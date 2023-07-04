@@ -22,11 +22,12 @@ const AllInput = document.querySelectorAll('input')
 function init() {
   console.log('init loaded')
   // Initialise l'application
-  for (let i = 0; i < recipesArray.length - 1; i += 1) {
+  for (let i = 0; i < recipesArray.length ; i += 1) {
     // Parcourt le tableau recipesArray et crée une carte de recette pour chaque élément.
     const { appliance, description, id, image, ingredients, name, servings, time, ustensils } = recipesArray[i];
     const recipe = new Recipe(appliance, description, id, image, ingredients, name, servings, time, ustensils);
     DisplayRecipes(recipesArray)
+    
   }
 
 
@@ -34,15 +35,16 @@ function init() {
 
 
   createAllFilters(); // Crée les filtres de recherche.
+  const NumberOfCards = document.querySelectorAll('.recipeCard')
   const resume = document.getElementById('summer'); // Affiche le nombre de recettes.
-  const { length } = recipesArray; // Récupère la longueur du tableau recipesArray.
+  const { length } = NumberOfCards; // Récupère la longueur du tableau recipesArray.
   resume.innerHTML = `${length} `; // Affiche la longueur du tableau recipesArray.
   mainInput.addEventListener('keyup', () => {
           
          if(mainInput.value.length >= 3) {
           const test = Search(mainInput.value)
-
-          UpdateRecipes(test)
+          console.log('test',test) 
+          UpdateRecipes( test)
          }
     })
 
