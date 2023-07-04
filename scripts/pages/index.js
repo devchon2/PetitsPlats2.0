@@ -1,14 +1,46 @@
+/* eslint-disable no-new */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 /* eslint-disable import/extensions */
 import { Recipe } from '../controllers/RecipesController.js';
 import { recipesArray } from '../controllers/datasController.js';
 import { createAllFilters } from '../utils/Filters.js';
-import { } from '../utils/search.js';
+import { Search} from '../utils/search.js';
 
 console.log('index.js loaded');
 
 const recipeContainer = document.getElementById('recipesCardsContainer'); // Récupère l'élément HTML qui contiendra les cartes de recettes.
+const mainInput = document.querySelector('#mainSearchInput')
+const AllInput = document.querySelectorAll('input')
+
+mainInput.addEventListener('keyup', () => {
+  if (mainInput.value.length >= 3 ){
+     const updatedArray = []
+     
+     recipesArray.forEach(Recipes => {
+      
+      const { ingredients , name , description, id } = Recipes
+      const ElementsToCheck = [name , description]
+      console.log(ElementsToCheck)
+      for (let i = 0;i <= ingredients.length-1; i+=1 ){
+        while (ingredients.ingredient){
+          ElementsToCheck.push(ingredients.ingredient)
+        }
+      }
+      
+      ElementsToCheck.forEach(element => { 
+        console.log(element)
+        if(element.match(mainInput.value)){
+          updatedArray.push(id)
+          } 
+          
+          console.log(updatedArray)
+        })})}   
+})
+      
+  
+    
+    
 
 function init() {
   // Initialise l'application
@@ -18,6 +50,10 @@ function init() {
     const recipe = new Recipe(appliance, description, id, image, ingredients, name, servings, time, ustensils);
     recipeContainer.appendChild(recipe.getCard());
   }
+
+  
+    
+  
 
   createAllFilters(); // Crée les filtres de recherche.
   const resume = document.getElementById('summer'); // Affiche le nombre de recettes.

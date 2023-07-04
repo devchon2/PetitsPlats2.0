@@ -13,6 +13,7 @@ class Label {
 
         this.labelElement = document.createElement('div');
         this.labelElement.innerHTML = `${this.html}`;
+        this.labelIcon = this.labelElement.querySelector('.label-icon');
         this.addListener();
 
     }
@@ -26,8 +27,7 @@ class Label {
     }
 
     addListener() {
-        const labelIcon = this.labelElement.querySelector('.label-icon');
-        labelIcon.addEventListener('click', (e) => {
+        this.labelIcon.addEventListener('click', (e) => {
             e.stopPropagation();
             const filter = document.querySelector(`#Filter-${this.id}`)  ;
             if (filter){
