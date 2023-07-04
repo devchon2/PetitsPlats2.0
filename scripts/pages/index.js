@@ -15,27 +15,8 @@ const AllInput = document.querySelectorAll('input')
 
 mainInput.addEventListener('keyup', () => {
   if (mainInput.value.length >= 3 ){
-     const updatedArray = []
-     
-     recipesArray.forEach(Recipes => {
-      
-      const { ingredients , name , description, id } = Recipes
-      const ElementsToCheck = [name , description]
-      console.log(ElementsToCheck)
-      for (let i = 0;i <= ingredients.length-1; i+=1 ){
-        while (ingredients.ingredient){
-          ElementsToCheck.push(ingredients.ingredient)
-        }
-      }
-      
-      ElementsToCheck.forEach(element => { 
-        console.log(element)
-        if(element.match(mainInput.value)){
-          updatedArray.push(id)
-          } 
-          
-          console.log(updatedArray)
-        })})}   
+    Search(mainInput.value)
+     }
 })
       
   
