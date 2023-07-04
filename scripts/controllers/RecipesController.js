@@ -5,6 +5,9 @@
 
 console.log('RecipesController.js loaded');
 
+const recipeContainer = document.getElementById('recipesCardsContainer'); // Récupère l'élément HTML qui contiendra les cartes de recettes.
+
+
 /**
  * Classe représentant une recette.
  * @class Recipe
@@ -27,7 +30,7 @@ class Recipe {
     this.appliance = appliance;
     this.description = description;
     this.id = id;
-    this.image = `./assets/Images/Recipes/${image}`;
+    this.image = image;
     this.ingredients = ingredients;
     this.name = name;
     this.servings = servings;
@@ -108,7 +111,7 @@ class Recipe {
 
     // Création du body
     const recipeImg = document.createElement('img');
-    recipeImg.setAttribute('src', this.image);
+    recipeImg.setAttribute('src', `assets/Images/Recipes/${this.image}`);
     recipeImg.setAttribute('alt', this.name);
     recipeImg.classList.add('recipePicture');
     recipeImgContainer.appendChild(recipeImg);
@@ -179,4 +182,25 @@ class Recipe {
   }
 }
 
-export { Recipe };
+function DisplayRecipes(Array){
+  recipeContainer.innerHTML = ''
+  for (let i = 0; i < Array.length - 1; i += 1) {
+    // Parcourt le tableau recipesArray et crée une carte de recette pour chaque élément.
+    const { appliance, description, id, image, ingredients, name, servings, time, ustensils } = Array[i];
+    const recipe = new Recipe(appliance, description, id, image, ingredients, name, servings, time, ustensils);
+    const recipeDom = recipe.getCard()
+    recipeContainer.appendChild(recipeDom);
+  }
+
+
+}
+
+function UpdateRecipes(Array){
+  
+    
+    DisplayRecipes(Array)
+    
+}
+
+
+export { Recipe , DisplayRecipes, UpdateRecipes};
