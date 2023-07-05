@@ -44,7 +44,6 @@ function Search(keyword) {
       }
       NewIngredientsArray.push(...ingredients)
     }
-    console.log('new ingredient array', NewIngredientsArray)
 
     ElementsToCheck.forEach(element => {
       if (element.includes(keyword) && !updatedArray.includes(recipe)) {
@@ -54,8 +53,7 @@ function Search(keyword) {
 
 
 
-    console.log('lancement createFilter')
-    console.log('updated',updatedArray)
+
     // createFilter('Ustensiles',NewUstensilesArray)
     // createFilter('appliance',NewappliancesArray)
     // createFilter('ingredients',NewIngredientsArray)
