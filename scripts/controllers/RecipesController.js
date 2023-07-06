@@ -197,7 +197,6 @@ function DisplayRecipes(Array){
 }
 
 function UpdateRecipes(Array){
-  console.log('array updated',Array)
    DisplayRecipes(Array)
   const NumberOfCards = document.querySelectorAll('.recipeCard')
   const resume = document.getElementById('summer'); // Affiche le nombre de recettes.

@@ -1,65 +1,59 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-vars */
-import { Recipe } from '../controllers/RecipesController.js';
 import { appliancesObject, ingredientsObject, recipesArray, ustensilesObject } from '../controllers/datasController.js';
-import { createFilter } from './Filters.js';
+import { createAllFilters, createFilter } from './Filters.js';
 
 import { Label } from './labels.js';
 
 console.log('search.js loaded')
 
-const NewappliancesArray = appliancesObject
-const NewIngredientsArray = ingredientsObject
-const NewUstensilesArray = ustensilesObject
+const NewappliancesArray = []
+const NewIngredientsArray = []
+const NewUstensilesArray = []
 
 function Search(keyword) {
   const updatedArray = []
 
-  recipesArray.forEach(Recipes => {
+  recipesArray.forEach(recipe => {
 
-    const { appliance, description, id, image, ingredients, name, servings, time, ustensils } = Recipes;
-    const recipe = new Recipe(appliance, description, id, image, ingredients, name, servings, time, ustensils);
-    const ElementsToCheck = [name, description, ingredients]
-
-    for (let i = 0; i<=appliancesObject.length -1;i+=1){
-      if (appliancesObject[i].match(appliance))
-      NewappliancesArray.push(appliance)
-    }
-    
-      
-    ustensils.forEach(element => {
-      for (let i = 0; i<=ustensilesObject.length -1 ;i+=1){
-      if (ustensilesObject[i].match(element))
-      NewUstensilesArray.push(element)
-    }
-  })
-  
-    
-
-    for (let i = 0; i <= ingredientsObject.length ; i += 1) {
+    const { appliance, description, id,  ingredients, name,  ustensils } = recipe;
+    const ElementsToCheck = [name, description ]
+    for (let i = 0; i <= ingredients.lenght ; i += 1) {
       const { ingredient } = ingredients[i]
-      if (ingredient && !NewIngredientsArray.includes(ingredient)) {
-        ElementsToCheck.push(ingredient)
-
-      }
-      NewIngredientsArray.push(...ingredients)
+      ElementsToCheck.push(ingredient)
     }
 
     ElementsToCheck.forEach(element => {
       if (element.includes(keyword) && !updatedArray.includes(recipe)) {
         updatedArray.push(recipe)
       }
-    })
+    })})
 
+      updatedArray.forEach(recipe => {
+        const { appliance, ingredients, ustensils } = recipe;
+        if (!NewappliancesArray.includes(appliance)){
+          NewappliancesArray.push(appliance)
+        }
+        ingredients.forEach(element => {
+          if (!NewIngredientsArray.includes(element.ingredient)){
+          NewIngredientsArray.push(element.ingredient)
+        }})
+        ustensils.forEach(element => {
+          if (!NewUstensilesArray.includes(element)){
+          NewUstensilesArray.push(element)
+        }
+      })
+      })
+      
 
+      const UpdatedFilterApplicances = {'Matériel':NewappliancesArray}
+      const UpdatedFilterIngredients = {'Ingredients':NewIngredientsArray}
+      const UpdatedFilterUstensiles = {'Ustensiles':NewUstensilesArray}
+    const UpdatedElement = [ UpdatedFilterIngredients, UpdatedFilterApplicances,  UpdatedFilterUstensiles]
+   
+   
 
-
-    // createFilter('Ustensiles',NewUstensilesArray)
-    // createFilter('appliance',NewappliancesArray)
-    // createFilter('ingredients',NewIngredientsArray)
-    
-  })
-  return updatedArray
+  return [updatedArray, UpdatedElement]
 }
 
 

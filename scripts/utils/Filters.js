@@ -1,8 +1,4 @@
-import {
-  ingredientsObject,
-  appliancesObject,
-  ustensilesObject,
-} from '../controllers/datasController.js';
+
 import { Label } from './labels.js';
 
 /** Variables des éléments
@@ -12,7 +8,6 @@ const filterIngredientsList = document.getElementById('ingredientsList');
 const filterApplianceList = document.getElementById('appliancesList');
 const filterUstensilsList = document.getElementById('ustensilsList');
 const filtersBtn = document.querySelectorAll('.filterBtn');
-const fullArray = [ingredientsObject, appliancesObject, ustensilesObject];
 const labelContainer = document.getElementById('labelsContainer');
 
 /** Écouteur d'événement pour les bouton des filtres
@@ -53,10 +48,41 @@ filtersBtn.forEach((btn) => {
 /** Fonction qui crée tous les filtres.
  *
  */
-function createAllFilters() {
-  fullArray.forEach((element) => {
-    // Parcourt chaque élément de fullArray et appelle CreateFilter pour chaque élément.
-    createFilter(element);
+function createAllFilters(Array) {    
+  // Parcourt chaque élément de fullArray et appelle CreateFilter pour chaque élément.
+    Array.forEach((obj) => {
+      const arrayName = Object.keys(obj)[0];
+      const arrayElement = Object.values(obj)[0].sort();
+    if (arrayName === 'Ingredients') {
+      console.log('updateIngredients', arrayName, arrayElement)
+      const OldElements = document.querySelectorAll('#ingredientsList .filterOption');
+      OldElements.forEach((Oldelement) => {
+        console.log(Oldelement)
+        Oldelement.remove();
+      });      console.log('création des listes de filtres ', arrayName, arrayElement)
+    
+    } else if (arrayName === 'Matériel') {
+      const OldElements = document.querySelectorAll('#appliancesList .filterOption');
+      OldElements.forEach((Oldelement) => {
+        console.log(Oldelement)
+        Oldelement.remove();
+      });    console.log('création des listes de filtres ', arrayName, arrayElement)
+
+    } else if (arrayName === 'Ustensiles') {
+      const OldElements = document.querySelectorAll('#ustensilsList .filterOption');
+      OldElements.forEach((Oldelement) => {
+        console.log(Oldelement)
+        Oldelement.remove();
+      }
+      );    console.log('création des listes de filtres ', arrayName,   arrayElement)
+
+    }
+
+  
+    
+    
+    
+    createFilter(obj);
   });
 }
 
@@ -65,16 +91,16 @@ function createAllFilters() {
  *
  */
 function createFilter(Obj) {
-  const arrayName = Object.keys(Obj)[0];
+  const arrayarrayName = Object.keys(Obj)[0];
   const arrayFull = Object.values(Obj)[0].sort();
-
+  
   arrayFull.forEach((element) => {
     // Parcourt chaque élément du tableau et crée un élément HTML pour chaque élément.
 
     const filterElement = document.createElement('div');
-    const filterName = element.toUpperCase().charAt(0) + element.slice(1);
-    filterElement.id = `Filter-${filterName.replaceAll(' ', '')}`;
-    filterElement.innerHTML = `${filterName}`;
+    const filterarrayName = element.toUpperCase().charAt(0) + element.slice(1);
+    filterElement.id = `Filter-${filterarrayName.replaceAll(' ', '')}`;
+    filterElement.innerHTML = `${filterarrayName}`;
     filterElement.classList.add('filterOption');
 
     // Écouteur d'événement Click pour chaque élément de filtre.
@@ -85,23 +111,23 @@ function createFilter(Obj) {
 
       if (!activeFilter) {
         filterElement.classList.toggle('active');
-        const label = new Label(filterName);
+        const label = new Label(filterarrayName);
         const labelDom = label.getDom();
         label.addListener();
-        labelDom.classList.add(`label-${arrayName}`);
-        filterElement.innerHTML = `<p class='filterName'>${filterName}</p> <i class="fa-solid fa-circle-xmark filter-icon"></i>`;
+        labelDom.classList.add(`label-${arrayarrayName}`);
+        filterElement.innerHTML = `<p class='filterarrayName'>${filterarrayName}</p> <i class="fa-solid fa-circle-xmark filter-icon"></i>`;
 
         labelContainer.appendChild(labelDom);
       } else if (e.target.classList.contains('filter-icon')) {
         e.stopPropagation();
         filterElement.classList.remove('active');
-        filterElement.innerHTML = `${filterName}  `;
-        const labelDom = document.getElementById(`label-${filterName}`);
+        filterElement.innerHTML = `${filterarrayName}  `;
+        const labelDom = document.getElementById(`label-${filterarrayName}`);
         labelDom.remove();
       } else {
         toggleList(activeBtn.id);
-        filterElement.innerHTML = `${filterName}  `;
-        const labelDom = document.getElementById(`label-${filterName}`);
+        filterElement.innerHTML = `${filterarrayName}  `;
+        const labelDom = document.getElementById(`label-${filterarrayName}`);
         labelDom.remove();
       }
     });
@@ -116,11 +142,12 @@ function createFilter(Obj) {
     });
 
     // Ajoute l'élément de filtre à la bonne liste.
-    if (arrayName === 'Ingredients') {
+    if (arrayarrayName === 'Ingredients') {
+      
       filterIngredientsList.appendChild(filterElement);
-    } else if (arrayName === 'Matériel') {
+    } else if (arrayarrayName === 'Matériel') {
       filterApplianceList.appendChild(filterElement);
-    } else if (arrayName === 'Ustensiles') {
+    } else if (arrayarrayName === 'Ustensiles') {
       filterUstensilsList.appendChild(filterElement);
     }
   });

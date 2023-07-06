@@ -3,16 +3,24 @@
 /* eslint-disable no-console */
 /* eslint-disable import/extensions */
 import { Recipe, DisplayRecipes, UpdateRecipes } from '../controllers/RecipesController.js';
-import { recipesArray } from '../controllers/datasController.js';
 import { createAllFilters } from '../utils/Filters.js';
 import { Search } from '../utils/search.js';
+import { recipesArray, ingredientsObject, appliancesObject, ustensilesObject } from '../controllers/datasController.js';
 
+const fullArray = [ingredientsObject, appliancesObject, ustensilesObject];
+console.log('fullArray', fullArray)
 console.log('index.js loaded');
 
 const recipeContainer = document.getElementById('recipesCardsContainer'); // Récupère l'élément HTML qui contiendra les cartes de recettes.
 const mainInput = document.querySelector('#mainSearchInput')
 const AllInput = document.querySelectorAll('input')
 
+function summarize() {
+  const NumberOfCards = document.querySelectorAll('.recipeCard')
+  const resume = document.getElementById('summer'); // Affiche le nombre de recettes.
+  const { length } = NumberOfCards; // Récupère la longueur du tableau recipesArray.
+  resume.innerHTML = `${length} `; // Affiche la longueur du tableau recipesArray.
+}
 
 
 
@@ -30,20 +38,22 @@ function init() {
     DisplayRecipes(recipesArray)
     
   }
-  createAllFilters(); // Crée les filtres de recherche.
-  const NumberOfCards = document.querySelectorAll('.recipeCard')
-  const resume = document.getElementById('summer'); // Affiche le nombre de recettes.
-  const { length } = NumberOfCards; // Récupère la longueur du tableau recipesArray.
-  resume.innerHTML = `${length} `; // Affiche la longueur du tableau recipesArray.
+  createAllFilters(fullArray); // Crée les filtres de recherche.
+  summarize(); // Affiche le nombre de recettes.
 
   mainInput.addEventListener('keyup', () => {
           
          if(mainInput.value.length >= 3) {
-          const updatedArray = Search(mainInput.value)
+          const updatedArray = Search(mainInput.value)[0]
+          const updatedFilter = Search(mainInput.value)[1]
           UpdateRecipes( updatedArray)
-         } else if (mainInput.value.length < 3){
+          console.log('updatedFilter', updatedFilter)
+          createAllFilters(updatedFilter)
+          
+         } else {
             UpdateRecipes(recipesArray)
-         }
+            createAllFilters(fullArray)
+          }
     })
 
 
