@@ -3,6 +3,7 @@
 /* eslint-disable import/extensions */
 // eslint-disable-next-line import/no-unresolved
 
+
 console.log('RecipesController.js loaded');
 
 const recipeContainer = document.getElementById('recipesCardsContainer'); // Récupère l'élément HTML qui contiendra les cartes de recettes.
@@ -181,24 +182,38 @@ class Recipe {
   }
 }
 
-function DisplayRecipes(Array){
 
+/**
+ * Fonction pour afficher le nombre de recettes
+ */
+
+function summarize() {
+  const NumberOfCards = document.querySelectorAll('.recipeCard');
+  const resume = document.getElementById('summer'); // Affiche le nombre de recettes.
+  const { length } = NumberOfCards; // Récupère la longueur du tableau recipesArray.
+  resume.innerHTML = `${length} `; // Affiche la longueur du tableau recipesArray.
+}
+
+
+function DisplayRecipes(RecipesArray){// Affiche les recettes dans le DOM.
   recipeContainer.innerHTML = ''
-  for (let i = 0; i < Array.length ; i += 1) {
-    // Parcourt le tableau recipesArray et crée une carte de recette pour chaque élément.
-    const { appliance, description, id, image, ingredients, name, servings, time, ustensils } = Array[i];
+  for (let i = 0; i < Array.length ; i += 1) {    // Parcourt le tableau recipesArray et crée une carte de recette pour chaque élément.
+
+    const { appliance, description, id, image, ingredients, name, servings, time, ustensils } = RecipesArray[i];
     const recipe = new Recipe(appliance, description, id, image, ingredients, name, servings, time, ustensils);
     const recipeDom = recipe.getCard()
     recipeContainer.appendChild(recipeDom);
   }
+  summarize()
 }
 
-function UpdateRecipes(ArrayRecipes){
-  if (ArrayRecipes.length === 0){
+function UpdateRecipes(RecipesArray){// Affiche les recettes dans le DOM après mis à jour de l'input Principal
+  if (RecipesArray.length === 0){
     recipeContainer.innerHTML = `<div class='errorMsg'>Aucune recette ne contient '${mainInput.value}' vous pouvez chercher «
-    tarte aux pommes », « poisson », etc.</div>`
+    tarte aux pommes », « poisson », etc.</div>`;
+    summarize()
   } else {
-    DisplayRecipes(ArrayRecipes)
+    DisplayRecipes(RecipesArray)
   }
 }
 
