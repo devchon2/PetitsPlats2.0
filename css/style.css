@@ -197,6 +197,11 @@ header {
     padding: 0 50px;
 }
 
+.errorMsg{
+    margin:0 auto;
+    align-self: center;
+}
+
 /* Styles des cartes de recettes */
 .recipeCard {
     display: flex;

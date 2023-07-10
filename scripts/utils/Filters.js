@@ -52,36 +52,26 @@ function createAllFilters(Array) {
   // Parcourt chaque élément de fullArray et appelle CreateFilter pour chaque élément.
     Array.forEach((obj) => {
       const arrayName = Object.keys(obj)[0];
-      const arrayElement = Object.values(obj)[0].sort();
-    if (arrayName === 'Ingredients') {
-      console.log('updateIngredients', arrayName, arrayElement)
+    if (arrayName === 'ingredients') {
       const OldElements = document.querySelectorAll('#ingredientsList .filterOption');
       OldElements.forEach((Oldelement) => {
-        console.log(Oldelement)
         Oldelement.remove();
-      });      console.log('création des listes de filtres ', arrayName, arrayElement)
+      });      
     
-    } else if (arrayName === 'Matériel') {
+    } else if (arrayName === 'appliances') {
       const OldElements = document.querySelectorAll('#appliancesList .filterOption');
       OldElements.forEach((Oldelement) => {
-        console.log(Oldelement)
         Oldelement.remove();
-      });    console.log('création des listes de filtres ', arrayName, arrayElement)
+      });    
 
-    } else if (arrayName === 'Ustensiles') {
+    } else if (arrayName === 'ustensils') {
       const OldElements = document.querySelectorAll('#ustensilsList .filterOption');
       OldElements.forEach((Oldelement) => {
-        console.log(Oldelement)
         Oldelement.remove();
       }
-      );    console.log('création des listes de filtres ', arrayName,   arrayElement)
+      );    
 
     }
-
-  
-    
-    
-    
     createFilter(obj);
   });
 }
@@ -91,16 +81,22 @@ function createAllFilters(Array) {
  *
  */
 function createFilter(Obj) {
-  const arrayarrayName = Object.keys(Obj)[0];
-  const arrayFull = Object.values(Obj)[0].sort();
+  const arrayName = Object.keys(Obj)[0];
+  const ListElements = document.querySelectorAll(`${arrayName.toLowerCase()}List .filterOption`);
+ListElements.forEach((element) => {
+    element.remove();
+  });
+  console.log(arrayName);
+  const arrayFull = new Set(Object.values(Obj)[0].sort());
+  console.log(arrayFull);
   
   arrayFull.forEach((element) => {
     // Parcourt chaque élément du tableau et crée un élément HTML pour chaque élément.
 
-    const filterElement = document.createElement('div');
-    const filterarrayName = element.toUpperCase().charAt(0) + element.slice(1);
-    filterElement.id = `Filter-${filterarrayName.replaceAll(' ', '')}`;
-    filterElement.innerHTML = `${filterarrayName}`;
+    const filterElement = document.createElement('div');//
+    const filterArrayName = element.toUpperCase().charAt(0) + element.slice(1);
+    filterElement.id = `Filter-${filterArrayName.replaceAll(' ', '')}`;
+    filterElement.innerHTML = `${filterArrayName}`;
     filterElement.classList.add('filterOption');
 
     // Écouteur d'événement Click pour chaque élément de filtre.
@@ -111,23 +107,23 @@ function createFilter(Obj) {
 
       if (!activeFilter) {
         filterElement.classList.toggle('active');
-        const label = new Label(filterarrayName);
+        const label = new Label(filterArrayName);
         const labelDom = label.getDom();
         label.addListener();
-        labelDom.classList.add(`label-${arrayarrayName}`);
-        filterElement.innerHTML = `<p class='filterarrayName'>${filterarrayName}</p> <i class="fa-solid fa-circle-xmark filter-icon"></i>`;
+        labelDom.classList.add(`label-${arrayName}`);
+        filterElement.innerHTML = `<p class='filterArrayName'>${filterArrayName}</p> <i class="fa-solid fa-circle-xmark filter-icon"></i>`;
 
         labelContainer.appendChild(labelDom);
       } else if (e.target.classList.contains('filter-icon')) {
         e.stopPropagation();
         filterElement.classList.remove('active');
-        filterElement.innerHTML = `${filterarrayName}  `;
-        const labelDom = document.getElementById(`label-${filterarrayName}`);
+        filterElement.innerHTML = `${filterArrayName}  `;
+        const labelDom = document.getElementById(`label-${filterArrayName}`);
         labelDom.remove();
       } else {
         toggleList(activeBtn.id);
-        filterElement.innerHTML = `${filterarrayName}  `;
-        const labelDom = document.getElementById(`label-${filterarrayName}`);
+        filterElement.innerHTML = `${filterArrayName}  `;
+        const labelDom = document.getElementById(`label-${filterArrayName}`);
         labelDom.remove();
       }
     });
@@ -142,12 +138,12 @@ function createFilter(Obj) {
     });
 
     // Ajoute l'élément de filtre à la bonne liste.
-    if (arrayarrayName === 'Ingredients') {
+    if (arrayName === 'ingredients') {
       
       filterIngredientsList.appendChild(filterElement);
-    } else if (arrayarrayName === 'Matériel') {
+    } else if (arrayName === 'appliances') {
       filterApplianceList.appendChild(filterElement);
-    } else if (arrayarrayName === 'Ustensiles') {
+    } else if (arrayName === 'ustensils') {
       filterUstensilsList.appendChild(filterElement);
     }
   });

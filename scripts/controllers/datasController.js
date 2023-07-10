@@ -39,7 +39,7 @@ function getFullIngredients() {
     });
   });
   
-  const StartingredientsArray = { 'Ingredients': ingredientsArray };
+  const StartingredientsArray = { 'ingredients': ingredientsArray };
   return StartingredientsArray;
 }
 
@@ -57,7 +57,7 @@ function getFullAppliance() {
     }
   });
 
-  const finalApplianceObject = { 'Matériel': appliancesArray };
+  const finalApplianceObject = { 'appliances': appliancesArray };
   return finalApplianceObject;
 }
 
@@ -76,7 +76,7 @@ function getFullUstensils() {
     });
   });
 
-  const FinalUstensilsObject = { 'Ustensiles': ustensilsArray };
+  const FinalUstensilsObject = { 'ustensils': ustensilsArray };
   return FinalUstensilsObject;
 }
 

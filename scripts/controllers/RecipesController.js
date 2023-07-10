@@ -6,8 +6,7 @@
 console.log('RecipesController.js loaded');
 
 const recipeContainer = document.getElementById('recipesCardsContainer'); // Récupère l'élément HTML qui contiendra les cartes de recettes.
-
-
+const mainInput = document.querySelector('#mainSearchInput');
 /**
  * Classe représentant une recette.
  * @class Recipe
@@ -183,6 +182,7 @@ class Recipe {
 }
 
 function DisplayRecipes(Array){
+
   recipeContainer.innerHTML = ''
   for (let i = 0; i < Array.length ; i += 1) {
     // Parcourt le tableau recipesArray et crée une carte de recette pour chaque élément.
@@ -190,21 +190,16 @@ function DisplayRecipes(Array){
     const recipe = new Recipe(appliance, description, id, image, ingredients, name, servings, time, ustensils);
     const recipeDom = recipe.getCard()
     recipeContainer.appendChild(recipeDom);
-    
   }
-
-
 }
 
-function UpdateRecipes(Array){
-   DisplayRecipes(Array)
-  const NumberOfCards = document.querySelectorAll('.recipeCard')
-  const resume = document.getElementById('summer'); // Affiche le nombre de recettes.
-  const { length } = NumberOfCards; // Récupère la longueur du tableau recipesArray.
-  resume.innerHTML = ''
-  resume.innerHTML = `${length} `; // Affiche la longueur du tableau recipesArray.
-  
-    
+function UpdateRecipes(ArrayRecipes){
+  if (ArrayRecipes.length === 0){
+    recipeContainer.innerHTML = `<div class='errorMsg'>Aucune recette ne contient '${mainInput.value}' vous pouvez chercher «
+    tarte aux pommes », « poisson », etc.</div>`
+  } else {
+    DisplayRecipes(ArrayRecipes)
+  }
 }
 
 
