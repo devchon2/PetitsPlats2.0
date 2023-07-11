@@ -1,6 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-vars */
-import { recipesArray } from '../controllers/datasController.js';
+import { appliancesObject, ingredientsObject, recipesArray, ustensilesObject } from '../controllers/datasController.js';
+import { createAllFilters, createFilter } from './filters.js';
+
+import { Label } from './labels.js';
 
 console.log('search.js loaded')
 
@@ -19,13 +22,12 @@ function Search(keyword) {
       const { ingredient } = ingredients[i]
       ElementsToCheck.push(ingredient)
     }
+
     ElementsToCheck.forEach(element => {
       if (element.includes(keyword) && !updatedArray.includes(recipe)) {
         updatedArray.push(recipe)
       }
-    })
-    console.log(ElementsToCheck)
-})
+    })})
 
       updatedArray.forEach(recipe => {
         const { appliance, ingredients, ustensils } = recipe;
@@ -33,7 +35,7 @@ function Search(keyword) {
           NewappliancesArray.push(appliance)
         }
         ingredients.forEach(element => {
-          if (!NewIngredientsArray.includes(element.ingredients)){
+          if (!NewIngredientsArray.includes(element.ingredient)){
           NewIngredientsArray.push(element.ingredient)
         }})
         ustensils.forEach(element => {
@@ -43,11 +45,12 @@ function Search(keyword) {
       })
       })
       
-      const UpdatedFilterApplicances = {'appliances':NewappliancesArray}
-      const UpdatedFilterIngredients = {'ingredients':NewIngredientsArray}
-      const UpdatedFilterUstensiles = {'ustensils':NewUstensilesArray}
+
+      const UpdatedFilterApplicances = {'Matériel':NewappliancesArray}
+      const UpdatedFilterIngredients = {'Ingredients':NewIngredientsArray}
+      const UpdatedFilterUstensiles = {'Ustensiles':NewUstensilesArray}
     const UpdatedElement = [ UpdatedFilterIngredients, UpdatedFilterApplicances,  UpdatedFilterUstensiles]
-   console.log(UpdatedElement)
+   
    
 
   return [updatedArray, UpdatedElement]

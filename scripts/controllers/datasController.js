@@ -1,5 +1,4 @@
 console.log('datasController.js loaded');
-
 const jsonDatas = './datas/recipes.json';
 
 /**
@@ -33,8 +32,8 @@ function getFullIngredients() {
     const { ingredients } = recipeObject;
     ingredients.forEach((ingredientObject) => {
       const { ingredient } = ingredientObject;
-      if (!ingredientsArray.includes(ingredient)) {
-        ingredientsArray.push(ingredient);
+      if (!ingredientsArray.includes(ingredient.toLowerCase())) {
+        ingredientsArray.push(ingredient.toLowerCase());
       }
     });
   });
@@ -49,11 +48,11 @@ function getFullIngredients() {
  */
 function getFullAppliance() {
   const appliancesArray = [];
-  recipesArray.forEach((recipeObject) => {
-    const { appliance } = recipeObject;
-
-    if (!appliancesArray.includes(appliance)) {
-      appliancesArray.push(appliance);
+  recipesArray.forEach((recipe) => {
+    const { appliance } = recipe;
+    console.log(appliance.toLowerCase());
+    if (!appliancesArray.includes(appliance.toLowerCase())) {
+      appliancesArray.push(appliance.toLowerCase());
     }
   });
 
@@ -67,19 +66,18 @@ function getFullAppliance() {
  */
 function getFullUstensils() {
   const ustensilsArray = [];
-  recipesArray.forEach((recipeObject) => {
-    const { ustensils } = recipeObject;
+  recipesArray.forEach((recipe) => {
+    const { ustensils } = recipe;
     ustensils.forEach((ustensil) => {
-      if (!ustensilsArray.includes(ustensil)) {
-        ustensilsArray.push(ustensil);
+      if (!ustensilsArray.includes(ustensil.toLowerCase())) {
+        ustensilsArray.push(ustensil.toLowerCase());
       }
     });
   });
 
-  const FinalUstensilsObject = { 'ustensils': ustensilsArray };
-  return FinalUstensilsObject;
+  const finalUstensilsObject = { 'ustensils': ustensilsArray };
+  return finalUstensilsObject;
 }
-
 
 
 // Récupération des données, des ingrédients, du matériel et des ustensiles
