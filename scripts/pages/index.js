@@ -3,7 +3,7 @@
 /* eslint-disable no-console */
 /* eslint-disable import/extensions */
 import { Recipe, DisplayRecipes, UpdateRecipes } from '../controllers/RecipesController.js';
-import { createAllFilters } from '../utils/filters.js';
+import { createAllFilters, createFilter } from '../utils/Filters.js';
 import { Search } from '../utils/search.js';
 import { recipesArray, ingredientsObject, appliancesObject, ustensilesObject } from '../controllers/datasController.js';
 
@@ -28,27 +28,29 @@ function init() {
   console.log('init loaded')
   
   // Initialise l'application
-  for (let i = 0; i < recipesArray.length ; i += 1) {
-    // Parcourt le tableau recipesArray et crée une carte de recette pour chaque élément.
-    const { appliance, description, id, image, ingredients, name, servings, time, ustensils } = recipesArray[i];
+  recipesArray.forEach((Rec) => { // Parcourt le tableau recipesArray et crée une carte de recette pour chaque élément.
+    const { appliance, description, id, image, ingredients, name, servings, time, ustensils } = Rec;
     const recipe = new Recipe(appliance, description, id, image, ingredients, name, servings, time, ustensils);
     DisplayRecipes(recipesArray)
-    
-  }
+  });
   createAllFilters(fullArray); // Crée les filtres de recherche.
   summarize(); // Affiche le nombre de recettes.
 
   mainInput.addEventListener('keyup', () => {
           
-         if(mainInput.value.length >= 3) {
-          console.log('mainInput.value', mainInput.value)
-          console.log('mainInput.value', Search(mainInput.value)[0] )
-          console.log('mainInput.value', Search(mainInput.value)[1] )
-
+         if(mainInput.value.length > 2) {
           const [ updatedArray, updatedFilter ] = Search(mainInput.value)
+          console.log('mainInput.value', mainInput.value)
+          console.log('mainInput.value', updatedArray )
+          console.log('mainInput.value', updatedFilter )
+
+          
           UpdateRecipes( updatedArray)
-          console.log('updatedFilter',  updatedFilter)
-          createAllFilters(updatedFilter)
+          
+          updatedFilter.forEach((object) => {
+            createFilter(object)
+          })
+
 
           
          } else {

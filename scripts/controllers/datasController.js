@@ -50,7 +50,6 @@ function getFullAppliance() {
   const appliancesArray = [];
   recipesArray.forEach((recipe) => {
     const { appliance } = recipe;
-    console.log(appliance.toLowerCase());
     if (!appliancesArray.includes(appliance.toLowerCase())) {
       appliancesArray.push(appliance.toLowerCase());
     }
@@ -66,13 +65,16 @@ function getFullAppliance() {
  */
 function getFullUstensils() {
   const ustensilsArray = [];
+  
   recipesArray.forEach((recipe) => {
     const { ustensils } = recipe;
     ustensils.forEach((ustensil) => {
       if (!ustensilsArray.includes(ustensil.toLowerCase())) {
-        ustensilsArray.push(ustensil.toLowerCase());
+        ustensilsArray.push(ustensil.toLowerCase());      console.log(ustensil);
+
       }
-    });
+    });  
+
   });
 
   const finalUstensilsObject = { 'ustensils': ustensilsArray };

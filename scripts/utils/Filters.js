@@ -1,4 +1,5 @@
 
+
 import { Label } from './labels.js';
 
 /** Variables des éléments
@@ -48,37 +49,36 @@ filtersBtn.forEach((btn) => {
 /** Fonction qui crée tous les filtres.
  *
  */
-function createAllFilters(Array) {    
+function createAllFilters(Array) {   
+  console.log('createAllFilters loaded')
+  console.log('Array entries createallfilters', Array) 
   // Parcourt chaque élément de fullArray et appelle CreateFilter pour chaque élément.
     Array.forEach((obj) => {
       const arrayName = Object.keys(obj)[0];
       const arrayElement = Object.values(obj)[0].sort((a, b) => a.localeCompare(b));
     if (arrayName === 'ingredients') {
-      console.log('updateIngredients', arrayName, arrayElement)
       const OldElements = document.querySelectorAll('#ingredientsList .filterOption');
       OldElements.forEach((Oldelement) => {
-        console.log(Oldelement)
         Oldelement.remove();
       });
-      createFilter(obj);      
+    //  console.log( `createFilter({ 'ingredients': ${arrayElement} })` );      
 
     
     } else if (arrayName === 'appliances') {
+      
       const OldElements = document.querySelectorAll('#appliancesList .filterOption');
       OldElements.forEach((Oldelement) => {
-        console.log(Oldelement)
         Oldelement.remove();
-      });    console.log('création des listes de filtres ', arrayName, arrayElement)
-      createFilter(obj);
+      });
+      createFilter({ appliances: arrayElement});
 
     } else if (arrayName === 'ustensils') {
       const OldElements = document.querySelectorAll('#ustensilsList .filterOption');
       OldElements.forEach((Oldelement) => {
-        console.log(Oldelement)
         Oldelement.remove();
       });
-         console.log('création des listes de filtres ', arrayName,   arrayElement)
-      createFilter(obj);
+         
+      createFilter({ ustensils: arrayElement});
     }
 
   

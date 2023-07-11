@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-vars */
 import { appliancesObject, ingredientsObject, recipesArray, ustensilesObject } from '../controllers/datasController.js';
-import { createAllFilters, createFilter } from './filters.js';
+import { createAllFilters, createFilter } from './Filters.js';
 
 import { Label } from './labels.js';
 
