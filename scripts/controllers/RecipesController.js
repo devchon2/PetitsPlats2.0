@@ -182,8 +182,6 @@ class Recipe {
   }
 }
 
-
-/**
  * Fonction pour afficher le nombre de recettes
  */
 
@@ -207,14 +205,16 @@ function DisplayRecipes(RecipesArray){// Affiche les recettes dans le DOM.
   summarize()
 }
 
-function UpdateRecipes(RecipesArray){// Affiche les recettes dans le DOM après mis à jour de l'input Principal
-  if (RecipesArray.length === 0){
-    recipeContainer.innerHTML = `<div class='errorMsg'>Aucune recette ne contient '${mainInput.value}' vous pouvez chercher «
-    tarte aux pommes », « poisson », etc.</div>`;
-    summarize()
-  } else {
-    DisplayRecipes(RecipesArray)
-  }
+function UpdateRecipes(Array){
+  console.log('array updated',Array)
+   DisplayRecipes(Array)
+  const NumberOfCards = document.querySelectorAll('.recipeCard')
+  const resume = document.getElementById('summer'); // Affiche le nombre de recettes.
+  const { length } = NumberOfCards; // Récupère la longueur du tableau recipesArray.
+  resume.innerHTML = ''
+  resume.innerHTML = `${length} `; // Affiche la longueur du tableau recipesArray.
+  
+    
 }
 
 

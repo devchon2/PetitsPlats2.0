@@ -4,14 +4,16 @@
 /* eslint-disable import/extensions */
 
 import { Recipe, DisplayRecipes, UpdateRecipes } from '../controllers/RecipesController.js';
-import { recipesArray, ingredientsObject, appliancesObject, ustensilesObject } from '../controllers/datasController.js';
+import { recipesArray } from '../controllers/datasController.js';
+import { createAllFilters } from '../utils/Filters.js';
+import { Search } from '../utils/search.js';
 
 console.log('index.js loaded');
 
 const recipeContainer = document.getElementById('recipesCardsContainer'); // Récupère l'élément HTML qui contiendra les cartes de recettes.
-const mainInput = document.querySelector('#mainSearchInput');
-const AllInput = document.querySelectorAll('input');
-const fullArray = [ingredientsObject, appliancesObject, ustensilesObject];
+const mainInput = document.querySelector('#mainSearchInput')
+const AllInput = document.querySelectorAll('input')
+
 
 
 
@@ -22,28 +24,30 @@ function init() {
   console.log('init loaded');
 
   // Initialise l'application
-  
-    DisplayRecipes(recipesArray);// Affiche les cartes de recettes.
-  
+  for (let i = 0; i < recipesArray.length ; i += 1) {
+    // Parcourt le tableau recipesArray et crée une carte de recette pour chaque élément.
+    const { appliance, description, id, image, ingredients, name, servings, time, ustensils } = recipesArray[i];
+    const recipe = new Recipe(appliance, description, id, image, ingredients, name, servings, time, ustensils);
+    DisplayRecipes(recipesArray)
+    
+  }
+  createAllFilters(); // Crée les filtres de recherche.
+  const NumberOfCards = document.querySelectorAll('.recipeCard')
+  const resume = document.getElementById('summer'); // Affiche le nombre de recettes.
+  const { length } = NumberOfCards; // Récupère la longueur du tableau recipesArray.
+  resume.innerHTML = `${length} `; // Affiche la longueur du tableau recipesArray.
 
   mainInput.addEventListener('keyup', () => {
-    const updateArray = recipesArray;
-    
-    
-    if (mainInput.value.lenght<3) {
-      DisplayRecipes(recipesArray);// Affiche les cartes de recettes.
-   
-    } else if (mainInput.value.length >= 3 && updateArray.length != 0) {
-      const input = [mainInput.value.toLowerCase()];// Récupère la valeur de l'input et la met en minuscule.
-      const Array = Search(input)[0];// Récupère le tableau de recettes mis à jour.
-      // const Filters = Search(input)[1];// Récupère le tableau de filtres mis à jour.
-      UpdateRecipes(updateArray);// Met à jour les cartes de recettes.
-      // createAllFilters(Filters); // Crée les filtres de recherche mis  à jour.
-    }  else  if (mainInput.value.length >= 3 && updateArray.length == 0){
-      recipeContainer.innerHTML = '<div class="noResult">Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc. </div>';
-    }
-    
-  });
+          
+         if(mainInput.value.length >= 3) {
+          const updatedArray = Search(mainInput.value)
+          UpdateRecipes( updatedArray)
+         } else if (mainInput.value.length < 3){
+            UpdateRecipes(recipesArray)
+         }
+    })
+
+
 }
 
 
