@@ -15,7 +15,6 @@ class Label {
         this.labelElement.innerHTML = `${this.html}`;
         this.labelIcon = this.labelElement.querySelector('.label-icon');
         this.addListener();
-
     }
 
     /** Get the label's ID.
@@ -29,15 +28,15 @@ class Label {
     addListener() {
         this.labelIcon.addEventListener('click', (e) => {
             e.stopPropagation();
-            const filter = document.querySelector(`#Filter-${this.id}`)  ;
-            if (filter){
+            const filter = document.querySelector(`#Filter-${this.id}`);
+            if (filter) {
                 filter.classList.remove('active');
-            filter.innerHTML = `${this.id}`;
-            this.labelElement.remove();
-        } else {
-            this.labelElement.remove();
-        }
-    });
+                filter.innerHTML = `${this.id}`;
+                this.labelElement.remove();
+            } else {
+                this.labelElement.remove();
+            }
+        });
     }
 }
 

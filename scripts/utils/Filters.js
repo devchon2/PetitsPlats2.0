@@ -1,19 +1,16 @@
-
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable no-unused-vars */
 
 import { Label } from './labels.js';
 
-/** Variables des éléments
- *
- */
+/** Variables des éléments */
 const filterIngredientsList = document.getElementById('ingredientsList');
 const filterApplianceList = document.getElementById('appliancesList');
 const filterUstensilsList = document.getElementById('ustensilsList');
 const filtersBtn = document.querySelectorAll('.filterBtn');
 const labelContainer = document.getElementById('labelsContainer');
 
-/** Écouteur d'événement pour les bouton des filtres
- *
- */
+/** Écouteur d'événement pour les boutons des filtres */
 filtersBtn.forEach((btn) => {
   const input = btn.querySelector('input');
   const btnID = btn.id; // Récupère l'ID du bouton
@@ -47,58 +44,48 @@ filtersBtn.forEach((btn) => {
 });
 
 /** Fonction qui crée tous les filtres.
- *
+ * @param {Array} Array - Le tableau contenant les filtres à créer
  */
-function createAllFilters(Array) {   
-  console.log('createAllFilters loaded')
-  console.log('Array entries createallfilters', Array) 
-  // Parcourt chaque élément de fullArray et appelle CreateFilter pour chaque élément.
-    Array.forEach((obj) => {
-      const arrayName = Object.keys(obj)[0];
-      const arrayElement = Object.values(obj)[0].sort((a, b) => a.localeCompare(b));
+function createAllFilters(Array) {
+  console.log('createAllFilters chargé');
+  console.log('Array entries createallfilters', Array);
+  // Parcourt chaque élément de fullArray et appelle createFilter pour chaque élément.
+  Array.forEach((obj) => {
+    const arrayName = Object.keys(obj)[0];
+    const arrayElement = Object.values(obj)[0].sort((a, b) => a.localeCompare(b));
+
     if (arrayName === 'ingredients') {
       const OldElements = document.querySelectorAll('#ingredientsList .filterOption');
       OldElements.forEach((Oldelement) => {
         Oldelement.remove();
       });
-    //  console.log( `createFilter({ 'ingredients': ${arrayElement} })` );      
 
-    
+      // createFilter({ 'ingredients': ${arrayElement} });
     } else if (arrayName === 'appliances') {
-      
       const OldElements = document.querySelectorAll('#appliancesList .filterOption');
       OldElements.forEach((Oldelement) => {
         Oldelement.remove();
       });
-      createFilter({ appliances: arrayElement});
-
+      createFilter({ appliances: arrayElement });
     } else if (arrayName === 'ustensils') {
       const OldElements = document.querySelectorAll('#ustensilsList .filterOption');
       OldElements.forEach((Oldelement) => {
         Oldelement.remove();
       });
-         
-      createFilter({ ustensils: arrayElement});
+      createFilter({ ustensils: arrayElement });
     }
-
-  
-    
-    
-    
   });
 }
 
 /** Fonction qui crée un filtre pour un objet donné.
- * @param {Object} Obj - L'objet pour lequel on veut créer un filtre. ex: {'Ingredients': $IngredientsArray}
- *
+ * @param {Object} Obj - L'objet pour lequel on veut créer un filtre
  */
 function createFilter(Obj) {
   const arrayName = Object.keys(Obj)[0];
   const arrayFull = Object.values(Obj)[0].sort((a, b) => a.localeCompare(b));
-  
+
   arrayFull.forEach((element) => {
     // Parcourt chaque élément du tableau et crée un élément HTML pour chaque élément.
-
     const filterElement = document.createElement('div');
     const filterarrayName = element.toUpperCase().charAt(0) + element.slice(1);
     filterElement.id = `Filter-${filterarrayName.replaceAll(' ', '')}`;
@@ -108,7 +95,7 @@ function createFilter(Obj) {
     // Écouteur d'événement Click pour chaque élément de filtre.
     filterElement.addEventListener('click', (e) => {
       e.stopPropagation();
-      const activeFilter = filterElement.classList.contains('active'); // Récupère  l'élément de filtre en état actif
+      const activeFilter = filterElement.classList.contains('active'); // Récupère l'élément de filtre en état actif
       const activeBtn = document.querySelector('.filter.active');
 
       if (!activeFilter) {
@@ -133,6 +120,7 @@ function createFilter(Obj) {
         labelDom.remove();
       }
     });
+
     // Écouteur d'événement Hover pour chaque élément de filtre.
     filterElement.addEventListener('mouseover', () => {
       filterElement.classList.add('hovered');
@@ -145,7 +133,6 @@ function createFilter(Obj) {
 
     // Ajoute l'élément de filtre à la bonne liste.
     if (arrayName === 'ingredients') {
-      
       filterIngredientsList.appendChild(filterElement);
     } else if (arrayName === 'appliances') {
       filterApplianceList.appendChild(filterElement);
@@ -156,7 +143,7 @@ function createFilter(Obj) {
 }
 
 /** Fonction qui affiche ou cache la liste de filtre.
- * @param { string } FilterID - Le nom du bouton de filtre. ex: 'ingredientsBtn'
+ * @param { string } FilterID - Le nom du bouton de filtre
  */
 function toggleList(FilterID) {
   const list = document.getElementById(`${FilterID}List`);

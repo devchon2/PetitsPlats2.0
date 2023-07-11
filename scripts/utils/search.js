@@ -1,33 +1,41 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-vars */
+
 import { appliancesObject, ingredientsObject, recipesArray, ustensilesObject } from '../controllers/datasController.js';
-import { createAllFilters, createFilter } from './Filters.js';
+import { createAllFilters, createFilter } from './filters.js';
 
 import { Label } from './labels.js';
 
-console.log('search.js loaded')
+console.log('search.js chargé');
 
-const NewappliancesArray = []
-const NewIngredientsArray = []
-const NewUstensilesArray = []
+const NewappliancesArray = [];
+const NewIngredientsArray = [];
+const NewUstensilesArray = [];
 
+/**
+ * Recherche les recettes correspondant à un mot-clé donné.
+ * @param {string} keyword - Le mot-clé à rechercher
+ * @returns {Array} - Un tableau contenant les recettes mises à jour et les filtres mis à jour
+ */
 function Search(keyword) {
   const updatedArray = []
-
   recipesArray.forEach(recipe => {
+const ElementsToCheck = []
 
-    const { appliance, description, id,  ingredients, name,  ustensils } = recipe;
-    const ElementsToCheck = [name, description ]
-    for (let i = 0; i <= ingredients.lenght ; i += 1) {
-      const { ingredient } = ingredients[i]
-      ElementsToCheck.push(ingredient)
-    }
+    const {  description, ingredients, name } = recipe;
+    ElementsToCheck.push(description, name)
+    const [ ingredient ] = ingredients 
+         console.log('ingredient', ingredient.ingredient);
+      ElementsToCheck.push(ingredient.ingredient)
+    
 
     ElementsToCheck.forEach(element => {
-      if (element.includes(keyword) && !updatedArray.includes(recipe)) {
+      console.log('element', element);
+      if (element.match(keyword) && !updatedArray.include(recipe)) {
         updatedArray.push(recipe)
       }
-    })})
+    })
+  })
 
       updatedArray.forEach(recipe => {
         const { appliance, ingredients, ustensils } = recipe;
@@ -44,21 +52,13 @@ function Search(keyword) {
         }
       })
       })
-      
 
-      const UpdatedFilterApplicances = {'Matériel':NewappliancesArray}
-      const UpdatedFilterIngredients = {'Ingredients':NewIngredientsArray}
-      const UpdatedFilterUstensiles = {'Ustensiles':NewUstensilesArray}
-    const UpdatedElement = [ UpdatedFilterIngredients, UpdatedFilterApplicances,  UpdatedFilterUstensiles]
-   
-   
+  const UpdatedFilterApplicances = { 'appliances': NewappliancesArray };
+  const UpdatedFilterIngredients = { 'ingredients': NewIngredientsArray };
+  const UpdatedFilterUstensiles = { 'ustensils': NewUstensilesArray };
+  const UpdatedElement = [UpdatedFilterIngredients, UpdatedFilterApplicances, UpdatedFilterUstensiles];
 
-  return [updatedArray, UpdatedElement]
+  return [updatedArray, UpdatedElement];
 }
 
-
-
-
-
-
-export { Search }
+export { Search };

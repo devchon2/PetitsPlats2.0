@@ -1,4 +1,4 @@
-console.log('datasController.js loaded');
+console.log('datasController.js chargé');
 const jsonDatas = './datas/recipes.json';
 
 /**
@@ -37,7 +37,7 @@ function getFullIngredients() {
       }
     });
   });
-  
+
   const StartingredientsArray = { 'ingredients': ingredientsArray };
   return StartingredientsArray;
 }
@@ -70,17 +70,14 @@ function getFullUstensils() {
     const { ustensils } = recipe;
     ustensils.forEach((ustensil) => {
       if (!ustensilsArray.includes(ustensil.toLowerCase())) {
-        ustensilsArray.push(ustensil.toLowerCase());      console.log(ustensil);
-
+        ustensilsArray.push(ustensil.toLowerCase());
       }
     });  
-
   });
 
   const finalUstensilsObject = { 'ustensils': ustensilsArray };
   return finalUstensilsObject;
 }
-
 
 // Récupération des données, des ingrédients, du matériel et des ustensiles
 const recipesArray = await getDatas();

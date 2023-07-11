@@ -3,15 +3,13 @@
 /* eslint-disable import/extensions */
 // eslint-disable-next-line import/no-unresolved
 
-console.log('RecipesController.js loaded');
+console.log('RecipesController.js chargé');
 
 const recipeContainer = document.getElementById('recipesCardsContainer'); // Récupère l'élément HTML qui contiendra les cartes de recettes.
-
 
 /**
  * Classe représentant une recette.
  * @class Recipe
- * 
  */
 class Recipe {
   /**
@@ -38,65 +36,65 @@ class Recipe {
     this.ustensils = ustensils;
   }
 
-  /** Récupère le nom de la recette.
+  /**
+   * Récupère le nom de la recette.
    * @returns {string} Le nom de la recette.
-   *
    */
   getName() {
     return this.name;
   }
 
-  /** Récupère les ingrédients de la recette.
+  /**
+   * Récupère les ingrédients de la recette.
    * @returns {Array} Les ingrédients de la recette.
-   *
    */
   getIngredients() {
     return this.ingredients;
   }
 
-  /** Récupère le temps de préparation de la recette.
+  /**
+   * Récupère le temps de préparation de la recette.
    * @returns {number} Le temps de préparation de la recette.
-   *
    */
   getTime() {
     return this.time;
   }
 
-  /** Récupère le nombre de portions de la recette.
+  /**
+   * Récupère le nombre de portions de la recette.
    * @returns {number} Le nombre de portions de la recette.
-   *
    */
   getServings() {
     return this.servings;
   }
 
-  /** Récupère les appareils de la recette.
+  /**
+   * Récupère les appareils de la recette.
    * @returns {string} L'appareil de la recette.
-   *
    */
   getAppliance() {
     return this.appliance;
   }
 
-  /** Récupère les ustensiles de la recette.
+  /**
+   * Récupère les ustensiles de la recette.
    * @returns {Array} Les ustensiles de la recette.
-   *
    */
   getUstensils() {
     return this.ustensils;
   }
 
-  /** Récupère l'ID de la recette.
+  /**
+   * Récupère l'ID de la recette.
    * @returns {number} L'ID de la recette.
-   *
    */
   getId() {
     return this.id;
   }
 
-  /** Génère la carte de la recette.
+  /**
+   * Génère la carte de la recette.
    * @returns {HTMLElement} La carte de la recette.
-   *
    */
   getCard() {
     // Création de la carte
@@ -182,31 +180,33 @@ class Recipe {
   }
 }
 
-function DisplayRecipes(Array){
-  recipeContainer.innerHTML = ''
-  for (let i = 0; i < Array.length ; i += 1) {
+/**
+ * Fonction qui affiche les recettes.
+ * @param {Array} Array - Le tableau des recettes à afficher.
+ */
+function DisplayRecipes(Array) {
+  recipeContainer.innerHTML = '';
+  for (let i = 0; i < Array.length; i += 1) {
     // Parcourt le tableau recipesArray et crée une carte de recette pour chaque élément.
     const { appliance, description, id, image, ingredients, name, servings, time, ustensils } = Array[i];
     const recipe = new Recipe(appliance, description, id, image, ingredients, name, servings, time, ustensils);
-    const recipeDom = recipe.getCard()
+    const recipeDom = recipe.getCard();
     recipeContainer.appendChild(recipeDom);
-    
   }
-
-
 }
 
-function UpdateRecipes(Array){
-  console.log('Array updater entries',Array)
-   DisplayRecipes(Array)
-  const NumberOfCards = document.querySelectorAll('.recipeCard')
+/**
+ * Fonction qui met à jour les recettes.
+ * @param {Array} Array - Le tableau des recettes à mettre à jour.
+ */
+function UpdateRecipes(Array) {
+  console.log('Array updater entries', Array);
+  DisplayRecipes(Array);
+  const NumberOfCards = document.querySelectorAll('.recipeCard');
   const resume = document.getElementById('summer'); // Affiche le nombre de recettes.
   const { length } = NumberOfCards; // Récupère la longueur du tableau recipesArray.
-  resume.innerHTML = ''
+  resume.innerHTML = '';
   resume.innerHTML = `${length} `; // Affiche la longueur du tableau recipesArray.
-  
-    
 }
 
-
-export { Recipe , DisplayRecipes, UpdateRecipes};
+export { Recipe, DisplayRecipes, UpdateRecipes };
