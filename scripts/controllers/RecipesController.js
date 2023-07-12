@@ -188,6 +188,12 @@ function summarize() {
   const resume = document.getElementById('summer'); // Affiche le nombre de recettes.
   const { length } = NumberOfCards; // Récupère la longueur du tableau recipesArray.
   resume.innerHTML = `${length} `; // Affiche la longueur du tableau recipesArray.
+  const recipe = document.getElementById('oneRecipe');
+  if (length <= 1) {
+    recipe.hidden = true;
+  } else {
+    recipe.hidden = false;
+  }
 }
 
 /**
