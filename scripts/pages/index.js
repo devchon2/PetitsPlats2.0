@@ -12,6 +12,7 @@ const fullArray = [ingredientsObject, appliancesObject, ustensilesObject];
 console.log('index.js chargé');
 
 const mainInput = document.querySelector('#mainSearchInput');
+const RecipeContainer = document.querySelector('#recipesCardsContainer');
 
 /**
  * Fonction qui affiche le résumé du nombre de recettes.
@@ -42,22 +43,21 @@ function init() {
 
   mainInput.addEventListener('keyup', () => {
     if (mainInput.value.length > 2) {
-      const [updatedArray, UpdatedElement] = Search(mainInput.value);
-      console.log('mainInput.value', mainInput.value);
-      console.log('mainInput.value', updatedArray);
-      console.log('mainInput.value', UpdatedElement);
-
-      UpdateRecipes(updatedArray);
-
-      UpdatedElement.forEach((object) => {
-        console.log('object', object);
-        createFilter(object);
-      });
+      const updatedArray = Search(mainInput.value)[0];
+      const UpdatedElement = Search(mainInput.value)[1];
+      console.log('updatedElement', UpdatedElement);
+      if (updatedArray.length > 0) {
+        UpdateRecipes(updatedArray);
+        createAllFilters(UpdatedElement);
+      } else {
+        RecipeContainer.innerHTML = `<div class="errorMsg">Aucune recette ne correspond à '${mainInput.value}'… vous pouvez chercher « 
+                                      tarte aux pommes », « poisson », etc.</div>`;
+      }
     } else {
       UpdateRecipes(recipesArray);
       createAllFilters(fullArray);
     }
-  });
+  })
 }
 
 init(); // Appel de la fonction d'initialisation
