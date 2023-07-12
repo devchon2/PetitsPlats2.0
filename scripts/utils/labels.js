@@ -14,6 +14,7 @@ class Label {
         this.labelElement = document.createElement('div');
         this.labelElement.innerHTML = `${this.html}`;
         this.labelIcon = this.labelElement.querySelector('.label-icon');
+        this.filter = document.querySelector(`#Filter-${this.id}`);
         this.addListener();
     }
 
@@ -28,15 +29,11 @@ class Label {
     addListener() {
         this.labelIcon.addEventListener('click', (e) => {
             e.stopPropagation();
-            const filter = document.querySelector(`#Filter-${this.id}`);
-            if (filter) {
-                filter.classList.remove('active');
-                filter.innerHTML = `${this.id}`;
+                this.filter.innerHTML = `${this.id}`
+                this.filter.classList.remove('active');
                 this.labelElement.remove();
-            } else {
-                this.labelElement.remove();
-            }
-        });
+            } 
+        );
     }
 }
 
