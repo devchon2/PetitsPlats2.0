@@ -67,7 +67,6 @@ function getFullAppliance() {
  */
 function getFullUstensils() {
   const ustensilsArray = [];
-  
   recipesArray.forEach((recipe) => {
     const { ustensils } = recipe;
     ustensils.forEach((ustensil) => {
@@ -75,8 +74,7 @@ function getFullUstensils() {
       if (!ustensilsArray.includes(normalizedUstensil.toLowerCase())) {
         ustensilsArray.push(normalizedUstensil.toLowerCase());
       }
-    });  
-  });
+    })});
 
   const finalUstensilsObject = { 'ustensils': ustensilsArray };
   return finalUstensilsObject;
