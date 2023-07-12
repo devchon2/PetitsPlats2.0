@@ -10,15 +10,16 @@ console.log('search.js loaded')
 const NewappliancesArray = []
 const NewIngredientsArray = []
 const NewUstensilesArray = []
-
-function Search(keyword) {
   const updatedArray = []
+
+function SearchRecipes(keyword) {
 
   recipesArray.forEach(recipe => {
 
-    const { appliance, description, id,  ingredients, name,  ustensils } = recipe;
-    const ElementsToCheck = [name, description ]
-    for (let i = 0; i <= ingredients.lenght ; i += 1) {
+    const { description, ingredients, name } = recipe;
+    console.log('ingredients Search ',ingredients)
+    const ElementsToCheck = [name, description]
+    for (let i = 0; i <= ingredients.len; i += 1) {
       const { ingredient } = ingredients[i]
       ElementsToCheck.push(ingredient)
     }
@@ -27,33 +28,36 @@ function Search(keyword) {
       if (element.includes(keyword) && !updatedArray.includes(recipe)) {
         updatedArray.push(recipe)
       }
-    })})
+    })
+  })
+  return updatedArray
+}
+function SearchFilters(recipes) {
+  recipes.forEach(recipe => {
+    const { appliance, ingredients, ustensils } = recipe;
+    if (!NewappliancesArray.includes(appliance)) {
+      NewappliancesArray.push(appliance)
+    }
+    ingredients.forEach(element => {
+      if (!NewIngredientsArray.includes(element.ingredient)) {
+        NewIngredientsArray.push(element.ingredient)
+      }
+    })
+    ustensils.forEach(element => {
+      if (!NewUstensilesArray.includes(element)) {
+        NewUstensilesArray.push(element)
+      }
+    })
+  })
 
-      updatedArray.forEach(recipe => {
-        const { appliance, ingredients, ustensils } = recipe;
-        if (!NewappliancesArray.includes(appliance)){
-          NewappliancesArray.push(appliance)
-        }
-        ingredients.forEach(element => {
-          if (!NewIngredientsArray.includes(element.ingredient)){
-          NewIngredientsArray.push(element.ingredient)
-        }})
-        ustensils.forEach(element => {
-          if (!NewUstensilesArray.includes(element)){
-          NewUstensilesArray.push(element)
-        }
-      })
-      })
-      
+  const UpdatedFilterApplicances = { 'appliances': NewappliancesArray }
+  const UpdatedFilterIngredients = { 'ingredients': NewIngredientsArray }
+  const UpdatedFilterUstensiles = { 'ustensils': NewUstensilesArray }
+  const UpdatedElement = [UpdatedFilterIngredients, UpdatedFilterApplicances, UpdatedFilterUstensiles]
+  console.log(UpdatedElement)
 
-      const UpdatedFilterApplicances = {'Matériel':NewappliancesArray}
-      const UpdatedFilterIngredients = {'Ingredients':NewIngredientsArray}
-      const UpdatedFilterUstensiles = {'Ustensiles':NewUstensilesArray}
-    const UpdatedElement = [ UpdatedFilterIngredients, UpdatedFilterApplicances,  UpdatedFilterUstensiles]
-   
-   
 
-  return [updatedArray, UpdatedElement]
+  return UpdatedElement
 }
 
 
@@ -61,4 +65,4 @@ function Search(keyword) {
 
 
 
-export { Search }
+export { SearchRecipes, SearchFilters }

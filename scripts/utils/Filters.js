@@ -55,25 +55,33 @@ function createAllFilters(Array) {
     const arrayElement = Object.values(obj)[0].sort((a, b) => a.localeCompare(b));
 
     if (arrayName === 'ingredients') {
-      const OldElements = document.querySelectorAll('#ingredientsList .filterOption');
-      OldElements.forEach((Oldelement) => {
-        Oldelement.remove();
-      });
-      createFilter({ ingredients: arrayElement });
-
+      const OldList = document.getElementById('ingredientsList');
+      const OldElements = OldList.querySelectorAll('.filterOption');
+      OldElements.forEach((Oldelement) => { Oldelement.remove();console.log('Oldelement remove createallfilters', Oldelement); });
+      const FinalObject = { [arrayName]: arrayElement };
+      console.log('FinalObject entries createallfilters', FinalObject);
+      createFilter(FinalObject);
+    
       // createFilter({ 'ingredients': ${arrayElement} });
-    } else if (arrayName === 'appliances') {
-      const OldElements = document.querySelectorAll('#appliancesList .filterOption');
-      OldElements.forEach((Oldelement) => {
-        Oldelement.remove();
-      });
-      createFilter({ appliances: arrayElement });
-    } else if (arrayName === 'ustensils') {
-      const OldElements = document.querySelectorAll('#ustensilsList .filterOption');
-      OldElements.forEach((Oldelement) => {
-        Oldelement.remove();
-      });
-      createFilter({ ustensils: arrayElement });
+    } 
+    if (arrayName === 'appliances') {
+      const OldList = document.getElementById('appliancesList');
+      const OldElements = OldList.querySelectorAll('.filterOption');
+      OldElements.forEach((Oldelement) => { Oldelement.remove();console.log('Oldelement remove createallfilters', Oldelement); });
+      const FinalObject = { [arrayName]: arrayElement };
+      console.log('FinalObject entries createallfilters', FinalObject);
+      createFilter(FinalObject);
+    
+    } 
+    if (arrayName === 'ustensils') {
+      const OldList = document.getElementById('ustensilsList');
+      console.log('OldList entries ustensils', OldList);
+      const OldElements = OldList.querySelectorAll('.filterOption');
+      console.log('OldElements entries ustensils', OldElements);
+      OldElements.forEach((Oldelement) => { console.log('Oldelement remove createallfilters', Oldelement); Oldelement.remove(); });
+      const FinalObject = { [arrayName]: arrayElement };
+      console.log('FinalObject entries createallfilters', FinalObject);
+      createFilter(FinalObject);
     }
   });
 }

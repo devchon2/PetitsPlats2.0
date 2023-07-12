@@ -32,8 +32,9 @@ function getFullIngredients() {
     const { ingredients } = recipeObject;
     ingredients.forEach((ingredientObject) => {
       const { ingredient } = ingredientObject;
-      if (!ingredientsArray.includes(ingredient.toLowerCase())) {
-        ingredientsArray.push(ingredient.toLowerCase());
+      const normalizedIngredient = ingredient.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      if (!ingredientsArray.includes(normalizedIngredient.toLowerCase())) {
+        ingredientsArray.push(normalizedIngredient.toLowerCase());
       }
     });
   });
@@ -50,8 +51,9 @@ function getFullAppliance() {
   const appliancesArray = [];
   recipesArray.forEach((recipe) => {
     const { appliance } = recipe;
-    if (!appliancesArray.includes(appliance.toLowerCase())) {
-      appliancesArray.push(appliance.toLowerCase());
+    const normalizedAppliance = appliance.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    if (!appliancesArray.includes(normalizedAppliance.toLowerCase())) {
+      appliancesArray.push(normalizedAppliance.toLowerCase());
     }
   });
 
@@ -69,8 +71,9 @@ function getFullUstensils() {
   recipesArray.forEach((recipe) => {
     const { ustensils } = recipe;
     ustensils.forEach((ustensil) => {
-      if (!ustensilsArray.includes(ustensil.toLowerCase())) {
-        ustensilsArray.push(ustensil.toLowerCase());
+      const normalizedUstensil = ustensil.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      if (!ustensilsArray.includes(normalizedUstensil.toLowerCase())) {
+        ustensilsArray.push(normalizedUstensil.toLowerCase());
       }
     });  
   });
@@ -84,5 +87,4 @@ const recipesArray = await getDatas();
 const ingredientsObject = getFullIngredients();
 const appliancesObject = getFullAppliance();
 const ustensilesObject = getFullUstensils();
-console.log(ingredientsObject)
 export { recipesArray, ingredientsObject, appliancesObject, ustensilesObject };
