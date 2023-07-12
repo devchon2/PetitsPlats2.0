@@ -191,11 +191,14 @@ header {
 /* Conteneur des cartes de recettes */
 #recipesCardsContainer {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     padding: 0 50px;
 }
+
+.errorMsg{
+margin:0 auto}
 
 /* Styles des cartes de recettes */
 .recipeCard {
@@ -306,10 +309,4 @@ header {
 /* Styles des quantités */
 .quantity {
     font-size: 1rem;
-}
-
-.errorMsg{
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }

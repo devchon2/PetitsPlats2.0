@@ -1,41 +1,37 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-vars */
+import { recipesArray } from '../controllers/datasController.js';
 
-import { appliancesObject, ingredientsObject, recipesArray, ustensilesObject } from '../controllers/datasController.js';
-import { createAllFilters, createFilter } from './filters.js';
+console.log('search.js loaded')
 
-import { Label } from './labels.js';
 
-console.log('search.js chargé');
 
-const NewappliancesArray = [];
-const NewIngredientsArray = [];
-const NewUstensilesArray = [];
-
-/**
- * Recherche les recettes correspondant à un mot-clé donné.
- * @param {string} keyword - Le mot-clé à rechercher
- * @returns {Array} - Un tableau contenant les recettes mises à jour et les filtres mis à jour
- */
-function Search(keyword) {
+function SearchRecipes(keyword) {
   const updatedArray = []
+
   recipesArray.forEach(recipe => {
-const ElementsToCheck = []
-
     const {  description, ingredients, name } = recipe;
-    ElementsToCheck.push(description, name)
-    const [ ingredient ] = ingredients 
-         console.log('ingredient', ingredient.ingredient);
-      ElementsToCheck.push(ingredient.ingredient)
-    
+    console.log('description', description)
+    const ElementsToCheck = [name, description ]
 
+    for (let i = 0; i <= ingredients.lenght ; i += 1) {
+      const { ingredient } = ingredients[i]
+      ElementsToCheck.push(ingredient)
+    }
     ElementsToCheck.forEach(element => {
-      console.log('element', element);
-      if (element.match(keyword) && !updatedArray.include(recipe)) {
+      console.log('element', element) 
+      if (element.match(keyword ) && !updatedArray.includes(recipe)) {
         updatedArray.push(recipe)
       }
-    })
-  })
+    })})
+    return updatedArray
+  }
+
+  function SearchFilters(updatedArray) {
+
+    const NewappliancesArray = []
+const NewIngredientsArray = []
+const NewUstensilesArray = []
 
       updatedArray.forEach(recipe => {
         const { appliance, ingredients, ustensils } = recipe;
@@ -52,13 +48,21 @@ const ElementsToCheck = []
         }
       })
       })
+      
 
-  const UpdatedFilterApplicances = { 'appliances': NewappliancesArray };
-  const UpdatedFilterIngredients = { 'ingredients': NewIngredientsArray };
-  const UpdatedFilterUstensiles = { 'ustensils': NewUstensilesArray };
-  const UpdatedElement = [UpdatedFilterIngredients, UpdatedFilterApplicances, UpdatedFilterUstensiles];
+      const UpdatedFilterApplicances = {'appliances':NewappliancesArray}
+      const UpdatedFilterIngredients = {'ingredients':NewIngredientsArray}
+      const UpdatedFilterUstensiles = {'ustensils':NewUstensilesArray}
+    const UpdatedElement = [ UpdatedFilterIngredients, UpdatedFilterApplicances,  UpdatedFilterUstensiles]
+   
+   
 
-  return [updatedArray, UpdatedElement];
+  return UpdatedElement
 }
 
-export { Search };
+
+
+
+
+
+export { SearchRecipes, SearchFilters }
