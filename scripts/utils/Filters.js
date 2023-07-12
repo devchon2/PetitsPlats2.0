@@ -59,6 +59,7 @@ function createAllFilters(Array) {
       OldElements.forEach((Oldelement) => {
         Oldelement.remove();
       });
+      createFilter({ ingredients: arrayElement });
 
       // createFilter({ 'ingredients': ${arrayElement} });
     } else if (arrayName === 'appliances') {

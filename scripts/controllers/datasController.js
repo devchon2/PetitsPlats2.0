@@ -84,5 +84,5 @@ const recipesArray = await getDatas();
 const ingredientsObject = getFullIngredients();
 const appliancesObject = getFullAppliance();
 const ustensilesObject = getFullUstensils();
-
+console.log(ingredientsObject)
 export { recipesArray, ingredientsObject, appliancesObject, ustensilesObject };
