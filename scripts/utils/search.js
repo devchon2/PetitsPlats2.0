@@ -8,7 +8,7 @@ console.log('search.js loaded')
 
 function SearchRecipes(keyword) {
   const updatedArray = []
-
+  
   recipesArray.forEach(recipe => {
     const {  description, ingredients, name } = recipe;
     console.log('description', description)

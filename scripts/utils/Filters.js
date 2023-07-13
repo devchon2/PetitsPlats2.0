@@ -2,8 +2,8 @@
 /* eslint-disable no-unused-vars */
 
 import { Label } from './labels.js';
-import { SearchListInput } from './search.js';
-
+import { SearchRecipes, SearchListInput } from './search.js';
+import { UpdateRecipes } from '../controllers/RecipesController.js';
 /** Variables des éléments */
 const filterIngredientsList = document.getElementById('ingredientsList');
 const filterApplianceList = document.getElementById('appliancesList');
@@ -107,9 +107,9 @@ function GetFilters(Obj) {
         label.addListener();
         labelDom.classList.add(`label-${arrayName}`);
         filterElement.innerHTML = `<p class='filterarrayName'>${filterarrayName}</p> <i class="fa-solid fa-circle-xmark filter-icon"></i>`;
-
         labelContainer.appendChild(labelDom);
         
+
       } else if (e.target.classList.contains('filter-icon')) {
         e.stopPropagation();
         filterElement.classList.remove('active');

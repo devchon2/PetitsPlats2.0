@@ -1,11 +1,13 @@
 /* eslint-disable import/prefer-default-export */
 
+
 /** Class representing a label.
  * @class Label
  */
 class Label {
     constructor(id) {
         this.id = id;
+        this.NormalisedName = this.id.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
         this.html = `<div class="labels" id="label-${this.id}">
                         <span>${this.id}</span>
                         <i class="hidden fa-solid fa-xmark label-icon"></i>
@@ -14,7 +16,7 @@ class Label {
         this.labelElement = document.createElement('div');
         this.labelElement.innerHTML = `${this.html}`;
         this.labelIcon = this.labelElement.querySelector('.label-icon');
-        this.filter = document.querySelector(`#Filter-${this.id}`);
+        this.filter = document.querySelector(`#filter-${this.NormalisedName}`);
         this.addListener();
     }
 

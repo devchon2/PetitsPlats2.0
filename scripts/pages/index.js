@@ -3,8 +3,8 @@
 /* eslint-disable no-console */
 /* eslint-disable import/extensions */
 
-import { Recipe, DisplayRecipes, UpdateRecipes } from '../controllers/RecipesController.js';
-import { GetAllFilters, GetFilters, UpdateFilters } from '../utils/Filters.js';
+import {  DisplayRecipes, UpdateRecipes } from '../controllers/RecipesController.js';
+import { GetAllFilters,  UpdateFilters } from '../utils/filters.js';
 import { SearchListInput, SearchRecipes } from '../utils/search.js';
 import { recipesArray, ingredientsObject, appliancesObject, ustensilesObject } from '../controllers/datasController.js';
 
