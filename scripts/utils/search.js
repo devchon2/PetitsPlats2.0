@@ -27,42 +27,19 @@ function SearchRecipes(keyword) {
     return updatedArray
   }
 
-  function SearchFilters(updatedArray) {
 
-    const NewappliancesArray = []
-const NewIngredientsArray = []
-const NewUstensilesArray = []
-
-      updatedArray.forEach(recipe => {
-        const { appliance, ingredients, ustensils } = recipe;
-        if (!NewappliancesArray.includes(appliance)){
-          NewappliancesArray.push(appliance)
-        }
-        ingredients.forEach(element => {
-          if (!NewIngredientsArray.includes(element.ingredient)){
-          NewIngredientsArray.push(element.ingredient)
-        }})
-        ustensils.forEach(element => {
-          if (!NewUstensilesArray.includes(element)){
-          NewUstensilesArray.push(element)
-        }
-      })
-      })
-      
-
-      const UpdatedFilterApplicances = {'appliances':NewappliancesArray}
-      const UpdatedFilterIngredients = {'ingredients':NewIngredientsArray}
-      const UpdatedFilterUstensiles = {'ustensils':NewUstensilesArray}
-    const UpdatedElement = [ UpdatedFilterIngredients, UpdatedFilterApplicances,  UpdatedFilterUstensiles]
-   
-   
-
-  return UpdatedElement
-}
+  function SearchListInput(input, filterElements) {// Fonction qui filtre les éléments de la liste des filtres
+    filterElements.forEach((element) => {
+      const elementName = element.querySelector('.filterName').innerHTML.toLowerCase();
+      if (elementName.indexOf(input.value.toLowerCase()) <0) {
+        element.classList.add('hidden');
+      } 
+    });
+  }
 
 
 
 
 
 
-export { SearchRecipes, SearchFilters }
+export { SearchRecipes, SearchListInput }

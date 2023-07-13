@@ -24,7 +24,17 @@ class Recipe {
    * @param {number} time - Le temps de préparation de la recette.
    * @param {Array} ustensils - Les ustensiles de la recette.
    */
-  constructor(appliance, description, id, image, ingredients, name, servings, time, ustensils) {
+  constructor(
+    appliance,
+    description,
+    id,
+    image,
+    ingredients,
+    name,
+    servings,
+    time,
+    ustensils
+  ) {
     this.appliance = appliance;
     this.description = description;
     this.id = id;
@@ -166,8 +176,12 @@ class Recipe {
 
       recipeContent.appendChild(ingredientsList);
 
-      const ingredientQuantity = this.ingredients[i].quantity ? this.ingredients[i].quantity : '';
-      const ingredientUnit = this.ingredients[i].unit ? this.ingredients[i].unit : '';
+      const ingredientQuantity = this.ingredients[i].quantity
+        ? this.ingredients[i].quantity
+        : '';
+      const ingredientUnit = this.ingredients[i].unit
+        ? this.ingredients[i].unit
+        : '';
 
       const ingredientMesure = `${ingredientQuantity} ${ingredientUnit}`;
       const ingredientMesureElement = document.createElement('p');
@@ -204,8 +218,28 @@ function DisplayRecipes(Array) {
   recipeContainer.innerHTML = '';
   for (let i = 0; i < Array.length; i += 1) {
     // Parcourt le tableau recipesArray et crée une carte de recette pour chaque élément.
-    const { appliance, description, id, image, ingredients, name, servings, time, ustensils } = Array[i];
-    const recipe = new Recipe(appliance, description, id, image, ingredients, name, servings, time, ustensils);
+    const {
+      appliance,
+      description,
+      id,
+      image,
+      ingredients,
+      name,
+      servings,
+      time,
+      ustensils,
+    } = Array[i];
+    const recipe = new Recipe(
+      appliance,
+      description,
+      id,
+      image,
+      ingredients,
+      name,
+      servings,
+      time,
+      ustensils
+    );
     const recipeDom = recipe.getCard();
     recipeContainer.appendChild(recipeDom);
   }

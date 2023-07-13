@@ -4,8 +4,8 @@
 /* eslint-disable import/extensions */
 
 import { Recipe, DisplayRecipes, UpdateRecipes } from '../controllers/RecipesController.js';
-import { createAllFilters, createFilter } from '../utils/Filters.js';
-import { SearchRecipes, SearchFilters } from '../utils/search.js';
+import { GetAllFilters, GetFilters, UpdateFilters } from '../utils/Filters.js';
+import { SearchListInput, SearchRecipes } from '../utils/search.js';
 import { recipesArray, ingredientsObject, appliancesObject, ustensilesObject } from '../controllers/datasController.js';
 
 const fullArray = [ingredientsObject, appliancesObject, ustensilesObject];
@@ -16,43 +16,45 @@ const recipeContainer = document.querySelector('#recipesCardsContainer');
 const filterIngredientsInputs = document.querySelector('#ingredientsSearchInput');
 const filtersIngredientsElements = filterIngredientsInputs.querySelectorAll('.filterOptions');
 const appliancesSearchInput = document.querySelector('#appliancesSearchInput');
+const filtersAppliancesElements = appliancesSearchInput.querySelectorAll('.filterOptions');
 const ustensilsSearchInput = document.querySelector('#ustensilsSearchInput');
+const filtersUstensilsElements = ustensilsSearchInput.querySelectorAll('.filterOptions');
 const filtersInput = document.querySelectorAll('.filterInput');
-
-
+const labelsContainer = document.querySelector('#labelsContainer');
 /**
  * Fonction d'initialisation de l'application.
  */
 function init() {
   DisplayRecipes(recipesArray);
-  createAllFilters(fullArray); // Crée les filtres de recherche.
+  GetAllFilters(fullArray); // Crée les filtres de recherche.
+  
 
-  mainInput.addEventListener('keyup', () => {
+       mainInput.addEventListener('keyup', () => {
     const updatedArray = SearchRecipes(mainInput.value.toLowerCase());
-    const UpdatedElement = SearchFilters(updatedArray);
+    const UpdatedElement = UpdateFilters(updatedArray);
     if (mainInput.value.length > 2) {
+      
       console.log('mainInput.value', mainInput.value);
       console.log('mainInput.value', updatedArray);
       console.log('mainInput.value', UpdatedElement);
 
       UpdateRecipes(updatedArray);
-      createAllFilters(UpdatedElement);
+      GetAllFilters(UpdatedElement);
       if (updatedArray.length === 0) {
         recipeContainer.innerHTML = `<p class=errorMsg>Aucune recette ne correspond à "${mainInput.value}" vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>`;
       }
     } else {
       UpdateRecipes(recipesArray);
-      createAllFilters(fullArray);
+      GetAllFilters(fullArray);
     }
 })
 
-// filtersInput.forEach((filterInput) => {
-//   if (filterInput.id === 'filterIngredientsInputs') {
-//     ''
-//   } else if (filterInput.id === 'appliancesSearchInput') {
-//     ''
-//   } else if (filterInput.id === 'ustensilsSearchInput') {
-//     ''
-//   }})
+filtersInput.forEach((input) => {
+  console.log('input', input.parentElement);
+  input.addEventListener('keyup', () => {
+  SearchListInput(input.value, (input.parentNode).parentNode);
+  });
+})
 }
+
 init(); // Appel de la fonction d'initialisation

@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 
 import { Label } from './labels.js';
+import { SearchListInput } from './search.js';
 
 /** Variables des éléments */
 const filterIngredientsList = document.getElementById('ingredientsList');
@@ -46,10 +47,10 @@ filtersBtn.forEach((btn) => {
 /** Fonction qui crée tous les filtres.
  * @param {Array} Array - Le tableau contenant les filtres à créer
  */
-function createAllFilters(Array) {
-  console.log('createAllFilters chargé');
-  console.log('Array entries createallfilters', Array);
-  // Parcourt chaque élément de fullArray et appelle createFilter pour chaque élément.
+function GetAllFilters(Array) {
+  console.log('GetAllFilters chargé');
+  console.log('Array entries GetAllFilters', Array);
+  // Parcourt chaque élément de fullArray et appelle GetFilters pour chaque élément.
   Array.forEach((obj) => {
     const arrayName = Object.keys(obj)[0];
     const arrayElement = Object.values(obj)[0].sort((a, b) => a.localeCompare(b));
@@ -59,21 +60,21 @@ function createAllFilters(Array) {
       OldElements.forEach((Oldelement) => {
         Oldelement.remove();
       });
-      createFilter({ 'ingredients': arrayElement });
+      GetFilters({ 'ingredients': arrayElement });
 
-      // createFilter({ 'ingredients': ${arrayElement} });
+      // GetFilters({ 'ingredients': ${arrayElement} });
     } else if (arrayName === 'appliances') {
       const OldElements = document.querySelectorAll('#appliancesList .filterOption');
       OldElements.forEach((Oldelement) => {
         Oldelement.remove();
       });
-      createFilter({ 'appliances': arrayElement });
+      GetFilters({ 'appliances': arrayElement });
     } else if (arrayName === 'ustensils') {
       const OldElements = document.querySelectorAll('#ustensilsList .filterOption');
       OldElements.forEach((Oldelement) => {
         Oldelement.remove();
       });
-      createFilter({ 'ustensils': arrayElement });
+      GetFilters({ 'ustensils': arrayElement });
     }
   });
 }
@@ -81,7 +82,7 @@ function createAllFilters(Array) {
 /** Fonction qui crée un filtre pour un objet donné.
  * @param {Object} Obj - L'objet pour lequel on veut créer un filtre
  */
-function createFilter(Obj) {
+function GetFilters(Obj) {
   const arrayName = Object.keys(Obj)[0];
   const arrayFull = Object.values(Obj)[0].sort((a, b) => a.localeCompare(b));
 
@@ -108,6 +109,7 @@ function createFilter(Obj) {
         filterElement.innerHTML = `<p class='filterarrayName'>${filterarrayName}</p> <i class="fa-solid fa-circle-xmark filter-icon"></i>`;
 
         labelContainer.appendChild(labelDom);
+        
       } else if (e.target.classList.contains('filter-icon')) {
         e.stopPropagation();
         filterElement.classList.remove('active');
@@ -159,4 +161,37 @@ function toggleList(FilterID) {
   btn.querySelector('i').classList.toggle('fa-chevron-up');
 }
 
-export { createAllFilters, createFilter };
+function UpdateFilters(updatedArray) {
+
+  const NewappliancesArray = []
+const NewIngredientsArray = []
+const NewUstensilesArray = []
+
+    updatedArray.forEach(recipe => {
+      const { appliance, ingredients, ustensils } = recipe;
+      if (!NewappliancesArray.includes(appliance)){
+        NewappliancesArray.push(appliance)
+      }
+      ingredients.forEach(element => {
+        if (!NewIngredientsArray.includes(element.ingredient)){
+        NewIngredientsArray.push(element.ingredient)
+      }})
+      ustensils.forEach(element => {
+        if (!NewUstensilesArray.includes(element)){
+        NewUstensilesArray.push(element)
+      }
+    })
+    })
+    
+
+    const UpdatedFilterApplicances = {'appliances':NewappliancesArray}
+    const UpdatedFilterIngredients = {'ingredients':NewIngredientsArray}
+    const UpdatedFilterUstensiles = {'ustensils':NewUstensilesArray}
+  const UpdatedElement = [ UpdatedFilterIngredients, UpdatedFilterApplicances,  UpdatedFilterUstensiles]
+ 
+ 
+
+return UpdatedElement
+}
+
+export { GetAllFilters, GetFilters, UpdateFilters };
