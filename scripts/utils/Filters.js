@@ -2,8 +2,7 @@
 /* eslint-disable no-unused-vars */
 
 import { Label } from './labels.js';
-import { SearchRecipes, SearchListInput } from './search.js';
-import { UpdateRecipes } from '../controllers/RecipesController.js';
+
 /** Variables des éléments */
 const filterIngredientsList = document.getElementById('ingredientsList');
 const filterApplianceList = document.getElementById('appliancesList');
