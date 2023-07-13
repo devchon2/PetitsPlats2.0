@@ -90,7 +90,7 @@ function GetFilters(Obj) {
     // Parcourt chaque élément du tableau et crée un élément HTML pour chaque élément.
     const filterElement = document.createElement('div');
     const filterarrayName = element.toUpperCase().charAt(0) + element.slice(1);
-    filterElement.id = `Filter-${filterarrayName.replaceAll(' ', '')}`;
+    filterElement.id = `Filter-${filterarrayName.normalize('NFD').replace(/[\u0300-\u036f]/g, '')}`.replace(' ', '-').toLowerCase();
     filterElement.innerHTML = `${filterarrayName}`;
     filterElement.classList.add('filterOption');
 

@@ -32,7 +32,6 @@ function getFullIngredients() {
     const { ingredients } = recipeObject;
     ingredients.forEach((ingredientObject) => {
       const { ingredient } = ingredientObject;
-      console.log(ingredient.toLowerCase());
       if (!ingredientsArray.includes(ingredient.toLowerCase())) {
         ingredientsArray.push(ingredient.toLowerCase());
       }
@@ -51,7 +50,6 @@ function getFullAppliance() {
   const appliancesArray = [];
   recipesArray.forEach((recipe) => {
     const { appliance } = recipe;
-    console.log(appliance.toLowerCase());
     if (!appliancesArray.includes(appliance.toLowerCase())) {
       appliancesArray.push(appliance.toLowerCase());
     }
@@ -70,7 +68,6 @@ function getFullUstensils() {
   recipesArray.forEach((recipe) => {
     const { ustensils } = recipe;
     ustensils.forEach((ustensil) => {
-      console.log(ustensil.toLowerCase());
       if (!ustensilsArray.includes(ustensil.toLowerCase())) {
         ustensilsArray.push(ustensil.toLowerCase());
       }

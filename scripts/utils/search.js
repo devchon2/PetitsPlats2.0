@@ -31,13 +31,24 @@ function SearchRecipes(keyword) {
 
 
   function SearchListInput(input, filterElements) {// Fonction qui filtre les éléments de la liste des filtres
-    filterElements.forEach((element) => {
-      const elementName = element.querySelector('.filterName').innerHTML.toLowerCase();
-      if (elementName.indexOf(input.value.toLowerCase()) <0) {
-        element.classList.add('hidden');
-      } 
-    });
-  }
+    for (let i = 0; i < filterElements.length; i += 1) {
+      
+      const elementName = filterElements[i].textContent.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(' ', );
+      if (!elementName.match(input) && !filterElements[i].classList.contains('inputFilterBtn')) {
+        console.log('elementName', elementName)
+
+        filterElements[i].classList.add('hidden');
+        console.log('filtre supprimé' , filterElements[i])
+
+      } else {
+        console.log('elementName', elementName)
+        filterElements[i].classList.remove('hidden');
+        console.log('filtre ajouté' , filterElements[i])
+      }
+    }
+    }
+  
+  
 
 
 

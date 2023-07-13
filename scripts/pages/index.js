@@ -27,13 +27,13 @@ const labelsContainer = document.querySelector('#labelsContainer');
 function init() {
   DisplayRecipes(recipesArray);
   GetAllFilters(fullArray); // Crée les filtres de recherche.
-  
 
-       mainInput.addEventListener('keyup', () => {
+
+  mainInput.addEventListener('keyup', () => {
     const updatedArray = SearchRecipes(mainInput.value.toLowerCase());
     const UpdatedElement = UpdateFilters(updatedArray);
     if (mainInput.value.length > 2) {
-      
+
       console.log('mainInput.value', mainInput.value);
       console.log('mainInput.value', updatedArray);
       console.log('mainInput.value', UpdatedElement);
@@ -47,14 +47,19 @@ function init() {
       UpdateRecipes(recipesArray);
       GetAllFilters(fullArray);
     }
-})
+  })
 
-filtersInput.forEach((input) => {
-  console.log('input', input.parentElement);
-  input.addEventListener('keyup', () => {
-  SearchListInput(input.value, (input.parentNode).parentNode);
-  });
-})
+  filtersInput.forEach((input) => {
+    input.addEventListener('keyup', () => {
+      const inputFilterName = input.id.replace('SearchInput', '');
+      const InputValue = input.value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+      const list = document.getElementById(`${inputFilterName}List`);
+      const FilterElementsOptions = Array.from(list.children);
+      SearchListInput(InputValue, FilterElementsOptions);
+     
+    })
+  })
+
+
 }
-
 init(); // Appel de la fonction d'initialisation
