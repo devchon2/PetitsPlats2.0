@@ -20,7 +20,9 @@ function SearchRecipes(keyword) {
     }
     ElementsToCheck.forEach(element => {
       console.log('element', element) 
-      if (element.match(keyword ) && !updatedArray.includes(recipe)) {
+      const normalizedElement = element.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+      const normalizedKeyword = keyword.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+      if (normalizedElement.match(normalizedKeyword ) && !updatedArray.includes(recipe)) {
         updatedArray.push(recipe)
       }
     })})

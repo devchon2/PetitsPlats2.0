@@ -164,34 +164,34 @@ function toggleList(FilterID) {
 function UpdateFilters(updatedArray) {
 
   const NewappliancesArray = []
-const NewIngredientsArray = []
-const NewUstensilesArray = []
+  const NewIngredientsArray = []
+  const NewUstensilesArray = []
 
-    updatedArray.forEach(recipe => {
-      const { appliance, ingredients, ustensils } = recipe;
-      if (!NewappliancesArray.includes(appliance)){
-        NewappliancesArray.push(appliance)
-      }
-      ingredients.forEach(element => {
-        if (!NewIngredientsArray.includes(element.ingredient)){
+  for (let i = 0; i < updatedArray.length; i+=1) {
+    const { appliance, ingredients, ustensils } = updatedArray[i];
+    if (!NewappliancesArray.includes(appliance)){
+      NewappliancesArray.push(appliance)
+    }
+    for (let j = 0; j < ingredients.length; j+=1) {
+      const element = ingredients[j];
+      if (!NewIngredientsArray.includes(element.ingredient)){
         NewIngredientsArray.push(element.ingredient)
-      }})
-      ustensils.forEach(element => {
-        if (!NewUstensilesArray.includes(element)){
+      }
+    }
+    for (let k = 0; k < ustensils.length; k+=1) {
+      const element = ustensils[k];
+      if (!NewUstensilesArray.includes(element)){
         NewUstensilesArray.push(element)
       }
-    })
-    })
-    
+    }
+  }
 
-    const UpdatedFilterApplicances = {'appliances':NewappliancesArray}
-    const UpdatedFilterIngredients = {'ingredients':NewIngredientsArray}
-    const UpdatedFilterUstensiles = {'ustensils':NewUstensilesArray}
+  const UpdatedFilterApplicances = {'appliances':NewappliancesArray}
+  const UpdatedFilterIngredients = {'ingredients':NewIngredientsArray}
+  const UpdatedFilterUstensiles = {'ustensils':NewUstensilesArray}
   const UpdatedElement = [ UpdatedFilterIngredients, UpdatedFilterApplicances,  UpdatedFilterUstensiles]
- 
- 
 
-return UpdatedElement
+  return UpdatedElement
 }
 
 export { GetAllFilters, GetFilters, UpdateFilters };
