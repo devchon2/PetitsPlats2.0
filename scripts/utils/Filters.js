@@ -2,6 +2,8 @@
 /* eslint-disable no-unused-vars */
 
 import { Label } from './labels.js';
+import { SearchRecipes } from './search.js';
+import { UpdateRecipes } from '../controllers/RecipesController.js';
 
 /** Variables des éléments */
 const filterIngredientsList = document.getElementById('ingredientsList');
@@ -24,17 +26,19 @@ filtersBtn.forEach((btn) => {
     }
 
     /** Écouteur d'événement de clic en dehors de la zone active */
-    document.body.addEventListener('click', (e2) => {
+    document.body.addEventListener('click', (event) => {
       const activeFilter = document.querySelector('.filter.active');
-      const activeBtnID = activeFilter?.id.replace('Filter', '');
+      const activeBtnID = activeFilter.id.replace('Filter', '');
+      const filterOptionActive = document.querySelector('.filterOption.active');
 
       if (activeFilter) {
         if (
-          e2.target.classList.contains('filter') &&
-          !e2.target.classList.contains('active')
+          event.target.classList.contains('filter') &&
+          !event.target.classList.contains('active') &&
+          event.target !== filterOptionActive
         ) {
-          toggleList(e2.target.id);
-          toggleList(activeBtnID);
+          toggleList(activeBtnID)
+          ;
         } else if (activeFilter) {
           toggleList(activeBtnID);
         }
@@ -107,8 +111,14 @@ function GetFilters(Obj) {
         labelDom.classList.add(`label-${arrayName}`);
         filterElement.innerHTML = `<p class='filterarrayName'>${filterarrayName}</p> <i class="fa-solid fa-circle-xmark filter-icon"></i>`;
         labelContainer.appendChild(labelDom);
-        
-
+        labelDom.id = `label-${filterarrayName}`;
+        // if (labelContainer.childElementCount > 0) {
+        //   const keyword = labelContainer.lastElementChild.textContent.toLowerCase();
+        //   const updatedArray = SearchRecipes(keyword,'filtered');
+        //   console.log(keyword)
+        //   console.log('updatedArray', updatedArray);
+        // UpdateRecipes(updatedArray);
+        // }
       } else if (e.target.classList.contains('filter-icon')) {
         e.stopPropagation();
         filterElement.classList.remove('active');
