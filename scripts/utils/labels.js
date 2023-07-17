@@ -8,7 +8,7 @@ class Label {
     constructor(id) {
         this.id = id;
         this.NormalisedName = this.id.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
-        this.html = `<div class="labels active" id="label-${this.id}">
+        this.html = `<div class="labels" id="label-${this.id}">
                         <span>${this.id}</span>
                         <i class="hidden fa-solid fa-xmark label-icon"></i>
                     </div>`;
