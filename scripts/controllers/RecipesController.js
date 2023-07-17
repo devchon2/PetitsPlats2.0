@@ -194,6 +194,11 @@ class Recipe {
   }
 }
 
+function getNormalized(str){
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replaceAll(' ', '');
+}
+
+
 /**
  * Fonction qui affiche le résumé du nombre de recettes.
  */
@@ -260,4 +265,4 @@ function UpdateRecipes(Array) {
   resume.innerHTML = `${length} `; // Affiche la longueur du tableau recipesArray.
 }
 
-export { Recipe, DisplayRecipes, UpdateRecipes };
+export { Recipe, DisplayRecipes, UpdateRecipes, getNormalized };

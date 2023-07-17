@@ -3,7 +3,7 @@
 /* eslint-disable no-console */
 /* eslint-disable import/extensions */
 
-import { Recipe, DisplayRecipes, UpdateRecipes } from '../controllers/RecipesController.js';
+import { Recipe, DisplayRecipes, UpdateRecipes, getNormalized } from '../controllers/RecipesController.js';
 import { GetAllFilters, GetFilters, UpdateFilters } from '../utils/Filters.js';
 import { SearchListInput, SearchRecipes } from '../utils/search.js';
 import { recipesArray, ingredientsObject, appliancesObject, ustensilesObject } from '../controllers/datasController.js';
@@ -50,11 +50,28 @@ function init() {
 })
 
 filtersInput.forEach((input) => {
-  console.log('input', input.parentElement);
-  input.addEventListener('keyup', () => {
-  SearchListInput(input.value, (input.parentNode).parentNode);
-  });
-})
+  
+  input.addEventListener('keyup', () => { 
+    const list = document.getElementById(input.parentElement.parentElement.id);
+    const filtersArray = Array.from(list.getElementsByClassName('filterOption'))
+    console.log('normalizedName', filtersArray);
+    filtersArray.forEach((filter) => {
+      console.log('normalizedName', filter);
+      const normalizedName = getNormalized(filter.innerText);
+      console.log('normalizedName', normalizedName);
+      if (normalizedName.includes(getNormalized(input.value))) {
+        filter.classList.remove('hidden');
+
+      } else {
+          filter.classList.add('hidden');      }
+    })
+  
+
+
+  // console.log('input', (Array.from(input.parentElement.parentElement.children)))
+   SearchListInput(input.value, filtersArray);
+})})
 }
 
-init(); // Appel de la fonction d'initialisation
+
+init(); // Appel de la fonction d'initialisation 

@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-vars */
 import { recipesArray } from '../controllers/datasController.js';
+import { getNormalized } from '../controllers/RecipesController.js';
 
 console.log('search.js loaded')
 
@@ -19,9 +20,8 @@ function SearchRecipes(keyword) {
       ElementsToCheck.push(ingredient)
     }
     ElementsToCheck.forEach(element => {
-      console.log('element', element) 
-      const normalizedElement = element.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
-      const normalizedKeyword = keyword.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+      const normalizedElement = getNormalized(element)
+      const normalizedKeyword = getNormalized(keyword)
       if (normalizedElement.match(normalizedKeyword ) && !updatedArray.includes(recipe)) {
         updatedArray.push(recipe)
       }
@@ -32,11 +32,16 @@ function SearchRecipes(keyword) {
 
   function SearchListInput(input, filterElements) {// Fonction qui filtre les éléments de la liste des filtres
     filterElements.forEach((element) => {
-      const elementName = element.querySelector('.filterName').innerHTML.toLowerCase();
-      if (elementName.indexOf(input.value.toLowerCase()) <0) {
-        element.classList.add('hidden');
-      } 
-    });
+      const normalizedElement = getNormalized(element)
+      console.log('normalizedElement', normalizedElement)
+      const normalizedInput = getNormalized(input)
+      console.log('normalizedInput', normalizedInput)
+      if (!normalizedElement.match(normalizedInput)) {
+        element.classList.add('hidden')
+      } else {
+        element.classList.remove('hidden')
+      }
+    })
   }
 
 
