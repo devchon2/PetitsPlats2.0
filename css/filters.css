@@ -1,0 +1,133 @@
+
+#filtersContainer{
+
+    display: flex;
+    justify-content: space-between;
+    margin: 0 40px;
+}
+
+/* Styles des filtres */
+#filters {
+
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    max-width: 80%;
+}
+
+/* Styles des Btn d'ingrédients, d'appareils et d'ustensiles */
+.filterBtn{
+
+    display: flex;
+    justify-content: space-between;
+    width: 220px;
+    margin: 20px;
+    padding: 15px 10px;
+    background-color: white;
+    border-radius: 15px;
+    position: relative;
+    font-family: "Manrope";
+    font-weight: 500;
+    font-size: 16px;
+}
+.filterBtn.active{
+
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.filterBtnName{
+    z-index:10;
+}
+
+.fa-magnifying-glass::before{
+
+    color:#afafaf;
+    padding:0;
+}
+
+.filterList{
+    
+    position:absolute;
+    padding: 10px;
+    left:0px;
+    top:50px;
+    width:220px;
+    background-color: white;
+    z-index:1;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.filter,
+.filterOption{
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;    
+}
+
+.filterOption{
+    padding:10px 15px;
+
+}
+
+.label.icon,
+.filter-icon{
+    cursor: pointer;
+    scale:1
+    
+}
+
+
+.filterName #text::first-letter{
+
+    text-transform:uppercase
+}
+
+
+
+.filterOption.active{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: default;
+    background-color: #FFD15B;
+    font-weight: bold;
+}
+
+
+
+.filterOption.hovered{
+
+    background-color: #FFD15B;
+}
+
+
+.inputFilterBtn{
+
+    display:flex;
+    padding: 5px 0;
+    margin-bottom:10px;
+    border:2px solid #afafaf;
+    border-radius: 5px;
+}
+
+.inputFilterBtn input{
+
+    width: 100%;
+    border:none;
+    outline: none;
+    
+}
+
+.searchInputButton{
+    
+    border:none;
+    background-color: white;
+}
+
+.filtersIcon{
+
+    color: #dfdfdf;
+    padding:0 5px;
+}
