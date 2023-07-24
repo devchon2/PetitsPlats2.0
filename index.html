@@ -6,40 +6,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href='./css/style.css'>
     <script src="https://kit.fontawesome.com/c6b75d90fa.js" crossorigin="anonymous"></script>
     <title>Les petits plats</title>
 </head>
 
-<body>
+<body class="mx-auto">
     <!-- En-tête -->
-    <header>
-        <h1 id="siteName"><img src="./assets/Images/Logo/Les petits plats (1).png" alt="Logo du site les petits plats"
-                id="logo">
-            <div id="ellipseOut">
-                <div id="ellipseIn"></div>
+    <header class="navbar position-absolute bg-transparent  z-1">
+        <h1 id="siteName" class="navbrand d-flex justify-content-start align-items-end flex-row p-4">
+            <img id="logo" src="./assets/Images/Logo/Les petits plats.png" alt="Logo du site les petits plats">
+            <div id="ellipseOut" class="d-flex justify-content-center align-items-center bg-white ms-2 rounded-circle ">
+                <div id="ellipseIn" class=" w-75 h-75 rounded-circle border border-dark"></div>
             </div>
         </h1>
     </header>
 
     <main>
         <!-- Section héro -->
-        <section id="hero">
-            <h2 id="welcome">CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES</h2>
-            <div id="labelSearch">
-                <input type="text" name="searchInput" id="mainSearchInput"
-                    placeholder="rechercher un ingrédients, une recette, etc...">
-                <button id="mainSearchButton" class="searchInputButton"><i id="mainSearchIcon"
-                        class="fa-solid fa-magnifying-glass "></i></button>
+        <section id="hero" class="position-relative d-flex justify-content-center align-items-center flex-column col-12 bg-image ">
 
+            <h2 id="welcome" class="d-flex bg-transparent text-center col-6 text-wrap fs-1 mb-5 fw-light">
+                CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES</h2>
+
+            <div id="labelSearch" class="bg-light d-flex w-50 rounded p-1 ">
+                <input type="text" id="mainSearchInput" class="d-flex flex-grow-1 h-100 border-0 px-1 py-2 " name="searchInput" placeholder="rechercher un ingrédients, une recette, etc..." >
+
+
+                <button id="mainSearchButton" class="d-flex justify-content-center align-items-center rounded-2 h-100 border-1">
+                    <i id="mainSearchIcon" class="fa-solid fa-magnifying-glass  d-flex justify-content-center align-items-center border-0 fw-1 "></i>
+                </button>
             </div>
         </section>
 
         <!-- Section filtres et labels -->
-        <section id="labelsAndFiltersContainer">
+        <section id="labelsAndFiltersContainer" class="p-4 d-flex flex-column">
             <!-- Conteneur des filtres -->
-            <div id="filtersContainer">
-                <div id="filters">
+            <div id="filtersContainer" class="d-flex flex-row">
+                <div id="filters" class="d-flex flex-row">
                     <div id="ingredientsFilter" class="filter">
                         <div id="ingredients" class="filterBtn">
                             Ingrédients
@@ -86,18 +96,16 @@
                 </div>
 
                 <!-- Nombre total de recettes -->
-                <div id="totalRecipes">
+                <div id="totalRecipes" class="position-relative mt-4 pt-1 pe-1 fs-3 ">
                     <span id="summer"></span> Recette<span id='oneRecipe'>s</span>
                 </div>
             </div>
             <!-- Conteneur des labels -->
-            <div id="labelsContainer">
-            </div>
+            <div id="labelsContainer" class="d-flex flex-row mt-3"></div>
         </section>
 
         <!-- Conteneur des cartes de recettes -->
-        <section id="recipesCardsContainer">
-
+        <section id="recipesCardsContainer" class="d-flex justify-content-between align-items-center flex-wrap ">
         </section>
     </main>
 
@@ -106,7 +114,8 @@
     </footer>
 </body>
 <!-- Scripts -->
-<script src="./scripts/pages/index.js" type="module"></script>
+<script src="/scripts/pages/index.js" type="module"></script>
+
 <script src="https://kit.fontawesome.com/c6b75d90fa.js" crossorigin="anonymous"></script>
 
 </html>

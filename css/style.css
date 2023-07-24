@@ -15,7 +15,6 @@
 /* Styles généraux du corps de la page */
 body {
     max-width: 1440px;
-    margin: 0 auto;
     background-color: #f0eeee;
     font-family: 'Manrope';
 }
@@ -29,135 +28,53 @@ body {
     display: flex;
 }
 
-/* Styles de l'en-tête */
-header {
-    position: absolute;
-    background-color: transparent;
-    width: 100%;
-    z-index: 1;
-}
-
-/* Styles du nom du site */
-#siteName {
-    padding: 20px 0 20px 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: end;
-}
-
-/* Styles du logo */
-#logo {
-    width: 200px;
-}
-
 /* Styles des ellipses */
-#ellipseOut {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
-    width: 1.25rem;
-    height: 1.25rem;
-    border-radius: 50%;
-    margin-left: 10px;
-    background-color: aliceblue;
-}
-
-#ellipseIn {
-    border: 1px solid black;
-    width: 75%;
-    height: 75%;
-    border-radius: 50%;
+#ellipseOut {   
+width: 1.25rem;
+ height: 1.25rem; 
+    
 }
 
 /* Styles du héros */
 #hero {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     background-image: url('../assets/Images/Hero/lampos-aritonang-24gR_9lCdes-unsplash\ 1\ \(1\).png');
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 600px;
-    width: 100%;
+    height:600px;
 }
 
 /* Styles du message de bienvenue */
 #welcome {
-    display: flex;
-    text-align: center;
-    width: 45%;
-    padding: 10px 20px;
-    background: transparent;
-    height: fit-content;
+
     color: #FFD15B;
     font-family: 'anton';
-    font-size: 2.2rem;
-    font-weight: 400;
-    margin-bottom: 20px;
+
 }
 
-/* Styles du label de recherche */
-#labelSearch {
-    display: flex;
-    width: 60%;
-    border-radius: 5px;
-    padding: 5px;
-    background-color: aliceblue;
-}
 
 /* Styles de la zone de recherche */
 #mainSearchInput {
-    display: flex;
-    height: 100%;
-    width: calc(100% - 2rem);
-    border: none;
     outline: none;
-    padding: 5px 10px;
 }
 
 /* Styles du bouton de recherche */
 #mainSearchButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 10px;
     background-color: #1b1b1b;
 }
 
-#mainSearchIcon {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-}
+
 
 #mainSearchButton #mainSearchIcon::before {
-    color: grey;
-    font-weight: 550;
-    font-size: large;
+    color: white;
 }
 
 #mainSearchButton:hover {
     background-color: #FFD15B;
-    border-top: 1px solid #1b1b1b;
-    border-left: 1px solid #1b1b1b;
-    border-bottom: 3px solid #1b1b1b;
-    border-right: 3px solid #1b1b1b;
-    border-radius: 10px;
 }
 
 #mainSearchButton:hover #mainSearchIcon::before {
     color: black;
     font-weight: 800;
-    font-size: large;
+    
 }
 
 #mainSearchButton:active {
@@ -167,36 +84,13 @@ header {
     border-right: 1px solid grey;
 }
 
-/* Labels et filtres */
-
-/* Conteneur des labels et des filtres */
-#labelsAndFiltersContainer {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-}
-
-#labelsContainer {
-    height: 90px;
-}
 
 /* Styles du total des recettes */
 #totalRecipes {
-    position: relative;
-    right: 10px;
-    padding: 30px 15px 0 0;
     font-family: 'Anton';
-    font-size: 21px;
 }
 
-/* Conteneur des cartes de recettes */
-#recipesCardsContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 0 50px;
-}
+
 
 .errorMsg{
 margin:0 auto}
