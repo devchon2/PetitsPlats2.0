@@ -195,9 +195,9 @@ import { Label } from './labels.js';
      }
    }
 
-   const UpdatedFilterApplicances = {'appliances':NewappliancesArray}
-   const UpdatedFilterIngredients = {'ingredients':NewIngredientsArray}
-   const UpdatedFilterUstensiles = {'ustensils':NewUstensilesArray}
+   const UpdatedFilterApplicances = {'appliances': new Set(NewappliancesArray)}
+   const UpdatedFilterIngredients = {'ingredients':new Set(NewIngredientsArray)}
+   const UpdatedFilterUstensiles = {'ustensils':new Set(NewUstensilesArray)}
    const UpdatedElement = [ UpdatedFilterIngredients, UpdatedFilterApplicances,  UpdatedFilterUstensiles]
 
    return UpdatedElement
