@@ -69,18 +69,12 @@ width: 1.25rem;
 
 #mainSearchButton:hover {
     background-color: #FFD15B;
-    border-top: 2px solid #1b1b1b;
-    border-left: 2px solid #1b1b1b;
-    border-bottom: 4px solid #1b1b1b;
-    border-right: 4px solid #1b1b1b;
-    border-radius: 10px;
-    border-
 }
 
 #mainSearchButton:hover #mainSearchIcon::before {
     color: black;
     font-weight: 800;
-    font-size: large;
+    
 }
 
 #mainSearchButton:active {
@@ -90,36 +84,13 @@ width: 1.25rem;
     border-right: 1px solid grey;
 }
 
-/* Labels et filtres */
-
-/* Conteneur des labels et des filtres */
-#labelsAndFiltersContainer {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-}
-
-#labelsContainer {
-    height: 90px;
-}
 
 /* Styles du total des recettes */
 #totalRecipes {
-    position: relative;
-    right: 10px;
-    padding: 30px 15px 0 0;
     font-family: 'Anton';
-    font-size: 21px;
 }
 
-/* Conteneur des cartes de recettes */
-#recipesCardsContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 0 50px;
-}
+
 
 .errorMsg{
 margin:0 auto}

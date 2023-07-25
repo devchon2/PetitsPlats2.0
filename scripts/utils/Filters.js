@@ -106,7 +106,7 @@ import { Label } from './labels.js';
          filterElement.classList.toggle('active');
          const label = new Label(filterName);
          const labelDom = label.getDom();
-         filterElement.innerHTML = `<p class='filterName, mb-0'>${filterName}</p> 
+         filterElement.innerHTML = `<p class='filterName'>${filterName}</p> 
                                     <i class="fa-solid fa-circle-xmark filter-icon"></i>`;
 
          labelContainer.appendChild(labelDom);
@@ -195,9 +195,9 @@ import { Label } from './labels.js';
      }
    }
 
-   const UpdatedFilterApplicances = {'appliances': new Set(NewappliancesArray)}
-   const UpdatedFilterIngredients = {'ingredients':new Set(NewIngredientsArray)}
-   const UpdatedFilterUstensiles = {'ustensils':new Set(NewUstensilesArray)}
+   const UpdatedFilterApplicances = {'appliances':NewappliancesArray}
+   const UpdatedFilterIngredients = {'ingredients':NewIngredientsArray}
+   const UpdatedFilterUstensiles = {'ustensils':NewUstensilesArray}
    const UpdatedElement = [ UpdatedFilterIngredients, UpdatedFilterApplicances,  UpdatedFilterUstensiles]
 
    return UpdatedElement

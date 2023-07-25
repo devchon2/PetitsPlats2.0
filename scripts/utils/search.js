@@ -10,25 +10,22 @@ console.log('search.js loaded')
 function SearchRecipes(keyword) {
   const updatedArray = []
 
-  for (let i = 0; i < recipesArray.length; i += 1) {
-    const recipe = recipesArray[i]
+  recipesArray.forEach(recipe => {
     const {  description, ingredients, name } = recipe;
     console.log('description', description)
     const ElementsToCheck = [name, description ]
 
-    for (let j = 0; j <= ingredients.lenght ; j += 1) {
-      const { ingredient } = ingredients[j]
+    for (let i = 0; i <= ingredients.lenght ; i += 1) {
+      const { ingredient } = ingredients[i]
       ElementsToCheck.push(ingredient)
     }
-
-    for (let k = 0; k <= ElementsToCheck.lenght ; k += 1) {
-      const element = ElementsToCheck[k]
+    ElementsToCheck.forEach(element => {
       const normalizedElement = getNormalized(element)
       const normalizedKeyword = getNormalized(keyword)
       if (normalizedElement.match(normalizedKeyword ) && !updatedArray.includes(recipe)) {
         updatedArray.push(recipe)
       }
-    }}
+    })})
     return updatedArray
   }
 
