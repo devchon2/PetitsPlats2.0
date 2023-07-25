@@ -106,7 +106,7 @@ import { Label } from './labels.js';
          filterElement.classList.toggle('active');
          const label = new Label(filterName);
          const labelDom = label.getDom();
-         filterElement.innerHTML = `<p class='filterName'>${filterName}</p> 
+         filterElement.innerHTML = `<p class='filterName, mb-0'>${filterName}</p> 
                                     <i class="fa-solid fa-circle-xmark filter-icon"></i>`;
 
          labelContainer.appendChild(labelDom);
