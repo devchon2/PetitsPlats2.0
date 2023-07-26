@@ -126,7 +126,7 @@ class Recipe {
 
     // Création encart 'Time'
     const Time = document.createElement('span');
-    Time.classList.add('CookingTime', 'position-absolute', 'text-dark', 'px-3', 'py-2', 'rounded-5');
+    Time.classList.add('CookingTime', 'position-absolute',  'text-dark', 'px-3', 'py-2', 'rounded-5');
     Time.textContent = `${this.time} min`;
     recipeImgContainer.appendChild(Time);
 
@@ -208,7 +208,6 @@ function summarize() {
   const { length } = NumberOfCards; // Récupère la longueur du tableau recipesArray.
   const TagRecipes = length > 1 ? `${length} recettes` : `${length} recette`;
   resume.innerHTML = '';
-  console.log('lengthblock', TagRecipes);
   resume.innerHTML = TagRecipes; // Affiche la longueur du tableau recipesArray.
   
 }

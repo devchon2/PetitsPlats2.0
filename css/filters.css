@@ -4,39 +4,22 @@
 .filterBtn{
     width: 220px;
     font-family: "Manrope";
-    font-size: 16px;
 }
 
 
-.filterBtnName{
-    z-index:2;
-}
+
 
 .fa-magnifying-glass::before{
     color:#afafaf;
 }
 
 .filterList{
-    
-    
-    left:0px;
-    top:50px; 
     width:220px;
-    background-color: white;
-    z-index:1;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
 }
 
 .filter,
 .filterOption{
-   
     cursor: pointer;    
-}
-
-.filterOption{
-    padding:10px 15px;
-
 }
 
 .label.icon,
@@ -48,16 +31,13 @@
 
 
 .filterName #text::first-letter{
-
     text-transform:uppercase
 }
 
 
 
 .filterOption.active{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    
     cursor: default;
     background-color: #FFD15B;
     font-weight: bold;
@@ -73,11 +53,11 @@
 
 .inputFilterBtn{
 
-    display:flex;
+   // display:flex;
     padding: 5px 0;
-    margin-bottom:10px;
+   // margin-bottom:10px;
     border:2px solid #afafaf;
-    border-radius: 5px;
+   // border-radius: 5px;
 }
 
 .inputFilterBtn input{
