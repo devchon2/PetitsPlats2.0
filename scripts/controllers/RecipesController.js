@@ -206,13 +206,11 @@ function summarize() {
   const NumberOfCards = document.querySelectorAll('.recipeCard');
   const resume = document.getElementById('summer'); // Affiche le nombre de recettes.
   const { length } = NumberOfCards; // Récupère la longueur du tableau recipesArray.
-  resume.innerHTML = `${length} `; // Affiche la longueur du tableau recipesArray.
-  const recipe = document.getElementById('oneRecipe');
-  if (length <= 1) {
-    recipe.hidden = true;
-  } else {
-    recipe.hidden = false;
-  }
+  const TagRecipes = length > 1 ? `${length} recettes` : `${length} recette`;
+  resume.innerHTML = '';
+  console.log('lengthblock', TagRecipes);
+  resume.innerHTML = TagRecipes; // Affiche la longueur du tableau recipesArray.
+  
 }
 
 /**
@@ -258,11 +256,7 @@ function DisplayRecipes(Array) {
 function UpdateRecipes(Array) {
   console.log('Array updater entries', Array);
   DisplayRecipes(Array);
-  const NumberOfCards = document.querySelectorAll('.recipeCard');
-  const resume = document.getElementById('summer'); // Affiche le nombre de recettes.
-  const { length } = NumberOfCards; // Récupère la longueur du tableau recipesArray.
-  resume.innerHTML = '';
-  resume.innerHTML = `${length} `; // Affiche la longueur du tableau recipesArray.
+  
 }
 
 export { Recipe, DisplayRecipes, UpdateRecipes, getNormalized };

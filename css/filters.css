@@ -6,11 +6,7 @@
     font-family: "Manrope";
     font-size: 16px;
 }
-.filterBtn.active{
 
-    /* border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0; */
-}
 
 .filterBtnName{
     z-index:2;
