@@ -114,7 +114,7 @@ class Recipe {
 
     // Création du header
     const recipeImgContainer = document.createElement('div');
-    recipeImgContainer.classList.add('recipePictureContainer','w-100','h-35','overflow-hidden');
+    recipeImgContainer.classList.add('recipePictureContainer','w-100', 'overflow-hidden');
     recipeCard.appendChild(recipeImgContainer);
 
     // Création du body
@@ -132,7 +132,7 @@ class Recipe {
 
     // Création Contenu Texte
     const recipeContent = document.createElement('div');
-    recipeContent.classList.add('recipeContent','p-3', 'mh-65', 'd-flex','mt-3', 'flex-column', );
+    recipeContent.classList.add('recipeContent','p-3', 'h-65', 'd-flex','mt-3','justify-content-end','align-items-start', 'flex-column', );
     recipeCard.appendChild(recipeContent);
 
     // Nom de la recette
@@ -155,7 +155,7 @@ class Recipe {
 
     // Titre de division Ingrédients
     const ingredientsTitle = document.createElement('h3');
-    ingredientsTitle.classList.add('cardSubTitle', 'my-2', 'mx-0' , 'text-uppercase','fs-7','text-secondary','font-weight-bold');
+    ingredientsTitle.classList.add('cardSubTitle','mt-4', 'mb-2', 'mx-0' , 'text-uppercase','fs-7','text-secondary','font-weight-bold');
     ingredientsTitle.textContent = 'Ingrédients';
     recipeContent.appendChild(ingredientsTitle);
 

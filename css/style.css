@@ -135,3 +135,7 @@ body {
 #labelsContainer {
   height: 40px;
 }
+
+.recipePictureContainer {
+    height:35%
+}
