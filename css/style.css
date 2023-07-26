@@ -1,159 +1,137 @@
 /* Importation des polices Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
-@import url('./filters.css');
-@import url('./labels.css');
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope&display=swap");
+@import url("./filters.css");
+@import url("./labels.css");
 
 /* Réinitialisation des marges, des paddings et de la boîte */
-*, ::before, ::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    color: #1b1b1b;
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #1b1b1b;
 }
 
 /* Styles généraux du corps de la page */
 body {
-    max-width: 1440px;
-    background-color: #eeeeee;
-    font-family: 'Manrope';
+  font-family: "Manrope";
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
-
 .visible {
-    display: flex;
+  display: flex;
 }
 
 /* Styles des ellipses */
-#ellipseOut {   
-width: 1.25rem;
- height: 1.25rem; 
-    
+#ellipseOut {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 /* Styles du héros */
 #hero {
-    background-image: url('../assets/Images/Hero/lampos-aritonang-24gR_9lCdes-unsplash\ 1\ \(1\).png');
-    height:600px;
+  background-image: url("../assets/Images/Hero/lampos-aritonang-24gR_9lCdes-unsplash\ 1\ \(1\).png");
+  height: 500px;
 }
 
 /* Styles du message de bienvenue */
 #welcome {
-
-    color: #FFD15B;
-    font-family: 'anton';
-
+  color: #ffd15b;
+  font-family: "anton";
 }
-
 
 /* Styles de la zone de recherche */
 #mainSearchInput {
-    outline: none;
+  outline: none;
 }
 
 /* Styles du bouton de recherche */
 #mainSearchButton {
-    width: 2.5rem;
-    background-color: #1b1b1b;
+  width: 2.5rem;
+  background-color: #1b1b1b;
 }
 
-
-
 #mainSearchButton #mainSearchIcon::before {
-    color: white;
+  color: white;
 }
 
 #mainSearchButton:hover {
-    background-color: #FFD15B;
+  background-color: #ffd15b;
 }
 
 #mainSearchButton:hover #mainSearchIcon::before {
-    color: black;
-    font-weight: 800;
-    
+  color: black;
+  font-weight: 800;
 }
 
 #mainSearchButton:active {
-    border-top: 1px;
-    border-left: 1px;
-    border-bottom: 1px solid grey;
-    border-right: 1px solid grey;
+  border: 1px solid grey;
 }
-
 
 /* Styles du total des recettes */
 #totalRecipes {
-    font-family: 'Anton';
+  font-family: "Anton";
 }
-
-
-
-.errorMsg{
-margin:0 auto}
 
 /* Styles des cartes de recettes */
 .recipeCard {
-    
-    height: 740px;
-    width:32%;
-    
+  height: 740px;
+  width: 32%;
 }
 
 /* Styles du temps de cuisson */
 .CookingTime {
-    right: 30px;
-    top: 30px;
-    background-color: #FFD15B;
-    
-   // border-radius: 15px;
+  right: 30px;
+  top: 30px;
+  background-color: #ffd15b;
+
+  // border-radius: 15px;
 }
 
 /* Styles du conteneur de l'image de recette */
-.recipePictureContainer {
-    height: 280px;
-}
-
-
-
 
 /* Styles du nom de la recette */
 .recipeName {
-    font-family: 'anton';
+  font-family: "anton";
 }
 
 /* Styles des titres de carte, des sous-titres de carte et des titres d'ingrédients */
 .cardTitle,
-.cardSubTitle{
-    font-weight:700;
-    font-family: 'Manrope';
-    font-size: 12px;
+.cardSubTitle {
+  font-weight: 700;
+  font-family: "Manrope";
+  font-size: 12px;
 }
 
 /* Styles de la description de la recette */
 .recipeDescription {
-    height: 100px;
-    font-size: 0.85rem;
+  height: 100px;
+  font-size: 0.85rem;
 }
-
 
 /* Styles des mesures d'ingrédients */
 .ingredientMesure,
 .ingredientName {
-    font-family: 'Manrope', 'Sans-serif';
-    margin: 2px 0;
-    font-size: 0.8rem;
+  font-family: "Manrope", "Sans-serif";
+  margin: 2px 0;
+  font-size: 0.8rem;
 }
 
 /* Styles des noms d'ingrédients */
 .ingredientName {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 /* Styles des quantités */
 .quantity {
-    font-size: 1rem;
+  font-size: 1rem;
+}
+
+#labelsContainer {
+  height: 40px;
 }

@@ -1,49 +1,19 @@
-/* Conteneurs des filtres et des labels */
-#labelsContainer {
-
-    display: flex;
-    justify-content: start;
-    margin: 0 40px;
-    justify-content: start;
-}
-
 /* Styles des labels */
-
 .labels {
-
-    display: flex;
-    justify-content: space-between;
-
-    margin: 20px;
-    padding: 15px 10px 15px 20px;
-    border-radius: 15px;
-    position: relative;
-    font-family: "Manrope";
-    font-weight: 500;
-    font-size: 16px;
-    align-items: center;
-    background-color: #FFD15B;
-    width:fit-content
+  font-family: "Manrope";
+  font-weight: 500;
+  font-size: 1rem;
+  background-color: #ffd15b;
+  width: fit-content;
 }
 
-/* Styles du contenu des labels */
-.label-content {
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding:0 10px;
-    width: fit-content;
-}
-
-.label-icon{
-    margin:0px 5px 0px 20px;
-    cursor: pointer;
-    scale:1;
+.label-icon {
+  cursor: pointer;
+  scale: 1;
 }
 
 .filter-icon:hover,
-.label-icon:hover{
-   transition: ease-out 0.2s;
-    scale:1.3;
+.label-icon:hover {
+  transition: ease-out 0.2s;
+  scale: 1.3;
 }

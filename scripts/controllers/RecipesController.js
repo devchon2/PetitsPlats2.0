@@ -114,7 +114,7 @@ class Recipe {
 
     // Création du header
     const recipeImgContainer = document.createElement('div');
-    recipeImgContainer.classList.add('recipePictureContainer','w-100','h-30');
+    recipeImgContainer.classList.add('recipePictureContainer','w-100','h-35','overflow-hidden');
     recipeCard.appendChild(recipeImgContainer);
 
     // Création du body
@@ -132,18 +132,18 @@ class Recipe {
 
     // Création Contenu Texte
     const recipeContent = document.createElement('div');
-    recipeContent.classList.add('recipeContent','p-3', 'mh-70', 'd-flex', 'flex-column', );
+    recipeContent.classList.add('recipeContent','p-3', 'mh-65', 'd-flex','mt-3', 'flex-column', );
     recipeCard.appendChild(recipeContent);
 
     // Nom de la recette
     const recipeName = document.createElement('h2');
-    recipeName.classList.add('recipeName','mt-1' ,'mb-2','fs-4')
+    recipeName.classList.add('recipeName','mt-1' ,'mb-2','fs-5')
     recipeName.textContent = this.name;
     recipeContent.appendChild(recipeName);
 
     // Titre de division Recette
     const recipeTitle = document.createElement('div');
-    recipeTitle.classList.add('cardTitle','my-2', 'mx-0' , 'text-uppercase','fs-6','text-secondary')
+    recipeTitle.classList.add('cardTitle','my-2', 'mx-0' , 'text-uppercase','fs-7','text-secondary')
     recipeTitle.textContent = 'Recette';
     recipeContent.appendChild(recipeTitle);
 
@@ -155,13 +155,13 @@ class Recipe {
 
     // Titre de division Ingrédients
     const ingredientsTitle = document.createElement('h3');
-    ingredientsTitle.classList.add('cardSubTitle', 'my-2', 'mx-0' , 'text-uppercase','fs-6','text-secondary','font-weight-bold');
+    ingredientsTitle.classList.add('cardSubTitle', 'my-2', 'mx-0' , 'text-uppercase','fs-7','text-secondary','font-weight-bold');
     ingredientsTitle.textContent = 'Ingrédients';
     recipeContent.appendChild(ingredientsTitle);
 
     // Création de la liste des ingrédients
     const ingredientsList = document.createElement('div');
-    ingredientsList.classList.add('recipeIngredients', 'd-flex', 'flex-wrap','w-100', 'justify-content-between','align-items-center' , 'fs-8')
+    ingredientsList.classList.add('recipeIngredients', 'd-flex', 'flex-wrap','w-100', 'justify-content-between','align-items-center' , 'fs-7')
 
     // Boucle pour afficher les ingrédients
     for (let i = 0; i < this.ingredients.length; i += 1) {
@@ -195,7 +195,8 @@ class Recipe {
 }
 
 function getNormalized(str){
-  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+ 
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replaceAll(' ','-');
 }
 
 
@@ -253,7 +254,6 @@ function DisplayRecipes(Array) {
  * @param {Array} Array - Le tableau des recettes à mettre à jour.
  */
 function UpdateRecipes(Array) {
-  console.log('Array updater entries', Array);
   DisplayRecipes(Array);
   
 }

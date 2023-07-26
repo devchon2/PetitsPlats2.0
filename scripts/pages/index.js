@@ -8,9 +8,9 @@ import { GetAllFilters, GetFilters, UpdateFilters } from '../utils/Filters.js';
 import { SearchListInput, SearchRecipes } from '../utils/search.js';
 import { recipesArray, ingredientsObject, appliancesObject, ustensilesObject } from '../controllers/datasController.js';
 
-const fullArray = [ingredientsObject, appliancesObject, ustensilesObject];
 console.log('index.js chargé');
 
+const fullArray = [ingredientsObject, appliancesObject, ustensilesObject];
 const mainInput = document.querySelector('#mainSearchInput');
 const recipeContainer = document.querySelector('#recipesCardsContainer');
 const filterIngredientsInputs = document.querySelector('#ingredientsSearchInput');
@@ -41,7 +41,7 @@ function init() {
       UpdateRecipes(updatedArray);// Met à jour les recettes.
       GetAllFilters(UpdatedElement);// Crée les filtres de recherche 
       if (updatedArray.length === 0) {// Si aucune recette ne correspond, affiche un message d'erreur.
-        recipeContainer.innerHTML = `<p class=errorMsg>Aucune recette ne correspond à "${mainInput.value}" 
+        recipeContainer.innerHTML = `<p class='errorMsg mx-auto my-0'>Aucune recettes ne correspond à "${mainInput.value}" 
         vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>`;
       }
     } else {// Si la valeur de l'input est inférieure à 3 caractères, affiche toutes les recettes.
@@ -49,6 +49,30 @@ function init() {
       GetAllFilters(fullArray);
     }
 })
+
+filtersInput.forEach((input) => {
+
+  input.addEventListener('keyup', () => { 
+    const list = document.getElementById(input.parentElement.parentElement.id);
+    const filtersArray = Array.from(list.getElementsByClassName('filterOption'))
+    console.log('normalizedName', filtersArray);
+    filtersArray.forEach((filter) => {
+      console.log('normalizedName', filter);
+      const normalizedName = getNormalized(filter.textContent);
+      console.log('normalizedName', normalizedName);
+      if (normalizedName.includes(getNormalized(input.value))) {
+        filter.classList.remove('hidden');
+
+      } else {
+          filter.classList.add('hidden');      }
+    })
+
+
+
+  // console.log('input', (Array.from(input.parentElement.parentElement.children)))
+   SearchListInput(input.value, filtersArray);
+})})
+
 
 filtersInput.forEach((input) => {// Ajoute un écouteur d'évènement sur chaque input de filtre
   

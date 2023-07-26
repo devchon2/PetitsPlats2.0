@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="mb-5">
 
 <head>
     <meta charset="UTF-8">
@@ -17,7 +17,7 @@
     <title>Les petits plats</title>
 </head>
 
-<body class="mx-auto  ">
+<body class="mx-auto col-8 bg-body-secondary">
     <!-- En-tête -->
     <header class="navbar position-absolute bg-transparent  z-1">
         <a  href="index.html" d="siteName" class="navbrand d-flex justify-content-start align-items-end flex-row p-4">
@@ -52,12 +52,12 @@
                 <div id="filters" class="d-flex flex-row justify-content-start flex-wrap col-10 ">
                     <div id="ingredientsFilter" class="filter">
                         <div id="ingredients" class="filterBtn  d-flex justify-content-between align-items-center position-relative rounded-top-4 rounded-bottom-4 bg-white m-2 p-3">
-                            <span class="z-2 filterBtnName">Ingrédients</span>
+                            <span class="filterBtnName">Ingrédients</span>
                             <i class="fa-solid fa-chevron-down"></i>
-                            <div id="ingredientsList" class="filterList d-none position-absolute start-0 top-100 px-2 py-3 bg-white z-1 rounded-bottom-4">
+                            <div id="ingredientsList" class="filterList z-10 d-none position-absolute start-0 top-100 px-2 py-3 bg-white z-1 rounded-bottom-4">
                                 <div class="inputFilterBtn d-flex mb-1 rounded">
-                                    <input type="text" id="ingredientsSearchInput" class="filterInput">
-                                    <button id="ingredientsSearchButton" class="searchInputButton">
+                                    <input type="text" id="ingredientsSearchInput" class="filterInput w-100 border-0">
+                                    <button id="ingredientsSearchButton" class="searchInputButton bg-white border-0">
                                         <i class="fa-solid fa-magnifying-glass filtersIcon"></i>
                                     </button>
                                 </div>
@@ -66,13 +66,13 @@
                     </div>
                     <div id="appliancesFilter" class="filter   ">
                         <div id="appliances" class="filterBtn d-flex justify-content-between align-items-center  position-relative rounded-top-4 rounded-bottom-4 bg-white m-2 p-3">
-                            <span class=" z-2 filterBtnName">Matériel</span> 
+                            <span class="filterBtnName">Matériel</span> 
                             <i class="fa-solid fa-chevron-down"></i>
 
-                            <div id="appliancesList" class="filterList d-none position-absolute start-0 top-100 px-2 py-3 bg-white z-1 rounded-bottom-4">
+                            <div id="appliancesList" class="filterList z-10 d-none position-absolute start-0 top-100 px-2 py-3 bg-white z-1 rounded-bottom-4">
                                 <div class="inputFilterBtn d-flex mb-1 rounded">
-                                    <input type="text" id="appliancesSearchInput" class="filterInput">
-                                    <button id="appliancesSearchButton" class="searchInputButton"><i
+                                    <input type="text" id="appliancesSearchInput" class="filterInput w-100 border-0">
+                                    <button id="appliancesSearchButton" class="searchInputButton bg-white border-0"><i
                                             class="fa-solid fa-magnifying-glass filtersIcon"></i></button>
                                 </div>
                             </div>
@@ -80,13 +80,13 @@
                     </div>
                     <div id="ustensilsFilter" class="filter ">
                         <div id="ustensils" class="filterBtn d-flex justify-content-between align-items-center  position-relative rounded-top-4 rounded-bottom-4 bg-white m-2 p-3">
-                            <span class="filterBtnName z-2">Ustensiles</span> 
+                            <span class="filterBtnName">Ustensiles</span> 
                             <i class="fa-solid fa-chevron-down"></i>
 
-                            <div id="ustensilsList" class="filterList d-none position-absolute start-0 top-100 px-2 py-3 bg-white z-1 rounded-bottom-4">
-                                <div class="inputFilterBtn d-flex mb-1 rounded">
-                                    <input type="text" id="ustensilsSearchInput" class="filterInput">
-                                    <button id="ustensilsSearchButton" class="searchInputButton">
+                            <div id="ustensilsList" class="filterList z-1 d-none position-absolute start-0 top-100 px-2 py-3 bg-white  rounded-bottom-4">
+                                <div class="inputFilterBtn d-flex mb-1 rounded ">
+                                    <input type="text" id="ustensilsSearchInput" class="filterInput w-100 border-0 ">
+                                    <button id="ustensilsSearchButton" class="searchInputButton bg-white border-0">
                                         <i class="fa-solid fa-magnifying-glass  filtersIcon"></i>
                                     </button>
                                 </div>
@@ -96,16 +96,16 @@
                 </div>
 
                 <!-- Nombre total de recettes -->
-                <div id="totalRecipes" class="position-relative d-flex justify-content-center align-items-center m-2 p-31 pe-1 fs-3 h-auto ">
+                <div id="totalRecipes" class="position-relative d-flex justify-content-center align-items-center m-2 p-31 pe-1 fs-3 h-auto col-2 ">
                     <span id="summer">
                 </div>
             </div>
             <!-- Conteneur des labels -->
-            <div id="labelsContainer" class="d-flex flex-row mt-3"></div>
+            <div id="labelsContainer" class="d-flex justify-content-start flex-row mx-0 "></div>
         </section>
 
         <!-- Conteneur des cartes de recettes -->
-        <section id="recipesCardsContainer" class="d-flex justify-content-between align-items-center flex-wrap ">
+        <section id="recipesCardsContainer" class="d-flex justify-content-between gap-4 align-items-center flex-wrap">
         </section>
     </main>
 

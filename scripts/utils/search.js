@@ -11,39 +11,39 @@ function SearchRecipes(keyword) {
   const updatedArray = []
 
   recipesArray.forEach(recipe => {
-    const {  description, ingredients, name } = recipe;
-    console.log('description', description)
-    const ElementsToCheck = [name, description ]
+    const { description, ingredients, name } = recipe;
+    const ElementsToCheck = [name, description]
 
-    for (let i = 0; i <= ingredients.lenght ; i += 1) {
-      const  {ingredient} = ingredients[i]
+    for (let i = 0; i <= ingredients.lenght; i += 1) {
+      const { ingredient } = ingredients[i]
       console.log('ingredient-ELEMENTTOCHECK', ingredient)
       ElementsToCheck.push(ingredient)
     }
     ElementsToCheck.forEach(element => {
       const normalizedElement = getNormalized(element)
       const normalizedKeyword = getNormalized(keyword)
-      if (normalizedElement.match(normalizedKeyword ) && !updatedArray.includes(recipe)) {
+      if (normalizedElement.match(normalizedKeyword) && !updatedArray.includes(recipe)) {
         updatedArray.push(recipe)
       }
-    })})
-    return updatedArray
-  }
-
-
-  function SearchListInput(input, filterElements) {// Fonction qui filtre les éléments de la liste des filtres
-    filterElements.forEach((element) => {
-      const normalizedElement = getNormalized(element)
-      console.log('normalizedElement', normalizedElement)
-      const normalizedInput = getNormalized(input)
-      console.log('normalizedInput', normalizedInput)
-      if (!normalizedElement.match(normalizedInput)) {
-        element.classList.add('hidden')
-      } else {
-        element.classList.remove('hidden')
-      }
     })
-  }
+  })
+  return updatedArray
+}
+
+
+function SearchListInput(input, filterElements) {// Fonction qui filtre les éléments de la liste des filtres
+  console.log('FilterElements', filterElements)
+  filterElements.forEach((element) => {
+    console.log(element.textContent)
+    const normalizedElement = getNormalized(element.textContent)
+    console.log('normalizedElement', normalizedElement)
+    const normalizedInput = getNormalized(input)
+    console.log('normalizedInput', normalizedInput)
+    if (normalizedElement.includes(normalizedInput)) {
+      element.classList.toggle('d-none','d-flex')
+    } 
+  })
+}
 
 
 

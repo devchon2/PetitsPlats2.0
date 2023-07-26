@@ -13,6 +13,8 @@ const filterApplianceList = document.getElementById('appliancesList');
 const filterUstensilsList = document.getElementById('ustensilsList');
 const filtersBtn = document.querySelectorAll('.filterBtn');
 const labelContainer = document.getElementById('labelsContainer');
+const filtersInput = document.querySelectorAll('.filterInput');
+
 
 /** //Écouteur d'événement pour les boutons des filtres */
 filtersBtn.forEach((btn) => {
@@ -47,12 +49,13 @@ filtersBtn.forEach((btn) => {
   });
 });
 
+
+
 /** Fonction qui crée tous les filtres.
  * @param {Array} Array - Le tableau contenant les filtres à créer
  */
 function GetAllFilters(Array) {
   console.log('GetAllFilters chargé');
-  console.log('Array entries GetAllFilters', Array);
   // Parcourt chaque élément de fullArray et appelle GetFilters pour chaque élément.
   Array.forEach((obj) => {
     const arrayName = Object.keys(obj)[0];
@@ -118,14 +121,30 @@ function GetFilters(Obj) {
         labelContainer.appendChild(labelDom);
 
         UpdateRecipes(NewRecipesArray);
-      } else if ((e.target.classList.contains('filter-icon') || e.target.classList.contains('filterName') || e.target.classList.contains('filterOption') && activeFilter)) {
+      } else if ((e.target.classList.contains('filter-icon') || e.target.classList.contains('filterName') || e.target.classList.contains('filterOption') && activeFilter)) {// Si actif et que l'utilisateur clique sur le contenu du filtre, il supprime le filtre.
         e.stopPropagation();
         filterElement.classList.toggle('active');
         console.log('filterName', filterName)
         filterElement.innerHTML = `${filterName}  `;
         const labelDom = document.getElementById(`label-${getNormalized(filterName)}`);
         labelDom.remove();
+        console.log('existantLabels ',ExistentLabels)
 
+
+      } else if (activeFilter) {
+        filterElement.classList.remove('active');
+        console.log('ExistentLabels', ExistentLabels);
+        const labelDom = document.getElementById(`label-${getNormalized(filterName)}`);
+        labelDom.remove();
+
+        // Active le dom du filtre et affiche le label
+        filterElement.innerHTML = `<p class='filterName m-0 '>${filterName}</p><i class="fa-solid fa-circle-xmark filter-icon"></i>`;
+
+        const NewRecipesArray = SearchRecipes(filterName);
+        const UpdatedElement = UpdateFilters(NewRecipesArray);
+        labelContainer.appendChild(labelDom);
+
+        UpdateRecipes(NewRecipesArray);
 
       } else {
         toggleList(activeBtn.id);
