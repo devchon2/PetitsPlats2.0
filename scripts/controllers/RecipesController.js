@@ -109,19 +109,19 @@ class Recipe {
   getCard() {
     // Création de la carte
     const recipeCard = document.createElement('article');
-    recipeCard.classList.add('recipeCard');
+    recipeCard.classList.add('recipeCard','d-flex','flex-column' , 'my-3','p-0', 'col-12', 'col-md-6', 'col-lg-4');
     recipeCard.setAttribute('id', this.getId());
 
     // Création du header
     const recipeImgContainer = document.createElement('div');
-    recipeImgContainer.classList.add('recipePictureContainer');
+    recipeImgContainer.classList.add('recipePictureContainer','w-100','overflow-hidden');
     recipeCard.appendChild(recipeImgContainer);
 
     // Création du body
     const recipeImg = document.createElement('img');
     recipeImg.setAttribute('src', `assets/Images/Recipes/${this.image}`);
     recipeImg.setAttribute('alt', this.name);
-    recipeImg.classList.add('recipePicture');
+    recipeImg.classList.add('recipePicture','w-100','h-100','object-fit-cover');
     recipeImgContainer.appendChild(recipeImg);
 
     // Création encart 'Time'
@@ -132,24 +132,24 @@ class Recipe {
 
     // Création Contenu Texte
     const recipeContent = document.createElement('div');
-    recipeContent.classList.add('recipeContent');
+    recipeContent.classList.add('recipeContent','p-3');
     recipeCard.appendChild(recipeContent);
 
     // Nom de la recette
     const recipeName = document.createElement('h2');
-    recipeName.classList.add('recipeName');
+    recipeName.classList.add('recipeName','mt-1' ,'mb-2','fs-5','fw-400');
     recipeName.textContent = this.name;
     recipeContent.appendChild(recipeName);
 
     // Titre de division Recette
     const recipeTitle = document.createElement('h3');
-    recipeTitle.classList.add('cardTitle');
+    recipeTitle.classList.add('cardTitle','mb-2','fw-700');
     recipeTitle.textContent = 'Recette';
     recipeContent.appendChild(recipeTitle);
 
     // Description de la recette
     const recipeDescription = document.createElement('div');
-    recipeDescription.classList.add('recipeDescription');
+    recipeDescription.classList.add('recipeDescription','text-troncate');
     recipeDescription.textContent = this.description;
     recipeContent.appendChild(recipeDescription);
 

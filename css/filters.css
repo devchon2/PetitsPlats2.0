@@ -1,57 +1,30 @@
 
-#filtersContainer{
-
-    display: flex;
-    justify-content: space-between;
-    margin: 0 40px;
-}
-
-/* Styles des filtres */
-#filters {
-
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    max-width: 80%;
-}
 
 /* Styles des Btn d'ingrédients, d'appareils et d'ustensiles */
 .filterBtn{
-
-    display: flex;
-    justify-content: space-between;
     width: 220px;
-    margin: 20px;
-    padding: 15px 10px;
-    background-color: white;
-    border-radius: 15px;
-    position: relative;
     font-family: "Manrope";
-    font-weight: 500;
     font-size: 16px;
 }
 .filterBtn.active{
 
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    /* border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0; */
 }
 
 .filterBtnName{
-    z-index:10;
+    z-index:2;
 }
 
 .fa-magnifying-glass::before{
-
     color:#afafaf;
-    padding:0;
 }
 
 .filterList{
     
-    position:absolute;
-    padding: 10px;
+    
     left:0px;
-    top:50px;
+    top:50px; 
     width:220px;
     background-color: white;
     z-index:1;
@@ -61,8 +34,7 @@
 
 .filter,
 .filterOption{
-    display: flex;
-    justify-content: space-between;
+   
     cursor: pointer;    
 }
 

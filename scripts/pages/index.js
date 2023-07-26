@@ -29,27 +29,28 @@ function init() {
   GetAllFilters(fullArray); // Crée les filtres de recherche.
   
 
-       mainInput.addEventListener('keyup', () => {
-    const updatedArray = SearchRecipes(mainInput.value.toLowerCase());
-    const UpdatedElement = UpdateFilters(updatedArray);
-    if (mainInput.value.length > 2) {
+    mainInput.addEventListener('keyup', () => {
+    const updatedArray = SearchRecipes(mainInput.value);// Récupère les recettes qui correspondent à la recherche.
+    const UpdatedElement = UpdateFilters(updatedArray);// Récupère les filtres qui correspondent à la recherche.
+    if (mainInput.value.length > 2) {// Si la valeur de l'input est supérieure à 2 caractères, affiche les recettes qui correspondent.
       
       console.log('mainInput.value', mainInput.value);
       console.log('mainInput.value', updatedArray);
       console.log('mainInput.value', UpdatedElement);
 
-      UpdateRecipes(updatedArray);
-      GetAllFilters(UpdatedElement);
-      if (updatedArray.length === 0) {
-        recipeContainer.innerHTML = `<p class=errorMsg>Aucune recette ne correspond à "${mainInput.value}" vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>`;
+      UpdateRecipes(updatedArray);// Met à jour les recettes.
+      GetAllFilters(UpdatedElement);// Crée les filtres de recherche 
+      if (updatedArray.length === 0) {// Si aucune recette ne correspond, affiche un message d'erreur.
+        recipeContainer.innerHTML = `<p class=errorMsg>Aucune recette ne correspond à "${mainInput.value}" 
+        vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>`;
       }
-    } else {
+    } else {// Si la valeur de l'input est inférieure à 3 caractères, affiche toutes les recettes.
       UpdateRecipes(recipesArray);
       GetAllFilters(fullArray);
     }
 })
 
-filtersInput.forEach((input) => {
+filtersInput.forEach((input) => {// Ajoute un écouteur d'évènement sur chaque input de filtre
   
   input.addEventListener('keyup', () => { 
     const list = document.getElementById(input.parentElement.parentElement.id);

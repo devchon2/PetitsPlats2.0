@@ -94,7 +94,7 @@ import { Label } from './labels.js';
      const filterName = element.toUpperCase().charAt(0) + element.slice(1);
      filterElement.id = `Filter-${getNormalized(filterName)}`;
      filterElement.innerHTML = `${filterName}`;
-     filterElement.classList.add('filterOption');
+     filterElement.classList.add('filterOption', 'd-flex', 'justify-content-between', );
 
      /// /Écouteur d'événement Click pour chaque élément de filtre.
      filterElement.addEventListener('click', (e) => {
@@ -163,7 +163,9 @@ import { Label } from './labels.js';
    const zone = document.getElementById(`${FilterID}Filter`);
 
    list.classList.toggle('active');
-   list.classList.toggle('hidden');
+   list.classList.toggle('d-none');
+   btn.classList.toggle('rounded-bottom-4');
+  //  list.classList.toggle('rounded-bottom-0');
    btn.classList.toggle('active');
    zone.classList.toggle('active');
    btn.querySelector('i').classList.toggle('fa-chevron-down');

@@ -97,9 +97,7 @@ margin:0 auto}
 
 /* Styles des cartes de recettes */
 .recipeCard {
-    display: flex;
-    flex-direction: column;
-    margin: 20px;
+    
     position: relative;
     min-width: 300px;
     width: 30%;
@@ -121,29 +119,15 @@ margin:0 auto}
 
 /* Styles du conteneur de l'image de recette */
 .recipePictureContainer {
-    width: 100%;
     height: 280px;
-    overflow: hidden;
 }
 
-/* Styles de l'image de recette */
-.recipePicture {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
 
-/* Styles du contenu de recette */
-.recipeContent {
-    padding: 10px 25px;
-}
+
 
 /* Styles du nom de la recette */
 .recipeName {
-    margin: 15px 0 20px 0;
     font-family: 'anton';
-    font-size: 1rem;
-    font-weight: 400px;
 }
 
 /* Styles des titres de carte, des sous-titres de carte et des titres d'ingrédients */
@@ -152,7 +136,6 @@ margin:0 auto}
 .ingredientsTitle {
     margin: 15px 0 10px 0;
     font-family: 'Manrope';
-    font-weight: 700;
     font-size: 12px;
     color: #7A7A7A;
     text-transform: uppercase;
@@ -165,7 +148,7 @@ margin:0 auto}
     text-align: left;
     white-space: wrap; /* Empêche le texte de se retourner à la ligne */
     overflow: hidden; /* Cache le texte qui dépasse */
-    text-overflow: ellipsis; /* Ajoute l'ellipse à la fin du texte caché */
+    text-overflow: ellipsis; Ajoute l'ellipse à la fin du texte caché
 }
 
 /* Styles de la Btne des ingrédients */

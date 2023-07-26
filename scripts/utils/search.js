@@ -16,7 +16,8 @@ function SearchRecipes(keyword) {
     const ElementsToCheck = [name, description ]
 
     for (let i = 0; i <= ingredients.lenght ; i += 1) {
-      const { ingredient } = ingredients[i]
+      const  {ingredient} = ingredients[i]
+      console.log('ingredient-ELEMENTTOCHECK', ingredient)
       ElementsToCheck.push(ingredient)
     }
     ElementsToCheck.forEach(element => {
