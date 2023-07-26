@@ -109,12 +109,12 @@ class Recipe {
   getCard() {
     // Création de la carte
     const recipeCard = document.createElement('article');
-    recipeCard.classList.add('recipeCard','d-flex','flex-column' , 'my-3','p-0', 'col-12', 'col-md-6', 'col-lg-4');
+    recipeCard.classList.add('recipeCard','d-flex','flex-column' ,'position-relative',/* 'mw-30', */ 'overflow-hidden', 'bg-white', 'rounded-4', 'my-3','p-0');
     recipeCard.setAttribute('id', this.getId());
 
     // Création du header
     const recipeImgContainer = document.createElement('div');
-    recipeImgContainer.classList.add('recipePictureContainer','w-100','overflow-hidden');
+    recipeImgContainer.classList.add('recipePictureContainer','w-100','h-30');
     recipeCard.appendChild(recipeImgContainer);
 
     // Création du body
@@ -126,47 +126,47 @@ class Recipe {
 
     // Création encart 'Time'
     const Time = document.createElement('span');
-    Time.classList.add('CookingTime');
+    Time.classList.add('CookingTime', 'position-absolute', 'text-dark', 'px-3', 'py-2', 'rounded-5');
     Time.textContent = `${this.time} min`;
     recipeImgContainer.appendChild(Time);
 
     // Création Contenu Texte
     const recipeContent = document.createElement('div');
-    recipeContent.classList.add('recipeContent','p-3');
+    recipeContent.classList.add('recipeContent','p-3', 'mh-70', 'd-flex', 'flex-column', );
     recipeCard.appendChild(recipeContent);
 
     // Nom de la recette
     const recipeName = document.createElement('h2');
-    recipeName.classList.add('recipeName','mt-1' ,'mb-2','fs-5','fw-400');
+    recipeName.classList.add('recipeName','mt-1' ,'mb-2','fs-4')
     recipeName.textContent = this.name;
     recipeContent.appendChild(recipeName);
 
     // Titre de division Recette
-    const recipeTitle = document.createElement('h3');
-    recipeTitle.classList.add('cardTitle','mb-2','fw-700');
+    const recipeTitle = document.createElement('div');
+    recipeTitle.classList.add('cardTitle','my-2', 'mx-0' , 'text-uppercase','fs-6','text-secondary')
     recipeTitle.textContent = 'Recette';
     recipeContent.appendChild(recipeTitle);
 
     // Description de la recette
     const recipeDescription = document.createElement('div');
-    recipeDescription.classList.add('recipeDescription','text-troncate');
+    recipeDescription.classList.add('recipeDescription' ,'text-wrap', 'overflow-hidden','text-align-start', 'mb-2');
     recipeDescription.textContent = this.description;
     recipeContent.appendChild(recipeDescription);
 
     // Titre de division Ingrédients
     const ingredientsTitle = document.createElement('h3');
-    ingredientsTitle.classList.add('cardSubTitle');
+    ingredientsTitle.classList.add('cardSubTitle', 'my-2', 'mx-0' , 'text-uppercase','fs-6','text-secondary','font-weight-bold');
     ingredientsTitle.textContent = 'Ingrédients';
     recipeContent.appendChild(ingredientsTitle);
 
     // Création de la liste des ingrédients
     const ingredientsList = document.createElement('div');
-    ingredientsList.classList.add('recipeIngredients');
+    ingredientsList.classList.add('recipeIngredients', 'd-flex', 'flex-wrap','w-100', 'justify-content-between','align-items-center' , 'fs-8')
 
     // Boucle pour afficher les ingrédients
     for (let i = 0; i < this.ingredients.length; i += 1) {
       const ingredientItem = document.createElement('div');
-      ingredientItem.classList.add('oneIngredientContainer');
+      ingredientItem.classList.add('oneIngredientContainer', 'ms-3','d-flex', 'flex-column', 'col-5', 'my-1',  );
       ingredientsList.appendChild(ingredientItem);
 
       const ingredientName = document.createElement('p');

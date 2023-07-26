@@ -17,15 +17,15 @@
     <title>Les petits plats</title>
 </head>
 
-<body class="mx-auto">
+<body class="mx-auto  ">
     <!-- En-tête -->
     <header class="navbar position-absolute bg-transparent  z-1">
-        <h1 id="siteName" class="navbrand d-flex justify-content-start align-items-end flex-row p-4">
+        <a  href="index.html" d="siteName" class="navbrand d-flex justify-content-start align-items-end flex-row p-4">
             <img id="logo" src="./assets/Images/Logo/Les petits plats.png" alt="Logo du site les petits plats">
             <div id="ellipseOut" class="d-flex justify-content-center align-items-center bg-white ms-2 rounded-circle ">
                 <div id="ellipseIn" class=" w-75 h-75 rounded-circle border border-dark"></div>
             </div>
-        </h1>
+        </a>
     </header>
 
     <main>
@@ -52,7 +52,7 @@
                 <div id="filters" class="d-flex flex-row justify-content-start flex-wrap col-10 ">
                     <div id="ingredientsFilter" class="filter">
                         <div id="ingredients" class="filterBtn d-flex justify-content-between align-items-center  fs-5 position-relative rounded-top-4 rounded-bottom-4 bg-white m-2 p-3">
-                            Ingrédients
+                            <span class=" z-2 filterBtnName">Ingrédients</span>
                             <i class="fa-solid fa-chevron-down"></i>
                             <div id="ingredientsList" class="filterList d-none position-absolute p-1 left-0 top-80 ">
                                 <div class="inputFilterBtn">
@@ -66,7 +66,7 @@
                     </div>
                     <div id="appliancesFilter" class="filter   ">
                         <div id="appliances" class="filterBtn d-flex justify-content-between align-items-center  fs-5 position-relative rounded-top-4 rounded-bottom-4 bg-white m-2 p-3">
-                            Matériel
+                            <span class=" z-2 filterBtnName">Matériel</span> 
                             <i class="fa-solid fa-chevron-down"></i>
 
                             <div id="appliancesList" class="filterList d-none position-absolute p-1  ">
@@ -80,7 +80,7 @@
                     </div>
                     <div id="ustensilsFilter" class="filter ">
                         <div id="ustensils" class="filterBtn d-flex justify-content-between align-items-center  fs-5 position-relative rounded-top-4 rounded-bottom-4 bg-white m-2 p-3">
-                            Ustensiles
+                            <span class="filterBtnName z-2">Ustensiles</span> 
                             <i class="fa-solid fa-chevron-down"></i>
 
                             <div id="ustensilsList" class="filterList d-none position-absolute p-1 left-0 top-60 ">
