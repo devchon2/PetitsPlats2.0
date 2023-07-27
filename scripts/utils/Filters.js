@@ -1,13 +1,13 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-vars */
 
+// Importation des classes et fonctions nécessaires depuis d'autres fichiers
 import { Label } from './labels.js';
 import { SearchListInput, SearchRecipes } from './search.js';
 import { UpdateRecipes, getNormalized } from '../controllers/RecipesController.js';
 
-
-
 /** Variables des éléments */
+// Sélection des éléments HTML à utiliser pour la gestion des filtres
 const filterIngredientsList = document.getElementById('ingredientsList');
 const filterApplianceList = document.getElementById('appliancesList');
 const filterUstensilsList = document.getElementById('ustensilsList');
@@ -15,8 +15,7 @@ const filtersBtn = document.querySelectorAll('.filterBtn');
 const labelContainer = document.getElementById('labelsContainer');
 const filtersInput = document.querySelectorAll('.filterInput');
 
-
-/** //Écouteur d'événement pour les boutons des filtres */
+/** Écouteur d'événement pour les boutons des filtres */
 filtersBtn.forEach((btn) => {
   const input = btn.querySelector('input');
   const btnID = btn.id;  // Récupère l'ID du bouton
@@ -29,7 +28,7 @@ filtersBtn.forEach((btn) => {
       toggleList(btnID);
     }
 
-    /** //Écouteur d'événement de clic en dehors de la zone active */
+    /** Écouteur d'événement de clic en dehors de la zone active */
     document.body.addEventListener('click', (e2) => {
       const activeFilter = document.querySelector('.filter.active');
       const activeBtnID = activeFilter?.id.replace('Filter', '');
@@ -48,8 +47,6 @@ filtersBtn.forEach((btn) => {
     });
   });
 });
-
-
 
 /** Fonction qui crée tous les filtres.
  * @param {Array} Array - Le tableau contenant les filtres à créer
@@ -99,7 +96,7 @@ function GetFilters(Obj) {
     filterElement.innerHTML = `${filterName}`;
     filterElement.classList.add('filterOption', 'd-flex', 'align-items-center', 'justify-content-between', 'px-2', 'py-2');
 
-    /// /Écouteur d'événement Click pour chaque élément de filtre.
+    /// Écouteur d'événement Click pour chaque élément de filtre.
     filterElement.addEventListener('click', (e) => {
       e.stopPropagation();
 
@@ -128,13 +125,13 @@ function GetFilters(Obj) {
         filterElement.innerHTML = `${filterName}  `;
         const labelDom = document.getElementById(`label-${getNormalized(filterName)}`);
         labelDom.remove();
-        console.log('existantLabels ',ExistentLabels)
+        console.log('existantLabels ', ExistentLabels)
 
 
       } else if (activeFilter) {
         filterElement.classList.remove('active');
         console.log('ExistentLabels', ExistentLabels);
-        const labelDom = document.getElementById(`label-${getNormalized(filterName)}`);
+        const labelDom = document.getElementById(`label-${filterName}`);
         labelDom.remove();
 
         // Active le dom du filtre et affiche le label
@@ -177,7 +174,7 @@ function GetFilters(Obj) {
 }
 
 /** Fonction qui affiche ou cache la liste de filtre.
- * @param { string } FilterID - Le nom du bouton de filtre
+ * @param {string} FilterID - Le nom du bouton de filtre
  */
 function toggleList(FilterID) {
   const list = document.getElementById(`${FilterID}List`);
@@ -187,47 +184,47 @@ function toggleList(FilterID) {
   list.classList.toggle('active');
   list.classList.toggle('d-none');
   btn.classList.toggle('rounded-bottom-4');
-  //  list.classList.toggle('rounded-bottom-0');
   btn.classList.toggle('active');
   zone.classList.toggle('active');
   btn.querySelector('i').classList.toggle('fa-chevron-down');
   btn.querySelector('i').classList.toggle('fa-chevron-up');
 }
 
+/** Fonction qui met à jour les filtres en fonction des recettes filtrées.
+ * @param {Array} updatedArray - Le tableau contenant les recettes filtrées
+ * @returns {Array} - Le tableau mis à jour des éléments de filtre
+ */
 function UpdateFilters(updatedArray) {
-
-  const NewappliancesArray = []
-  const NewIngredientsArray = []
-  const NewUstensilesArray = []
+  const NewappliancesArray = [];
+  const NewIngredientsArray = [];
+  const NewUstensilesArray = [];
 
   for (let i = 0; i < updatedArray.length; i += 1) {
     const { appliance, ingredients, ustensils } = updatedArray[i];
     if (!NewappliancesArray.includes(appliance)) {
-      NewappliancesArray.push(appliance)
+      NewappliancesArray.push(appliance);
     }
     for (let j = 0; j < ingredients.length; j += 1) {
       const element = ingredients[j];
       if (!NewIngredientsArray.includes(element.ingredient)) {
-        NewIngredientsArray.push(element.ingredient)
+        NewIngredientsArray.push(element.ingredient);
       }
     }
     for (let k = 0; k < ustensils.length; k += 1) {
       const element = ustensils[k];
       if (!NewUstensilesArray.includes(element)) {
-        NewUstensilesArray.push(element)
+        NewUstensilesArray.push(element);
       }
     }
   }
 
-  const UpdatedFilterApplicances = { 'appliances': NewappliancesArray }
-  const UpdatedFilterIngredients = { 'ingredients': NewIngredientsArray }
-  const UpdatedFilterUstensiles = { 'ustensils': NewUstensilesArray }
-  const UpdatedElement = [UpdatedFilterIngredients, UpdatedFilterApplicances, UpdatedFilterUstensiles]
+  const UpdatedFilterApplicances = { 'appliances': NewappliancesArray };
+  const UpdatedFilterIngredients = { 'ingredients': NewIngredientsArray };
+  const UpdatedFilterUstensiles = { 'ustensils': NewUstensilesArray };
+  const UpdatedElement = [UpdatedFilterIngredients, UpdatedFilterApplicances, UpdatedFilterUstensiles];
 
-  return UpdatedElement
+  return UpdatedElement;
 }
 
+// Exportation des fonctions pour les rendre disponibles dans d'autres fichiers
 export { GetAllFilters, GetFilters, UpdateFilters };
-
-
-/* eslint-disable no-unused-vars */
