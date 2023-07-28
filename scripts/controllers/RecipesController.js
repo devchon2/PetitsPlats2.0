@@ -162,12 +162,12 @@ class Recipe {
     // Création de la liste des ingrédients
     const ingredientsList = document.createElement('div');
     ingredientsList.classList.add('recipeIngredients', 'd-flex', 'flex-wrap', 'w-100', 'justify-content-between', 'align-items-center', 'fs-7')
-
+    
     // Boucle pour afficher les ingrédients
     for (let i = 0; i < this.ingredients.length; i += 1) {
       const ingredientItem = document.createElement('div');
       ingredientItem.classList.add('oneIngredientContainer', 'ms-3', 'd-flex', 'flex-column', 'col-5', 'my-1');
-      ingredientsList.appendChild(ingredientItem);
+      
 
       const ingredientName = document.createElement('p');
       ingredientName.classList.add('ingredientName');
@@ -188,7 +188,7 @@ class Recipe {
       ingredientMesureElement.classList.add('ingredientMesure');
       ingredientMesureElement.textContent = ingredientMesure;
       ingredientItem.appendChild(ingredientMesureElement);
-    }
+      ingredientsList.appendChild(ingredientItem);}
 
     return recipeCard;
   }
@@ -211,6 +211,7 @@ function summarize() {
 
 // Fonction qui affiche les recettes.
 function DisplayRecipes(Array) {
+  console.log(Array);
   recipeContainer.innerHTML = '';
   for (let i = 0; i < Array.length; i += 1) {
     // Parcourt le tableau recipesArray et crée une carte de recette pour chaque élément.
@@ -244,6 +245,7 @@ function DisplayRecipes(Array) {
 
 // Fonction qui met à jour les recettes.
 function UpdateRecipes(Array) {
+  console.log(Array);
   DisplayRecipes(Array);
 }
 

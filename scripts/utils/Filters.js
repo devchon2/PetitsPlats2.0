@@ -4,7 +4,10 @@
 // Importation des classes et fonctions nécessaires depuis d'autres fichiers
 import { Label } from './labels.js';
 import { SearchListInput, SearchRecipes } from './search.js';
-import { UpdateRecipes, getNormalized } from '../controllers/RecipesController.js';
+import {
+  UpdateRecipes,
+  getNormalized,
+} from '../controllers/RecipesController.js';
 
 /** Variables des éléments */
 // Sélection des éléments HTML à utiliser pour la gestion des filtres
@@ -18,7 +21,7 @@ const filtersInput = document.querySelectorAll('.filterInput');
 /** Écouteur d'événement pour les boutons des filtres */
 filtersBtn.forEach((btn) => {
   const input = btn.querySelector('input');
-  const btnID = btn.id;  // Récupère l'ID du bouton
+  const btnID = btn.id; // Récupère l'ID du bouton
 
   btn.addEventListener('click', (e) => {
     if (input.contains(e.target)) {
@@ -27,24 +30,28 @@ filtersBtn.forEach((btn) => {
       e.stopPropagation();
       toggleList(btnID);
     }
+  });
 
-    /** Écouteur d'événement de clic en dehors de la zone active */
-    document.body.addEventListener('click', (e2) => {
-      const activeFilter = document.querySelector('.filter.active');
-      const activeBtnID = activeFilter?.id.replace('Filter', '');
+  /** Écouteur d'événement de clic en dehors de la zone active */
+  document.body.addEventListener('click', (e2) => {
+    const activeFilter = document.querySelector('.filter.active');
+    const inactiveFilters = document.querySelectorAll('.filter:not(.active)');
+    const activeBtnID = activeFilter?.id.replace('Filter', '');
 
-      if (activeFilter) {
-        if (
-          e2.target.classList.contains('filter') &&
-          !e2.target.classList.contains('active')
-        ) {
-          toggleList(e2.target.id);
-          toggleList(activeBtnID);
-        } else if (activeFilter) {
-          toggleList(activeBtnID);
-        }
+    if (activeFilter) {
+      if (e2.target.id !== activeFilter.id) {
+        // Si l'élément cliqué n'est pas le filtre actif
+        toggleList(activeBtnID); // Ferme le filtre actif
       }
-    });
+      if (
+        e2.target.classList.contains('filter') &&
+        !e2.target.classList.contains('active')
+      ) {
+        // Si l'élément cliqué est un filtre
+        toggleList(activeBtnID); // Ferme le filtre actif
+        toggleList(e2.target.id); // Ouvre le filtre inactif sur lequel l'utilisateur a cliqué
+      }
+    }
   });
 });
 
@@ -56,27 +63,34 @@ function GetAllFilters(Array) {
   // Parcourt chaque élément de fullArray et appelle GetFilters pour chaque élément.
   Array.forEach((obj) => {
     const arrayName = Object.keys(obj)[0];
-    const arrayElement = Object.values(obj)[0].sort((a, b) => a.localeCompare(b));
+    const arrayElement = Object.values(obj)[0].sort((a, b) =>
+      a.localeCompare(b)
+    );
 
     if (arrayName === 'ingredients') {
-      const OldElements = document.querySelectorAll('#ingredientsList .filterOption');
+      const OldElements = document.querySelectorAll(
+        '#ingredientsList .filterOption'
+      );
       OldElements.forEach((Oldelement) => {
         Oldelement.remove();
       });
-      GetFilters({ 'ingredients': arrayElement });
-
+      GetFilters({ ingredients: arrayElement });
     } else if (arrayName === 'appliances') {
-      const OldElements = document.querySelectorAll('#appliancesList .filterOption');
+      const OldElements = document.querySelectorAll(
+        '#appliancesList .filterOption'
+      );
       OldElements.forEach((Oldelement) => {
         Oldelement.remove();
       });
-      GetFilters({ 'appliances': arrayElement });
+      GetFilters({ appliances: arrayElement });
     } else if (arrayName === 'ustensils') {
-      const OldElements = document.querySelectorAll('#ustensilsList .filterOption');
+      const OldElements = document.querySelectorAll(
+        '#ustensilsList .filterOption'
+      );
       OldElements.forEach((Oldelement) => {
         Oldelement.remove();
       });
-      GetFilters({ 'ustensils': arrayElement });
+      GetFilters({ ustensils: arrayElement });
     }
   });
 }
@@ -88,21 +102,31 @@ function GetFilters(Obj) {
   const arrayName = Object.keys(Obj)[0];
   const arrayFull = Object.values(Obj)[0].sort((a, b) => a.localeCompare(b));
 
-  arrayFull.forEach((element) => {// Parcourt chaque élément du tableau et crée un élément HTML pour chaque élément.
+  arrayFull.forEach((element) => {
+    // Parcourt chaque élément du tableau et crée un élément HTML pour chaque élément.
 
-    const filterElement = document.createElement('div');// Crée un élément HTML
-    const filterName = element.toUpperCase().charAt(0) + element.slice(1);// Met la première lettre en majuscule
+    const filterElement = document.createElement('div'); // Crée un élément HTML
+    const filterName = element.toUpperCase().charAt(0) + element.slice(1); // Met la première lettre en majuscule
     filterElement.id = `Filter-${getNormalized(filterName)}`;
     filterElement.innerHTML = `${filterName}`;
-    filterElement.classList.add('filterOption', 'd-flex', 'align-items-center', 'justify-content-between', 'px-2', 'py-2');
+    filterElement.classList.add(
+      'filterOption',
+      'd-flex',
+      'align-items-center',
+      'justify-content-between',
+      'px-2',
+      'py-2'
+    );
 
     /// Écouteur d'événement Click pour chaque élément de filtre.
     filterElement.addEventListener('click', (e) => {
       e.stopPropagation();
 
-      const activeFilter = filterElement.classList.contains('active');  // Récupère l'élément de filtre en état actif
+      const activeFilter = filterElement.classList.contains('active'); // Récupère l'élément de filtre en état actif
       const activeBtn = document.querySelector('.filter.active');
-      const ExistentLabels = Array.from(document.getElementsByClassName('labels'));
+      const ExistentLabels = Array.from(
+        document.getElementsByClassName('labels')
+      );
 
       if (!activeFilter) {
         filterElement.classList.add('active');
@@ -118,16 +142,21 @@ function GetFilters(Obj) {
         labelContainer.appendChild(labelDom);
 
         UpdateRecipes(NewRecipesArray);
-      } else if ((e.target.classList.contains('filter-icon') || e.target.classList.contains('filterName') || e.target.classList.contains('filterOption') && activeFilter)) {// Si actif et que l'utilisateur clique sur le contenu du filtre, il supprime le filtre.
+      } else if (
+        e.target.classList.contains('filter-icon') ||
+        e.target.classList.contains('filterName') ||
+        (e.target.classList.contains('filterOption') && activeFilter)
+      ) {
+        // Si actif et que l'utilisateur clique sur le contenu du filtre, il supprime le filtre.
         e.stopPropagation();
         filterElement.classList.toggle('active');
-        console.log('filterName', filterName)
+        console.log('filterName', filterName);
         filterElement.innerHTML = `${filterName}  `;
-        const labelDom = document.getElementById(`label-${getNormalized(filterName)}`);
+        const labelDom = document.getElementById(
+          `label-${getNormalized(filterName)}`
+        );
         labelDom.remove();
-        console.log('existantLabels ', ExistentLabels)
-
-
+        console.log('existantLabels ', ExistentLabels);
       } else if (activeFilter) {
         filterElement.classList.remove('active');
         console.log('ExistentLabels', ExistentLabels);
@@ -142,7 +171,6 @@ function GetFilters(Obj) {
         labelContainer.appendChild(labelDom);
 
         UpdateRecipes(NewRecipesArray);
-
       } else {
         toggleList(activeBtn.id);
 
@@ -180,6 +208,7 @@ function toggleList(FilterID) {
   const list = document.getElementById(`${FilterID}List`);
   const btn = document.getElementById(`${FilterID}`);
   const zone = document.getElementById(`${FilterID}Filter`);
+  const input = list.firstElementChild.firstElementChild;
 
   list.classList.toggle('active');
   list.classList.toggle('d-none');
@@ -188,6 +217,8 @@ function toggleList(FilterID) {
   zone.classList.toggle('active');
   btn.querySelector('i').classList.toggle('fa-chevron-down');
   btn.querySelector('i').classList.toggle('fa-chevron-up');
+  if (list.classList.contains('active')) {
+ input.value = '';  }
 }
 
 /** Fonction qui met à jour les filtres en fonction des recettes filtrées.
@@ -218,10 +249,14 @@ function UpdateFilters(updatedArray) {
     }
   }
 
-  const UpdatedFilterApplicances = { 'appliances': NewappliancesArray };
-  const UpdatedFilterIngredients = { 'ingredients': NewIngredientsArray };
-  const UpdatedFilterUstensiles = { 'ustensils': NewUstensilesArray };
-  const UpdatedElement = [UpdatedFilterIngredients, UpdatedFilterApplicances, UpdatedFilterUstensiles];
+  const UpdatedFilterApplicances = { appliances: NewappliancesArray };
+  const UpdatedFilterIngredients = { ingredients: NewIngredientsArray };
+  const UpdatedFilterUstensiles = { ustensils: NewUstensilesArray };
+  const UpdatedElement = [
+    UpdatedFilterIngredients,
+    UpdatedFilterApplicances,
+    UpdatedFilterUstensiles,
+  ];
 
   return UpdatedElement;
 }

@@ -61,53 +61,10 @@ function init() {
 
   filtersInput.forEach((input) => {
     input.addEventListener('keyup', () => {
-      // Recherche les filtres qui correspondent à la recherche.
       const list = document.getElementById(input.parentElement.parentElement.id);
-      const filtersArray = Array.from(list.getElementsByClassName('filterOption'));
-      console.log('normalizedName', filtersArray);
-
-      filtersArray.forEach((filter) => {
-        console.log('normalizedName', filter);
-        const normalizedName = getNormalized(filter.textContent);
-        console.log('normalizedName', normalizedName);
-
-        if (normalizedName.includes(getNormalized(input.value))) {
-          // Affiche le filtre s'il correspond à la recherche.
-          filter.classList.remove('hidden');
-        } else {
-          // Cache le filtre s'il ne correspond pas à la recherche.
-          filter.classList.add('hidden');
-        }
-      });
-
-      SearchListInput(input.value, filtersArray);
-    });
-  });
-
-  filtersInput.forEach((input) => {
-    // Ajoute un écouteur d'évènement sur chaque input de filtre
-    input.addEventListener('keyup', () => {
-      const list = document.getElementById(input.parentElement.parentElement.id);
-      const filtersArray = Array.from(list.getElementsByClassName('filterOption'));
-      console.log('normalizedName', filtersArray);
-
-      filtersArray.forEach((filter) => {
-        console.log('normalizedName', filter);
-        const normalizedName = getNormalized(filter.innerText);
-        console.log('normalizedName', normalizedName);
-
-        if (normalizedName.includes(getNormalized(input.value))) {
-          // Affiche le filtre s'il correspond à la recherche.
-          filter.classList.remove('hidden');
-        } else {
-          // Cache le filtre s'il ne correspond pas à la recherche.
-          filter.classList.add('hidden');
-        }
-      });
-
-      SearchListInput(input.value, filtersArray);
+      const filtersArray = Array.from(list.getElementsByClassName('filterOption'))
+      SearchListInput(filtersArray,input.value );
     });
   });
 }
-
 init(); // Appel de la fonction d'initialisation
