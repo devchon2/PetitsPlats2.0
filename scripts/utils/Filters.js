@@ -137,7 +137,7 @@ function GetFilters(Obj) {
         // Active le dom du filtre et affiche le label
         filterElement.innerHTML = `<p class='filterName m-0 '>${filterName}</p><i class="fa-solid fa-circle-xmark filter-icon"></i>`;
 
-        const NewRecipesArray = SearchRecipes(filterName);
+        const NewRecipesArray = SearchRecipes(filterName, 'filter');
         const UpdatedElement = UpdateFilters(NewRecipesArray);
         labelContainer.appendChild(labelDom);
 
