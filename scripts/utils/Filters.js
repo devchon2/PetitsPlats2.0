@@ -8,6 +8,7 @@ import {
   UpdateRecipes,
   getNormalized,
 } from '../controllers/RecipesController.js';
+import { recipesArray } from '../controllers/datasController.js';
 
 /** Variables des éléments */
 // Sélection des éléments HTML à utiliser pour la gestion des filtres
@@ -17,6 +18,7 @@ const filterUstensilsList = document.getElementById('ustensilsList');
 const filtersBtn = document.querySelectorAll('.filterBtn');
 const labelContainer = document.getElementById('labelsContainer');
 const filtersInput = document.querySelectorAll('.filterInput');
+const mainInput = document.querySelector('#mainSearchInput');
 
 /** Écouteur d'événement pour les boutons des filtres */
 filtersBtn.forEach((btn) => {
@@ -137,7 +139,7 @@ function GetFilters(Obj) {
         // Active le dom du filtre et affiche le label
         filterElement.innerHTML = `<p class='filterName m-0 '>${filterName}</p><i class="fa-solid fa-circle-xmark filter-icon"></i>`;
 
-        const NewRecipesArray = SearchRecipes(filterName, 'filter');
+        const NewRecipesArray = SearchRecipes([mainInput.value,filterName], 'filter');
         const UpdatedElement = UpdateFilters(NewRecipesArray);
         labelContainer.appendChild(labelDom);
 
@@ -166,7 +168,7 @@ function GetFilters(Obj) {
         // Active le dom du filtre et affiche le label
         filterElement.innerHTML = `<p class='filterName m-0 '>${filterName}</p><i class="fa-solid fa-circle-xmark filter-icon"></i>`;
 
-        const NewRecipesArray = SearchRecipes(filterName);
+        const NewRecipesArray = SearchRecipes([mainInput.value,filterName],'filter');
         const UpdatedElement = UpdateFilters(NewRecipesArray);
         labelContainer.appendChild(labelDom);
 

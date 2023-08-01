@@ -35,7 +35,7 @@ function init() {
 
   mainInput.addEventListener('keyup', () => {
     // Récupère les recettes qui correspondent à la recherche.
-    const updatedArray = SearchRecipes(mainInput.value, 'main');
+    const updatedArray = SearchRecipes([mainInput.value],'main');
     // Récupère les filtres qui correspondent à la recherche.
     const UpdatedElement = UpdateFilters(updatedArray);
 
