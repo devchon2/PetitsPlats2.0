@@ -17,7 +17,7 @@ const filterApplianceList = document.getElementById('appliancesList');
 const filterUstensilsList = document.getElementById('ustensilsList');
 const filtersBtn = document.querySelectorAll('.filterBtn');
 const labelContainer = document.getElementById('labelsContainer');
-const filtersInput = document.querySelectorAll('.filterInput');
+const labels = document.querySelectorAll('.labels');
 const mainInput = document.querySelector('#mainSearchInput');
 
 /** Écouteur d'événement pour les boutons des filtres */
@@ -126,58 +126,47 @@ function GetFilters(Obj) {
 
       const activeFilter = filterElement.classList.contains('active'); // Récupère l'élément de filtre en état actif
       const activeBtn = document.querySelector('.filter.active');
-      const ExistentLabels = Array.from(
-        document.getElementsByClassName('labels')
-      );
+      const keywordsArray = [mainInput.value]
 
       if (!activeFilter) {
         filterElement.classList.add('active');
-        console.log('ExistentLabels', ExistentLabels);
         const label = new Label(filterName);
         const labelDom = label.getDom();
 
-        // Active le dom du filtre et affiche le label
         filterElement.innerHTML = `<p class='filterName m-0 '>${filterName}</p><i class="fa-solid fa-circle-xmark filter-icon"></i>`;
 
-        const NewRecipesArray = SearchRecipes([mainInput.value,filterName], 'filter');
-        const UpdatedElement = UpdateFilters(NewRecipesArray);
-        labelContainer.appendChild(labelDom);
 
+        labelContainer.appendChild(labelDom);
+        keywordsArray.push(filterName);
+        const NewRecipesArray = SearchRecipes(keywordsArray, 'filter');
+        console.log('label', ...keywordsArray)
+        UpdateFilters(NewRecipesArray);
         UpdateRecipes(NewRecipesArray);
-      } else if (
-        e.target.classList.contains('filter-icon') ||
-        e.target.classList.contains('filterName') ||
-        (e.target.classList.contains('filterOption') && activeFilter)
-      ) {
+
+      } else if ( e.target.classList.contains('filter-icon') || e.target.classList.contains('filterName') || (e.target.classList.contains('filterOption')&& activeFilter) ) {
         // Si actif et que l'utilisateur clique sur le contenu du filtre, il supprime le filtre.
         e.stopPropagation();
         filterElement.classList.toggle('active');
-        console.log('filterName', filterName);
         filterElement.innerHTML = `${filterName}  `;
         const labelDom = document.getElementById(
           `label-${getNormalized(filterName)}`
         );
         labelDom.remove();
-        console.log('existantLabels ', ExistentLabels);
-      } else if (activeFilter) {
-        filterElement.classList.remove('active');
-        console.log('ExistentLabels', ExistentLabels);
-        const labelDom = document.getElementById(`label-${filterName}`);
-        labelDom.remove();
-
-        // Active le dom du filtre et affiche le label
-        filterElement.innerHTML = `<p class='filterName m-0 '>${filterName}</p><i class="fa-solid fa-circle-xmark filter-icon"></i>`;
-
-        const NewRecipesArray = SearchRecipes([mainInput.value,filterName],'filter');
-        const UpdatedElement = UpdateFilters(NewRecipesArray);
-        labelContainer.appendChild(labelDom);
-
+        keywordsArray.pop(filterName);
+        const NewRecipesArray = SearchRecipes(keywordsArray, 'filter');
+        console.log('label', ...keywordsArray)
+        UpdateFilters(NewRecipesArray);
         UpdateRecipes(NewRecipesArray);
       } else {
         toggleList(activeBtn.id);
 
         const labelDom = document.getElementById(`label-${filterName}`);
         labelDom.remove();
+        keywordsArray.pop(filterName);
+        const NewRecipesArray = SearchRecipes(keywordsArray, 'filter');
+        console.log('label', ...keywordsArray)
+        UpdateFilters(NewRecipesArray);
+        UpdateRecipes(NewRecipesArray);
         filterElement.innerHTML = `${filterName}  `;
       }
     });
@@ -220,13 +209,15 @@ function toggleList(FilterID) {
   btn.querySelector('i').classList.toggle('fa-chevron-down');
   btn.querySelector('i').classList.toggle('fa-chevron-up');
   if (list.classList.contains('active')) {
- input.value = '';  }
+    input.value = '';
+  }
 }
 
 /** Fonction qui met à jour les filtres en fonction des recettes filtrées.
  * @param {Array} updatedArray - Le tableau contenant les recettes filtrées
  * @returns {Array} - Le tableau mis à jour des éléments de filtre
  */
+
 function UpdateFilters(updatedArray) {
   const NewappliancesArray = [];
   const NewIngredientsArray = [];

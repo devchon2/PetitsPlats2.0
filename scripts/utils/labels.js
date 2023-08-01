@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 // Importation du module depuis un autre fichier
-import { getNormalized } from '../controllers/RecipesController.js';
+import { getNormalized} from '../controllers/RecipesController.js';
 
 /**
  * Classe représentant un label.
@@ -39,6 +39,8 @@ class Label {
 
         // Ajoute un écouteur d'événement sur l'icône pour supprimer le label lorsque l'utilisateur clique dessus
         this.addListener();
+        this.labels = document.querySelectorAll('.labels');
+        this.mainInput = document.querySelector('#mainSearchInput');
     }
 
     /**
@@ -54,11 +56,12 @@ class Label {
      */
     addListener() {
         this.labelIcon.addEventListener('click', (e) => {
+
             e.stopPropagation();
             this.filter.innerHTML = `${this.id}`;
             this.filter.classList.remove('active');
             this.labelElement.remove();
-        });
+      });
     }
 }
 
