@@ -3,7 +3,7 @@
 
 // Importation des classes et fonctions nécessaires depuis d'autres fichiers
 import { Label } from "./labels.js";
-import { SearchFromFilter } from "./search.js";
+import { SearchFromFilter, SearchListInput } from "./search.js";
 import { UpdateRecipes, getNormalized } from "../controllers/RecipesController.js";
 
 /** Classe Filter */
@@ -12,11 +12,10 @@ class Filter {
     this.element = element;
     this.arrayName = arrayName;
     this.filterElement = document.createElement("div");
-    this.filterName = element.toUpperCase().charAt(0) + element.slice(1);
+    this.filterName = element.charAt(0).toUpperCase() + element.slice(1);
     this.normalizedName = getNormalized(this.filterName);
-    this.filterID = `Filter-${this.normalizedName}}`;
-    this.keywordsArray = Array.from(document.querySelectorAll(".labels"));
-
+    this.filterID = `Filter-${this.normalizedName}`;
+    this.label = new Label(this.filterName);
     this.setupFilterElement();
     this.addEventListeners();
     this.addToFilterList();
@@ -39,61 +38,36 @@ class Filter {
   addEventListeners() {
     this.filterElement.addEventListener("click", (e) => {
       e.stopPropagation();
-      const keywordsArray = [];
+
       const labelsArray = Array.from(document.querySelectorAll(".labels"));
-      for (let label of labelsArray) {
-        keywordsArray.push(label.getAttribute("data-normalizedname"));
-      }
+      const keywordsArray = [];
+      for (const label of labelsArray) { keywordsArray.push(label.innerText); }
       const activeFilter = this.filterElement.classList.contains("active");
       const activeBtn = document.querySelector(".filter.active");
       const btnID = activeBtn?.id.replace("Filter", "");
 
-      if (!activeFilter) {//si le filtre n'est pas actif
-        this.filterElement.classList.add("active");
-        const label = new Label(this.filterName);
-        const labelDom = label.getDom();
-
-        this.filterElement.innerHTML = `<p class='filterName m-0 '>${this.filterName}</p><i class="fa-solid fa-circle-xmark filter-icon"></i>`;
+      if (!activeFilter) { //si le filtre n'est pas actif
         this.filterElement.classList.add("active");
 
+        this.filterElement.innerHTML = `<p class='filterName m-0 '>${this.filterName}</p><i class="fa-solid fa-circle-xmark filter-Icon"></i>`;
+        this.filterElement.classList.add("active");
+
+        const labelDom = this.label.getDom();
         labelContainer.appendChild(labelDom);
-        keywordsArray.push(this.normalizedName);
-        const NewRecipesArray = SearchFromFilter(
-          keywordsArray,
-          this.arrayName
-        );
-        UpdateRecipes(NewRecipesArray);
-        UpdateFilters(NewRecipesArray);
-        
-      } else if (
-        e.target.classList.contains("filter-icon") ||
-        e.target.classList.contains("filterName") ||
-        (e.target.classList.contains("filterOption") && activeFilter)
-      ) {
-        e.stopPropagation();
-        this.filterElement.classList.toggle("active");
-        this.filterElement.innerHTML = `${this.filterName}  `;
-        const labelDom = document.getElementById(
-          `label-${getNormalized(this.filterName)}`
-        );
-        labelDom.remove();
-        this.keywordsArray.pop(this.filterName);
-        const NewRecipesArray = SearchFromFilter(keywordsArray, btnID);
-        UpdateRecipes(NewRecipesArray);        
-        UpdateFilters(NewRecipesArray);
 
-      } else if (activeFilter) {
-        const labelDom = document.getElementById(`label-${this.filterName}`);
-        labelDom.remove();
-        this.keywordsArray.pop(this.filterName);
-        const NewRecipesArray = SearchFromFilter(
-          this.keywordsArray,
-          this.arrayName
-        );
-        console.log("label", ...this.keywordsArray);
-                UpdateRecipes(NewRecipesArray);
-UpdateFilters(NewRecipesArray);
-        this.filterElement.innerHTML = `${this.filterName}  `;
+        keywordsArray.push(this.normalizedName);
+        SearchAndUpdate(keywordsArray, btnID);
+
+      } else if (
+        ( e.target.classList.contains("filter-Icon")) ) {
+        this.filterElement.classList.remove("active");
+        this.filterElement.innerHTML = `<p class='filterName m-0 '>${this.filterName}</p>`;
+
+        const label = document.getElementById(`label-${this.normalizedName}`);
+        label.remove();
+        keywordsArray.pop(this.normalizedName);
+        console.log(keywordsArray);
+        SearchAndUpdate(keywordsArray, btnID);
       }
     });
 
@@ -124,11 +98,18 @@ const filterApplianceList = document.getElementById("appliancesList");
 const filterUstensilsList = document.getElementById("ustensilsList");
 const filtersBtn = document.querySelectorAll(".filterBtn");
 const labelContainer = document.getElementById("labelsContainer");
-const labels = document.querySelectorAll(".labels");
-const mainInput = document.querySelector("#mainSearchInput");
+const filtersInput = document.querySelectorAll(".inputFilterBtn");
 
-/** Écouteur d'événement pour les boutons des filtres */
-filtersBtn.forEach((btn) => {
+filtersInput.forEach((input) => {
+  input.addEventListener('keyup', () => {
+    const list = document.getElementById(input.parentElement.parentElement.id);
+    const filtersArray = Array.from(list.getElementsByClassName('filterOption'));
+    SearchListInput(filtersArray, input.value);
+  });
+});
+
+filtersBtn.forEach((btn) => { /** Écouteur d'événement pour les boutons des filtres */
+
   const input = btn.querySelector("input");
   const btnID = btn.id; // Récupère l'ID du bouton
 
@@ -164,27 +145,27 @@ document.body.addEventListener("click", (e2) => {
   }
 });
 
+function SearchAndUpdate(keywords, filterName) {
+  const NewRecipesArray = SearchFromFilter(
+    keywords,
+    filterName
+  );
+  UpdateRecipes(NewRecipesArray);
+  UpdateFilters(NewRecipesArray);
+}
+
 /** Fonction qui crée tous les filtres.
  * @param {Array} Array - Le tableau contenant les filtres à créer
  */
-function GetAllFilters(Array) {// Parcourt chaque élément de fullArray et appelle GetFilters pour chaque élément.
+function GetAllFilters(Array) { // Parcourt chaque élément de fullArray et appelle GetFilters pour chaque élément.
   Array.forEach((obj) => {
     const arrayName = Object.keys(obj)[0];
     const arrayElement = Object.values(obj)[0].sort((a, b) => a.localeCompare(b));
 
-    if (arrayName === "ingredients") {
-      const OldElements = document.querySelectorAll("#ingredientsList .filterOption");
-      OldElements.forEach((Oldelement) => { Oldelement.remove(); });
-      GetFilters({ ingredients: arrayElement });
-    } else if (arrayName === "appliances") {
-      const OldElements = document.querySelectorAll("#appliancesList .filterOption");
-      OldElements.forEach((Oldelement) => { Oldelement.remove(); });
-      GetFilters({ appliances: arrayElement });
-    } else if (arrayName === "ustensils") {
-      const OldElements = document.querySelectorAll("#ustensilsList .filterOption");
-      OldElements.forEach((Oldelement) => { Oldelement.remove(); });
-      GetFilters({ ustensils: arrayElement });
-    }
+    const list = document.getElementById(`${arrayName}List`);
+    const oldElements = list.querySelectorAll(".filterOption");
+    oldElements.forEach((oldElement) => { oldElement.remove(); });
+    GetFilters({ [arrayName]: arrayElement });
   });
 }
 
@@ -195,9 +176,7 @@ function GetFilters(Obj) {
   const arrayName = Object.keys(Obj)[0];
   const arrayFull = Object.values(Obj)[0].sort((a, b) => a.localeCompare(b));
 
-  arrayFull.forEach((element) => {
-    // Parcourt chaque élément du tableau et crée un élément HTML pour chaque élément.
-
+  arrayFull.forEach((element) => { // Parcourt chaque élément du tableau et crée un élément HTML pour chaque élément.
     const filter = new Filter(element, arrayName);
   });
 }
@@ -228,38 +207,36 @@ function toggleList(FilterID) {
  * @returns {Array} - Le tableau mis à jour des éléments de filtre
  */
 function UpdateFilters(updatedFiltersArray) {
-  const test = updatedFiltersArray;
   const NewappliancesArray = [];
   const NewIngredientsArray = [];
   const NewUstensilesArray = [];
 
-  const ActiveFilters = Array.from(
-    document.querySelectorAll(".filterOption.active")
-  );
-  console.log(ActiveFilters);
-  for (let i = 0; i < updatedFiltersArray.length; i += 1) {
-    const { appliance, ingredients, ustensils } = updatedFiltersArray[i];
+  const ActiveFilters = Array.from(document.querySelectorAll(".filterOption.active"));
+
+  for (const recipe of updatedFiltersArray) {
+    const { appliance, ingredients, ustensils } = recipe;
     if (!NewappliancesArray.includes(appliance)) {
       NewappliancesArray.push(appliance);
     }
-    for (let j = 0; j < ingredients.length; j += 1) {
-      const IngredientsObject = ingredients[j];
-      const { ingredient } = IngredientsObject;
-      if (!NewIngredientsArray.includes(ingredient)) {
-        NewIngredientsArray.push(ingredient);
+    for (const ingredient of ingredients) {
+      if (!NewIngredientsArray.includes(ingredient.ingredient)) {
+        NewIngredientsArray.push(ingredient.ingredient);
       }
     }
-    for (let k = 0; k < ustensils.length; k += 1) {
-      const ustensil = ustensils[k];
+    for (const ustensil of ustensils) {
       if (!NewUstensilesArray.includes(ustensil)) {
         NewUstensilesArray.push(ustensil);
       }
     }
   }
 
-  const UpdatedFilterApplicances = { appliances: NewappliancesArray };
-  const UpdatedFilterIngredients = { ingredients: NewIngredientsArray };
-  const UpdatedFilterUstensiles = { ustensils: NewUstensilesArray };
+  const finalAppliancesArray = Array.from(new Set(NewappliancesArray));
+  const finalIngredientsArray = Array.from(new Set(NewIngredientsArray));
+  const finalUstensilesArray = Array.from(new Set(NewUstensilesArray));
+
+  const UpdatedFilterApplicances = { appliances: finalAppliancesArray };
+  const UpdatedFilterIngredients = { ingredients: finalIngredientsArray };
+  const UpdatedFilterUstensiles = { ustensils: finalUstensilesArray };
   const UpdatedElement = [
     UpdatedFilterIngredients,
     UpdatedFilterApplicances,
@@ -269,13 +246,12 @@ function UpdateFilters(updatedFiltersArray) {
   document.querySelectorAll(".filterOption").forEach((element) => {
     const elementName = element.textContent;
     const normalizedElementName = getNormalized(elementName);
-    for (let filter of ActiveFilters) {
+    for (const filter of ActiveFilters) {
       const filterName = filter.textContent;
       const normalizedFilterName = getNormalized(filterName);
       if (normalizedElementName.includes(normalizedFilterName)) {
-        console.log(element.textContent);
-        console.log(filter.textContent);
-        element.innerHTML = `<p class='filterName m-0 '>${filterName}</p><i class="fa-solid fa-circle-xmark filter-icon"></i>`;
+
+        element.innerHTML = `<p class='filterName m-0 '>${elementName}</p><i class="fa-solid fa-circle-xmark filter-Icon"></i>`;
         element.classList.add("active");
       }
     }
@@ -283,4 +259,4 @@ function UpdateFilters(updatedFiltersArray) {
 }
 
 // Exportation des fonctions pour les rendre disponibles dans d'autres fichiers
-export { GetAllFilters, GetFilters, UpdateFilters, Filter };
+export { GetAllFilters, GetFilters, UpdateFilters, SearchAndUpdate };

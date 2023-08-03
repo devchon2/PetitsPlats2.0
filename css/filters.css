@@ -17,11 +17,23 @@
   cursor: pointer;
 }
 
-.label.icon,
-.filter-icon {
+.label.Icon,
+.filter-Icon {
   cursor: pointer;
   scale: 1;
+  transition: transform 0.3s ease-in-out; /* Ajout de la règle de transition */
+
 }
+ 
+.label.Icon::hover,
+.filter-Icon::hover {
+  
+  transform: scale(1.2);  
+  
+
+}
+
+
 
 .filterName #text::first-letter {
   text-transform: uppercase;

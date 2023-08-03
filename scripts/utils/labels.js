@@ -2,6 +2,7 @@
 
 // Importation du module depuis un autre fichier
 import { getNormalized } from '../controllers/RecipesController.js';
+import { SearchAndUpdate } from '../utils/Filters.js';
 
 /**
  * Classe représentant un label.
@@ -15,32 +16,29 @@ class Label {
      */
     constructor(id) {
         this.id = id;
-
         this.labelName = this.id.toUpperCase().charAt(0) + this.id.slice(1);
         this.normalizedName = getNormalized(this.labelName);
-        // Crée le code HTML pour le label
         this.html = `<span>${this.labelName}</span>
-                    <i class="hidden fa-solid fa-xmark label-icon ms-4 me-1 "></i>
-                    `;
-
-        // Crée l'élément de label en tant que div avec les classes spécifiées
+                    <i class="fa-solid fa-xmark label-Icon ms-4 me-1 "></i>`;
         this.labelElement = document.createElement('div');
-        this.labelElement.classList.add('labels', 'd-flex', 'align-items-center', 'justify-content-between', 'positon-relative', 'rounded-4', 'ms-2', 'me-4', 'ps-3', 'pe-2', 'py-4');
+        this.labelElement.innerHTML = `${this.html}`;
         this.labelElement.id = `label-${this.normalizedName}`;
         this.labelElement.setAttribute('data-NormalizedName', this.normalizedName);
+        this.labelElement.classList.add('labels', 'd-flex', 
+                                        'align-items-center', 'justify-content-between', 
+                                        'positon-relative', 'rounded-4', 
+                                        'ms-2', 'me-4', 
+                                        'ps-3', 'pe-2', 
+                                        'py-4'
+                                        );
 
-        // Ajoute le code HTML au contenu de l'élément de label
-        this.labelElement.innerHTML = `${this.html}`;
-
+        
         // Sélectionne l'icône du label
-        this.labelIcon = this.labelElement.querySelector('.label-icon');
+        this.labelIcon = this.labelElement.querySelector('.label-Icon');
 
-        // Sélectionne l'élément de filtre associé à ce label
-        this.filter = document.querySelector(`#Filter-${this.normalizedName}`);
+        this.addListener();        // Ajoute un écouteur d'événement sur l'icône pour supprimer le label lorsque l'utilisateur clique dessus
 
-        // Ajoute un écouteur d'événement sur l'icône pour supprimer le label lorsque l'utilisateur clique dessus
-        this.addListener();
-        this.labels = document.querySelectorAll('.labels');
+        
         this.mainInput = document.querySelector('#mainSearchInput');
     }
 
@@ -60,13 +58,18 @@ class Label {
      * Ajoute un écouteur d'événement sur l'icône de suppression du label.
      */
     addListener() {
+        
         this.labelIcon.addEventListener('click', (e) => {
-
             e.stopPropagation();
-            this.filter.innerHTML = `${this.id}`;
-            this.filter.classList.remove('active');
             this.labelElement.remove();
-        });
+            const labels = Array.from(document.querySelectorAll('.labels'));    
+            const filter = document.getElementById(`Filter-${this.normalizedName}`);
+            filter.classList.remove('active');
+            filter.innerHTML = `<p class='filterName m-0 '>${this.labelName}</p>`
+            SearchAndUpdate(labels, this.labelName);
+
+        
+    });
     }
 }
 
