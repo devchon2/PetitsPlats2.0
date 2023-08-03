@@ -196,7 +196,11 @@ class Recipe {
 
 // Fonction utilitaire pour normaliser les chaînes de caractères (enlever les accents et convertir en minuscules)
 function getNormalized(str) {
-  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replaceAll(' ', '-');
+  console.log(str)
+  if (str.includes('-')){
+    str = str.replaceAll('-', ' ');
+  }
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
 }
 
 // Fonction qui affiche le résumé du nombre de recettes.

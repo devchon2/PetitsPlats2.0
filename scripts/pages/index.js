@@ -4,9 +4,9 @@
 /* eslint-disable import/extensions */
 
 // Importation des modules depuis d'autres fichiers
-import { Recipe, DisplayRecipes, UpdateRecipes, getNormalized } from '../controllers/RecipesController.js';
-import { GetAllFilters, GetFilters, UpdateFilters } from '../utils/Filters.js';
-import { SearchListInput, SearchRecipes } from '../utils/search.js';
+import { DisplayRecipes, UpdateRecipes, getNormalized } from '../controllers/RecipesController.js';
+import { GetAllFilters, UpdateFilters } from '../utils/Filters.js';
+import { SearchFromMain, SearchListInput } from '../utils/search.js';
 import { recipesArray, ingredientsObject, appliancesObject, ustensilesObject } from '../controllers/datasController.js';
 
 console.log('index.js chargé');
@@ -35,26 +35,22 @@ function init() {
 
   mainInput.addEventListener('keyup', () => {
     // Récupère les recettes qui correspondent à la recherche.
-    const updatedArray = SearchRecipes([mainInput.value], 'main');
+    const updatedFromMain = SearchFromMain(mainInput.value);
     // Récupère les filtres qui correspondent à la recherche.
-    const UpdatedElement = UpdateFilters(updatedArray);
+    UpdateFilters(updatedFromMain);
 
-    if (mainInput.value.length > 2) {
+    if (mainInput.value.length > 2){
       // Si la valeur de l'input est supérieure à 2 caractères, affiche les recettes qui correspondent.
-      console.log('mainInput.value', mainInput.value);
-      console.log('mainInput.value', updatedArray);
-      console.log('mainInput.value', UpdatedElement);
+      UpdateRecipes(updatedFromMain); // Met à jour les recettes.
+      UpdateFilters(updatedFromMain); // Crée les filtres de recherche.
 
-      UpdateRecipes(updatedArray); // Met à jour les recettes.
-      GetAllFilters(UpdatedElement); // Crée les filtres de recherche.
-
-      if (updatedArray.length === 0) {
+      if (updatedFromMain.length === 0) {
         // Si aucune recette ne correspond, affiche un message d'erreur.
         recipeContainer.innerHTML = `<p class='errorMsg mx-auto my-0'>Aucune recettes ne correspond à "${mainInput.value}" vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>`;
       }
     } else {
       // Si la valeur de l'input est inférieure à 3 caractères, affiche toutes les recettes.
-      UpdateRecipes(recipesArray);
+      DisplayRecipes(recipesArray);
       GetAllFilters(fullArray);
     }
   });

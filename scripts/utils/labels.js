@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 // Importation du module depuis un autre fichier
-import { getNormalized} from '../controllers/RecipesController.js';
+import { getNormalized } from '../controllers/RecipesController.js';
 
 /**
  * Classe représentant un label.
@@ -15,9 +15,9 @@ class Label {
      */
     constructor(id) {
         this.id = id;
-        this.normalizedName = getNormalized(this.id);
-        this.labelName = this.id.toUpperCase().charAt(0) + this.id.slice(1);
 
+        this.labelName = this.id.toUpperCase().charAt(0) + this.id.slice(1);
+        this.normalizedName = getNormalized(this.labelName);
         // Crée le code HTML pour le label
         this.html = `<span>${this.labelName}</span>
                     <i class="hidden fa-solid fa-xmark label-icon ms-4 me-1 "></i>
@@ -27,6 +27,7 @@ class Label {
         this.labelElement = document.createElement('div');
         this.labelElement.classList.add('labels', 'd-flex', 'align-items-center', 'justify-content-between', 'positon-relative', 'rounded-4', 'ms-2', 'me-4', 'ps-3', 'pe-2', 'py-4');
         this.labelElement.id = `label-${this.normalizedName}`;
+        this.labelElement.setAttribute('data-NormalizedName', this.normalizedName);
 
         // Ajoute le code HTML au contenu de l'élément de label
         this.labelElement.innerHTML = `${this.html}`;
@@ -51,6 +52,10 @@ class Label {
         return this.labelElement;
     }
 
+    getNormalizedName() {
+        return this.normalizedName;
+    }
+
     /**
      * Ajoute un écouteur d'événement sur l'icône de suppression du label.
      */
@@ -61,7 +66,7 @@ class Label {
             this.filter.innerHTML = `${this.id}`;
             this.filter.classList.remove('active');
             this.labelElement.remove();
-      });
+        });
     }
 }
 

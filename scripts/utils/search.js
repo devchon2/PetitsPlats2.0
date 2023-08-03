@@ -1,57 +1,143 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-vars */
 import { recipesArray } from '../controllers/datasController.js';
-import {  getNormalized } from '../controllers/RecipesController.js';
+import { getNormalized } from '../controllers/RecipesController.js';
 
 
 console.log('search.js loaded');
 
 
-function SearchRecipes(KeywordsArray, type = 'main') {
-        const updatedArray = [];
-for (let i = 0; i < recipesArray.length; i += 1) {
-const recipe = recipesArray[i];
-    const { description, ingredients, appliance, ustensils, name } = recipe;
-    const ElementsToCheckMain = [name, description];
-    const ElementsToCheckFilter = [appliance, ...ustensils];
+
+function SearchFromMain(ValuesToSearch) {
+  const UpdatedRecipes = [];
+  for (let i = 0; i < recipesArray.length; i += 1) {
+    const recipe = recipesArray[i];
+    const { description, ingredients, name } = recipe;
+    const ElementsToCheck = [name, description];
 
     for (let j = 0; j <= ingredients.length - 1; j += 1) {
       const ingr = ingredients[j];
       const { ingredient } = ingr;
-      ElementsToCheckMain.push(ingredient);
-      ElementsToCheckFilter.push(ingredient);
-    }
-    let ElementsToCheck = ElementsToCheckMain;
-
-    if (type === 'filter') {
-      ElementsToCheck = ElementsToCheckFilter;
+      ElementsToCheck.push(ingredient);
     }
 
-    
-    for (let l = 0; l < KeywordsArray.length; l += 1) {
+    for (let k = 0; k < ElementsToCheck.length; k += 1) {
+      const element = ElementsToCheck[k];
+      const normalizedKeyword = getNormalized(ValuesToSearch);
+      const normalizedElement = getNormalized(element);
+      if (normalizedElement.match(normalizedKeyword) && !UpdatedRecipes.includes(recipe)) {
+        UpdatedRecipes.push(recipe)
+      }
+    }
+  }
+  return UpdatedRecipes;
+}
 
-      const keyword = KeywordsArray[l];
-      let keywordFound = KeywordsArray.length -1;
-      let allkeywords = true;
-      for (let k = 0; k < ElementsToCheck.length; k += 1) {
-        const element = ElementsToCheck[k];
-        const normalizedKeyword = getNormalized(keyword);
-        const normalizedElement = getNormalized(element);
-        if (!normalizedElement.match(normalizedKeyword)) {
-          keywordFound -=1;
-          console.log('keywordFound', keywordFound);
-          console.log(normalizedKeyword)
-        }
-        if (keywordFound === KeywordsArray.length -1) {
-            allkeywords = true;
-        } 
-        if (allkeywords)  {
-          updatedArray.push(recipe);
+function SearchFromIngredients(ValuesToSearch, recipesToUpdate) {
+
+  const updatedArray = [];
+
+  for (let i = 0; i < recipesArray.length; i += 1) {
+    const { id, ingredients } = recipesArray[i];
+    debugger
+    for (let rec2Upd of recipesToUpdate) {
+      const id2 = rec2Upd.id;
+      if (id == id2) {
+
+        for (let ingr of ingredients) {
+          const { ingredient } = ingr
+          const normalizedElement = getNormalized(ingredient)
+
+          for (let keyword of ValuesToSearch) {
+            const normalizedKeyword = getNormalized(keyword)
+            if (normalizedElement.match(normalizedKeyword)) {
+              if (!updatedArray.includes(recipesArray[i])) {
+                updatedArray.push(recipesArray[i])
+              }
+            }
+          }
         }
       }
     }
   }
-  return updatedArray;
+  return updatedArray
+}
+
+
+
+
+
+function SearchFromUstensils(ValuesToSearch, recipesToUpdate) {
+  const updatedArray = [];
+
+  for (let i = 0; i < recipesArray.length; i += 1) {
+    const { id, ustensils } = recipesArray[i];
+    debugger
+    for (let rec2Upd of recipesToUpdate) {
+      const id2 = rec2Upd.id;
+      if (id == id2) {
+
+        for (let ustensil of ustensils) {
+
+          const normalizedElement = getNormalized(ustensil)
+
+          for (let keyword of ValuesToSearch) {
+            const normalizedKeyword = getNormalized(keyword)
+            if (normalizedElement.match(normalizedKeyword)) {
+              if (!updatedArray.includes(recipesArray[i])) {
+                updatedArray.push(recipesArray[i])
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  return updatedArray
+}
+
+function SearchFromAppliances(ValuesToSearch, recipesToUpdate) {
+  const updatedArray = [];
+
+  for (let i = 0; i < recipesArray.length; i += 1) {
+    const { id, appliance } = recipesArray[i];
+    debugger
+    for (let rec2Upd of recipesToUpdate) {
+      const id2 = rec2Upd.id;
+      if (id == id2) {
+
+        const normalizedElement = getNormalized(appliance)
+
+        for (let keyword of ValuesToSearch) {
+          const normalizedKeyword = getNormalized(keyword)
+          if (normalizedElement.match(normalizedKeyword)) {
+            if (!updatedArray.includes(recipesArray[i])) {
+              updatedArray.push(recipesArray[i])
+            }
+          }
+        }
+      }
+    }
+  }
+
+return updatedArray
+}
+
+
+function SearchFromFilter(ValuesToSearch, filterId) {
+  console.log(...ValuesToSearch)
+  const recipesToUpdate = Array.from(document.querySelectorAll('.recipeCard'));
+  let UpdatedRecipes;
+  if (ValuesToSearch.length === 0) {
+    UpdatedRecipes = recipesArray;
+  } else if (filterId === 'ingredients') {
+    UpdatedRecipes = SearchFromIngredients(ValuesToSearch, recipesToUpdate);
+  } else if (filterId === 'ustensils') {
+    UpdatedRecipes = SearchFromUstensils(ValuesToSearch, recipesToUpdate);
+  } else if ('appliances') {
+    UpdatedRecipes = SearchFromAppliances(ValuesToSearch, recipesToUpdate);
+  }
+  return UpdatedRecipes;
 }
 
 
@@ -79,4 +165,4 @@ function SearchListInput(filterElements, input = '') {
 
 
 
-export { SearchRecipes, SearchListInput };
+export { SearchFromFilter, SearchFromMain, SearchListInput };
