@@ -103,24 +103,28 @@ const labelContainer = document.getElementById('labelsContainer');
 const filtersInput = document.querySelectorAll('.inputFilterBtn');
 
 filtersInput.forEach((input) => {
-  input.addEventListener('keyup', () => {
-    const list = document.getElementById(input.parentActualFilter.parentActualFilter.id);
-    const filtersArray = Array.from(list.getActualFiltersByClassName('filterOption'));
-    SearchListInput(filtersArray, input.value);
-  });
+  
 });
 
 filterZones.forEach((btn) => { /** Écouteur d'événement pour les boutons des filtres */
 
   const input = btn.querySelector('input');
   const btnID = btn.id; // Récupère l'ID du bouton
+  const list = btn.querySelector('.filterList'); // Récupère la liste de filtres associée au bouton
 
   btn.addEventListener('click', (e) => {
+    
     if (input.contains(e.target)) {
       e.stopImmediatePropagation();
+      input.addEventListener('keyup', () => {
+        const filtersArray = Array.from(list.querySelectorAll('.filterOption'));
+        SearchListInput(filtersArray, input.value);
+      });
+    
     } else {
       e.stopPropagation();
       toggleList(btnID);
+    
     }
   });
 });

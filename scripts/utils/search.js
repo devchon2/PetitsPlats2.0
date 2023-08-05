@@ -144,11 +144,12 @@ function SearchFromDeleteLabel(ArrayOfLabels, filterZone) {
 
 }}
 
-function SearchListInput(filterElements, input = '') {
+function SearchListInput(filters, input) {
   // Fonction qui filtre les éléments de la liste des filtres
-  if (input.length > 0) {
-    for (let i = 0; i < filterElements.length; i += 1) {
-      const element = filterElements[i];
+  if (input !== 0) {
+    debugger
+    for (let filter of filters) {
+      const element = filter;
       const normalizedElement = Normalized(element.textContent);
       const normalizedInput = Normalized(input);
       if (!normalizedElement.match(normalizedInput)) {
