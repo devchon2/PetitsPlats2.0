@@ -1,8 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 // Importation du module depuis un autre fichier
-import { getNormalized } from '../controllers/RecipesController.js';
-import { SearchAndUpdate } from '../utils/Filters.js';
+import { Normalized } from '../controllers/RecipesController.js';
 
 /**
  * Classe représentant un label.
@@ -12,64 +11,69 @@ class Label {
     /**
      * Crée une instance de Label.
      * @constructor
-     * @param {string} id - L'identifiant du label.
+     * @param {string} name - L'identifiant du label.
      */
-    constructor(id) {
-        this.id = id;
-        this.labelName = this.id.toUpperCase().charAt(0) + this.id.slice(1);
-        this.normalizedName = getNormalized(this.labelName);
-        this.html = `<span>${this.labelName}</span>
-                    <i class="fa-solid fa-xmark label-Icon ms-4 me-1 "></i>`;
-        this.labelElement = document.createElement('div');
-        this.labelElement.innerHTML = `${this.html}`;
-        this.labelElement.id = `label-${this.normalizedName}`;
-        this.labelElement.setAttribute('data-NormalizedName', this.normalizedName);
-        this.labelElement.classList.add('labels', 'd-flex', 
-                                        'align-items-center', 'justify-content-between', 
-                                        'positon-relative', 'rounded-4', 
-                                        'ms-2', 'me-4', 
-                                        'ps-3', 'pe-2', 
-                                        'py-4'
-                                        );
+    constructor(name, type) {
+        this.NAME = name;
+        this.TYPE = type;
+        this.ELEMENT = document.createElement('div');
+        this.RAWNAME = this.NAME.toUpperCase().charAt(0) + this.NAME.slice(1);
+        this.NORMALIZED = Normalized(this.RAWNAME);
+        this.ID = `label-${this.NORMALIZED}`;
+        this.FILTERID = `Filter-${this.NORMALIZED}`;
 
-        
-        // Sélectionne l'icône du label
-        this.labelIcon = this.labelElement.querySelector('.label-Icon');
-
-        this.addListener();        // Ajoute un écouteur d'événement sur l'icône pour supprimer le label lorsque l'utilisateur clique dessus
-
-        
-        this.mainInput = document.querySelector('#mainSearchInput');
+        this.SetupElement();
     }
 
+    SetupElement() {
+        this.ELEMENT.id = this.ID;
+        this.ELEMENT.setAttribute('data-normalized', this.NORMALIZED);
+        this.ELEMENT.setAttribute('data-name', this.NAME);
+        this.ELEMENT.innerHTML = `<span>${this.RAWNAME}</span><i class="fa-solid fa-xmark label-Icon ms-4 me-1 "></i>`;
+        this.ELEMENT.classList.add('labels', 'd-flex', 'align-items-center', 'justify-content-between',
+                                    'positon-relative', 'rounded-4', 'ms-2', 'me-4', 'ps-3', 'pe-2', 'py-4' );
+        this.ICON = this.ELEMENT.querySelector('.label-Icon');
+        this.AddListeners();
+
+    }
+    
     /**
      * Récupère l'élément HTML représentant le label.
      * @returns {HTMLElement} - Retourne l'élément HTML du label avec l'icône de suppression associée.
      */
-    getDom() {
-        return this.labelElement;
+    getDom() {        
+        this.AddListeners();        // Ajoute un écouteur d'événement sur l'icône pour supprimer le label lorsque l'utilisateur clique dessus
+        return this.ELEMENT;
     }
 
-    getNormalizedName() {
-        return this.normalizedName;
+    removeDom() {
+        this.removeListeners();
+        this.ELEMENT.remove();
+    }
+
+    Normalized() {
+        return this.NORMALIZED;
     }
 
     /**
      * Ajoute un écouteur d'événement sur l'icône de suppression du label.
      */
-    addListener() {
-        
-        this.labelIcon.addEventListener('click', (e) => {
+    AddListeners() {
+        this.ICON.addEventListener('click', (e) => {
             e.stopPropagation();
-            this.labelElement.remove();
-            const labels = Array.from(document.querySelectorAll('.labels'));    
-            const filter = document.getElementById(`Filter-${this.normalizedName}`);
-            filter.classList.remove('active');
-            filter.innerHTML = `<p class='filterName m-0 '>${this.labelName}</p>`
-            SearchAndUpdate(labels, this.labelName);
+            this.ELEMENT.remove();
+            // const labels = Array.from(document.querySelectorAll('.labels'));
+            // SearchFromDelete(ArrayofLabelsObject);
+        });
+    }
 
-        
-    });
+    removeListeners() {
+        this.ICON.removeEventListener('click', (e) => {
+            e.stopPropagation();
+            this.ELEMENT.remove();
+            // const labels = Array.from(document.querySelectorAll('.labels'));
+            // SearchFromDelete(ArrayofLabelsObject);
+        });
     }
 }
 

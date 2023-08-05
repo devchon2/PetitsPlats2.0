@@ -550,7 +550,7 @@
                 "unit": "grammes"
             },
             {
-                "ingredient": "Bananes",
+                "ingredient": "Banane",
                 "quantity": 4
             }
         ],
@@ -680,7 +680,7 @@
                 "unit":"grammes"
             },
             {
-                "ingredient": "Bananes",
+                "ingredient": "Banane",
                 "quantity": 1
             }
         ],
