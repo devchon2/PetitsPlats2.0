@@ -4,7 +4,7 @@
 /* eslint-disable import/extensions */
 
 // Importation des modules depuis d'autres fichiers
-import { DisplayRecipes, UpdateRecipes, Normalized } from '../controllers/RecipesController.js';
+import { DisplayRecipes, UpdateRecipes } from '../controllers/RecipesController.js';
 import { GetAllFilters, UpdateFilters } from '../utils/Filters.js';
 import { SearchFromMain, SearchListInput } from '../utils/search.js';
 import { recipesArray, ingredientsObject, appliancesObject, ustensilesObject } from '../controllers/datasController.js';

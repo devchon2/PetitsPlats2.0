@@ -10,8 +10,6 @@ import { Label } from './labels.js';
 
 console.log('search.js loaded');
 
-
-
 function SearchFromMain(ValueToSearch) {
   const UpdatedRecipes = [];
   for (let i = 0; i < recipesArray.length; i += 1) {
@@ -38,6 +36,7 @@ function SearchFromMain(ValueToSearch) {
 }
 
 function SearchFromIngredients(ValueToSearch, ActualsRecipes) {
+  
   const updatedArray = [];
   
   for (let ActualRecipe of ActualsRecipes) {
@@ -147,7 +146,7 @@ function SearchFromDeleteLabel(ArrayOfLabels, filterZone) {
 function SearchListInput(filters, input) {
   // Fonction qui filtre les éléments de la liste des filtres
   if (input !== 0) {
-    debugger
+    
     for (let filter of filters) {
       const element = filter;
       const normalizedElement = Normalized(element.textContent);
@@ -165,4 +164,4 @@ function SearchListInput(filters, input) {
 
 
 
-export { SearchFromFilter, SearchFromMain, SearchListInput };
+export { SearchFromFilter, SearchFromMain, SearchListInput, SearchFromDeleteLabel };

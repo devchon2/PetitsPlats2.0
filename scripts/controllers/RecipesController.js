@@ -35,15 +35,15 @@ class Recipe {
     time,
     ustensils
   ) {
-    this.appliance = appliance;
-    this.description = description;
-    this.id = id;
-    this.image = image;
-    this.ingredients = ingredients;
-    this.name = name;
-    this.servings = servings;
-    this.time = time;
-    this.ustensils = ustensils;
+    this.APPLIANCE = appliance;
+    this.DESCRIPTION = description;
+    this.ID = id;
+    this.PICTURE = image;
+    this.INGREDIENTS = ingredients;
+    this.NAME = name;
+    this.NB_OF_PARTS = servings;
+    this.COOKING_TIME = time;
+    this.USTENSILS = ustensils;
   }
 
   /**
@@ -51,7 +51,7 @@ class Recipe {
    * @returns {string} Le nom de la recette.
    */
   getName() {
-    return this.name;
+    return this.NAME;
   }
 
   /**
@@ -59,7 +59,7 @@ class Recipe {
    * @returns {Array} Les ingrédients de la recette.
    */
   getIngredients() {
-    return this.ingredients;
+    return this.INGREDIENTS;
   }
 
   /**
@@ -67,7 +67,7 @@ class Recipe {
    * @returns {number} Le temps de préparation de la recette.
    */
   getTime() {
-    return this.time;
+    return this.COOKING_TIME;
   }
 
   /**
@@ -75,7 +75,7 @@ class Recipe {
    * @returns {number} Le nombre de portions de la recette.
    */
   getServings() {
-    return this.servings;
+    return this.NB_OF_PARTS;
   }
 
   /**
@@ -83,7 +83,7 @@ class Recipe {
    * @returns {string} L'appareil de la recette.
    */
   getAppliance() {
-    return this.appliance;
+    return this.APPLIANCE;
   }
 
   /**
@@ -91,7 +91,7 @@ class Recipe {
    * @returns {Array} Les ustensiles de la recette.
    */
   getUstensils() {
-    return this.ustensils;
+    return this.USTENSILS;
   }
 
   /**
@@ -99,7 +99,7 @@ class Recipe {
    * @returns {number} L'ID de la recette.
    */
   getId() {
-    return this.id;
+    return this.ID;
   }
 
   /**
@@ -110,7 +110,7 @@ class Recipe {
     // Création de la carte
     const recipeCard = document.createElement('article');
     recipeCard.classList.add('recipeCard', 'd-flex', 'flex-column', 'position-relative', 'overflow-hidden', 'bg-white', 'rounded-4', 'my-3', 'p-0');
-    recipeCard.setAttribute('id', this.getId());
+    recipeCard.setAttribute('id', this.ID);
 
     // Création du header
     const recipeImgContainer = document.createElement('div');
@@ -119,15 +119,15 @@ class Recipe {
 
     // Création du body
     const recipeImg = document.createElement('img');
-    recipeImg.setAttribute('src', `assets/Images/Recipes/${this.image}`);
-    recipeImg.setAttribute('alt', this.name);
+    recipeImg.setAttribute('src', `assets/Images/Recipes/${this.PICTURE}`);
+    recipeImg.setAttribute('alt', this.NAME);
     recipeImg.classList.add('recipePicture', 'w-100', 'h-100', 'object-fit-cover');
     recipeImgContainer.appendChild(recipeImg);
 
     // Création encart 'Time'
     const Time = document.createElement('span');
     Time.classList.add('CookingTime', 'position-absolute', 'text-dark', 'px-3', 'py-2', 'rounded-5');
-    Time.textContent = `${this.time} min`;
+    Time.textContent = `${this.COOKING_TIME} min`;
     recipeImgContainer.appendChild(Time);
 
     // Création Contenu Texte
@@ -138,7 +138,7 @@ class Recipe {
     // Nom de la recette
     const recipeName = document.createElement('h2');
     recipeName.classList.add('recipeName', 'mt-1', 'mb-2', 'fs-5')
-    recipeName.textContent = this.name;
+    recipeName.textContent = this.NAME;
     recipeContent.appendChild(recipeName);
 
     // Titre de division Recette
@@ -150,7 +150,7 @@ class Recipe {
     // Description de la recette
     const recipeDescription = document.createElement('div');
     recipeDescription.classList.add('recipeDescription', 'text-wrap', 'overflow-hidden', 'text-align-start', 'mb-2');
-    recipeDescription.textContent = this.description;
+    recipeDescription.textContent = this.DESCRIPTION;
     recipeContent.appendChild(recipeDescription);
 
     // Titre de division Ingrédients
@@ -164,23 +164,23 @@ class Recipe {
     ingredientsList.classList.add('recipeIngredients', 'd-flex', 'flex-wrap', 'w-100', 'justify-content-between', 'align-items-center', 'fs-7')
     
     // Boucle pour afficher les ingrédients
-    for (let i = 0; i < this.ingredients.length; i += 1) {
+    for (let i = 0; i < this.INGREDIENTS.length; i += 1) {
       const ingredientItem = document.createElement('div');
       ingredientItem.classList.add('oneIngredientContainer', 'ms-3', 'd-flex', 'flex-column', 'col-5', 'my-1');
       
 
       const ingredientName = document.createElement('p');
       ingredientName.classList.add('ingredientName');
-      ingredientName.textContent = this.ingredients[i].ingredient;
+      ingredientName.textContent = this.INGREDIENTS[i].ingredient;
       ingredientItem.appendChild(ingredientName);
 
       recipeContent.appendChild(ingredientsList);
 
-      const ingredientQuantity = this.ingredients[i].quantity
-        ? this.ingredients[i].quantity
+      const ingredientQuantity = this.INGREDIENTS[i].quantity
+        ? this.INGREDIENTS[i].quantity
         : '';
-      const ingredientUnit = this.ingredients[i].unit
-        ? this.ingredients[i].unit
+      const ingredientUnit = this.INGREDIENTS[i].unit
+        ? this.INGREDIENTS[i].unit
         : '';
 
       const ingredientMesure = `${ingredientQuantity} ${ingredientUnit}`;
@@ -200,7 +200,7 @@ function Normalized(str) {
 }
 
 // Fonction qui affiche le résumé du nombre de recettes.
-function summarize() {
+function Summarize() {
   const NumberOfCards = document.querySelectorAll('.recipeCard');
   const resume = document.getElementById('summer'); // Affiche le nombre de recettes.
   const { length } = NumberOfCards; // Récupère la longueur du tableau recipesArray.
@@ -239,12 +239,13 @@ function DisplayRecipes(Array) {
     const recipeDom = recipe.getCard();
     recipeContainer.appendChild(recipeDom);
   }
-  summarize();
+
+  Summarize();
+
 }
 
 // Fonction qui met à jour les recettes.
 function UpdateRecipes(Array) {
-  console.log(Array);
   DisplayRecipes(Array);
 }
 
