@@ -52,10 +52,11 @@ function SearchFromIngredients(ValueToSearch,Actuals, recipes) {debugger
           const ingr = ingredients[k];
           console.log('ingr', ingr);
           const { ingredient } = ingr;
+          const normalizedKeyword = Normalized(ValueToSearch);
           const normalizedElement = Normalized(ingredient);
           console.log()
           console.log('ingredient', ingredient);
-          if (ValueToSearch.match(normalizedElement)) {
+          if (normalizedKeyword.match(normalizedElement)) {
             console.log('ingredient trouvé', ingredient);
             if (!UpdatedRecipes.includes(recipe)) {
               UpdatedRecipes.push(recipe);

@@ -17,18 +17,12 @@ const fullArray = [ingredientsObject, appliancesObject, ustensilesObject];
 // Sélection des éléments HTML du DOM
 const mainInput = document.querySelector('#mainSearchInput');
 const recipeContainer = document.querySelector('#recipesCardsContainer');
-const filterIngredientsInputs = document.querySelector('#ingredientsSearchInput');
-const filtersIngredientsElements = filterIngredientsInputs.querySelectorAll('.filterOptions');
-const appliancesSearchInput = document.querySelector('#appliancesSearchInput');
-const filtersAppliancesElements = appliancesSearchInput.querySelectorAll('.filterOptions');
-const ustensilsSearchInput = document.querySelector('#ustensilsSearchInput');
-const filtersUstensilsElements = ustensilsSearchInput.querySelectorAll('.filterOptions');
-const filtersInput = document.querySelectorAll('.filterInput');
-const labelsContainer = document.querySelector('#labelsContainer');
+
 
 /**
  * Fonction d'initialisation de l'application.
  */
+
 function init() {
   DisplayRecipes(recipesArray); // Affiche toutes les recettes au chargement de la page
   GetAllFilters(fullArray); // Crée les filtres de recherche.
@@ -37,7 +31,7 @@ function init() {
     const updatedFromMain = SearchFromMain(mainInput.value, recipesArray);    // Récupère les filtres qui correspondent à la recherche.
 
     if (mainInput.value.length > 2) {      // Si la valeur de l'input est supérieure à 2 caractères, affiche les recettes qui correspondent.
-      if (updatedFromMain.length !== 0) {        // Si aucune recette ne correspond, affiche un message d'erreur.
+      if (updatedFromMain) {        // Si aucune recette ne correspond, affiche un message d'erreur.
         UpdateRecipes(updatedFromMain); // Met à jour les recettes.
         UpdateFilters(updatedFromMain); // Crée les filtres de recherche.
       } else {

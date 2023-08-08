@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 // Importation du module depuis un autre fichier
-import { Normalized, SearchFromDeleteLabel } from './search.js';
+import { Normalized } from './search.js';
 
 /**
  * Classe représentant un label.
@@ -37,15 +37,9 @@ class Label {
                                     'positon-relative', 'rounded-4', 'ms-2', 'me-4', 'ps-3', 'pe-2', 'py-4' );
         
         this.ICON = this.ELEMENT.querySelector('.label-Icon');
-        this.AddListeners()
     }
 
-    AddListeners() {
-        this.ICON.addEventListener('click', () => {
-            this.Unmount();
-            SearchFromDeleteLabel();
-        })
-    }
+    
     
     Mount() {
         this.CONTAINER.appendChild(this.ELEMENT);

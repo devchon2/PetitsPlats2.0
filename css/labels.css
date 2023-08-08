@@ -7,13 +7,13 @@
   width: fit-content;
 }
 
-.label-icon {
+.label-Icon {
   cursor: pointer;
   scale: 1;
 }
 
-.filter-icon:hover,
-.label-icon:hover {
+
+.label-Icon:hover {
   transition: ease-out 0.2s;
   scale: 1.3;
 }

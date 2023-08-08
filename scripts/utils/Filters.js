@@ -57,9 +57,10 @@ class Filter {
 
   SetInactive() {// Désactive le filtre
     
-    this.RemoveLabel();
+    
     this.ELEMENT.classList.remove('active');
     this.ELEMENT.innerHTML = this.INACTIVE;
+    this.RemoveLabel();
     SearchFromDeleteLabel();
 
   }
@@ -95,8 +96,13 @@ class Filter {
     const labelToAdd = new Label(this.NAME, this.TYPE);
     labelToAdd.SetLabel();
     labelToAdd.Mount();
-    labelToAdd.AddListeners();
     
+    const LabelIcon = labelToAdd.ELEMENT.querySelector('.label-Icon')
+    
+    LabelIcon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.SetInactive();
+  });
   }
 
   RemoveLabel() {
