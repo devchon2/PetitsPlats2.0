@@ -94,12 +94,16 @@ class Filter {
     labelToAdd.SetLabel();
     labelToAdd.Mount();
     labelToAdd.AddListeners();
+    
+    SearchAndUpdate(labelToAdd.NAME, labelToAdd.TYPE);
 
   }
 
   RemoveLabel() {
+
     const labelToRemove = document.getElementById(this.LABELID);
-    if (labelToRemove) labelToRemove.remove();
+    labelToRemove.remove();
+    SearchFromDeleteLabel();
   }
 
   AddListener() {
@@ -124,6 +128,11 @@ filterZones.forEach((btn) => { /** Écouteur d'événement pour les boutons des 
   const input = btn.querySelector('input');
   const list = btn.querySelector('.filterList'); // Récupère la liste de filtres associée au bouton
 
+  input.addEventListener('click', (e) => {
+    e.stopPropagation();
+    input.focus();
+  });
+
   input.addEventListener('keyup', () => {
     const filtersArray = Array.from(list.querySelectorAll('.filterOption'));
     SearchListInput(filtersArray, input.value);
@@ -132,6 +141,7 @@ filterZones.forEach((btn) => { /** Écouteur d'événement pour les boutons des 
 
   btn.addEventListener('click', (e) => {
     e.stopPropagation();
+
     const btnID = btn.id.replace('Filter', ''); // Récupère le nom du bouton de filtre
     toggleList(btnID); // Affiche ou cache la liste de filtres associée au bouton
   });
@@ -140,17 +150,14 @@ filterZones.forEach((btn) => { /** Écouteur d'événement pour les boutons des 
 /** Écouteur d'événement de clic en dehors de la zone active */
 document.body.addEventListener('click', (e2) => {
   const activeFilter = document.querySelector('.filter.active');
-  const inactiveFilters = document.querySelectorAll('.filter:not(.active)');
   const activeBtnID = activeFilter?.id.replace('Filter', '');
 
   if (activeFilter) {
     if (e2.target.id !== activeFilter.id) {
       // Si l'élément cliqué n'est pas le filtre actif
       toggleList(activeBtnID); // Ferme le filtre actif
-    }
-    if (
-      e2.target.classList.contains('filter') &&
-      !e2.target.classList.contains('active')
+    } else if (
+      e2.target.classList.contains('filter:not(active)')       
     ) {
       // Si l'élément cliqué est un filtre
       toggleList(activeBtnID); // Ferme le filtre actif
@@ -167,7 +174,7 @@ function SearchAndUpdate(name, type) {
 }
 
 function RestoreActive() {
-  debugger
+  
   const CurrentLabels = document.querySelectorAll('.labels');
   const CurrentFilters = document.querySelectorAll('.filterOption');
 

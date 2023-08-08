@@ -5,7 +5,6 @@
 /* eslint-disable no-unused-vars */
 import { recipesArray } from '../controllers/datasController.js';
 import { Normalized } from '../controllers/RecipesController.js';
-import { Label } from './labels.js';
 
 
 console.log('search.js loaded');
@@ -14,7 +13,8 @@ function SearchFromMain(ValueToSearch) {
   const UpdatedRecipes = [];
   for (let i = 0; i < recipesArray.length; i += 1) {
     const recipe = recipesArray[i];
-    const { description, ingredients, name } = recipe;
+    const {ingredients} = recipe;
+    const { name, description } = recipe;
     const ElementsToCheck = [name, description];
 
     for (let j = 0; j <= ingredients.length - 1; j += 1) {
@@ -35,8 +35,8 @@ function SearchFromMain(ValueToSearch) {
   return UpdatedRecipes;
 }
 
-function SearchFromIngredients(ValueToSearch, ActualsRecipes) {
-  
+function SearchFromIngredients(ValueToSearch) {
+  const ActualsRecipes = Array.from(document.querySelectorAll('.recipeCard'));
   const updatedArray = [];
   
   for (let ActualRecipe of ActualsRecipes) {
@@ -62,7 +62,8 @@ function SearchFromIngredients(ValueToSearch, ActualsRecipes) {
   return updatedArray
 }
 
-function SearchFromUstensils(ValueToSearch, ActualsRecipes) {
+function SearchFromUstensils(ValueToSearch) {
+  const ActualsRecipes = Array.from(document.querySelectorAll('.recipeCard'));
   const updatedArray = [];
   const normalizedKeyword = Normalized(ValueToSearch)
 
@@ -90,7 +91,8 @@ function SearchFromUstensils(ValueToSearch, ActualsRecipes) {
   return updatedArray
 }
 
-function SearchFromAppliances(ValueToSearch, ActualsRecipes) {
+function SearchFromAppliances(ValueToSearch) {
+  const ActualsRecipes = Array.from(document.querySelectorAll('.recipeCard'));
   const updatedArray = [];
   const normalizedKeyword = Normalized(ValueToSearch)
 
@@ -119,6 +121,7 @@ return updatedArray
 }
 
 function SearchFromFilter(ValueToSearch, filterZone) {
+
   const ActualsRecipes = Array.from(document.querySelectorAll('.recipeCard'));
   let UpdatedRecipes;
   if (filterZone === 'ingredients') {
@@ -131,13 +134,12 @@ function SearchFromFilter(ValueToSearch, filterZone) {
   return UpdatedRecipes;
 }
 
-function SearchFromDeleteLabel(ArrayOfLabels, filterZone) {
+function SearchFromDeleteLabel() {
+  const ArrayOfLabels = Array.from(document.querySelectorAll('.labels'));
   for (let label of ArrayOfLabels) {
-    const name = Object.keys(label)[0];
-    const type = Object.values(label)[0];
-    const normalizedName = Normalized(name);
+    const normalizedName = label.getAttribute('data-normalized');
+    const type = label.getAttribute('data-type');
     console.log('normalizedName', normalizedName);
-    console.log('name', name);
     console.log('type', type);
 
 

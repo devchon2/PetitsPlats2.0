@@ -41,15 +41,10 @@ class Label {
 
     AddListeners() {
         this.ICON.addEventListener('click', () => {
-            const filter = document.getElementById(this.FILTERID);
             this.Unmount();
-            console.log('filter', filter);
-        
         })
     }
     
-
-
     Mount() {
         this.CONTAINER.appendChild(this.ELEMENT);
     }
