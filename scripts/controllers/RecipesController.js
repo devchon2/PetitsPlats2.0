@@ -3,7 +3,6 @@
 /* eslint-disable import/extensions */
 // eslint-disable-next-line import/no-unresolved
 
-console.log('RecipesController.js chargé');
 
 const recipeContainer = document.getElementById('recipesCardsContainer'); // Récupère l'élément HTML qui contiendra les cartes de recettes.
 
@@ -194,10 +193,7 @@ class Recipe {
   }
 }
 
-// Fonction utilitaire pour normaliser les chaînes de caractères (enlever les accents et convertir en minuscules)
-function Normalized(str) {
-  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replaceAll(' ','').replace('\'','').toLowerCase().trim();
-}
+
 
 // Fonction qui affiche le résumé du nombre de recettes.
 function Summarize() {
@@ -249,4 +245,4 @@ function UpdateRecipes(Array) {
   DisplayRecipes(Array);
 }
 
-export { Recipe, DisplayRecipes, UpdateRecipes, Normalized };
+export { Recipe, DisplayRecipes, UpdateRecipes,  };

@@ -34,7 +34,7 @@ function init() {
   GetAllFilters(fullArray); // Crée les filtres de recherche.
 
   mainInput.addEventListener('keyup', () => {    // Récupère les recettes qui correspondent à la recherche.
-    const updatedFromMain = SearchFromMain(mainInput.value);    // Récupère les filtres qui correspondent à la recherche.
+    const updatedFromMain = SearchFromMain(mainInput.value, recipesArray);    // Récupère les filtres qui correspondent à la recherche.
 
     if (mainInput.value.length > 2) {      // Si la valeur de l'input est supérieure à 2 caractères, affiche les recettes qui correspondent.
       if (updatedFromMain.length !== 0) {        // Si aucune recette ne correspond, affiche un message d'erreur.

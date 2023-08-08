@@ -5,9 +5,9 @@
 
 // Importation des classes et fonctions nécessaires depuis d'autres fichiers
 import { Label } from './labels.js';
-import { SearchFromDeleteLabel, SearchFromFilter, SearchListInput } from './search.js';
-import { UpdateRecipes, Normalized } from '../controllers/RecipesController.js';
-
+import { SearchFromDeleteLabel, SearchFromFilter, SearchListInput, Normalized } from './search.js';
+import { UpdateRecipes,  } from '../controllers/RecipesController.js';
+import {recipesArray } from '../controllers/datasController.js';
 // Sélection des éléments HTML à utiliser pour la gestion des filtres
 const filterIngredientsList = document.getElementById('ingredientsList');
 const filterApplianceList = document.getElementById('appliancesList');
@@ -51,13 +51,17 @@ class Filter {
     this.ELEMENT.classList.add('active');
     this.ELEMENT.innerHTML = this.ACTIVE;
     this.AddLabel();
+    SearchAndUpdate(this.NAME, this.TYPE, recipesArray);
 
   }
 
   SetInactive() {// Désactive le filtre
+    
+    this.RemoveLabel();
     this.ELEMENT.classList.remove('active');
     this.ELEMENT.innerHTML = this.INACTIVE;
-    this.RemoveLabel();
+    SearchFromDeleteLabel();
+
   }
 
   SetHovered() {// Ajoute un écouteur d'événement pour le survol du filtre
@@ -80,14 +84,12 @@ class Filter {
   
         if (!this.ISACTIVE) {
           this.SetActive();
-          SearchAndUpdate(this.NAME, this.TYPE);
   
-        } else if (this.ISACTIVE && e.target.classList.contains('filter-Icon')) {
+        } else if (this.ISACTIVE && (e.target.classList.contains('filter-Icon'))) {
           this.SetInactive();
-          SearchFromDeleteLabel(this.NAME, this.TYPE);
-        }
-      });
-  }  
+        };
+  }  )
+};
   
   AddLabel() {
     const labelToAdd = new Label(this.NAME, this.TYPE);
@@ -95,15 +97,12 @@ class Filter {
     labelToAdd.Mount();
     labelToAdd.AddListeners();
     
-    SearchAndUpdate(labelToAdd.NAME, labelToAdd.TYPE);
-
   }
 
   RemoveLabel() {
 
     const labelToRemove = document.getElementById(this.LABELID);
     labelToRemove.remove();
-    SearchFromDeleteLabel();
   }
 
   AddListener() {
@@ -166,9 +165,9 @@ document.body.addEventListener('click', (e2) => {
   }
 });
 
-function SearchAndUpdate(name, type) {
-  UpdateRecipes(SearchFromFilter(name, type,));
-  UpdateFilters(SearchFromFilter(name, type,));
+function SearchAndUpdate(name, type, recipes) {
+  UpdateRecipes(SearchFromFilter(name, type, recipes));
+  UpdateFilters(SearchFromFilter(name, type, recipes));
   RestoreActive();
 
 }
