@@ -56,12 +56,16 @@ class Filter {
   }
 
   SetInactive() {// Désactive le filtre
-    
-    
+    this.ELEMENT = document.getElementById(this.ID);
     this.ELEMENT.classList.remove('active');
     this.ELEMENT.innerHTML = this.INACTIVE;
+    
     this.RemoveLabel();
-    SearchFromDeleteLabel();
+
+    const UpdatedRecipes = SearchFromDeleteLabel(recipesArray);
+    UpdateRecipes(UpdatedRecipes);
+    UpdateFilters(UpdatedRecipes);
+    RestoreActive();
 
   }
 
@@ -106,7 +110,6 @@ class Filter {
   }
 
   RemoveLabel() {
-
     const labelToRemove = document.getElementById(this.LABELID);
     labelToRemove.remove();
   }
