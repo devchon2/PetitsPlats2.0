@@ -7,7 +7,6 @@
 
 
 
-
 console.log('search.js loaded');
 
 function SearchFromMain(ValueToSearch, recipes) {
@@ -165,14 +164,13 @@ function SearchFromFilter(ValueToSearch, filterZone, recipes) {
   return UpdatedRecipes;
 }
 
-function SearchFromDeleteLabel(recipes) { // une fonction qui recuperes les labels et renvoi que les recettes qui contiennent l'ensemble des labels
-  
+function SearchFromDeleteLabel(recipes, MainInputValue) { // une fonction qui recuperes les labels et renvoi que les recettes qui contiennent l'ensemble des labels
+    const ActualsLabel = Array.from(document.querySelectorAll('.labels'));
+    debugger
+
   let UpdatedFinalRecipes = [ ]
-  const ActualsLabel = Array.from(document.querySelectorAll('.labels'));
   let Start = 'delete';
-  if (ActualsLabel.length === 0) {
-    return recipes;
-  }
+  
   let iteration = 0;
   for (let label of ActualsLabel) {
     const name = label.getAttribute('data-normalized');
@@ -207,7 +205,11 @@ function SearchFromDeleteLabel(recipes) { // une fonction qui recuperes les labe
       if (id == id2Upd) {
         UpdatedFinalRecipes.push(recipe);
       }
-    } debugger
+    } 
+  }
+
+  if (UpdatedFinalRecipes.length === 0) {
+    UpdatedFinalRecipes = SearchFromMain(MainInputValue, recipes);
   }
 
   return UpdatedFinalRecipes

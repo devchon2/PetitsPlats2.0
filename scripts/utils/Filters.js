@@ -13,6 +13,7 @@ const filterIngredientsList = document.getElementById('ingredientsList');
 const filterApplianceList = document.getElementById('appliancesList');
 const filterUstensilsList = document.getElementById('ustensilsList');
 const filterZones = document.querySelectorAll('.filterBtn');
+const mainInput = document.getElementById('mainSearchInput');
 
 /** Classe Filter */
 class Filter {
@@ -62,7 +63,7 @@ class Filter {
     
     this.RemoveLabel();
 
-    const UpdatedRecipes = SearchFromDeleteLabel(recipesArray);
+    const UpdatedRecipes = SearchFromDeleteLabel(recipesArray, Normalized(mainInput.value));
     UpdateRecipes(UpdatedRecipes);
     UpdateFilters(UpdatedRecipes);
     RestoreActive();
