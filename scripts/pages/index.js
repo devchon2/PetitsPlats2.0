@@ -4,7 +4,7 @@
 /* eslint-disable import/extensions */
 
 // Importation des modules depuis d'autres fichiers
-import { DisplayRecipes, UpdateRecipes } from '../controllers/RecipesController.js';
+import { DisplayRecipes, UpdateRecipes, Summarize } from '../controllers/RecipesController.js';
 import { GetAllFilters, UpdateFilters } from '../utils/Filters.js';
 import { SearchFromMain, SearchListInput } from '../utils/search.js';
 import { recipesArray, ingredientsObject, appliancesObject, ustensilesObject } from '../controllers/datasController.js';
@@ -17,6 +17,7 @@ const fullArray = [ingredientsObject, appliancesObject, ustensilesObject];
 // Sélection des éléments HTML du DOM
 const mainInput = document.querySelector('#mainSearchInput');
 const recipeContainer = document.querySelector('#recipesCardsContainer');
+const labelContainer = document.querySelector('#labelsContainer');
 
 
 /**
@@ -27,23 +28,34 @@ function init() {
   DisplayRecipes(recipesArray); // Affiche toutes les recettes au chargement de la page
   GetAllFilters(fullArray); // Crée les filtres de recherche.
 
-  mainInput.addEventListener('keyup', () => {    // Récupère les recettes qui correspondent à la recherche.
-    const updatedFromMain = SearchFromMain(mainInput.value, recipesArray);    // Récupère les filtres qui correspondent à la recherche.
 
+  mainInput.addEventListener('keyup', () => {    
+    
+    const updatedFromMain = SearchFromMain(mainInput.value, recipesArray);    // Récupère les filtres qui correspondent à la recherche.
+    
     if (mainInput.value.length > 2) {      // Si la valeur de l'input est supérieure à 2 caractères, affiche les recettes qui correspondent.
-      if (updatedFromMain) {        // Si aucune recette ne correspond, affiche un message d'erreur.
+      
+      if (updatedFromMain.length > 0) {        // Si aucune recette ne correspond, affiche un message d'erreur.
         UpdateRecipes(updatedFromMain); // Met à jour les recettes.
         UpdateFilters(updatedFromMain); // Crée les filtres de recherche.
+        labelContainer.innerHTML = ''; // Supprime les filtres de recherche.
+      
       } else {
         recipeContainer.innerHTML = `<p class='errorMsg mx-auto my-0'>
-                                        Aucune recettes ne correspond à "${mainInput.value}" 
+                                        Aucune recettes ne correspond à <span id = "output"></span> 
                                         vous pouvez chercher « tarte aux pommes », « poisson », 
                                         etc.</p>`;
+
+        const output = document.querySelector('#output');
+        output.textContent = mainInput.value;
+        Summarize(); // Affiche le résumé du nombre de recettes.
       }
     } else {
+    
       // Si la valeur de l'input est inférieure à 3 caractères, affiche toutes les recettes.
       DisplayRecipes(recipesArray);
       GetAllFilters(fullArray);
+
     }
   });
 

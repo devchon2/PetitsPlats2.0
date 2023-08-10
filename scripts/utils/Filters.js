@@ -6,8 +6,10 @@
 // Importation des classes et fonctions nécessaires depuis d'autres fichiers
 import { Label } from './labels.js';
 import { SearchFromDeleteLabel, SearchFromFilter, SearchListInput, Normalized } from './search.js';
-import { UpdateRecipes,  } from '../controllers/RecipesController.js';
+import { UpdateRecipes, Summarize  } from '../controllers/RecipesController.js';
 import {recipesArray } from '../controllers/datasController.js';
+
+
 // Sélection des éléments HTML à utiliser pour la gestion des filtres
 const filterIngredientsList = document.getElementById('ingredientsList');
 const filterApplianceList = document.getElementById('appliancesList');
@@ -63,9 +65,20 @@ class Filter {
     
     this.RemoveLabel();
 
-    const UpdatedRecipes = SearchFromDeleteLabel(recipesArray, Normalized(mainInput.value));
-    UpdateRecipes(UpdatedRecipes);
-    UpdateFilters(UpdatedRecipes);
+    
+    UpdateRecipes(
+      SearchFromDeleteLabel(
+        recipesArray, 
+        Normalized(mainInput.value)
+    
+    ));
+
+    UpdateFilters(
+      SearchFromDeleteLabel(
+        recipesArray, 
+        Normalized(mainInput.value)
+    ));
+
     RestoreActive();
 
   }
@@ -179,6 +192,7 @@ function SearchAndUpdate(name, type, recipes) {
   UpdateRecipes(SearchFromFilter(name, type, recipes));
   UpdateFilters(SearchFromFilter(name, type, recipes));
   RestoreActive();
+
 
 }
 
