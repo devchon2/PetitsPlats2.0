@@ -163,7 +163,7 @@ class Recipe {
     ingredientsList.classList.add('recipeIngredients', 'd-flex', 'flex-wrap', 'w-100', 'justify-content-between', 'align-items-center', 'fs-7')
     
     // Boucle pour afficher les ingrédients
-    for (let i = 0; i < this.INGREDIENTS.Array; i += 1) {
+    for (let i = 0; i < this.INGREDIENTS.length; i += 1) {
       const ingredientItem = document.createElement('div');
       ingredientItem.classList.add('oneIngredientContainer', 'ms-3', 'd-flex', 'flex-column', 'col-5', 'my-1');
       
@@ -197,28 +197,18 @@ class Recipe {
 
 // Fonction qui affiche le résumé du nombre de recettes.
 function Summarize() {
-  
+  const NumberOfCards = document.querySelectorAll('.recipeCard');
   const resume = document.getElementById('summer'); // Affiche le nombre de recettes.
-  const Recipes = document.querySelectorAll('.recipeCard');
-  const errorMsg = document.getElementById('errorMSG'); 
-  
-  if (errorMsg) {
-    const noTagRecipes = '0 recette';
-    resume.innerHTML = '';
-    resume.innerHTML = noTagRecipes;
-  
-  } else {
-  const SomeTagRecipes = Recipes.length > 1 ? `${Recipes.length} recettes` : `${Recipes.length} recette`;
+  const { length } = NumberOfCards; // Récupère la longueur du tableau recipesArray.
+  const TagRecipes = length > 1 ? `${length} recettes` : `${length} recette`;
   resume.innerHTML = '';
-  resume.innerHTML = SomeTagRecipes; // Affiche la longueur du tableau recipesArray.   
-  }
+  resume.innerHTML = TagRecipes; // Affiche la longueur du tableau recipesArray.
 }
 
 // Fonction qui affiche les recettes.
-function DisplayRecipes(Array) { 
+function DisplayRecipes(Array) {
   recipeContainer.innerHTML = '';
-  
-    for (let i = 0; i < Array.length; i += 1) {
+  for (let i = 0; i < Array.length; i += 1) {
     // Parcourt le tableau recipesArray et crée une carte de recette pour chaque élément.
     const {
       appliance,
@@ -246,9 +236,7 @@ function DisplayRecipes(Array) {
     recipeContainer.appendChild(recipeDom);
   }
 
-  
   Summarize();
-  
 
 }
 
@@ -257,4 +245,4 @@ function UpdateRecipes(Array) {
   DisplayRecipes(Array);
 }
 
-export { Recipe, DisplayRecipes, UpdateRecipes, Summarize  };
+export { Recipe, DisplayRecipes, UpdateRecipes,  };

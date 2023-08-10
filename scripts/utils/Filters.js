@@ -6,10 +6,8 @@
 // Importation des classes et fonctions nécessaires depuis d'autres fichiers
 import { Label } from './labels.js';
 import { SearchFromDeleteLabel, SearchFromFilter, SearchListInput, Normalized } from './search.js';
-import { UpdateRecipes, Summarize  } from '../controllers/RecipesController.js';
+import { UpdateRecipes,  } from '../controllers/RecipesController.js';
 import {recipesArray } from '../controllers/datasController.js';
-
-
 // Sélection des éléments HTML à utiliser pour la gestion des filtres
 const filterIngredientsList = document.getElementById('ingredientsList');
 const filterApplianceList = document.getElementById('appliancesList');
@@ -65,20 +63,9 @@ class Filter {
     
     this.RemoveLabel();
 
-    
-    UpdateRecipes(
-      SearchFromDeleteLabel(
-        recipesArray, 
-        Normalized(mainInput.value)
-    
-    ));
-
-    UpdateFilters(
-      SearchFromDeleteLabel(
-        recipesArray, 
-        Normalized(mainInput.value)
-    ));
-
+    const UpdatedRecipes = SearchFromDeleteLabel(recipesArray, Normalized(mainInput.value));
+    UpdateRecipes(UpdatedRecipes);
+    UpdateFilters(UpdatedRecipes);
     RestoreActive();
 
   }
@@ -193,7 +180,6 @@ function SearchAndUpdate(name, type, recipes) {
   UpdateFilters(SearchFromFilter(name, type, recipes));
   RestoreActive();
 
-
 }
 
 function RestoreActive() {
@@ -243,7 +229,10 @@ function GetFilters(Obj) {
   const arrayFull = Object.values(Obj)[0].sort((a, b) => a.localeCompare(b));
 
   arrayFull.forEach((ActualFilter) => { // Parcourt chaque élément du tableau et crée un élément HTML pour chaque élément.
+    const isExist = document.getElementById(`${ActualFilter}Filter`);
+    if (!isExist) {
     const filter = new Filter(ActualFilter, arrayName);
+    }
   });
 }
 
@@ -273,33 +262,46 @@ function toggleList(FilterID) {
  * @returns {Array} - Le tableau mis à jour des éléments de filtre
  */
 function UpdateFilters(UpdatedFilter) {
+  console.log('updateFilters',UpdatedFilter);
+
   const NewappliancesArray = [];
   const NewIngredientsArray = [];
   const NewUstensilesArray = [];
+
   for (const recipe of UpdatedFilter) {
     const { appliance, ingredients, ustensils } = recipe;
-    if (!NewappliancesArray.includes(appliance)) {
-      NewappliancesArray.push(appliance);
+    const normalizedAppliance = Normalized(appliance);
+
+    if (!NewappliancesArray.includes(normalizedAppliance)) {
+      console.log('toLower',);
+      NewappliancesArray.push(appliance.toLowerCase());
     }
+
     for (const ingredient of ingredients) {
-      if (!NewIngredientsArray.includes(ingredient.ingredient)) {
-        NewIngredientsArray.push(ingredient.ingredient);
+      const normalizedIngredient = Normalized(ingredient.ingredient);
+      const loweredIngr = ingredient.ingredient.toLowerCase();
+      if (!NewIngredientsArray.includes(normalizedIngredient)) {
+        NewIngredientsArray.push(loweredIngr);
       }
     }
+
     for (const ustensil of ustensils) {
-      if (!NewUstensilesArray.includes(ustensil)) {
-        NewUstensilesArray.push(ustensil);
+      const normalizedUstensil = Normalized(ustensil);
+
+      if (!NewUstensilesArray.includes(normalizedUstensil)) {
+        NewUstensilesArray.push(ustensil.toLowerCase());
       }
     }
   }
 
-  const finalAppliancesArray = Array.from(new Set(NewappliancesArray));
-  const finalIngredientsArray = Array.from(new Set(NewIngredientsArray));
-  const finalUstensilesArray = Array.from(new Set(NewUstensilesArray));
+  const finalAppliancesArray = [...new Set(NewappliancesArray)];
+  const finalIngredientsArray = [...new Set(NewIngredientsArray)];
+  const finalUstensilesArray = [...new Set(NewUstensilesArray)];
 
-  const UpdatedFilterApplicances = { appliances: finalAppliancesArray };
-  const UpdatedFilterIngredients = { ingredients: finalIngredientsArray };
-  const UpdatedFilterUstensiles = { ustensils: finalUstensilesArray };
+  console.log('finalAppliancesArray',finalUstensilesArray);
+  const UpdatedFilterApplicances = { 'appliances': finalAppliancesArray };
+  const UpdatedFilterIngredients = { 'ingredients': finalIngredientsArray };
+  const UpdatedFilterUstensiles = { 'ustensils': finalUstensilesArray };
   const UpdatedActualFilter = [UpdatedFilterIngredients, UpdatedFilterApplicances, UpdatedFilterUstensiles];
 
   GetAllFilters(UpdatedActualFilter);

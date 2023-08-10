@@ -96,7 +96,8 @@ function SearchFromUstensils(ValueToSearch, Actuals, recipes, from = '') {
 
         for (let ustensil of ustensils) {
           const normalizedElement = Normalized(ustensil)
-
+          console.log(normalizedElement)
+          console.log(normalizedKeyword)
           if (normalizedKeyword.match(normalizedElement)) {
 
             if (!updatedArray.includes(recipe)) {
@@ -121,11 +122,11 @@ function SearchFromAppliances(ValueToSearch, Actuals, recipes, from = '') {
   const normalizedKeyword = Normalized(ValueToSearch)
 
 
-  for (let Recipe of ActualsRecipe) {
+  for (let ActualRecipe of ActualsRecipe) {
 
     for (let i = 0; i < recipes.length; i += 1) {
       const { id, appliance } = recipes[i];
-      const id2 = Recipe.id;
+      const id2 = ActualRecipe.id;
 
       if (id == id2) {
         const normalizedElement = Normalized(appliance)
