@@ -1,12 +1,11 @@
-/* eslint-disable import/no-cycle */
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-vars */
+
 
 // Importation des classes et fonctions nécessaires depuis d'autres fichiers
 import { Label } from './labels.js';
 import { SearchFromDeleteLabel, SearchFromFilter, SearchListInput, Normalized } from './search.js';
-import { UpdateRecipes, Summarize  } from '../controllers/RecipesController.js';
+import { UpdateRecipes  } from '../controllers/RecipesController.js';
 import {recipesArray } from '../controllers/datasController.js';
 
 
@@ -27,7 +26,6 @@ class Filter {
     this.RAWNAME = this.NAME.charAt(0).toUpperCase() + this.NAME.slice(1);
     this.NORMALIZED = Normalized(this.RAWNAME);
     this.ID = `Filter-${this.NORMALIZED}`;
-    this.SetFilter();
   }
 
   SetFilter() {// Crée un élément HTML pour le filtre
@@ -228,8 +226,8 @@ function GetAllFilters(Array) { // Parcourt chaque élément de fullArray et app
     const arrayFilter = Object.values(obj)[0].sort((a, b) => a.localeCompare(b));
 
     const list = document.getElementById(`${arrayName}List`);
-    const oldActualFilters = list.querySelectorAll('.filterOption');
-    oldActualFilters.forEach((oldActualFilter) => { oldActualFilter.remove(); });
+    const oldFilters = list.querySelectorAll('.filterOption');
+    oldFilters.forEach((oldActualFilter) => { oldActualFilter.remove(); });
 
     GetFilters({ [arrayName]: arrayFilter });
   });
@@ -240,11 +238,15 @@ function GetAllFilters(Array) { // Parcourt chaque élément de fullArray et app
  */
 function GetFilters(Obj) {
   const arrayName = Object.keys(Obj)[0];
-  const arrayFull = Object.values(Obj)[0].sort((a, b) => a.localeCompare(b));
+  const arrayFull = [...new Set(Object.values(Obj)[0].sort((a, b) => a.localeCompare(b)))];
 
   arrayFull.forEach((ActualFilter) => { // Parcourt chaque élément du tableau et crée un élément HTML pour chaque élément.
+    const isExist = document.querySelector(`[data-name="${ActualFilter}"]`);
+    if (!isExist) {
     const filter = new Filter(ActualFilter, arrayName);
-  });
+    filter.SetFilter();
+  };
+});
 }
 
 /** Fonction qui affiche ou cache la liste de filtre.
@@ -269,25 +271,25 @@ function toggleList(FilterID) {
 }
 
 /** Fonction qui met à jour les filtres en fonction des recettes filtrées.
- * @param {Array} UpdatedFilter - Le tableau contenant les recettes filtrées
+ * @param {Array} UpdatedRecipes - Le tableau contenant les recettes filtrées
  * @returns {Array} - Le tableau mis à jour des éléments de filtre
  */
-function UpdateFilters(UpdatedFilter) {
+function UpdateFilters(UpdatedRecipes) {
   const NewappliancesArray = [];
   const NewIngredientsArray = [];
   const NewUstensilesArray = [];
-  for (const recipe of UpdatedFilter) {
+  for (const recipe of UpdatedRecipes) {
     const { appliance, ingredients, ustensils } = recipe;
-    if (!NewappliancesArray.includes(appliance)) {
+    if (!NewappliancesArray.includes(Normalized(appliance))) {
       NewappliancesArray.push(appliance);
     }
     for (const ingredient of ingredients) {
-      if (!NewIngredientsArray.includes(ingredient.ingredient)) {
+      if (!NewIngredientsArray.includes(Normalized(ingredient.ingredient))) {
         NewIngredientsArray.push(ingredient.ingredient);
       }
     }
     for (const ustensil of ustensils) {
-      if (!NewUstensilesArray.includes(ustensil)) {
+      if (!NewUstensilesArray.includes(Normalized(ustensil))) {
         NewUstensilesArray.push(ustensil);
       }
     }
@@ -297,6 +299,7 @@ function UpdateFilters(UpdatedFilter) {
   const finalIngredientsArray = Array.from(new Set(NewIngredientsArray));
   const finalUstensilesArray = Array.from(new Set(NewUstensilesArray));
 
+  console.log(finalUstensilesArray)
   const UpdatedFilterApplicances = { appliances: finalAppliancesArray };
   const UpdatedFilterIngredients = { ingredients: finalIngredientsArray };
   const UpdatedFilterUstensiles = { ustensils: finalUstensilesArray };
