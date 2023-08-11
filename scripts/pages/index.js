@@ -28,29 +28,33 @@ function init() {
   DisplayRecipes(recipesArray); // Affiche toutes les recettes au chargement de la page
   GetAllFilters(fullArray); // Crée les filtres de recherche.
 
-  mainInput.addEventListener('keyup', () => {    // Récupère les recettes qui correspondent à la recherche.
+  mainInput.addEventListener('keyup', () => {    
+    
     const updatedFromMain = SearchFromMain(mainInput.value, recipesArray);    // Récupère les filtres qui correspondent à la recherche.
-    labelsContainer.innerHTML = '';    // Vide le conteneur des filtres.
     
     if (mainInput.value.length > 2) {      // Si la valeur de l'input est supérieure à 2 caractères, affiche les recettes qui correspondent.
       
-      if (updatedFromMain > 0) {
+      if (updatedFromMain.length > 0) {        // Si aucune recette ne correspond, affiche un message d'erreur.
         UpdateRecipes(updatedFromMain); // Met à jour les recettes.
         UpdateFilters(updatedFromMain); // Crée les filtres de recherche.
+        labelsContainer.innerHTML = ''; // Supprime les filtres de recherche.
       
-      } else{
+      } else {
         recipeContainer.innerHTML = `<p class='errorMsg mx-auto my-0'>
-                                        Aucune recettes ne correspond à "${mainInput.value}" 
+                                        Aucune recettes ne correspond à <span id = "output"></span> 
                                         vous pouvez chercher « tarte aux pommes », « poisson », 
                                         etc.</p>`;
-        UpdateFilters(updatedFromMain); // Crée les filtres de recherche.
-        
-                                        Summarize();
-      }
-    } else {      // Si la valeur de l'input est inférieure à 3 caractères, affiche toutes les recettes.
 
+        const output = document.querySelector('#output');
+        output.textContent = mainInput.value;
+        Summarize(); // Affiche le résumé du nombre de recettes.
+      }
+    } else {
+    
+      // Si la valeur de l'input est inférieure à 3 caractères, affiche toutes les recettes.
       DisplayRecipes(recipesArray);
       GetAllFilters(fullArray);
+
     }
   });
 
