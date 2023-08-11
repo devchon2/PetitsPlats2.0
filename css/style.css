@@ -17,6 +17,7 @@
 /* Styles généraux du corps de la page */
 body {
   font-family: "Manrope";
+  max-width:1440px;
 }
 
 .hidden {
