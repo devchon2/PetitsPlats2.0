@@ -4,9 +4,9 @@
 /* eslint-disable import/extensions */
 
 // Importation des modules depuis d'autres fichiers
-import { DisplayRecipes, UpdateRecipes } from '../controllers/RecipesController.js';
+import { DisplayRecipes, UpdateRecipes, Summarize } from '../controllers/RecipesController.js';
 import { GetAllFilters, UpdateFilters } from '../utils/Filters.js';
-import { SearchFromMain, SearchListInput } from '../utils/search.js';
+import { SearchFromMain } from '../utils/search.js';
 import { recipesArray, ingredientsObject, appliancesObject, ustensilesObject } from '../controllers/datasController.js';
 
 console.log('index.js chargé');
@@ -17,6 +17,7 @@ const fullArray = [ingredientsObject, appliancesObject, ustensilesObject];
 // Sélection des éléments HTML du DOM
 const mainInput = document.querySelector('#mainSearchInput');
 const recipeContainer = document.querySelector('#recipesCardsContainer');
+const labelsContainer = document.querySelector('#labelsContainer');
 
 
 /**
@@ -29,19 +30,25 @@ function init() {
 
   mainInput.addEventListener('keyup', () => {    // Récupère les recettes qui correspondent à la recherche.
     const updatedFromMain = SearchFromMain(mainInput.value, recipesArray);    // Récupère les filtres qui correspondent à la recherche.
-
+    labelsContainer.innerHTML = '';    // Vide le conteneur des filtres.
+    
     if (mainInput.value.length > 2) {      // Si la valeur de l'input est supérieure à 2 caractères, affiche les recettes qui correspondent.
-      if (updatedFromMain) {        // Si aucune recette ne correspond, affiche un message d'erreur.
+      
+      if (updatedFromMain > 0) {
         UpdateRecipes(updatedFromMain); // Met à jour les recettes.
         UpdateFilters(updatedFromMain); // Crée les filtres de recherche.
-      } else {
+      
+      } else{
         recipeContainer.innerHTML = `<p class='errorMsg mx-auto my-0'>
                                         Aucune recettes ne correspond à "${mainInput.value}" 
                                         vous pouvez chercher « tarte aux pommes », « poisson », 
                                         etc.</p>`;
+        UpdateFilters(updatedFromMain); // Crée les filtres de recherche.
+        
+                                        Summarize();
       }
-    } else {
-      // Si la valeur de l'input est inférieure à 3 caractères, affiche toutes les recettes.
+    } else {      // Si la valeur de l'input est inférieure à 3 caractères, affiche toutes les recettes.
+
       DisplayRecipes(recipesArray);
       GetAllFilters(fullArray);
     }

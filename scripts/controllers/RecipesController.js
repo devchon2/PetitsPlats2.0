@@ -245,4 +245,4 @@ function UpdateRecipes(Array) {
   DisplayRecipes(Array);
 }
 
-export { Recipe, DisplayRecipes, UpdateRecipes,  };
+export { Recipe, DisplayRecipes, UpdateRecipes, Summarize };

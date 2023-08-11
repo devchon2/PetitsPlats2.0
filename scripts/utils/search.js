@@ -6,7 +6,6 @@
 
 
 
-
 console.log('search.js loaded');
 
 function SearchFromMain(ValueToSearch, recipes) {
@@ -149,8 +148,8 @@ function SearchFromAppliances(ValueToSearch, Actuals, recipes, from = '') {
 
 function SearchFromFilter(ValueToSearch, filterZone, recipes) {
   const Actuals = Array.from(document.querySelectorAll('.recipeCard'));
-  let UpdatedRecipes;
-
+    let UpdatedRecipes;
+  
   if (filterZone === 'ingredients') {
     UpdatedRecipes = SearchFromIngredients(ValueToSearch, Actuals, recipes);
 

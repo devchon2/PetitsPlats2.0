@@ -37,9 +37,9 @@ class Filter {
     this.ELEMENT.setAttribute('data-Normalized', this.NORMALIZED);
     this.ELEMENT.setAttribute('data-name', this.RAWNAME);
     this.ELEMENT.setAttribute('data-type', this.TYPE);
-    this.ACTIVE = `<p class='FilterName m-0 '>${this.RAWNAME}</p><i class=" fa-solid fa-xmark filter-Icon ms-4 me-1 "></i>`
-    this.INACTIVE = `<p class='FilterName m-0 '>${this.RAWNAME}</p><i class="fa-solid fa-xmark filter-Icon ms-4 me-1 d-none"></i>`
-    this.HOVERED = `<p class='FilterName m-0 '>${this.RAWNAME}</p><i class="fa-solid fa-xmark filter-Icon ms-4 me-1 d-none"></i>`
+    this.ACTIVE = `<p class='FilterName m-0 '>${this.RAWNAME}</p><i class="fa-solid fa-circle-xmark filter-Icon ms-4 me-1 "></i>`
+    this.INACTIVE = `<p class='FilterName m-0 '>${this.RAWNAME}</p><i class="fa-solid fa-circle-xmark filter-Icon ms-4 me-1 d-none"></i>`
+    this.HOVERED = `<p class='FilterName m-0 '>${this.RAWNAME}</p><i class="fa-solid fa-circle-xmark filter-Icon ms-4 me-1 d-none"></i>`
     this.ELEMENT.classList.add('filterOption', 'd-flex', 'align-items-center', 'justify-content-between', 'px-2', 'py-2');
     this.ELEMENT.innerHTML = this.INACTIVE;
     this.ICON = this.ELEMENT.querySelector('.filter-Icon');
@@ -197,7 +197,7 @@ function RestoreActive() {
 
         if (NormalizedLabel === NormalizedFilter) {
           CurrentFilter.classList.add('active');
-          CurrentFilter.innerHTML = `<p class='FilterName m-0 '>${RAWNAME}</p><i class=" fa-solid fa-xmark filter-Icon ms-4 me-1 "></i>`;
+          CurrentFilter.innerHTML = `<p class='FilterName m-0 '>${RAWNAME}</p><i class=" fa-solid fa-circle-xmark filter-Icon ms-4 me-1 "></i>`;
         }
       }
     }
