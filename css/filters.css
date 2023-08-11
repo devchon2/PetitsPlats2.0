@@ -1,0 +1,60 @@
+/* Styles des Btn d'ingrédients, d'appareils et d'ustensiles */
+.filterBtn {
+  width: 220px;
+  font-family: "Manrope";
+}
+
+.fa-magnifying-glass::before {
+  color: #afafaf;
+}
+
+.filterList {
+  width: 220px;
+}
+
+.filter,
+.filterOption {
+  cursor: pointer;
+}
+
+.filter-Icon {
+  cursor: pointer;
+  scale: 1;
+
+}
+ 
+.filter-Icon:hover {
+  
+  transition: ease-out 0.2s;
+  scale: 1.3
+  
+}
+
+.filterName #text::first-letter {
+  text-transform: uppercase;
+}
+
+.filterOption.active {
+  cursor: default;
+  background-color: #ffd15b;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.filterOption.hovered {
+  background-color: #ffd15b;
+}
+
+.inputFilterBtn {
+  padding: 5px 0;
+  border: 2px solid #afafaf;
+}
+
+.filterInput {
+  outline: none;
+}
+
+.filtersIcon {
+  color: #dfdfdf;
+  padding: 0 5px;
+}

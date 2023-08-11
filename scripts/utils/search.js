@@ -1,7 +1,3 @@
-
-
-console.log('search.js loaded');
-
 function SearchFromMain(ValueToSearch, recipes) {
     const UpdatedRecipes = [];
     recipes.forEach(recipe => {
@@ -15,7 +11,7 @@ function SearchFromMain(ValueToSearch, recipes) {
             }
         });
     });
-    return UpdatedRecipes;
+    return [...new Set(UpdatedRecipes)];
 }
 
 function SearchFromIngredients(ValueToSearch, Actuals, recipes, from = '') {
@@ -25,7 +21,7 @@ function SearchFromIngredients(ValueToSearch, Actuals, recipes, from = '') {
     recipes.forEach(recipe => {
         const { id, ingredients } = recipe;
         ActualsRecipe.forEach(Recipe => {
-            if (id == Recipe.id) {
+            if (Number(id) === Number(Recipe.id)) {
                 ingredients.forEach(ing => {
                     const { ingredient } = ing;
                     const normalizedKeyword = Normalized(ValueToSearch);
@@ -48,7 +44,7 @@ function SearchFromUstensils(ValueToSearch, ActualsRecipe, recipes) {
             const { id, ustensils } = recipe;
             ActualsRecipe.forEach(Recipe => {
         
-            if (Recipe.id == id) {
+            if (Number(Recipe.id) === Number(id)) {
                 ustensils.forEach(ustensil => {
                     const normalizedElement = Normalized(ustensil);
                     if (normalizedKeyword.match(normalizedElement) && !updatedArray.includes(recipe)) {
@@ -68,7 +64,7 @@ function SearchFromAppliances(ValueToSearch, ActualsRecipe, recipes) {
     ActualsRecipe.forEach(Recipe => {
         recipes.forEach(recipe => {
             const { id, appliance } = recipe;
-            if (Recipe.id == id) {
+            if (Number(Recipe.id) === Number(id)) {
                 const normalizedElement = Normalized(appliance);
                 if (normalizedKeyword.match(normalizedElement) && !updatedArray.includes(recipe)) {
                     updatedArray.push(recipe);

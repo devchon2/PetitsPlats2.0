@@ -1,0 +1,19 @@
+/* Styles des labels */
+.labels {
+  font-family: "Manrope";
+  font-weight: 500;
+  font-size: 1rem;
+  background-color: #ffd15b;
+  width: fit-content;
+}
+
+.label-Icon {
+  cursor: pointer;
+  scale: 1;
+}
+
+
+.label-Icon:hover {
+  transition: ease-out 0.2s;
+  scale: 1.3;
+}
