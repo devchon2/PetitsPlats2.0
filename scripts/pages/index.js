@@ -48,6 +48,7 @@ function init() {
         const output = document.querySelector('#output');
         output.textContent = mainInput.value;
         Summarize(); // Affiche le résumé du nombre de recettes.
+        UpdateFilters(updatedFromMain); // Crée les filtres de recherche.
       }
     } else {
     
