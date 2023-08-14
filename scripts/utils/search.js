@@ -26,7 +26,7 @@ function SearchFromIngredients(ValueToSearch, Actuals, recipes, from = '') {
                     const { ingredient } = ing;
                     const normalizedKeyword = Normalized(ValueToSearch);
                     const normalizedElement = Normalized(ingredient);
-                    if (normalizedKeyword.match(normalizedElement) && !UpdatedRecipes.includes(recipe)) {
+                    if (normalizedElement.match(normalizedKeyword) && !UpdatedRecipes.includes(recipe)) {
                         UpdatedRecipes.push(recipe);
                     }
                 });
