@@ -60,7 +60,7 @@ function SearchFromIngredients(ValueToSearch, Actuals, recipes, from = '') {
           const normalizedKeyword = Normalized(ValueToSearch);
           const normalizedElement = Normalized(ingredient);
 
-          if (normalizedKeyword.match(normalizedElement)) {
+          if (normalizedElement.match(normalizedKeyword)) {
 
             if (!UpdatedRecipes.includes(recipe)) {
               UpdatedRecipes.push(recipe);
@@ -91,13 +91,13 @@ function SearchFromUstensils(ValueToSearch, Actuals, recipes, from = '') {
       const { id, ustensils } = recipe;
       const id2Upd = Recipe.id;
 
-      if (id2Upd == id) {
+      if (Number(id2Upd) === Number(id)) {
 
         for (let ustensil of ustensils) {
           const normalizedElement = Normalized(ustensil)
           console.log(normalizedElement)
           console.log(normalizedKeyword)
-          if (normalizedKeyword.match(normalizedElement)) {
+          if (normalizedElement.match(normalizedKeyword)) {
 
             if (!updatedArray.includes(recipe)) {
               updatedArray.push(recipe)
@@ -131,7 +131,7 @@ function SearchFromAppliances(ValueToSearch, Actuals, recipes, from = '') {
         const normalizedElement = Normalized(appliance)
 
 
-        if (normalizedKeyword.match(normalizedElement)) {
+        if (normalizedElement.match(normalizedKeyword)) {
 
           if (!updatedArray.includes(recipes[i])) {
             updatedArray.push(recipes[i])

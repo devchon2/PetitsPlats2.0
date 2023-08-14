@@ -49,6 +49,7 @@ class Filter {
   }
 
   SetActive() {// Active le filtre
+    debugger
     this.ELEMENT.classList.add('active');
     this.ELEMENT.innerHTML = this.ACTIVE;
     this.AddLabel();
@@ -183,9 +184,9 @@ function SearchAndUpdate(name, type, recipes) {
 }
 
 function RestoreActive() {
-  
-  const CurrentLabels = document.querySelectorAll('.labels');
-  const CurrentFilters = document.querySelectorAll('.filterOption');
+  debugger
+  const CurrentLabels = [...document.querySelectorAll('.labels')];
+  const CurrentFilters = [...document.querySelectorAll('.filterOption')];
 
   if (CurrentLabels) {
     for (const CurrentLabel of CurrentLabels) {
@@ -263,7 +264,7 @@ function toggleList(FilterID) {
  */
 function UpdateFilters(UpdatedFilter) {
   console.log('updateFilters',UpdatedFilter);
-
+  debugger
   const NewappliancesArray = [];
   const NewIngredientsArray = [];
   const NewUstensilesArray = [];
@@ -273,7 +274,6 @@ function UpdateFilters(UpdatedFilter) {
     const normalizedAppliance = Normalized(appliance);
 
     if (!NewappliancesArray.includes(normalizedAppliance)) {
-      console.log('toLower',);
       NewappliancesArray.push(appliance.toLowerCase());
     }
 
@@ -298,7 +298,7 @@ function UpdateFilters(UpdatedFilter) {
   const finalIngredientsArray = [...new Set(NewIngredientsArray)];
   const finalUstensilesArray = [...new Set(NewUstensilesArray)];
 
-  console.log('finalAppliancesArray',finalUstensilesArray);
+  console.log('finalAppliancesArray',finalIngredientsArray);
   const UpdatedFilterApplicances = { 'appliances': finalAppliancesArray };
   const UpdatedFilterIngredients = { 'ingredients': finalIngredientsArray };
   const UpdatedFilterUstensiles = { 'ustensils': finalUstensilesArray };

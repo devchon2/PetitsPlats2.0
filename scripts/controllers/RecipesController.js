@@ -207,6 +207,7 @@ function Summarize() {
 
 // Fonction qui affiche les recettes.
 function DisplayRecipes(Array) {
+  debugger
   recipeContainer.innerHTML = '';
   for (let i = 0; i < Array.length; i += 1) {
     // Parcourt le tableau recipesArray et crée une carte de recette pour chaque élément.
