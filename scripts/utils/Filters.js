@@ -49,7 +49,7 @@ class Filter {
   }
 
   SetActive() {// Active le filtre
-    debugger
+    
     this.ELEMENT.classList.add('active');
     this.ELEMENT.innerHTML = this.ACTIVE;
     this.AddLabel();
@@ -184,7 +184,7 @@ function SearchAndUpdate(name, type, recipes) {
 }
 
 function RestoreActive() {
-  debugger
+  
   const CurrentLabels = [...document.querySelectorAll('.labels')];
   const CurrentFilters = [...document.querySelectorAll('.filterOption')];
 
@@ -264,7 +264,7 @@ function toggleList(FilterID) {
  */
 function UpdateFilters(UpdatedFilter) {
   console.log('updateFilters',UpdatedFilter);
-  debugger
+  
   const NewappliancesArray = [];
   const NewIngredientsArray = [];
   const NewUstensilesArray = [];

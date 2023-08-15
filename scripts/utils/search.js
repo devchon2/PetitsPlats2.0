@@ -34,25 +34,22 @@ function SearchFromMain(ValueToSearch, recipes) {
   return UpdatedRecipes;
 }
 
-function SearchFromIngredients(ValueToSearch, Actuals, recipes, from = '') {
+function SearchFromIngredients(ValueToSearch, Actuals, recipes, from = 'add') {
   let ActualsRecipe = Actuals;
-  
+
   if (from === 'delete') {
     ActualsRecipe = recipes;
   }
-  
+
   const UpdatedRecipes = [];
   for (let j = 0; j < recipes.length; j += 1) {
     const recipe = recipes[j];
-    const { id, ingredients } = recipe;
+    const { id:id1, ingredients } = recipe;
 
-    for (let i = 0; i < ActualsRecipe.length; i += 1) {
-      const Recipe = ActualsRecipe[i];
-      const id2Upd = Recipe.id;
-
-
-
-      if (id == id2Upd) {
+    for (let ActualRecipe of ActualsRecipe) {
+      const {id:id2} = ActualRecipe;
+      
+      if (Number(id1) === Number(id2)) {
 
         for (let k = 0; k < ingredients.length; k += 1) {
           const ingr = ingredients[k];
@@ -60,7 +57,7 @@ function SearchFromIngredients(ValueToSearch, Actuals, recipes, from = '') {
           const normalizedKeyword = Normalized(ValueToSearch);
           const normalizedElement = Normalized(ingredient);
 
-          if (normalizedElement.match(normalizedKeyword)) {
+          if (normalizedElement === normalizedKeyword) {
 
             if (!UpdatedRecipes.includes(recipe)) {
               UpdatedRecipes.push(recipe);
@@ -75,7 +72,7 @@ function SearchFromIngredients(ValueToSearch, Actuals, recipes, from = '') {
   return UpdatedRecipes;
 }
 
-function SearchFromUstensils(ValueToSearch, Actuals, recipes, from = '') {
+function SearchFromUstensils(ValueToSearch, Actuals, recipes, from = 'add') {
   let ActualsRecipe = Actuals;
 
   if (from === 'delete') {
@@ -85,19 +82,19 @@ function SearchFromUstensils(ValueToSearch, Actuals, recipes, from = '') {
   const updatedArray = [];
   const normalizedKeyword = Normalized(ValueToSearch)
 
-  for (let Recipe of ActualsRecipe) {
+  for (let ActualRecipe of ActualsRecipe) {
+      const {id:id1} = ActualRecipe;
 
     for (let recipe of recipes) {
-      const { id, ustensils } = recipe;
-      const id2Upd = Recipe.id;
+      const { id:id2, ustensils } = recipe;
 
-      if (Number(id2Upd) === Number(id)) {
+      if (Number(id1) === Number(id2)) {
 
         for (let ustensil of ustensils) {
           const normalizedElement = Normalized(ustensil)
           console.log(normalizedElement)
           console.log(normalizedKeyword)
-          if (normalizedElement.match(normalizedKeyword)) {
+          if (normalizedElement === normalizedKeyword) {
 
             if (!updatedArray.includes(recipe)) {
               updatedArray.push(recipe)
@@ -110,9 +107,9 @@ function SearchFromUstensils(ValueToSearch, Actuals, recipes, from = '') {
   return updatedArray
 }
 
-function SearchFromAppliances(ValueToSearch, Actuals, recipes, from = '') {
+function SearchFromAppliances(ValueToSearch, Actuals, recipes, from = 'add') {
   let ActualsRecipe = Actuals;
-  
+
   if (from === 'delete') {
     ActualsRecipe = recipes;
   }
@@ -120,21 +117,19 @@ function SearchFromAppliances(ValueToSearch, Actuals, recipes, from = '') {
   const updatedArray = [];
   const normalizedKeyword = Normalized(ValueToSearch)
 
-
   for (let ActualRecipe of ActualsRecipe) {
 
-    for (let i = 0; i < recipes.length; i += 1) {
-      const { id, appliance } = recipes[i];
-      const id2 = ActualRecipe.id;
+    for (let recipe of recipes) {
+      const { id: id1, appliance } = recipe;
+      const {id:id2} = ActualRecipe;
 
-      if (id == id2) {
+      if (Number(id1) === Number(id2)) {
         const normalizedElement = Normalized(appliance)
 
+        if (normalizedElement === normalizedKeyword) {
 
-        if (normalizedElement.match(normalizedKeyword)) {
-
-          if (!updatedArray.includes(recipes[i])) {
-            updatedArray.push(recipes[i])
+          if (!updatedArray.includes(recipe)) {
+            updatedArray.push(recipe)
 
           }
         }
@@ -142,14 +137,13 @@ function SearchFromAppliances(ValueToSearch, Actuals, recipes, from = '') {
     }
   }
 
-
   return updatedArray
 }
 
 function SearchFromFilter(ValueToSearch, filterZone, recipes) {
   const Actuals = Array.from(document.querySelectorAll('.recipeCard'));
-    let UpdatedRecipes;
-  
+  let UpdatedRecipes;
+
   if (filterZone === 'ingredients') {
     UpdatedRecipes = SearchFromIngredients(ValueToSearch, Actuals, recipes);
 
@@ -165,48 +159,50 @@ function SearchFromFilter(ValueToSearch, filterZone, recipes) {
 }
 
 function SearchFromDeleteLabel(recipes, MainInputValue) { // une fonction qui recuperes les labels et renvoi que les recettes qui contiennent l'ensemble des labels
-    const ActualsLabel = Array.from(document.querySelectorAll('.labels'));
-    debugger
+  const ActualsLabel = Array.from(document.querySelectorAll('.labels'));
+  debugger
 
-  let UpdatedFinalRecipes = [ ]
-  let Start = 'delete';
-  
+  let UpdatedFinalRecipes = []
+  let Action = 'delete';
+
   let iteration = 0;
   for (let label of ActualsLabel) {
     const name = label.getAttribute('data-normalized');
     const type = label.getAttribute('data-type');
     let updatedRecipes;
+    const ActualRecipes = Array.from(document.querySelectorAll('.recipeCard'));
     if (iteration > 0) {
-      Start = '';
+      Action = 'add';
     }
 
-    const ActualRecipes = Array.from(document.querySelectorAll('.recipeCard'));
     if (type === 'ingredients') {
-       updatedRecipes = SearchFromIngredients(name, ActualRecipes, recipes, Start);
-        
+      updatedRecipes = SearchFromIngredients(name, ActualRecipes, recipes, Action);
+
     } else if (type === 'ustensils') {
-        updatedRecipes = SearchFromUstensils(name, ActualRecipes, recipes, Start);
+      updatedRecipes = SearchFromUstensils(name, ActualRecipes, recipes, Action);
 
     } else {
-        updatedRecipes = SearchFromAppliances(name, ActualRecipes, recipes, Start);
-          
-    } 
-    iteration += 1;
-    for (let recipe of recipes) {
-      const { id } = recipe;
+      updatedRecipes = SearchFromAppliances(name, ActualRecipes, recipes, Action);
+    }
+
+    if (iteration === 0) { // si c'est la premiere iteration on met a jour le tableau final
+      UpdatedFinalRecipes.push(...updatedRecipes);
+      iteration += 1;
+
+    } else{
       
-      for (let updatedRecipe of updatedRecipes) {
-        const { id: id2 } = updatedRecipe;
-        if (id == id2) {
-          UpdatedFinalRecipes.push(recipe);
+      for (let UpdatedFinalRecipe of UpdatedFinalRecipes) {
+      const { id: id1 } = UpdatedFinalRecipe
+      
+      for (let updrecipe of updatedRecipes) {
+        const { id: id2 } = updrecipe;
+        
+        if (id1 !== id2 && UpdatedFinalRecipes.includes(UpdatedFinalRecipe)) {
+          UpdatedFinalRecipes.pop(UpdatedFinalRecipe)
         }
       }
-      const id2Upd = updatedRecipes.id;
-      if (id == id2Upd) {
-        UpdatedFinalRecipes.push(recipe);
-      }
-    } 
-  }
+    }
+  }}
 
   if (UpdatedFinalRecipes.length === 0) {
     UpdatedFinalRecipes = SearchFromMain(MainInputValue, recipes);
