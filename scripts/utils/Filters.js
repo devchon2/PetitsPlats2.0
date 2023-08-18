@@ -185,11 +185,10 @@ function RestoreActive() {
   const CurrentFilters = document.querySelectorAll('.filterOption');
 
   if (CurrentLabels) {
-    // eslint-disable-next-line no-restricted-syntax
+
     for (const CurrentLabel of CurrentLabels) {
       const NormalizedLabel = CurrentLabel.getAttribute('data-normalized');
 
-      // eslint-disable-next-line no-restricted-syntax
       for (const CurrentFilter of CurrentFilters) {
         const NormalizedFilter = CurrentFilter.getAttribute('data-normalized');
         const RAWNAME = CurrentFilter.getAttribute('data-name');

@@ -1,7 +1,3 @@
-/* eslint-disable no-new */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
-/* eslint-disable import/extensions */
 
 // Importation des modules depuis d'autres fichiers
 import { DisplayRecipes, UpdateRecipes, Summarize } from '../controllers/RecipesController.js';
@@ -9,7 +5,6 @@ import { GetAllFilters, UpdateFilters } from '../utils/Filters.js';
 import { SearchFromMain } from '../utils/search.js';
 import { recipesArray, ingredientsObject, appliancesObject, ustensilesObject } from '../controllers/datasController.js';
 
-console.log('index.js chargé');
 
 // Tableau contenant les objets d'ingrédients, d'appareils et d'ustensiles
 const fullArray = [ingredientsObject, appliancesObject, ustensilesObject];

@@ -1,9 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable no-console */
-/* eslint-disable import/extensions */
-// eslint-disable-next-line import/no-unresolved
-
-
 const recipeContainer = document.getElementById('recipesCardsContainer'); // Récupère l'élément HTML qui contiendra les cartes de recettes.
 
 /**
