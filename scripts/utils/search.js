@@ -11,7 +11,7 @@ function SearchFromMain(ValueToSearch, recipes) {
 function SearchFromIngredients(ValueToSearch, Actuals, recipes, Action = 'add') {
   const normalizedKeyword = Normalized(ValueToSearch);
   const ActualsRecipe = Action === 'delete' ? recipes : Actuals;
-// debugger
+
   return recipes.filter(recipe => 
     recipe.ingredients.some(ingr => 
       Normalized(ingr.ingredient) === normalizedKeyword)).filter(recipe => 
@@ -20,68 +20,21 @@ function SearchFromIngredients(ValueToSearch, Actuals, recipes, Action = 'add') 
 
 
 function SearchFromUstensils(ValueToSearch, Actuals, recipes, Action = 'add') {
+  const normalizedKeyword = Normalized(ValueToSearch);
   const ActualsRecipe = Action === 'delete' ? recipes : Actuals;
 
-
-  const updatedArray = [];
-  const normalizedKeyword = Normalized(ValueToSearch)
-
-  for (const ActualRecipe of ActualsRecipe) {
-    const { id: id1 } = ActualRecipe;
-
-    for (const recipe of recipes) {
-      const { id: id2, ustensils } = recipe;
-
-      if (Number(id1) === Number(id2)) {
-
-        for (const ustensil of ustensils) {
-          const normalizedElement = Normalized(ustensil)
-          console.log(normalizedElement)
-          console.log(normalizedKeyword)
-          if (normalizedElement === normalizedKeyword) {
-
-            if (!updatedArray.includes(recipe)) {
-              updatedArray.push(recipe)
-            }
-          }
-        }
-      }
-    }
+  return recipes.filter(recipe => 
+    recipe.ustensils.some(Ustensil => 
+      Normalized(Ustensil) === normalizedKeyword)).filter(recipe => 
+        ActualsRecipe.some(Recipe => Number(Recipe.id) === Number(recipe.id)))
   }
-  return updatedArray
-}
 
 function SearchFromAppliances(ValueToSearch, Actuals, recipes, Action = 'add') {
-  let ActualsRecipe = Actuals;
+  const normalizedKeyword = Normalized(ValueToSearch);
+  const ActualsRecipe = Action === 'delete' ? recipes : Actuals;
 
-  if (Action === 'delete') {
-    ActualsRecipe = recipes;
-  }
-
-  const updatedArray = [];
-  const normalizedKeyword = Normalized(ValueToSearch)
-
-  for (const ActualRecipe of ActualsRecipe) {
-
-    for (const recipe of recipes) {
-      const { id: id1, appliance } = recipe;
-      const { id: id2 } = ActualRecipe;
-
-      if (Number(id1) === Number(id2)) {
-        const normalizedElement = Normalized(appliance)
-
-        if (normalizedElement === normalizedKeyword) {
-
-          if (!updatedArray.includes(recipe)) {
-            updatedArray.push(recipe)
-
-          }
-        }
-      }
-    }
-  }
-
-  return updatedArray
+  return recipes.filter(recipe => Normalized(recipe.appliance) === normalizedKeyword).filter(recipe => 
+        ActualsRecipe.some(Recipe => Number(Recipe.id) === Number(recipe.id)))
 }
 
 function SearchFromFilter(ValueToSearch, filterZone, recipes) {
