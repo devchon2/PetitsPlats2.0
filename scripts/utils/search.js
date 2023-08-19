@@ -1,19 +1,11 @@
-/* eslint-disable no-console */
 /* eslint-disable no-restricted-syntax */
-
 function SearchFromMain(ValueToSearch, recipes) {
-    const normalizedKeyword = Normalized(ValueToSearch);
-
-    return recipes.filter(recipe => {
-        const { name, description, ingredients } = recipe;
-        const ElementsToCheck = [name, description, ...ingredients.map(ingr => ingr.ingredient)];
-        return ElementsToCheck.some(element => Normalized(element) === (normalizedKeyword));
-    });
+  return recipes.filter(recipe => {
+      const { ingredients, name, description } = recipe;
+      const ToCheck = [name, description, ...ingredients.map(ing => ing.ingredient)]
+      return ToCheck.some(element => Normalized(element).match(Normalized(ValueToSearch))) 
+     })
 }
-
-
-
-
 
 function SearchFromIngredients(ValueToSearch, Actuals, recipes, from = 'add') {
     let ActualsRecipe = Actuals;
