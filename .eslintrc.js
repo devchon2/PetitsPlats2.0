@@ -14,6 +14,7 @@ module.exports = {
     'quotes': ['error', 'single'],
     'import/prefered-default-export' : 'off',
     'no-use-before-define': 'off',
+    'no-nested-ternary': 'off',
     'import/extensions': [
       'error',
       'always', {

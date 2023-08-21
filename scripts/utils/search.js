@@ -55,56 +55,46 @@ function SearchFromFilter(ValueToSearch, filterZone, recipes) {
   return UpdatedRecipes;
 }
 
-function SearchFromDeleteLabel(recipes, MainInputValue) { // une fonction qui recuperes les labels et renvoi que les recettes qui contiennent l'ensemble des labels
+function SearchFromDeleteLabel(recipes, MainInputValue) { 
   const ActualsLabel = Array.from(document.querySelectorAll('.labels'));
-  debugger
+  
 
   let UpdatedFinalRecipes = []
   let Action = 'delete';
-
   let iteration = 0;
-  for (const label of ActualsLabel) {
+  ActualsLabel.forEach(label => {
     const name = label.getAttribute('data-normalized');
     const type = label.getAttribute('data-type');
-    let updatedRecipes;
+    let TocheckRecipes;
     const ActualRecipes = Array.from(document.querySelectorAll('.recipeCard'));
-    if (iteration > 0) {
-      Action = 'add';
-    }
+    
+    if (iteration > 0) Action = 'add'; // 
+    
 
     if (type === 'ingredients') {
-      updatedRecipes = SearchFromIngredients(name, ActualRecipes, recipes, Action);
-
+      TocheckRecipes = SearchFromIngredients(name, ActualRecipes, recipes, Action);
+      
     } else if (type === 'ustensils') {
-      updatedRecipes = SearchFromUstensils(name, ActualRecipes, recipes, Action);
-
+      TocheckRecipes = SearchFromUstensils(name, ActualRecipes, recipes, Action);
+      
     } else {
-      updatedRecipes = SearchFromAppliances(name, ActualRecipes, recipes, Action);
+      TocheckRecipes = SearchFromAppliances(name, ActualRecipes, recipes, Action);
+      
     }
+    
+    if (iteration === 0) { // si c'est la premiere iteration on met a jour avec le tableau initial filtré pour le premier label
+      UpdatedFinalRecipes.push(...TocheckRecipes)
+      iteration +=1;
+      
+    } 
 
-    if (iteration === 0) { // si c'est la premiere iteration on met a jour le tableau final
-      UpdatedFinalRecipes.push(...updatedRecipes);
-      iteration += 1;
+      UpdatedFinalRecipes = UpdatedFinalRecipes.filter(FinalRecipe => TocheckRecipes
+        .some(  ToCheckRecipe => Number(ToCheckRecipe.id) === Number(FinalRecipe.id)))
+        iteration +=1
 
-    } else {
+  })
 
-      for (const UpdatedFinalRecipe of UpdatedFinalRecipes) {
-        const { id: id1 } = UpdatedFinalRecipe
-
-        for (const updrecipe of updatedRecipes) {
-          const { id: id2 } = updrecipe;
-
-          if (id1 !== id2 && UpdatedFinalRecipes.includes(UpdatedFinalRecipe)) {
-            UpdatedFinalRecipes.pop(UpdatedFinalRecipe)
-          }
-        }
-      }
-    }
-  }
-
-  if (UpdatedFinalRecipes.length === 0) {
-    UpdatedFinalRecipes = SearchFromMain(MainInputValue, recipes);
-  }
+  if (UpdatedFinalRecipes.length === 0) UpdatedFinalRecipes = SearchFromMain(MainInputValue, recipes);
 
   return UpdatedFinalRecipes
 }
