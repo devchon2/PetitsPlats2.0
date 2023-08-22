@@ -34,19 +34,13 @@ function SearchFromMain(ValueToSearch, recipes) {
   return UpdatedRecipes;
 }
 
-function SearchFromIngredients(ValueToSearch, Actuals, recipes, from = 'add') {
-  let ActualsRecipe = Actuals;
-
-  if (from === 'delete') {
-    ActualsRecipe = recipes;
-  }
-
+function SearchFromIngredients(ValueToSearch, Actuals, recipes) {
   const UpdatedRecipes = [];
   for (let j = 0; j < recipes.length; j += 1) {
     const recipe = recipes[j];
     const { id:id1, ingredients } = recipe;
 
-    for (let ActualRecipe of ActualsRecipe) {
+    for (let ActualRecipe of Actuals) {
       const {id:id2} = ActualRecipe;
       
       if (Number(id1) === Number(id2)) {
@@ -72,17 +66,11 @@ function SearchFromIngredients(ValueToSearch, Actuals, recipes, from = 'add') {
   return UpdatedRecipes;
 }
 
-function SearchFromUstensils(ValueToSearch, Actuals, recipes, from = 'add') {
-  let ActualsRecipe = Actuals;
-
-  if (from === 'delete') {
-    ActualsRecipe = recipes;
-  }
-
+function SearchFromUstensils(ValueToSearch, Actuals, recipes) {
   const updatedArray = [];
   const normalizedKeyword = Normalized(ValueToSearch)
 
-  for (let ActualRecipe of ActualsRecipe) {
+  for (let ActualRecipe of Actuals) {
       const {id:id1} = ActualRecipe;
 
     for (let recipe of recipes) {
@@ -107,17 +95,11 @@ function SearchFromUstensils(ValueToSearch, Actuals, recipes, from = 'add') {
   return updatedArray
 }
 
-function SearchFromAppliances(ValueToSearch, Actuals, recipes, from = 'add') {
-  let ActualsRecipe = Actuals;
-
-  if (from === 'delete') {
-    ActualsRecipe = recipes;
-  }
-
+function SearchFromAppliances(ValueToSearch, Actuals, recipes) {
   const updatedArray = [];
   const normalizedKeyword = Normalized(ValueToSearch)
 
-  for (let ActualRecipe of ActualsRecipe) {
+  for (let ActualRecipe of Actuals) {
 
     for (let recipe of recipes) {
       const { id: id1, appliance } = recipe;
@@ -126,16 +108,14 @@ function SearchFromAppliances(ValueToSearch, Actuals, recipes, from = 'add') {
       if (Number(id1) === Number(id2)) {
         const normalizedElement = Normalized(appliance)
 
-        if (normalizedElement === normalizedKeyword) {
-
-          if (!updatedArray.includes(recipe)) {
+        if (normalizedElement === normalizedKeyword && !updatedArray.includes(recipe)) {
             updatedArray.push(recipe)
 
           }
         }
       }
     }
-  }
+  
 
   return updatedArray
 }
@@ -158,52 +138,37 @@ function SearchFromFilter(ValueToSearch, filterZone, recipes) {
   return UpdatedRecipes;
 }
 
-function SearchFromDeleteLabel(recipes, MainInputValue) {
-  const ActualsLabel = Array.from(document.querySelectorAll('.labels'));
-
-  let UpdatedFinalRecipes = [];
-  let Action = 'delete';
-
-  let iteration = 0;
+function SearchFromDeleteLabel(recipes) {
+  // Récupération des éléments avec la classe 'labels'
+  const labelsNodeList = document.querySelectorAll('.labels');
   
-  for (let label of ActualsLabel) {
-    const name = label.getAttribute('data-normalized');
-    const type = label.getAttribute('data-type');
-    const ActualRecipes = Array.from(document.querySelectorAll('.recipeCard'));
-    if (iteration > 0) {
-      Action = 'add';
-    }
+  let Action = 'delete';
+  let iteration = 0;
+  let updatedRecipes = recipes;
 
-    let Results;
-    if (type === 'ingredients') {
-      Results = SearchFromIngredients(name, ActualRecipes, recipes, Action);
+  // Boucle for pour parcourir les labels
+  for (let i = 0; i < labelsNodeList.length; i++) {
+      const label = labelsNodeList[i];
+      const name = label.getAttribute('data-normalized');
+      const type = label.getAttribute('data-type');
 
-    } else if (type === 'ustensils') {
-      Results = SearchFromUstensils(name, ActualRecipes, recipes, Action);
-
-    } else {
-      Results = SearchFromAppliances(name, ActualRecipes, recipes, Action);
-    }
-
-    if (iteration === 0) {
-      UpdatedFinalRecipes.push(...Results)
-      iteration += 1; 
-    } else {
-      const newUpdatedFinalRecipes = [];
-      for (const FinalRecipe of UpdatedFinalRecipes) {
-        for (const result of Results) {
-          if (Number(FinalRecipe.id) === Number(result.id)) {
-            newUpdatedFinalRecipes.push(FinalRecipe);
-          }
-        }
+      if (iteration > 0) {
+          Action = 'add';
       }
-      UpdatedFinalRecipes = newUpdatedFinalRecipes;
-    }
+
+      if (type === 'ingredients') {
+          updatedRecipes = SearchFromIngredients(name, updatedRecipes, recipes, Action);
+          iteration += 1;
+      } else if (type === 'ustensils') {
+          updatedRecipes = SearchFromUstensils(name, updatedRecipes, recipes, Action);
+          iteration += 1;
+      } else if (type === 'appliances') {
+          updatedRecipes = SearchFromAppliances(name, updatedRecipes, recipes, Action);
+          iteration += 1;
+      }
   }
 
-  
-
-  return UpdatedFinalRecipes;
+  return updatedRecipes;
 }
 
 function SearchListInput(filters, input) {
