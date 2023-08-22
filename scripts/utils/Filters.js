@@ -134,47 +134,41 @@ class Filter {
 }
 
 
-filterZones.forEach((btn) => { /** Écouteur d'événement pour les boutons des filtres */
+filterZones.forEach((btn) => {
   const input = btn.querySelector('input');
-  const list = btn.querySelector('.filterList'); // Récupère la liste de filtres associée au bouton
+  const list = btn.querySelector('.filterList');
 
   input.addEventListener('click', (e) => {
-    e.stopPropagation();
-    input.focus();
+      e.stopPropagation();
+      input.focus();
   });
 
   input.addEventListener('keyup', () => {
-    const filtersArray = Array.from(list.querySelectorAll('.filterOption'));
-    SearchListInput(filtersArray, input.value);
+      const filtersArray = Array.from(list.querySelectorAll('.filterOption'));
+      SearchListInput(filtersArray, input.value);
   });
-
 
   btn.addEventListener('click', (e) => {
-    e.stopPropagation();
+      e.stopPropagation();
+      
+      // Vérifier si le bouton cliqué est actuellement actif
+      const isActive = btn.classList.contains('active');
+      
+      // Fermer tous les filtres actifs
+      const allActiveFilters = document.querySelectorAll('.filter.active');
+      allActiveFilters.forEach(filter => {
+          const filterID = filter.id.replace('Filter', '');
+          toggleList(filterID);
+      });
 
-    const btnID = btn.id.replace('Filter', ''); // Récupère le nom du bouton de filtre
-    toggleList(btnID); // Affiche ou cache la liste de filtres associée au bouton
+      // Si le bouton n'était pas actif, l'ouvrir
+      if (!isActive) {
+          const btnID = btn.id.replace('Filter', '');
+          toggleList(btnID);
+      }
   });
 });
 
-/** Écouteur d'événement de clic en dehors de la zone active */
-document.body.addEventListener('click', (e2) => {
-  const activeFilter = document.querySelector('.filter.active');
-  const activeBtnID = activeFilter?.id.replace('Filter', '');
-
-  if (activeFilter) {
-    if (e2.target.id !== activeFilter.id) {
-      // Si l'élément cliqué n'est pas le filtre actif
-      toggleList(activeBtnID); // Ferme le filtre actif
-    } else if (
-      e2.target.classList.contains('filter:not(active)')       
-    ) {
-      // Si l'élément cliqué est un filtre
-      toggleList(activeBtnID); // Ferme le filtre actif
-      toggleList(e2.target.id); // Ouvre le filtre inactif sur lequel l'utilisateur a cliqué
-    }
-  }
-});
 
 function SearchAndUpdate(name, type, recipes) {
   UpdateRecipes(SearchFromFilter(name, type, recipes));
