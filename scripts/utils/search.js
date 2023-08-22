@@ -8,33 +8,30 @@ function SearchFromMain(ValueToSearch, recipes) {
   })
 }
 
-function SearchFromIngredients(ValueToSearch, Actuals, recipes, Action = 'add') {
+function SearchFromIngredients(ValueToSearch, Actuals, recipes) {
   const normalizedKeyword = Normalized(ValueToSearch);
-  const ActualsRecipe = Action === 'delete' ? recipes : Actuals;
 
   return recipes.filter(recipe => 
     recipe.ingredients.some(ingr => 
       Normalized(ingr.ingredient) === normalizedKeyword)).filter(recipe => 
-        ActualsRecipe.some(Recipe => Number(Recipe.id) === Number(recipe.id)))
+        Actuals.some(Recipe => Number(Recipe.id) === Number(recipe.id)))
   }
 
 
-function SearchFromUstensils(ValueToSearch, Actuals, recipes, Action = 'add') {
+function SearchFromUstensils(ValueToSearch, Actuals, recipes) {
   const normalizedKeyword = Normalized(ValueToSearch);
-  const ActualsRecipe = Action === 'delete' ? recipes : Actuals;
 
   return recipes.filter(recipe => 
     recipe.ustensils.some(Ustensil => 
       Normalized(Ustensil) === normalizedKeyword)).filter(recipe => 
-        ActualsRecipe.some(Recipe => Number(Recipe.id) === Number(recipe.id)))
+        Actuals.some(Recipe => Number(Recipe.id) === Number(recipe.id)))
   }
 
-function SearchFromAppliances(ValueToSearch, Actuals, recipes, Action = 'add') {
+function SearchFromAppliances(ValueToSearch, Actuals, recipes) {
   const normalizedKeyword = Normalized(ValueToSearch);
-  const ActualsRecipe = Action === 'delete' ? recipes : Actuals;
 
   return recipes.filter(recipe => Normalized(recipe.appliance) === normalizedKeyword).filter(recipe => 
-        ActualsRecipe.some(Recipe => Number(Recipe.id) === Number(recipe.id)))
+        Actuals.some(Recipe => Number(Recipe.id) === Number(recipe.id)))
 }
 
 function SearchFromFilter(ValueToSearch, filterZone, recipes) {
@@ -55,48 +52,38 @@ function SearchFromFilter(ValueToSearch, filterZone, recipes) {
   return UpdatedRecipes;
 }
 
-function SearchFromDeleteLabel(recipes, MainInputValue) { 
+function SearchFromDeleteLabel(recipes) { // une fonction qui recuperes les labels et renvoi que les recettes qui contiennent l'ensemble des labels
   const ActualsLabel = Array.from(document.querySelectorAll('.labels'));
   
 
-  let UpdatedFinalRecipes = []
   let Action = 'delete';
   let iteration = 0;
+  let updatedRecipes = recipes
+
   ActualsLabel.forEach(label => {
     const name = label.getAttribute('data-normalized');
     const type = label.getAttribute('data-type');
-    let TocheckRecipes;
-    const ActualRecipes = Array.from(document.querySelectorAll('.recipeCard'));
-    
-    if (iteration > 0) Action = 'add'; // 
-    
+
+    if (iteration > 0) {
+      Action = 'add';
+    }
 
     if (type === 'ingredients') {
-      TocheckRecipes = SearchFromIngredients(name, ActualRecipes, recipes, Action);
-      
+      updatedRecipes = SearchFromIngredients(name, updatedRecipes, recipes, Action);
+      iteration += 1;
+
     } else if (type === 'ustensils') {
-      TocheckRecipes = SearchFromUstensils(name, ActualRecipes, recipes, Action);
-      
-    } else {
-      TocheckRecipes = SearchFromAppliances(name, ActualRecipes, recipes, Action);
-      
+      updatedRecipes = SearchFromUstensils(name, updatedRecipes, recipes, Action);
+      iteration += 1;
+
+    } else if (type === 'appliances') {
+      updatedRecipes = SearchFromAppliances(name, updatedRecipes, recipes, Action);
+      iteration += 1;
     }
-    
-    if (iteration === 0) { // si c'est la premiere iteration on met a jour avec le tableau initial filtré pour le premier label
-      UpdatedFinalRecipes.push(...TocheckRecipes)
-      iteration +=1;
-      
-    } 
-
-      UpdatedFinalRecipes = UpdatedFinalRecipes.filter(FinalRecipe => TocheckRecipes
-        .some(  ToCheckRecipe => Number(ToCheckRecipe.id) === Number(FinalRecipe.id)))
-        iteration +=1
-
   })
+    
 
-  if (UpdatedFinalRecipes.length === 0) UpdatedFinalRecipes = SearchFromMain(MainInputValue, recipes);
-
-  return UpdatedFinalRecipes
+  return updatedRecipes
 }
 
 function SearchListInput(filters, input) {
