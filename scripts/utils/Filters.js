@@ -165,7 +165,7 @@ filterZones.forEach((btn) => {
   });
 });
 
-document.body.addEventListener('click', (e) => {
+document.querySelector('html').addEventListener('click', (e) => {
   const activeFilter = document.querySelector('.filter.active');
   const activeBtnID = activeFilter?.id.replace('Filter', '');
 
