@@ -1,6 +1,7 @@
 #labelsContainer{
   display:flex;
   justify-content:start;
+  height:60px;
   margin: 0;
 }
 
@@ -11,7 +12,7 @@
   justify-content: space-between;
   position:relative;
   border-radius:0.75rem;
-
+  padding:0.5rem 1rem 0.5rem 1rem;
   font-family: "Manrope";
   font-weight: 500;
   font-size: 1rem;

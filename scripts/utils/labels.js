@@ -1,15 +1,16 @@
-// Importation du module depuis un autre fichier
+// Importation du module Normalized depuis un autre fichier
 import { Normalized } from './search.js';
 
 /**
  * Classe représentant un label.
  * @class Label
  */
- class Label {
+class Label {
     /**
      * Crée une instance de Label.
      * @constructor
      * @param {string} name - L'identifiant du label.
+     * @param {string} type - Le type de label.
      */
     constructor(name, type) {
         this.NAME = name;
@@ -20,11 +21,12 @@ import { Normalized } from './search.js';
         this.FILTERID = `Filter-${this.NORMALIZED}`;
         this.ELEMENT = document.createElement('div');        
         this.CONTAINER = document.getElementById('labelsContainer');
-
     }
 
+    /**
+     * Configure les attributs et le contenu du label.
+     */
     SetLabel() {
-        
         this.ELEMENT.setAttribute('id', this.ID);
         this.ELEMENT.setAttribute('data-normalized', this.NORMALIZED);
         this.ELEMENT.setAttribute('data-name', this.RAWNAME);
@@ -36,17 +38,19 @@ import { Normalized } from './search.js';
         this.ICON = this.ELEMENT.querySelector('.label-Icon');
     }
 
-    
-    
+    /**
+     * Attache l'élément du label au conteneur.
+     */
     Mount() {
         this.CONTAINER.appendChild(this.ELEMENT);
     }
 
+    /**
+     * Détache l'élément du label du conteneur.
+     */
     Unmount() {
         this.ELEMENT.remove();
     }
-
 }
-
 
 export default Label;

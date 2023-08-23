@@ -1,39 +1,75 @@
-/* eslint-disable no-constant-condition */
-/* eslint-disable no-restricted-syntax */
+/**
+ * Recherche dans les recettes en fonction d'une valeur de recherche.
+ *
+ * @param {string} ValueToSearch - La valeur à rechercher.
+ * @param {Array} recipes - Liste des recettes à filtrer.
+ * @returns {Array} - Liste des recettes correspondant à la recherche.
+ */
 function SearchFromMain(ValueToSearch, recipes) {
   return recipes.filter(recipe => {
     const { ingredients, name, description } = recipe;
-    const ToCheck = [name, description, ...ingredients.map(ing => ing.ingredient)]
-    return ToCheck.some(element => Normalized(element).match(Normalized(ValueToSearch)))
-  })
+    const ToCheck = [name, description, ...ingredients.map(ing => ing.ingredient)];
+    return ToCheck.some(element => Normalized(element).match(Normalized(ValueToSearch)));
+  });
 }
 
+/**
+ * Recherche parmi les ingrédients des recettes.
+ *
+ * @param {string} ValueToSearch - La valeur à rechercher.
+ * @param {Array} Actuals - Liste des éléments actuels.
+ * @param {Array} recipes - Liste des recettes à filtrer.
+ * @returns {Array} - Liste des recettes correspondant à la recherche d'ingrédients.
+ */
 function SearchFromIngredients(ValueToSearch, Actuals, recipes) {
   const normalizedKeyword = Normalized(ValueToSearch);
 
   return recipes.filter(recipe => 
     recipe.ingredients.some(ingr => 
       Normalized(ingr.ingredient) === normalizedKeyword)).filter(recipe => 
-        Actuals.some(Recipe => Number(Recipe.id) === Number(recipe.id)))
-  }
+        Actuals.some(Recipe => Number(Recipe.id) === Number(recipe.id)));
+}
 
-
+/**
+ * Recherche parmi les ustensiles des recettes.
+ *
+ * @param {string} ValueToSearch - La valeur à rechercher.
+ * @param {Array} Actuals - Liste des éléments actuels.
+ * @param {Array} recipes - Liste des recettes à filtrer.
+ * @returns {Array} - Liste des recettes correspondant à la recherche d'ustensiles.
+ */
 function SearchFromUstensils(ValueToSearch, Actuals, recipes) {
   const normalizedKeyword = Normalized(ValueToSearch);
 
   return recipes.filter(recipe => 
     recipe.ustensils.some(Ustensil => 
       Normalized(Ustensil) === normalizedKeyword)).filter(recipe => 
-        Actuals.some(Recipe => Number(Recipe.id) === Number(recipe.id)))
-  }
+        Actuals.some(Recipe => Number(Recipe.id) === Number(recipe.id)));
+}
 
+/**
+ * Recherche parmi les appareils des recettes.
+ *
+ * @param {string} ValueToSearch - La valeur à rechercher.
+ * @param {Array} Actuals - Liste des éléments actuels.
+ * @param {Array} recipes - Liste des recettes à filtrer.
+ * @returns {Array} - Liste des recettes correspondant à la recherche d'appareils.
+ */
 function SearchFromAppliances(ValueToSearch, Actuals, recipes) {
   const normalizedKeyword = Normalized(ValueToSearch);
 
   return recipes.filter(recipe => Normalized(recipe.appliance) === normalizedKeyword).filter(recipe => 
-        Actuals.some(Recipe => Number(Recipe.id) === Number(recipe.id)))
+        Actuals.some(Recipe => Number(Recipe.id) === Number(recipe.id)));
 }
 
+/**
+ * Recherche en fonction de la zone de filtre spécifiée.
+ *
+ * @param {string} ValueToSearch - La valeur à rechercher.
+ * @param {string} filterZone - La zone de filtre (ingrédients, ustensiles, appareils).
+ * @param {Array} recipes - Liste des recettes à filtrer.
+ * @returns {Array} - Liste des recettes filtrées en fonction de la zone de filtre.
+ */
 function SearchFromFilter(ValueToSearch, filterZone, recipes) {
   const Actuals = Array.from(document.querySelectorAll('.recipeCard'));
   let UpdatedRecipes;
@@ -52,13 +88,18 @@ function SearchFromFilter(ValueToSearch, filterZone, recipes) {
   return UpdatedRecipes;
 }
 
-function SearchFromDeleteLabel(recipes) { // une fonction qui recuperes les labels et renvoi que les recettes qui contiennent l'ensemble des labels
+/**
+ * Filtre les recettes en fonction des labels.
+ *
+ * @param {Array} recipes - Liste des recettes à filtrer.
+ * @returns {Array} - Liste des recettes filtrées en fonction des labels.
+ */
+function SearchFromDeleteLabel(recipes) { // une fonction qui récupère les labels et renvoie les recettes qui contiennent l'ensemble des labels
   const ActualsLabel = Array.from(document.querySelectorAll('.labels'));
   
-
   let Action = 'delete';
   let iteration = 0;
-  let updatedRecipes = recipes
+  let updatedRecipes = recipes;
 
   ActualsLabel.forEach(label => {
     const name = label.getAttribute('data-normalized');
@@ -80,12 +121,18 @@ function SearchFromDeleteLabel(recipes) { // une fonction qui recuperes les labe
       updatedRecipes = SearchFromAppliances(name, updatedRecipes, recipes, Action);
       iteration += 1;
     }
-  })
+  });
     
 
-  return updatedRecipes
+  return updatedRecipes;
 }
 
+/**
+ * Filtre les éléments de la liste des filtres en fonction de l'entrée.
+ *
+ * @param {Array} filters - Liste des éléments de filtre.
+ * @param {string} input - Entrée à filtrer.
+ */
 function SearchListInput(filters, input) {
   // Fonction qui filtre les éléments de la liste des filtres
   if (input !== 0) {
@@ -105,9 +152,15 @@ function SearchListInput(filters, input) {
   }
 }
 
-// Fonction utilitaire pour normaliser les chaînes de caractères (enlever les accents et convertir en minuscules)
+/**
+ * Normalise une chaîne de caractères en enlevant les accents et en la convertissant en minuscules.
+ *
+ * @param {string} str - Chaîne de caractères à normaliser.
+ * @returns {string} - Chaîne de caractères normalisée.
+ */
 function Normalized(str) {
   return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replaceAll(' ', '').replace('\'', '').toLowerCase().trim();
 }
 
+// Exportation des fonctions pour une utilisation externe
 export { SearchFromFilter, SearchFromMain, SearchListInput, SearchFromDeleteLabel, Normalized };

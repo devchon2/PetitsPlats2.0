@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 
 
 // Importation des classes et fonctions nécessaires depuis d'autres fichiers
