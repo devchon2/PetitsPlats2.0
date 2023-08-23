@@ -1,9 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable no-console */
-/* eslint-disable import/extensions */
-// eslint-disable-next-line import/no-unresolved
-
-
 const recipeContainer = document.getElementById('recipesCardsContainer'); // Récupère l'élément HTML qui contiendra les cartes de recettes.
 
 /**
@@ -108,64 +102,64 @@ class Recipe {
   getCard() {
     // Création de la carte
     const recipeCard = document.createElement('article');
-    recipeCard.classList.add('recipeCard', 'd-flex', 'flex-column', 'position-relative', 'overflow-hidden', 'bg-white', 'rounded-4', 'my-3', 'p-0');
+    recipeCard.classList.add('recipeCard');
     recipeCard.setAttribute('id', this.ID);
 
     // Création du header
     const recipeImgContainer = document.createElement('div');
-    recipeImgContainer.classList.add('recipePictureContainer', 'w-100', 'overflow-hidden');
+    recipeImgContainer.classList.add('recipePictureContainer');
     recipeCard.appendChild(recipeImgContainer);
 
     // Création du body
     const recipeImg = document.createElement('img');
     recipeImg.setAttribute('src', `assets/Images/Recipes/${this.PICTURE}`);
     recipeImg.setAttribute('alt', this.NAME);
-    recipeImg.classList.add('recipePicture', 'w-100', 'h-100', 'object-fit-cover');
+    recipeImg.classList.add('recipePicture');
     recipeImgContainer.appendChild(recipeImg);
 
     // Création encart 'Time'
     const Time = document.createElement('span');
-    Time.classList.add('CookingTime', 'position-absolute', 'text-dark', 'px-3', 'py-2', 'rounded-5');
+    Time.classList.add('CookingTime');
     Time.textContent = `${this.COOKING_TIME} min`;
     recipeImgContainer.appendChild(Time);
 
     // Création Contenu Texte
     const recipeContent = document.createElement('div');
-    recipeContent.classList.add('recipeContent', 'p-3', 'h-65', 'd-flex', 'mt-3', 'justify-content-end', 'align-items-start', 'flex-column');
+    recipeContent.classList.add('recipeContent');
     recipeCard.appendChild(recipeContent);
 
     // Nom de la recette
     const recipeName = document.createElement('h2');
-    recipeName.classList.add('recipeName', 'mt-1', 'mb-2', 'fs-5')
+    recipeName.classList.add('recipeName')
     recipeName.textContent = this.NAME;
     recipeContent.appendChild(recipeName);
 
     // Titre de division Recette
     const recipeTitle = document.createElement('div');
-    recipeTitle.classList.add('cardTitle', 'my-2', 'mx-0', 'text-uppercase', 'fs-7', 'text-secondary')
+    recipeTitle.classList.add('cardTitle')
     recipeTitle.textContent = 'Recette';
     recipeContent.appendChild(recipeTitle);
 
     // Description de la recette
     const recipeDescription = document.createElement('div');
-    recipeDescription.classList.add('recipeDescription', 'text-wrap', 'overflow-hidden', 'text-align-start', 'mb-2');
+    recipeDescription.classList.add('recipeDescription');
     recipeDescription.textContent = this.DESCRIPTION;
     recipeContent.appendChild(recipeDescription);
 
     // Titre de division Ingrédients
     const ingredientsTitle = document.createElement('h3');
-    ingredientsTitle.classList.add('cardSubTitle', 'mt-4', 'mb-2', 'mx-0', 'text-uppercase', 'fs-7', 'text-secondary', 'font-weight-bold');
+    ingredientsTitle.classList.add('cardSubTitle');
     ingredientsTitle.textContent = 'Ingrédients';
     recipeContent.appendChild(ingredientsTitle);
 
     // Création de la liste des ingrédients
     const ingredientsList = document.createElement('div');
-    ingredientsList.classList.add('recipeIngredients', 'd-flex', 'flex-wrap', 'w-100', 'justify-content-between', 'align-items-center', 'fs-7')
+    ingredientsList.classList.add('recipeIngredients')
     
     // Boucle pour afficher les ingrédients
     for (let i = 0; i < this.INGREDIENTS.length; i += 1) {
       const ingredientItem = document.createElement('div');
-      ingredientItem.classList.add('oneIngredientContainer', 'ms-3', 'd-flex', 'flex-column', 'col-5', 'my-1');
+      ingredientItem.classList.add('oneIngredientContainer');
       
 
       const ingredientName = document.createElement('p');

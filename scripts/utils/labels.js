@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 // Importation du module depuis un autre fichier
 import { Normalized } from './search.js';
 
@@ -7,7 +5,7 @@ import { Normalized } from './search.js';
  * Classe représentant un label.
  * @class Label
  */
-class Label {
+ class Label {
     /**
      * Crée une instance de Label.
      * @constructor
@@ -32,9 +30,8 @@ class Label {
         this.ELEMENT.setAttribute('data-name', this.RAWNAME);
         this.ELEMENT.setAttribute('data-type', this.TYPE);
 
-        this.ELEMENT.innerHTML = `<span>${this.RAWNAME}</span><i class="fa-solid fa-xmark label-Icon ms-4 me-1 "></i>`;
-        this.ELEMENT.classList.add('labels',  'd-flex', 'align-items-center', 'justify-content-between',
-                                    'positon-relative', 'rounded-4', 'ms-2', 'me-4', 'ps-3', 'pe-2', 'py-4' );
+        this.ELEMENT.innerHTML = `<span class="labelName">${this.RAWNAME}</span><i class="fa-solid fa-xmark label-Icon "></i>`;
+        this.ELEMENT.classList.add('labels');
         
         this.ICON = this.ELEMENT.querySelector('.label-Icon');
     }
@@ -51,5 +48,5 @@ class Label {
 
 }
 
-// Exportation de la classe Label pour la rendre disponible dans d'autres fichiers
-export { Label };
+
+export default Label;
