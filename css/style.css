@@ -3,6 +3,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope&display=swap");
 @import url("./filters.css");
 @import url("./labels.css");
+@import url("./recipes.css");
+
+html {
+  margin-bottom: 5rem;
+}
 
 /* Réinitialisation des marges, des paddings et de la boîte */
 *,
@@ -16,8 +21,33 @@
 
 /* Styles généraux du corps de la page */
 body {
+  margin: 0 auto; 
   font-family: "Manrope";
+  width: 85%;
   max-width:1440px;
+  background-color: #E5E5E5;
+}
+
+header{
+  position: absolute;
+  background:transparent;
+  z-index:1;
+}
+
+#siteName{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: end;
+  padding: 1rem;
+}
+
+#Logo{
+  display: flex;
+  justify content: center;
+  align-items: center;
+  background-color: #1B1B1B;
+  padding-left: 0.5rem;
 }
 
 .hidden {
@@ -30,35 +60,98 @@ body {
 
 /* Styles des ellipses */
 #ellipseOut {
-  width: 1.25rem;
-  height: 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  margin-left:0.5rem;
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+}
+
+#ellipseIn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px black;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
 }
 
 /* Styles du héros */
 #hero {
+  position:relative;
+  display: flex;
+  flex-direction: column;
+  width:100%;
+  justify-content: center;
+  align-items: center;
   background-image: url("../assets/Images/Hero/lampos-aritonang-24gR_9lCdes-unsplash\ 1\ \(1\).png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   height: 500px;
 }
 
 /* Styles du message de bienvenue */
 #welcome {
+  display: flex;
+  background:transparent;
+  text-align: center;
+  width:50%;
+  text-wrap: wrap;
+  margin-bottom:1.25rem;
+  font-weight: 500;
   color: #ffd15b;
   font-family: "anton";
 }
 
+#labelSearch{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width:50%;
+  background-color: white;
+  padding: 0.2rem;
+  border-radius: 7px;
+  margin-bottom: 1.25rem;
+}
+
 /* Styles de la zone de recherche */
 #mainSearchInput {
+  display: flex;
+  flex-grow: 1;
+  height:100%;
+  width: 100%;
+  font-size: .9rem;
+  padding: 0.25rem 0.5rem;
+  border:none;
   outline: none;
 }
 
 /* Styles du bouton de recherche */
 #mainSearchButton {
-  width: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15%;
+  border:1px solid black;
+  width: 38px;
+  height: 38px;
   background-color: #1b1b1b;
 }
 
 #mainSearchButton #mainSearchIcon::before {
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border:none;
+  font-family: "Font Awesome 5 Free";
+  font-size: 1.25rem;
 }
 
 #mainSearchButton:hover {
@@ -74,69 +167,18 @@ body {
   border: 1px solid grey;
 }
 
-/* Styles du total des recettes */
-#totalRecipes {
-  font-family: "Anton";
+#labelsAndFiltersContainer{
+  display: flex;
+  flex-direction: column;
+  padding:1rem;
 }
 
-/* Styles des cartes de recettes */
-.recipeCard {
-  height: 740px;
-  width: 32%;
+#errorMsg{
+  margin: 0 auto;
 }
 
-/* Styles du temps de cuisson */
-.CookingTime {
-  right: 30px;
-  top: 30px;
-  background-color: #ffd15b;
+///////////////////////////////////////////////////////////////////////////////////
 
-  // border-radius: 15px;
-}
 
-/* Styles du conteneur de l'image de recette */
 
-/* Styles du nom de la recette */
-.recipeName {
-  font-family: "anton";
-}
 
-/* Styles des titres de carte, des sous-titres de carte et des titres d'ingrédients */
-.cardTitle,
-.cardSubTitle {
-  font-weight: 700;
-  font-family: "Manrope";
-  font-size: 12px;
-}
-
-/* Styles de la description de la recette */
-.recipeDescription {
-  height: 100px;
-  font-size: 0.85rem;
-}
-
-/* Styles des mesures d'ingrédients */
-.ingredientMesure,
-.ingredientName {
-  font-family: "Manrope", "Sans-serif";
-  margin: 2px 0;
-  font-size: 0.8rem;
-}
-
-/* Styles des noms d'ingrédients */
-.ingredientName {
-  font-weight: 700;
-}
-
-/* Styles des quantités */
-.quantity {
-  font-size: 1rem;
-}
-
-#labelsContainer {
-  height: 40px;
-}
-
-.recipePictureContainer {
-    height:35%
-}

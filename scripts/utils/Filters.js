@@ -34,11 +34,8 @@ class Filter {
     this.ELEMENT.setAttribute('data-Normalized', this.NORMALIZED);
     this.ELEMENT.setAttribute('data-name', this.RAWNAME);
     this.ELEMENT.setAttribute('data-type', this.TYPE);
-    this.ACTIVE = `<p class='FilterName m-0 '>${this.RAWNAME}</p><i class="fa-solid fa-circle-xmark filter-Icon ms-4 me-1 "></i>`
-    this.INACTIVE = `<p class='FilterName m-0 '>${this.RAWNAME}</p><i class="fa-solid fa-circle-xmark filter-Icon ms-4 me-1 d-none"></i>`
-    this.HOVERED = `<p class='FilterName m-0 '>${this.RAWNAME}</p><i class="fa-solid fa-circle-xmark filter-Icon ms-4 me-1 d-none"></i>`
-    this.ELEMENT.classList.add('filterOption', 'd-flex', 'align-items-center', 'justify-content-between', 'px-2', 'py-2');
-    this.ELEMENT.innerHTML = this.INACTIVE;
+    this.ELEMENT.innerHTML = `<p class='FilterName'>${this.RAWNAME}</p><i class=" fa-solid fa-circle-xmark filter-Icon "></i>`;
+    this.ELEMENT.classList.add('filterOption');
     this.ICON = this.ELEMENT.querySelector('.filter-Icon');
     this.AddListener();
     this.AddToList();
@@ -47,7 +44,7 @@ class Filter {
 
   SetActive() {// Active le filtre
     this.ELEMENT.classList.add('active');
-    this.ELEMENT.innerHTML = this.ACTIVE;
+    
     this.AddLabel();
     SearchAndUpdate(this.NAME, this.TYPE, recipesArray);
 
@@ -162,6 +159,9 @@ filterZones.forEach((btn) => {
           toggleList(filterID);
       });
           toggleList(btnID);
+      } else {
+          // Si le bouton était actif, le fermer
+          toggleList(btn.id.replace('Filter', ''));
       } 
   });
 });
@@ -207,7 +207,6 @@ function RestoreActive() {
 
         if (NormalizedLabel === NormalizedFilter) {
           CurrentFilter.classList.add('active');
-          CurrentFilter.innerHTML = `<p class='FilterName m-0 '>${RAWNAME}</p><i class=" fa-solid fa-circle-xmark filter-Icon ms-4 me-1 "></i>`;
         }
       }
     }
@@ -257,8 +256,7 @@ function toggleList(FilterID) {
   const input = list.firstElementChild.querySelector('input');
 
   list.classList.toggle('active');
-  list.classList.toggle('d-none');
-  btn.classList.toggle('rounded-bottom-4');
+  list.classList.toggle('hidden');
   btn.classList.toggle('active');
   zone.classList.toggle('active');
   btn.querySelector('i').classList.toggle('fa-chevron-down');

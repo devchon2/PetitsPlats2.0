@@ -35,7 +35,7 @@ function init() {
         UpdateFilters(updatedFromMain); // Crée les filtres de recherche.
       
       } else {
-        recipeContainer.innerHTML = `<p class='errorMsg mx-auto my-0'>
+        recipeContainer.innerHTML = `<p id='errorMsg>
                                         Aucune recettes ne correspond à <span id = "output"></span> 
                                         vous pouvez chercher « tarte aux pommes », « poisson », 
                                         etc.</p>`;

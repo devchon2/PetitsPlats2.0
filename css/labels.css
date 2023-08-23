@@ -1,10 +1,27 @@
+#labelsContainer{
+  display:flex;
+  justify-content:start;
+  margin: 0;
+}
+
 /* Styles des labels */
 .labels {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position:relative;
+  border-radius:0.75rem;
+
   font-family: "Manrope";
   font-weight: 500;
   font-size: 1rem;
   background-color: #ffd15b;
+  margin:.25rem;
   width: fit-content;
+}
+
+.labelName{
+  margin:0.25rem 1rem 0.25rem 0.5rem;
 }
 
 .label-Icon {
