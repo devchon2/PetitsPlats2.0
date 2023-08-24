@@ -1,4 +1,3 @@
-console.log('datasController.js chargé');
 const jsonDatas = './datas/recipes.json';
 
 /**
@@ -13,6 +12,7 @@ async function getDatas() {
       if (response.status === 404) throw new Error('Aucun fichier trouvé');
     }
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(e);
   }
 

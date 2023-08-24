@@ -1,13 +1,11 @@
-/* eslint-disable import/no-cycle */
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable no-unused-vars */
+
 
 // Importation des classes et fonctions nécessaires depuis d'autres fichiers
-import { Label } from './labels.js';
 import { SearchFromDeleteLabel, SearchFromFilter, SearchListInput, Normalized } from './search.js';
 import { UpdateRecipes,  } from '../controllers/RecipesController.js';
 import {recipesArray } from '../controllers/datasController.js';
+import Label from './labels.js';
 // Sélection des éléments HTML à utiliser pour la gestion des filtres
 const filterIngredientsList = document.getElementById('ingredientsList');
 const filterApplianceList = document.getElementById('appliancesList');
@@ -25,7 +23,6 @@ class Filter {
     this.RAWNAME = this.NAME.charAt(0).toUpperCase() + this.NAME.slice(1);
     this.NORMALIZED = Normalized(this.RAWNAME);
     this.ID = `Filter-${this.NORMALIZED}`;
-    this.SetFilter();
   }
 
   SetFilter() {// Crée un élément HTML pour le filtre
@@ -37,11 +34,8 @@ class Filter {
     this.ELEMENT.setAttribute('data-Normalized', this.NORMALIZED);
     this.ELEMENT.setAttribute('data-name', this.RAWNAME);
     this.ELEMENT.setAttribute('data-type', this.TYPE);
-    this.ACTIVE = `<p class='FilterName m-0 '>${this.RAWNAME}</p><i class="fa-solid fa-circle-xmark filter-Icon ms-4 me-1 "></i>`
-    this.INACTIVE = `<p class='FilterName m-0 '>${this.RAWNAME}</p><i class="fa-solid fa-circle-xmark filter-Icon ms-4 me-1 d-none"></i>`
-    this.HOVERED = `<p class='FilterName m-0 '>${this.RAWNAME}</p><i class="fa-solid fa-circle-xmark filter-Icon ms-4 me-1 d-none"></i>`
-    this.ELEMENT.classList.add('filterOption', 'd-flex', 'align-items-center', 'justify-content-between', 'px-2', 'py-2');
-    this.ELEMENT.innerHTML = this.INACTIVE;
+    this.ELEMENT.innerHTML = `<p class='FilterName'>${this.RAWNAME}</p><i class=" fa-solid fa-circle-xmark filter-Icon "></i>`;
+    this.ELEMENT.classList.add('filterOption');
     this.ICON = this.ELEMENT.querySelector('.filter-Icon');
     this.AddListener();
     this.AddToList();
@@ -49,9 +43,8 @@ class Filter {
   }
 
   SetActive() {// Active le filtre
-    
     this.ELEMENT.classList.add('active');
-    this.ELEMENT.innerHTML = this.ACTIVE;
+    
     this.AddLabel();
     SearchAndUpdate(this.NAME, this.TYPE, recipesArray);
 
@@ -153,22 +146,43 @@ filterZones.forEach((btn) => {
       
       // Vérifier si le bouton cliqué est actuellement actif
       const isActive = btn.classList.contains('active');
-      
+
       // Fermer tous les filtres actifs
       const allActiveFilters = document.querySelectorAll('.filter.active');
-      allActiveFilters.forEach(filter => {
-          const filterID = filter.id.replace('Filter', '');
-          toggleList(filterID);
-      });
+     
 
       // Si le bouton n'était pas actif, l'ouvrir
       if (!isActive) {
-          const btnID = btn.id.replace('Filter', '');
+          const btnID = btn.id.replace('Filter', ''); 
+          allActiveFilters.forEach(filter => {
+          const filterID = filter.id.replace('Filter', '');
+          toggleList(filterID);
+      });
           toggleList(btnID);
-      }
+      } else {
+          // Si le bouton était actif, le fermer
+          toggleList(btn.id.replace('Filter', ''));
+      } 
   });
 });
 
+document.body.addEventListener('click', (e) => {
+  const activeFilter = document.querySelector('.filter.active');
+  const activeBtnID = activeFilter?.id.replace('Filter', '');
+
+  if (activeFilter) {
+    if (e.target.id !== activeFilter.id) {
+      // Si l'élément cliqué n'est pas le filtre actif
+      toggleList(activeBtnID); // Ferme le filtre actif
+    } else if (
+      e.target.classList.contains('filter:not(active)')       
+    ) {
+      // Si l'élément cliqué est un filtre
+      toggleList(activeBtnID); // Ferme le filtre actif
+      toggleList(e.target.id); // Ouvre le filtre inactif sur lequel l'utilisateur a cliqué
+    }
+  }
+});
 
 function SearchAndUpdate(name, type, recipes) {
   UpdateRecipes(SearchFromFilter(name, type, recipes));
@@ -179,10 +193,11 @@ function SearchAndUpdate(name, type, recipes) {
 
 function RestoreActive() {
   
-  const CurrentLabels = [...document.querySelectorAll('.labels')];
-  const CurrentFilters = [...document.querySelectorAll('.filterOption')];
+  const CurrentLabels = document.querySelectorAll('.labels');
+  const CurrentFilters = document.querySelectorAll('.filterOption');
 
   if (CurrentLabels) {
+
     for (const CurrentLabel of CurrentLabels) {
       const NormalizedLabel = CurrentLabel.getAttribute('data-normalized');
 
@@ -192,7 +207,6 @@ function RestoreActive() {
 
         if (NormalizedLabel === NormalizedFilter) {
           CurrentFilter.classList.add('active');
-          CurrentFilter.innerHTML = `<p class='FilterName m-0 '>${RAWNAME}</p><i class=" fa-solid fa-circle-xmark filter-Icon ms-4 me-1 "></i>`;
         }
       }
     }
@@ -227,6 +241,7 @@ function GetFilters(Obj) {
     const isExist = document.getElementById(`${ActualFilter}Filter`);
     if (!isExist) {
     const filter = new Filter(ActualFilter, arrayName);
+    filter.SetFilter();
     }
   });
 }
@@ -241,8 +256,7 @@ function toggleList(FilterID) {
   const input = list.firstElementChild.querySelector('input');
 
   list.classList.toggle('active');
-  list.classList.toggle('d-none');
-  btn.classList.toggle('rounded-bottom-4');
+  list.classList.toggle('hidden');
   btn.classList.toggle('active');
   zone.classList.toggle('active');
   btn.querySelector('i').classList.toggle('fa-chevron-down');
@@ -257,8 +271,7 @@ function toggleList(FilterID) {
  * @returns {Array} - Le tableau mis à jour des éléments de filtre
  */
 function UpdateFilters(UpdatedFilter) {
-  console.log('updateFilters',UpdatedFilter);
-  
+
   const NewappliancesArray = [];
   const NewIngredientsArray = [];
   const NewUstensilesArray = [];
@@ -292,7 +305,6 @@ function UpdateFilters(UpdatedFilter) {
   const finalIngredientsArray = [...new Set(NewIngredientsArray)];
   const finalUstensilesArray = [...new Set(NewUstensilesArray)];
 
-  console.log('finalAppliancesArray',finalIngredientsArray);
   const UpdatedFilterApplicances = { 'appliances': finalAppliancesArray };
   const UpdatedFilterIngredients = { 'ingredients': finalIngredientsArray };
   const UpdatedFilterUstensiles = { 'ustensils': finalUstensilesArray };
