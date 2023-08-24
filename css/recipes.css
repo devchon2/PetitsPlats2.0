@@ -90,7 +90,7 @@
 /* Styles de la description de la recette */
 .recipeDescription {
   overflow: hidden;
-  white-space: wrap;
+  white-space: pre-wrap;
   
   margin-left: 0.5rem;
   font-family: "Manrope";
