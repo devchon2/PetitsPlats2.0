@@ -141,9 +141,10 @@ header{
   display: flex;
   background:transparent;
   text-align: center;
-  width:50%;
+  width:35%;
   text-wrap: wrap;
   margin-bottom:1.25rem;
+  font-size:2.6rem;
   font-weight: 500;
   color: #ffd15b;
   font-family: "anton";
