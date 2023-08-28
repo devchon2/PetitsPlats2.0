@@ -15,7 +15,8 @@ html {
 ::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   color: #1b1b1b;
 }
 
@@ -35,17 +36,32 @@ header{
 }
 
 #siteName{
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: start;
-  align-items: end;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: end;
   padding: 1rem;
 }
 
 #Logo{
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background-color: #1B1B1B;
   padding-left: 0.5rem;
 }
@@ -55,14 +71,22 @@ header{
 }
 
 .visible {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
 /* Styles des ellipses */
 #ellipseOut {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background-color: white;
   margin-left:0.5rem;
   border-radius: 50%;
@@ -71,9 +95,15 @@ header{
 }
 
 #ellipseIn {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border: solid 1px black;
   width: 0.75rem;
   height: 0.75rem;
@@ -83,11 +113,20 @@ header{
 /* Styles du héros */
 #hero {
   position:relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width:100%;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background-image: url("../assets/Images/Hero/lampos-aritonang-24gR_9lCdes-unsplash\ 1\ \(1\).png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -97,22 +136,34 @@ header{
 
 /* Styles du message de bienvenue */
 #welcome {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   background:transparent;
   text-align: center;
-  width:50%;
-  text-wrap: wrap;
+  width:35%;
+  justify-content: center;
   margin-bottom:1.25rem;
+  font-size:2.6rem;
   font-weight: 500;
   color: #ffd15b;
   font-family: "anton";
 }
 
 #labelSearch{
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width:50%;
   background-color: white;
   padding: 0.2rem;
@@ -122,8 +173,12 @@ header{
 
 /* Styles de la zone de recherche */
 #mainSearchInput {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-grow: 1;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   height:100%;
   width: 100%;
   font-size: .9rem;
@@ -134,9 +189,15 @@ header{
 
 /* Styles du bouton de recherche */
 #mainSearchButton {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border-radius: 15%;
   border:1px solid black;
   width: 38px;
@@ -146,9 +207,15 @@ header{
 
 #mainSearchButton #mainSearchIcon::before {
   color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border:none;
   font-family: "Font Awesome 5 Free";
   font-size: 1.25rem;
@@ -168,17 +235,16 @@ header{
 }
 
 #labelsAndFiltersContainer{
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   padding:1rem;
 }
 
 #errorMsg{
   margin: 0 auto;
 }
-
-///////////////////////////////////////////////////////////////////////////////////
-
-
-
-
