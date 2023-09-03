@@ -1,0 +1,30 @@
+.App-Nav {
+  margin: 10px;
+  display: flex;
+  flex-direction: flex-row;
+  align-items: center;
+  list-style: none;
+}
+
+.App-Nav-Link {
+  display: flex;
+  text-align: right;
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 35px;
+  margin: 20px;
+  color: #FF6060;
+  text-decoration:none;
+}
+
+.App-Nav-Link.active{
+  text-decoration:underline;
+}
+
+.App-Logo {
+  width:150px;
+  height:50px;
+  
+}
